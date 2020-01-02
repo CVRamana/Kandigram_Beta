@@ -1,10 +1,7 @@
 import { createAppContainer } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
-import Splash from "../../Screens/Home/Splash";
-import SignUp from '../../Screens/Home/SignUp';
-import axios from 'axios';
-import AsyncStorage from '@react-native-community/async-storage';
-
+import Splash from "../../Screens/Authentications/Splash";
+import SignUp from '../../Screens/Authentications/SignIn/SignUp';
 
 const SplashContainer = createStackNavigator({
   Splash: {
