@@ -19,7 +19,7 @@ class Loader extends React.PureComponent {
    checkInternet=()=> {
        NetInfo.addEventListener(state => {
         //state.type
-          alert("Is connected?"+state.isConnected);
+         // alert("Is connected?"+state.isConnected);
       });}
 
     render(){

@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "633802656029",
+    "firebase_url": "https://kandigram-beta.firebaseio.com",
+    "project_id": "kandigram-beta",
+    "storage_bucket": "kandigram-beta.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:633802656029:android:a1f6b255cd0829af3939f4",
+        "android_client_info": {
+          "package_name": "com.kandigram_beta"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "633802656029-3dohdr6bcbbl9fo8rne5kbtd6dm8jjle.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCSKs1FnnTe9h75ZuL6s0cXYBgl7leriXI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "633802656029-3dohdr6bcbbl9fo8rne5kbtd6dm8jjle.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "633802656029-6v5h0esva3p1bfdej50ebgqranecn4bi.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "org.reactjs.native.example.Kandigram-Beta"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

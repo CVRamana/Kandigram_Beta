@@ -8,29 +8,30 @@
 
 /* Begin PBXBuildFile section */
 		00E356F31AD99517003FC87E /* Kandigram_BetaTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* Kandigram_BetaTests.m */; };
+		0C9769C023BE27A40036B50D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0C9769BF23BE27A40036B50D /* GoogleService-Info.plist */; };
 		13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
 		13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB11A68108700A75B9A /* LaunchScreen.xib */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
+		25E3179790E3440DAB77BDF1 /* Monofett.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 77FB6C585FD94B9092671F78 /* Monofett.ttf */; };
 		2D02E4BC1E0B4A80006451C7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
 		2D02E4BD1E0B4A84006451C7 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		2D02E4BF1E0B4AB3006451C7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		2DCD954D1E0B4F2C00145EB5 /* Kandigram_BetaTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* Kandigram_BetaTests.m */; };
-		54A9E774590CCF54ED64F7C0 /* libPods-Kandigram_BetaTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D1F34EE4681B9CD57D871550 /* libPods-Kandigram_BetaTests.a */; };
-		5F84D869325C31201D2E1D87 /* libPods-Kandigram_Beta.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F6F7502B8307392AA67AAF0C /* libPods-Kandigram_Beta.a */; };
-		7E2DDE232EC7860EABCC73BF /* libPods-Kandigram_Beta-tvOSTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 07855F4B16D9460E14FD6348 /* libPods-Kandigram_Beta-tvOSTests.a */; };
-		AF5A9A8CFE2D7245F663EE31 /* libPods-Kandigram_Beta-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 93960EDB8D141530CBEEB1C1 /* libPods-Kandigram_Beta-tvOS.a */; };
-		7BB402B52DCE4CC9BAB9ED3B /* vincHand.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0E092C7A62E549A0B50303CB /* vincHand.ttf */; };
-		25E3179790E3440DAB77BDF1 /* Monofett.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 77FB6C585FD94B9092671F78 /* Monofett.ttf */; };
-		D4048122A32D4F449AE7DFE7 /* Ubuntu Condensed.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 63D7ADE1FB934DF7959C6006 /* Ubuntu Condensed.ttf */; };
 		37F07462EAF74D81A002D034 /* Ubuntu-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AC422CE2D1304E3391D9140D /* Ubuntu-Bold.ttf */; };
-		97A842A5AC974043AA97CBC8 /* Ubuntu-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 56D83B444E4A47DCADDBED29 /* Ubuntu-BoldItalic.ttf */; };
 		3FAE22EB89E24A54AC0FAD79 /* Ubuntu-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F2156F7D80FC476AA81B626C /* Ubuntu-Light.ttf */; };
+		54A9E774590CCF54ED64F7C0 /* libPods-Kandigram_BetaTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D1F34EE4681B9CD57D871550 /* libPods-Kandigram_BetaTests.a */; };
 		5D8FBEE846CD4468B51D043F /* Ubuntu-LightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 361D921C91DF43BA84228E70 /* Ubuntu-LightItalic.ttf */; };
-		C5A5B056BB7946E8AB7D6D94 /* Ubuntu-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B22698C17F7F456691E5A2EB /* Ubuntu-Medium.ttf */; };
+		5F84D869325C31201D2E1D87 /* libPods-Kandigram_Beta.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F6F7502B8307392AA67AAF0C /* libPods-Kandigram_Beta.a */; };
+		7BB402B52DCE4CC9BAB9ED3B /* vincHand.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0E092C7A62E549A0B50303CB /* vincHand.ttf */; };
+		7E2DDE232EC7860EABCC73BF /* libPods-Kandigram_Beta-tvOSTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 07855F4B16D9460E14FD6348 /* libPods-Kandigram_Beta-tvOSTests.a */; };
+		97A842A5AC974043AA97CBC8 /* Ubuntu-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 56D83B444E4A47DCADDBED29 /* Ubuntu-BoldItalic.ttf */; };
 		A59CD41FDA2744C6A016A21F /* Ubuntu-MediumItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F0C5E8828BD84CA9B1CD386F /* Ubuntu-MediumItalic.ttf */; };
-		EDCED1C47F0C4151B0D338DA /* Ubuntu.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CE3381D0C580456DAF6701E8 /* Ubuntu.ttf */; };
+		AF5A9A8CFE2D7245F663EE31 /* libPods-Kandigram_Beta-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 93960EDB8D141530CBEEB1C1 /* libPods-Kandigram_Beta-tvOS.a */; };
+		C5A5B056BB7946E8AB7D6D94 /* Ubuntu-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B22698C17F7F456691E5A2EB /* Ubuntu-Medium.ttf */; };
+		D4048122A32D4F449AE7DFE7 /* Ubuntu Condensed.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 63D7ADE1FB934DF7959C6006 /* Ubuntu Condensed.ttf */; };
 		DCE8616259864680B462ACD2 /* UbuntuCondensed-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0AA0264612E5436AA032133C /* UbuntuCondensed-Regular.ttf */; };
+		EDCED1C47F0C4151B0D338DA /* Ubuntu.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CE3381D0C580456DAF6701E8 /* Ubuntu.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,6 +57,14 @@
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00E356F21AD99517003FC87E /* Kandigram_BetaTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Kandigram_BetaTests.m; sourceTree = "<group>"; };
 		07855F4B16D9460E14FD6348 /* libPods-Kandigram_Beta-tvOSTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Kandigram_Beta-tvOSTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		0AA0264612E5436AA032133C /* UbuntuCondensed-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "UbuntuCondensed-Regular.ttf"; path = "../assets/fonts/UbuntuCondensed-Regular.ttf"; sourceTree = "<group>"; };
+		0C9769B523BE24B40036B50D /* libRNGoogleSignin.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libRNGoogleSignin.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		0C9769B723BE24E40036B50D /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
+		0C9769B923BE24F50036B50D /* SafariServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SafariServices.framework; path = System/Library/Frameworks/SafariServices.framework; sourceTree = SDKROOT; };
+		0C9769BB23BE250E0036B50D /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		0C9769BD23BE25270036B50D /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
+		0C9769BF23BE27A40036B50D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		0E092C7A62E549A0B50303CB /* vincHand.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = vincHand.ttf; path = ../assets/fonts/vincHand.ttf; sourceTree = "<group>"; };
 		110772B55ED240F86CCE7544 /* Pods-Kandigram_Beta.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Kandigram_Beta.debug.xcconfig"; path = "Target Support Files/Pods-Kandigram_Beta/Pods-Kandigram_Beta.debug.xcconfig"; sourceTree = "<group>"; };
 		13B07F961A680F5B00A75B9A /* Kandigram_Beta.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Kandigram_Beta.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = Kandigram_Beta/AppDelegate.h; sourceTree = "<group>"; };
@@ -69,26 +78,24 @@
 		2AB680FF05CDB8608885B932 /* Pods-Kandigram_Beta.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Kandigram_Beta.release.xcconfig"; path = "Target Support Files/Pods-Kandigram_Beta/Pods-Kandigram_Beta.release.xcconfig"; sourceTree = "<group>"; };
 		2D02E47B1E0B4A5D006451C7 /* Kandigram_Beta-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Kandigram_Beta-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D02E4901E0B4A5D006451C7 /* Kandigram_Beta-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Kandigram_Beta-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		361D921C91DF43BA84228E70 /* Ubuntu-LightItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Ubuntu-LightItalic.ttf"; path = "../assets/fonts/Ubuntu-LightItalic.ttf"; sourceTree = "<group>"; };
 		4A34F944C18FDB1778EBF646 /* Pods-Kandigram_Beta-tvOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Kandigram_Beta-tvOS.release.xcconfig"; path = "Target Support Files/Pods-Kandigram_Beta-tvOS/Pods-Kandigram_Beta-tvOS.release.xcconfig"; sourceTree = "<group>"; };
+		56D83B444E4A47DCADDBED29 /* Ubuntu-BoldItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Ubuntu-BoldItalic.ttf"; path = "../assets/fonts/Ubuntu-BoldItalic.ttf"; sourceTree = "<group>"; };
+		63D7ADE1FB934DF7959C6006 /* Ubuntu Condensed.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Ubuntu Condensed.ttf"; path = "../assets/fonts/Ubuntu Condensed.ttf"; sourceTree = "<group>"; };
 		67D78AD3300B12E6EB8494BA /* Pods-Kandigram_BetaTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Kandigram_BetaTests.debug.xcconfig"; path = "Target Support Files/Pods-Kandigram_BetaTests/Pods-Kandigram_BetaTests.debug.xcconfig"; sourceTree = "<group>"; };
+		77FB6C585FD94B9092671F78 /* Monofett.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Monofett.ttf; path = ../assets/fonts/Monofett.ttf; sourceTree = "<group>"; };
 		93960EDB8D141530CBEEB1C1 /* libPods-Kandigram_Beta-tvOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Kandigram_Beta-tvOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A87EA93B0EB8D0A6E3DA33BD /* Pods-Kandigram_Beta-tvOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Kandigram_Beta-tvOS.debug.xcconfig"; path = "Target Support Files/Pods-Kandigram_Beta-tvOS/Pods-Kandigram_Beta-tvOS.debug.xcconfig"; sourceTree = "<group>"; };
+		AC422CE2D1304E3391D9140D /* Ubuntu-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Ubuntu-Bold.ttf"; path = "../assets/fonts/Ubuntu-Bold.ttf"; sourceTree = "<group>"; };
+		B22698C17F7F456691E5A2EB /* Ubuntu-Medium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Ubuntu-Medium.ttf"; path = "../assets/fonts/Ubuntu-Medium.ttf"; sourceTree = "<group>"; };
+		CE3381D0C580456DAF6701E8 /* Ubuntu.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Ubuntu.ttf; path = ../assets/fonts/Ubuntu.ttf; sourceTree = "<group>"; };
 		D1F34EE4681B9CD57D871550 /* libPods-Kandigram_BetaTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Kandigram_BetaTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E01E6A83A931EDDAB0DC4103 /* Pods-Kandigram_BetaTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Kandigram_BetaTests.release.xcconfig"; path = "Target Support Files/Pods-Kandigram_BetaTests/Pods-Kandigram_BetaTests.release.xcconfig"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		ED2971642150620600B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS12.0.sdk/System/Library/Frameworks/JavaScriptCore.framework; sourceTree = DEVELOPER_DIR; };
+		F0C5E8828BD84CA9B1CD386F /* Ubuntu-MediumItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Ubuntu-MediumItalic.ttf"; path = "../assets/fonts/Ubuntu-MediumItalic.ttf"; sourceTree = "<group>"; };
+		F2156F7D80FC476AA81B626C /* Ubuntu-Light.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Ubuntu-Light.ttf"; path = "../assets/fonts/Ubuntu-Light.ttf"; sourceTree = "<group>"; };
 		F6F7502B8307392AA67AAF0C /* libPods-Kandigram_Beta.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Kandigram_Beta.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		0E092C7A62E549A0B50303CB /* vincHand.ttf */ = {isa = PBXFileReference; name = "vincHand.ttf"; path = "../assets/fonts/vincHand.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		77FB6C585FD94B9092671F78 /* Monofett.ttf */ = {isa = PBXFileReference; name = "Monofett.ttf"; path = "../assets/fonts/Monofett.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		63D7ADE1FB934DF7959C6006 /* Ubuntu Condensed.ttf */ = {isa = PBXFileReference; name = "Ubuntu Condensed.ttf"; path = "../assets/fonts/Ubuntu Condensed.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		AC422CE2D1304E3391D9140D /* Ubuntu-Bold.ttf */ = {isa = PBXFileReference; name = "Ubuntu-Bold.ttf"; path = "../assets/fonts/Ubuntu-Bold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		56D83B444E4A47DCADDBED29 /* Ubuntu-BoldItalic.ttf */ = {isa = PBXFileReference; name = "Ubuntu-BoldItalic.ttf"; path = "../assets/fonts/Ubuntu-BoldItalic.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		F2156F7D80FC476AA81B626C /* Ubuntu-Light.ttf */ = {isa = PBXFileReference; name = "Ubuntu-Light.ttf"; path = "../assets/fonts/Ubuntu-Light.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		361D921C91DF43BA84228E70 /* Ubuntu-LightItalic.ttf */ = {isa = PBXFileReference; name = "Ubuntu-LightItalic.ttf"; path = "../assets/fonts/Ubuntu-LightItalic.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		B22698C17F7F456691E5A2EB /* Ubuntu-Medium.ttf */ = {isa = PBXFileReference; name = "Ubuntu-Medium.ttf"; path = "../assets/fonts/Ubuntu-Medium.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		F0C5E8828BD84CA9B1CD386F /* Ubuntu-MediumItalic.ttf */ = {isa = PBXFileReference; name = "Ubuntu-MediumItalic.ttf"; path = "../assets/fonts/Ubuntu-MediumItalic.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		CE3381D0C580456DAF6701E8 /* Ubuntu.ttf */ = {isa = PBXFileReference; name = "Ubuntu.ttf"; path = "../assets/fonts/Ubuntu.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		0AA0264612E5436AA032133C /* UbuntuCondensed-Regular.ttf */ = {isa = PBXFileReference; name = "UbuntuCondensed-Regular.ttf"; path = "../assets/fonts/UbuntuCondensed-Regular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -151,6 +158,7 @@
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
+				0C9769BF23BE27A40036B50D /* GoogleService-Info.plist */,
 				13B07FB61A68108700A75B9A /* Info.plist */,
 				13B07FB11A68108700A75B9A /* LaunchScreen.xib */,
 				13B07FB71A68108700A75B9A /* main.m */,
@@ -161,6 +169,11 @@
 		2D16E6871FA4F8E400B85C8A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				0C9769BD23BE25270036B50D /* libz.tbd */,
+				0C9769BB23BE250E0036B50D /* SystemConfiguration.framework */,
+				0C9769B923BE24F50036B50D /* SafariServices.framework */,
+				0C9769B723BE24E40036B50D /* AddressBook.framework */,
+				0C9769B523BE24B40036B50D /* libRNGoogleSignin.a */,
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
 				ED2971642150620600B7C4FE /* JavaScriptCore.framework */,
 				F6F7502B8307392AA67AAF0C /* libPods-Kandigram_Beta.a */,
@@ -183,7 +196,6 @@
 				67D78AD3300B12E6EB8494BA /* Pods-Kandigram_BetaTests.debug.xcconfig */,
 				E01E6A83A931EDDAB0DC4103 /* Pods-Kandigram_BetaTests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -222,7 +234,7 @@
 			sourceTree = "<group>";
 		};
 		BCC84EE9C6554656843DC126 /* Resources */ = {
-			isa = "PBXGroup";
+			isa = PBXGroup;
 			children = (
 				0E092C7A62E549A0B50303CB /* vincHand.ttf */,
 				77FB6C585FD94B9092671F78 /* Monofett.ttf */,
@@ -238,7 +250,6 @@
 			);
 			name = Resources;
 			sourceTree = "<group>";
-			path = "";
 		};
 /* End PBXGroup section */
 
@@ -272,6 +283,7 @@
 				13B07F8C1A680F5B00A75B9A /* Frameworks */,
 				13B07F8E1A680F5B00A75B9A /* Resources */,
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
+				1AFEA24ED6866377066CAF0B /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -350,6 +362,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 				Base,
 			);
@@ -383,6 +396,7 @@
 				7BB402B52DCE4CC9BAB9ED3B /* vincHand.ttf in Resources */,
 				25E3179790E3440DAB77BDF1 /* Monofett.ttf in Resources */,
 				D4048122A32D4F449AE7DFE7 /* Ubuntu Condensed.ttf in Resources */,
+				0C9769C023BE27A40036B50D /* GoogleService-Info.plist in Resources */,
 				37F07462EAF74D81A002D034 /* Ubuntu-Bold.ttf in Resources */,
 				97A842A5AC974043AA97CBC8 /* Ubuntu-BoldItalic.ttf in Resources */,
 				3FAE22EB89E24A54AC0FAD79 /* Ubuntu-Light.ttf in Resources */,
@@ -446,6 +460,26 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		1AFEA24ED6866377066CAF0B /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Kandigram_Beta/Pods-Kandigram_Beta-resources.sh",
+				"${PODS_ROOT}/FBSDKCoreKit/FacebookSDKStrings.bundle",
+				"${PODS_ROOT}/GoogleSignIn/Resources/GoogleSignIn.bundle",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/FacebookSDKStrings.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GoogleSignIn.bundle",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Kandigram_Beta/Pods-Kandigram_Beta-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		1F9A0E0DA295972A9C2AD183 /* [CP] Check Pods Manifest.lock */ = {

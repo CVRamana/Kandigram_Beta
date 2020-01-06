@@ -3,7 +3,8 @@ import { Component } from "react";
 import NetInfo from "@react-native-community/netinfo";
 import {connect} from 'react-redux'
 import {GlobalAction} from '../../GlobalRedux/GlobalAction'
-import { Text, View, StyleSheet, Animated, Image, Easing } from 'react-native';
+import image, {  } from "../../Utils/Constants/image";
+import { ImageBackground, View,TextInput, StyleSheet, Animated, Image, Easing } from 'react-native';
 
 interface SplashProps { }
 
@@ -36,7 +37,7 @@ class Splash extends Component {
         duration: 2000,
         easing: Easing.linear
       }
-    ).start(() => this.props.navigation.navigate('SignUp'))
+    ).start(() => this.props.navigation.navigate('WelcomeSplash'))
   }
 
   render() {
@@ -45,7 +46,11 @@ class Splash extends Component {
       outputRange: ['0deg','360deg','0deg']
     })
     return (
-      <View style={styles.container}>
+     
+      <ImageBackground 
+      source={image.splash_bg}
+      style={styles.container}>
+       
         <Animated.Image
           style={{
             width: 227,
@@ -54,7 +59,8 @@ class Splash extends Component {
           }}
           source={{ uri: 'https://s3.amazonaws.com/media-p.slid.es/uploads/alexanderfarennikov/images/1198519/reactjs.png' }}
         />
-      </View>
+     
+      </ImageBackground>
     );
   }
 };

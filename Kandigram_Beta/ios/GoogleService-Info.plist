@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>633802656029-6v5h0esva3p1bfdej50ebgqranecn4bi.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.633802656029-6v5h0esva3p1bfdej50ebgqranecn4bi</string>
+	<key>API_KEY</key>
+	<string>AIzaSyBnnEDhANzObDWNNk1UmrA-wzmyMN6APa8</string>
+	<key>GCM_SENDER_ID</key>
+	<string>633802656029</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>org.reactjs.native.example.Kandigram-Beta</string>
+	<key>PROJECT_ID</key>
+	<string>kandigram-beta</string>
+	<key>STORAGE_BUCKET</key>
+	<string>kandigram-beta.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:633802656029:ios:b5a1bb8b29b8262e3939f4</string>
+	<key>DATABASE_URL</key>
+	<string>https://kandigram-beta.firebaseio.com</string>
+</dict>
+</plist>
