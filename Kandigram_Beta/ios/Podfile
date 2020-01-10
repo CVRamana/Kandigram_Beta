@@ -33,15 +33,21 @@ target 'Kandigram_Beta' do
   pod 'DoubleConversion', :podspec => '../node_modules/react-native/third-party-podspecs/DoubleConversion.podspec'
   pod 'glog', :podspec => '../node_modules/react-native/third-party-podspecs/glog.podspec'
   pod 'Folly', :podspec => '../node_modules/react-native/third-party-podspecs/Folly.podspec'
+  # pod 'BVLinearGradient', :path => '../node_modules/react-native-linear-gradient'
   
-  pod 'GoogleSignIn', '~> 5.0.2'
+#  pod 'GoogleSignIn', '~> 5.0.2'
   pod 'Firebase/Analytics'
+  pod 'Firebase/Core'
+  pod 'Firebase/Auth'
+  pod 'Firebase/Database'
+  pod 'Firebase/Messaging'
+  
 
   target 'Kandigram_BetaTests' do
     inherit! :search_paths
     # Pods for testing
   end
-
+   use_frameworks!
   use_native_modules!
 end
 

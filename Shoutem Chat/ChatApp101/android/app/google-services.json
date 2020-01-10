@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "279065874868",
+    "firebase_url": "https://chatting101-bc87c.firebaseio.com",
+    "project_id": "chatting101-bc87c",
+    "storage_bucket": "chatting101-bc87c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:279065874868:android:6bbcb3d541ef1923ed62e1",
+        "android_client_info": {
+          "package_name": "com.chatapp101"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "279065874868-uuvuhur1f5mo6t3ldq4n4l1km7mo4p0c.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA9XBhLlXxt33zG6FWUbJPyId6_Z9Hd3MU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "279065874868-uuvuhur1f5mo6t3ldq4n4l1km7mo4p0c.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "279065874868-aj9iah1u04fs6sn4hoib680s1p79hns5.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "org.reactjs.native.example.ChatApp101"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

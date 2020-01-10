@@ -14,20 +14,20 @@
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		25E3179790E3440DAB77BDF1 /* Monofett.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 77FB6C585FD94B9092671F78 /* Monofett.ttf */; };
+		2CEBBF5DFBEA7916FCA6A7E5 /* Pods_Kandigram_Beta.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BC0B36B22D29B2083D40B737 /* Pods_Kandigram_Beta.framework */; };
 		2D02E4BC1E0B4A80006451C7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
 		2D02E4BD1E0B4A84006451C7 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		2D02E4BF1E0B4AB3006451C7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		2DCD954D1E0B4F2C00145EB5 /* Kandigram_BetaTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* Kandigram_BetaTests.m */; };
 		37F07462EAF74D81A002D034 /* Ubuntu-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AC422CE2D1304E3391D9140D /* Ubuntu-Bold.ttf */; };
 		3FAE22EB89E24A54AC0FAD79 /* Ubuntu-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F2156F7D80FC476AA81B626C /* Ubuntu-Light.ttf */; };
-		54A9E774590CCF54ED64F7C0 /* libPods-Kandigram_BetaTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D1F34EE4681B9CD57D871550 /* libPods-Kandigram_BetaTests.a */; };
 		5D8FBEE846CD4468B51D043F /* Ubuntu-LightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 361D921C91DF43BA84228E70 /* Ubuntu-LightItalic.ttf */; };
-		5F84D869325C31201D2E1D87 /* libPods-Kandigram_Beta.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F6F7502B8307392AA67AAF0C /* libPods-Kandigram_Beta.a */; };
 		7BB402B52DCE4CC9BAB9ED3B /* vincHand.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0E092C7A62E549A0B50303CB /* vincHand.ttf */; };
 		7E2DDE232EC7860EABCC73BF /* libPods-Kandigram_Beta-tvOSTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 07855F4B16D9460E14FD6348 /* libPods-Kandigram_Beta-tvOSTests.a */; };
 		97A842A5AC974043AA97CBC8 /* Ubuntu-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 56D83B444E4A47DCADDBED29 /* Ubuntu-BoldItalic.ttf */; };
 		A59CD41FDA2744C6A016A21F /* Ubuntu-MediumItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F0C5E8828BD84CA9B1CD386F /* Ubuntu-MediumItalic.ttf */; };
 		AF5A9A8CFE2D7245F663EE31 /* libPods-Kandigram_Beta-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 93960EDB8D141530CBEEB1C1 /* libPods-Kandigram_Beta-tvOS.a */; };
+		BA1C1C4FC0006C300B375D29 /* Pods_Kandigram_BetaTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5647D3750E25902FF72D0476 /* Pods_Kandigram_BetaTests.framework */; };
 		C5A5B056BB7946E8AB7D6D94 /* Ubuntu-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B22698C17F7F456691E5A2EB /* Ubuntu-Medium.ttf */; };
 		D4048122A32D4F449AE7DFE7 /* Ubuntu Condensed.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 63D7ADE1FB934DF7959C6006 /* Ubuntu Condensed.ttf */; };
 		DCE8616259864680B462ACD2 /* UbuntuCondensed-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0AA0264612E5436AA032133C /* UbuntuCondensed-Regular.ttf */; };
@@ -80,6 +80,7 @@
 		2D02E4901E0B4A5D006451C7 /* Kandigram_Beta-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Kandigram_Beta-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		361D921C91DF43BA84228E70 /* Ubuntu-LightItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Ubuntu-LightItalic.ttf"; path = "../assets/fonts/Ubuntu-LightItalic.ttf"; sourceTree = "<group>"; };
 		4A34F944C18FDB1778EBF646 /* Pods-Kandigram_Beta-tvOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Kandigram_Beta-tvOS.release.xcconfig"; path = "Target Support Files/Pods-Kandigram_Beta-tvOS/Pods-Kandigram_Beta-tvOS.release.xcconfig"; sourceTree = "<group>"; };
+		5647D3750E25902FF72D0476 /* Pods_Kandigram_BetaTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Kandigram_BetaTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		56D83B444E4A47DCADDBED29 /* Ubuntu-BoldItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Ubuntu-BoldItalic.ttf"; path = "../assets/fonts/Ubuntu-BoldItalic.ttf"; sourceTree = "<group>"; };
 		63D7ADE1FB934DF7959C6006 /* Ubuntu Condensed.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Ubuntu Condensed.ttf"; path = "../assets/fonts/Ubuntu Condensed.ttf"; sourceTree = "<group>"; };
 		67D78AD3300B12E6EB8494BA /* Pods-Kandigram_BetaTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Kandigram_BetaTests.debug.xcconfig"; path = "Target Support Files/Pods-Kandigram_BetaTests/Pods-Kandigram_BetaTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -88,14 +89,13 @@
 		A87EA93B0EB8D0A6E3DA33BD /* Pods-Kandigram_Beta-tvOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Kandigram_Beta-tvOS.debug.xcconfig"; path = "Target Support Files/Pods-Kandigram_Beta-tvOS/Pods-Kandigram_Beta-tvOS.debug.xcconfig"; sourceTree = "<group>"; };
 		AC422CE2D1304E3391D9140D /* Ubuntu-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Ubuntu-Bold.ttf"; path = "../assets/fonts/Ubuntu-Bold.ttf"; sourceTree = "<group>"; };
 		B22698C17F7F456691E5A2EB /* Ubuntu-Medium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Ubuntu-Medium.ttf"; path = "../assets/fonts/Ubuntu-Medium.ttf"; sourceTree = "<group>"; };
+		BC0B36B22D29B2083D40B737 /* Pods_Kandigram_Beta.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Kandigram_Beta.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE3381D0C580456DAF6701E8 /* Ubuntu.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Ubuntu.ttf; path = ../assets/fonts/Ubuntu.ttf; sourceTree = "<group>"; };
-		D1F34EE4681B9CD57D871550 /* libPods-Kandigram_BetaTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Kandigram_BetaTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E01E6A83A931EDDAB0DC4103 /* Pods-Kandigram_BetaTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Kandigram_BetaTests.release.xcconfig"; path = "Target Support Files/Pods-Kandigram_BetaTests/Pods-Kandigram_BetaTests.release.xcconfig"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		ED2971642150620600B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS12.0.sdk/System/Library/Frameworks/JavaScriptCore.framework; sourceTree = DEVELOPER_DIR; };
 		F0C5E8828BD84CA9B1CD386F /* Ubuntu-MediumItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Ubuntu-MediumItalic.ttf"; path = "../assets/fonts/Ubuntu-MediumItalic.ttf"; sourceTree = "<group>"; };
 		F2156F7D80FC476AA81B626C /* Ubuntu-Light.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Ubuntu-Light.ttf"; path = "../assets/fonts/Ubuntu-Light.ttf"; sourceTree = "<group>"; };
-		F6F7502B8307392AA67AAF0C /* libPods-Kandigram_Beta.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Kandigram_Beta.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,7 +103,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				54A9E774590CCF54ED64F7C0 /* libPods-Kandigram_BetaTests.a in Frameworks */,
+				BA1C1C4FC0006C300B375D29 /* Pods_Kandigram_BetaTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -111,7 +111,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5F84D869325C31201D2E1D87 /* libPods-Kandigram_Beta.a in Frameworks */,
+				2CEBBF5DFBEA7916FCA6A7E5 /* Pods_Kandigram_Beta.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -158,9 +158,9 @@
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
-				0C9769BF23BE27A40036B50D /* GoogleService-Info.plist */,
 				13B07FB61A68108700A75B9A /* Info.plist */,
 				13B07FB11A68108700A75B9A /* LaunchScreen.xib */,
+				0C9769BF23BE27A40036B50D /* GoogleService-Info.plist */,
 				13B07FB71A68108700A75B9A /* main.m */,
 			);
 			name = Kandigram_Beta;
@@ -176,10 +176,10 @@
 				0C9769B523BE24B40036B50D /* libRNGoogleSignin.a */,
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
 				ED2971642150620600B7C4FE /* JavaScriptCore.framework */,
-				F6F7502B8307392AA67AAF0C /* libPods-Kandigram_Beta.a */,
 				93960EDB8D141530CBEEB1C1 /* libPods-Kandigram_Beta-tvOS.a */,
 				07855F4B16D9460E14FD6348 /* libPods-Kandigram_Beta-tvOSTests.a */,
-				D1F34EE4681B9CD57D871550 /* libPods-Kandigram_BetaTests.a */,
+				BC0B36B22D29B2083D40B737 /* Pods_Kandigram_Beta.framework */,
+				5647D3750E25902FF72D0476 /* Pods_Kandigram_BetaTests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -283,7 +283,7 @@
 				13B07F8C1A680F5B00A75B9A /* Frameworks */,
 				13B07F8E1A680F5B00A75B9A /* Resources */,
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
-				1AFEA24ED6866377066CAF0B /* [CP] Copy Pods Resources */,
+				A78B55B7ACC6FA1284663557 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -462,26 +462,6 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		1AFEA24ED6866377066CAF0B /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Kandigram_Beta/Pods-Kandigram_Beta-resources.sh",
-				"${PODS_ROOT}/FBSDKCoreKit/FacebookSDKStrings.bundle",
-				"${PODS_ROOT}/GoogleSignIn/Resources/GoogleSignIn.bundle",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/FacebookSDKStrings.bundle",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GoogleSignIn.bundle",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Kandigram_Beta/Pods-Kandigram_Beta-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		1F9A0E0DA295972A9C2AD183 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -538,6 +518,100 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A78B55B7ACC6FA1284663557 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Kandigram_Beta/Pods-Kandigram_Beta-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/BVLinearGradient/BVLinearGradient.framework",
+				"${BUILT_PRODUCTS_DIR}/DoubleConversion/DoubleConversion.framework",
+				"${BUILT_PRODUCTS_DIR}/FBReactNativeSpec/FBReactNativeSpec.framework",
+				"${BUILT_PRODUCTS_DIR}/FBSDKCoreKit/FBSDKCoreKit.framework",
+				"${BUILT_PRODUCTS_DIR}/FBSDKLoginKit/FBSDKLoginKit.framework",
+				"${BUILT_PRODUCTS_DIR}/FBSDKShareKit/FBSDKShareKit.framework",
+				"${BUILT_PRODUCTS_DIR}/Folly/folly.framework",
+				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
+				"${BUILT_PRODUCTS_DIR}/Protobuf/protobuf.framework",
+				"${BUILT_PRODUCTS_DIR}/RCTTypeSafety/RCTTypeSafety.framework",
+				"${BUILT_PRODUCTS_DIR}/RNCAsyncStorage/RNCAsyncStorage.framework",
+				"${BUILT_PRODUCTS_DIR}/RNDeviceInfo/RNDeviceInfo.framework",
+				"${BUILT_PRODUCTS_DIR}/RNGestureHandler/RNGestureHandler.framework",
+				"${BUILT_PRODUCTS_DIR}/RNReanimated/RNReanimated.framework",
+				"${BUILT_PRODUCTS_DIR}/RNScreens/RNScreens.framework",
+				"${BUILT_PRODUCTS_DIR}/React-Core/React.framework",
+				"${BUILT_PRODUCTS_DIR}/React-CoreModules/CoreModules.framework",
+				"${BUILT_PRODUCTS_DIR}/React-RCTActionSheet/RCTActionSheet.framework",
+				"${BUILT_PRODUCTS_DIR}/React-RCTAnimation/RCTAnimation.framework",
+				"${BUILT_PRODUCTS_DIR}/React-RCTBlob/RCTBlob.framework",
+				"${BUILT_PRODUCTS_DIR}/React-RCTImage/RCTImage.framework",
+				"${BUILT_PRODUCTS_DIR}/React-RCTLinking/RCTLinking.framework",
+				"${BUILT_PRODUCTS_DIR}/React-RCTNetwork/RCTNetwork.framework",
+				"${BUILT_PRODUCTS_DIR}/React-RCTSettings/RCTSettings.framework",
+				"${BUILT_PRODUCTS_DIR}/React-RCTText/RCTText.framework",
+				"${BUILT_PRODUCTS_DIR}/React-RCTVibration/RCTVibration.framework",
+				"${BUILT_PRODUCTS_DIR}/React-cxxreact/cxxreact.framework",
+				"${BUILT_PRODUCTS_DIR}/React-jsi/jsi.framework",
+				"${BUILT_PRODUCTS_DIR}/React-jsiexecutor/jsireact.framework",
+				"${BUILT_PRODUCTS_DIR}/React-jsinspector/jsinspector.framework",
+				"${BUILT_PRODUCTS_DIR}/ReactCommon/ReactCommon.framework",
+				"${BUILT_PRODUCTS_DIR}/Yoga/yoga.framework",
+				"${BUILT_PRODUCTS_DIR}/glog/glog.framework",
+				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
+				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
+				"${BUILT_PRODUCTS_DIR}/react-native-fbsdk/react_native_fbsdk.framework",
+				"${BUILT_PRODUCTS_DIR}/react-native-netinfo/react_native_netinfo.framework",
+				"${BUILT_PRODUCTS_DIR}/react-native-spinkit/react_native_spinkit.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/BVLinearGradient.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DoubleConversion.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBReactNativeSpec.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKCoreKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKLoginKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKShareKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/folly.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/protobuf.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RCTTypeSafety.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RNCAsyncStorage.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RNDeviceInfo.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RNGestureHandler.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RNReanimated.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RNScreens.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/React.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CoreModules.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RCTActionSheet.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RCTAnimation.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RCTBlob.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RCTImage.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RCTLinking.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RCTNetwork.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RCTSettings.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RCTText.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RCTVibration.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/cxxreact.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/jsi.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/jsireact.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/jsinspector.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ReactCommon.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/yoga.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/glog.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/react_native_fbsdk.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/react_native_netinfo.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/react_native_spinkit.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Kandigram_Beta/Pods-Kandigram_Beta-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		DA23CE5A620C902F8D3327C2 /* [CP] Check Pods Manifest.lock */ = {

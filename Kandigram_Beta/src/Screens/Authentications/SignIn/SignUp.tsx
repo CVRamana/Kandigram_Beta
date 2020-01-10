@@ -10,15 +10,16 @@ import { connect } from "react-redux";
 import { LoginButton, AccessToken } from 'react-native-fbsdk';
 import Loader from '../../../Common/loader';
 import index from "../../../Utils//Constants/index";
+import firebase from "react-native-firebase";
 
-import {
-  GoogleSignin,
-  statusCodes,
-} from '@react-native-community/google-signin';
 import image from '../../../Utils/Constants/image';
 
 import TextInputComponent from '../../../Common/TextInputComponent';
-GoogleSignin.configure();
+import colors from '../../../Utils/Constants/colors';
+import ButtonComponent from '../../../Common/ButonComponent';
+import CommonEye from '../../../Common/CommonEye';
+import HeaderComponent from '../../../Common/HeaderComponent';
+
 
 class SignUp extends React.Component {
   constructor(props) {
@@ -27,6 +28,15 @@ class SignUp extends React.Component {
     this.state = {
       isSigninInProgress: true,
       txt: "",
+      name: '',
+      email: '',
+      mobile: "",
+      password: "",
+      age: "",
+      username: "",
+      isSecure: true,
+      isSecureText: false,
+      isChecked: false,
 
     };
   };
@@ -35,29 +45,19 @@ class SignUp extends React.Component {
     this.setState({
       txt: val
     })
-
+  }
+  // Sign UP Action 
+  handleSignUp = () => {
+    firebase
+      .auth()
+      .createUserWithEmailAndPassword(this.state.email, this.state.password)
+      .then((res) => {
+        alert(JSON.stringify(res))
+        this.props.navigation.navigate('Profile')
+      })
+      .catch(error => this.setState({ errorMessage: error.message }, () => alert(error)))
   }
 
-
-  signIn = async () => {
-    try {
-      await GoogleSignin.hasPlayServices();
-      const userInfo = await GoogleSignin.signIn();
-      alert(JSON.stringify(userInfo))
-      this.setState({ userInfo });
-    } catch (error) {
-      if (error.code === statusCodes.SIGN_IN_CANCELLED) {
-        alert("error")
-        // user cancelled the login flow
-      } else if (error.code === statusCodes.IN_PROGRESS) {
-        // operation (e.g. sign in) is in progress already
-      } else if (error.code === statusCodes.PLAY_SERVICES_NOT_AVAILABLE) {
-        // play services not available or outdated
-      } else {
-        // some other error happened
-      }
-    }
-  };
 
 
   componentDidMount() {
@@ -75,94 +75,179 @@ class SignUp extends React.Component {
   }
   render() {
     return (
-      <View style={{ flex: 1, }}>
-        <ImageBackground
+      <ImageBackground style={{ flex: 1, backgroundColor: 'rgb(19,31,52)' }}>
+        {/* <ImageBackground
           source={image.signup_bg}
           style={styles.container}>
           <Loader
             isLoading={false}
           />
+          
+          <Text style={styles.helloStyle}> {index.strings.helloText}</Text>
+          <Text style={styles.signUpstyle}>{index.strings.signUpText} </Text>
 
-          {/* <Text> {DeviceInfo.getDeviceId}</Text>
+        </ImageBackground> */}
+        <HeaderComponent
+          firstText={index.strings.helloText}
+          secondText={index.strings.signUpText}
+        />
+
+        {/* <Text> {DeviceInfo.getDeviceId}</Text>
           <Button onPress={() => this.onPress()} title={"Redux"} />
           <Button onPress={() => this.onPersist()} title={"Redux Persist"} />
           */}
-          <Button
-            title="GoogleSignIn "
-            onPress={() => this.signIn()}
-          />
-
-
-        </ImageBackground>
 
         <View style={{
-          flex: .70,
+          height: heightPercentageToDP(calculateHeight(1100)),
+          width: widthPercentageToDP(calculateWidth(375)),
+          paddingBottom: 400,
           paddingLeft: 16,
-          // backgroundColor: "pink"
+          marginTop: 50,
+          paddingTop: 200,
+          // backgroundColor:"pink"
         }}>
-
-          <TextInputComponent
-            ref="first"
-            commonPlaceholder={"FirstTextInput"}
-            commonReturnKeyType={"next"}
-            commonOnSubmitEditing={() => this.refs.second.refs.commonInputRef.focus()}
-          />
-
-          <TextInputComponent
-            ref="second"
-            commonPlaceholder={"secondTextInput"}
-            commonReturnKeyType={"next"}
-            commonOnSubmitEditing={() => this.refs.third.refs.commonInputRef.focus()}
-          />
-          <TextInputComponent
-            ref="third"
-            commonPlaceholder={"secondTextInput"}
-            commonReturnKeyType={"next"}
-            commonOnSubmitEditing={() => this.refs.fourth.refs.commonInputRef.focus()}
-          />
-          <TextInputComponent
-            ref="fourth"
-            commonPlaceholder={"secondTextInput"}
-            commonReturnKeyType={"next"}
-            commonOnSubmitEditing={() => this.refs.fifth.refs.commonInputRef.focus()}
-          />
-          <TextInputComponent
-            ref="fifth"
-            commonPlaceholder={"secondTextInput"}
-            commonReturnKeyType={"next"}
-            commonOnSubmitEditing={() => alert("Submit action")}
-          />
-          <View style={{ flexDirection: "row" }}>
-            <Image
-              source={image.check}
-              style={styles.check}
+          <ScrollView>
+            <TextInputComponent
+              ref="first"
+              val={this.state.name}
+              commonPlaceholder={"Name*"}
+              commonReturnKeyType={"next"}
+              commonOnSubmitEditing={() => this.refs.second.refs.commonInputRef.focus()}
+              commonOnChangeText={(val: any) => this.setState({ name: val })}
+              commonSecureTextEntry={false}
+              extraStyle={{ marginTop: 30, }}
             />
-            <Text style={{ marginTop: heightPercentageToDP(calculateHeight(35)) }}>{index.strings.terms} </Text>
-          </View>
-          <LoginButton
-            onLoginFinished={
-              (error, result) => {
-                if (error) {
-                  console.log("login has error: " + result.error);
-                } else if (result.isCancelled) {
-                  console.log("login is cancelled.");
-                } else {
-                  AccessToken.getCurrentAccessToken().then(
-                    (data) => {
-                      console.log(data.accessToken.toString())
-                      // alert(JSON.stringify(data))
-                    }
-                  )
+
+            <TextInputComponent
+              ref="second"
+              val={this.state.mobile}
+              commonPlaceholder={"Mobile Number*"}
+              commonReturnKeyType={"next"}
+              commonOnSubmitEditing={() => this.refs.third.refs.commonInputRef.focus()}
+              commonOnChangeText={(val: any) => this.setState({ mobile: val })}
+              commonSecureTextEntry={false}
+              extraStyle={{ marginTop: 30, }}
+            />
+            <TextInputComponent
+              ref="third"
+              val={this.state.email}
+              commonPlaceholder={"Email Address*"}
+              commonReturnKeyType={"next"}
+              commonOnSubmitEditing={() => this.refs.fourth.refs.commonInputRef.focus()}
+              commonOnChangeText={(val: any) => this.setState({ email: val })}
+              commonSecureTextEntry={false}
+              extraStyle={{ marginTop: 30, }}
+            />
+            <TextInputComponent
+              ref="fourth"
+              val={this.state.username}
+              commonPlaceholder={"UseraName*"}
+              commonReturnKeyType={"next"}
+              commonOnSubmitEditing={() => this.refs.fifth.refs.commonInputRef.focus()}
+              commonOnChangeText={(val: any) => this.setState({ username: val })}
+              commonSecureTextEntry={false}
+              extraStyle={{ marginTop: 30, }}
+            />
+            <TextInputComponent
+              ref="fifth"
+              val={this.state.password}
+              commonPlaceholder={"password*"}
+              commonReturnKeyType={"next"}
+              commonOnSubmitEditing={() => alert("Submit action")}
+              commonOnChangeText={(val: any) => this.setState({ password: val })}
+              commonSecureTextEntry={this.state.isSecureText}
+              extraStyle={{ marginTop: 30, }}
+            />
+
+            {/* 
+            <TouchableOpacity
+              onPress={() => this.setState({ isSecure: !this.state.isSecure,
+              isSecureText: !this.state.isSecureText })}
+              style={styles.secure11}>
+              {this.state.isSecure ?
+                <Image
+                  style={{ tintColor: "white", height: 30, width: 45 }}
+                  source={index.image.closeEye}
+                /> : <Image
+                  style={{ tintColor: "white", height: 30, width: 45 }}
+                  source={index.image.openEye}
+                />}
+            </TouchableOpacity> 
+            */}
+
+            <View style={styles.secure11}>
+              <CommonEye
+                isSecureProp={this.state.isSecure}
+                handlePress={() => this.setState({
+                  isSecure: !this.state.isSecure,
+                  isSecureText: !this.state.isSecureText
+                })}
+              />
+            </View>
+
+            <View style={{ flexDirection: "row" }}>
+              <TouchableOpacity
+                onPress={() => this.setState({ isChecked: !this.state.isChecked })}>
+                {this.state.isChecked ?
+                  <Image
+                    source={image.check}
+                    style={styles.check}
+                  /> :
+                  <Image
+                    source={image.uncheck}
+                    style={styles.check}
+                  />
                 }
-              }
-            }
-            onLogoutFinished={() => console.log("logout.")} />
-          <Button
-            title="GoogleSignIn "
-            onPress={() => this.signIn()}
-          />
+
+              </TouchableOpacity>
+
+              <Text style={{ marginTop: heightPercentageToDP(calculateHeight(35)) }}>{index.strings.terms} </Text>
+            </View>
+            <View style={{ flexDirection: "row", alignItems: "center", justifyContent: "center", marginTop: 48 }}>
+              <LoginButton
+                onLoginFinished={
+                  (error, result) => {
+                    if (error) {
+                      console.log("login has error: " + result.error);
+                    } else if (result.isCancelled) {
+                      console.log("login is cancelled.");
+                    } else {
+                      AccessToken.getCurrentAccessToken().then(
+                        (data) => {
+                          const credential = firebase.auth.FacebookAuthProvider.credential(data.accessToken);
+                        
+                          firebase.auth().signInWithCredential(credential)
+                          .then((res)=>{
+                           console.log(res)
+                          })
+                          .catch((err)=>{
+                            console.log(err)
+                          })
+                          debugger
+                          //console.warn(JSON.stringify(firebaseUserCredential.user.toJSON()))
+                          console.log(data.accessToken.toString())
+                        }
+                      )
+                    }
+                  }
+                }
+                onLogoutFinished={() => console.warn("logout.")} />
+              {/* <Button
+              //   title="GoogleSignIn "
+              //   onPress={() => this.signIn()}
+              // /> */}
+            </View>
+            <View style={{ marginTop: heightPercentageToDP(calculateHeight(48)), marginBottom: 20, }}>
+              <ButtonComponent
+                myStyle={{ width: widthPercentageToDP(calculateWidth(340)), backgroundColor: "red" }}
+                name={"Sign UP"}
+                onButtonPress={() => this.handleSignUp()}
+              />
+            </View>
+
+          </ScrollView>
         </View>
-      </View>
+      </ImageBackground>
     );
   }
 };
@@ -189,6 +274,18 @@ const styles = StyleSheet.create({
     marginTop: heightPercentageToDP(calculateHeight(30)),
     height: heightPercentageToDP(calculateHeight(28)),
     width: widthPercentageToDP(calculateWidth(28))
+  },
+
+  secure11: {
+    position: "absolute",
+    // backgroundColor:"red",
+    height: heightPercentageToDP(calculateHeight(30)),
+    width: widthPercentageToDP(calculateWidth(50)),
+    justifyContent: "center",
+    alignItems: "center",
+    bottom: heightPercentageToDP(calculateHeight(268)),
+    right: widthPercentageToDP(calculateWidth(40)),
+
   }
 });
 

@@ -6,10 +6,30 @@ import { widthPercentageToDP, heightPercentageToDP } from 'react-native-responsi
 import { calculateHeight, calculateWidth } from '../../Common/ResponsiveScreen';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import ButtonComponent from '../../Common/ButonComponent';
+import firebase from 'react-native-firebase';
 
 interface WelocmeSplashProps { }
 
 class WelocmeSplash extends React.Component {
+    constructor(props) {
+      super(props)
+    
+      this.state = {
+        isAuthenticated: false,
+      };
+    };
+
+    componentDidMount() {
+        alert(this.state.isAuthenticated)
+        firebase.auth().signInAnonymously()
+          .then(() => {
+            this.setState({
+              isAuthenticated: true,
+            });
+          });
+      }
+    
+    
     render() {
         return (
             <ImageBackground
@@ -26,24 +46,26 @@ class WelocmeSplash extends React.Component {
                     KandiSnap</Text>
                 <Text style={[styles.textt, { fontSize: widthPercentageToDP(calculateWidth(18)) }]}>
                     Share your kandi</Text>
+                    <View style={{marginLeft: 24,marginTop: 80,}}>
                 <ButtonComponent
-                name={"Discover Kandi"}
-               // top={15}
-             
-                onButtonPress={()=>alert("called")}
+                    name={"Discover Kandi"}
+                    onButtonPress={() => this.props.navigation.navigate('Home')}
                 />
-             <View style={styles.loginContainer}>
-                <TouchableOpacity style={styles.loginStyle}>
-                    <Text style={styles.textt11}>Login </Text>
-                </TouchableOpacity>
+                </View>
+                <View style={styles.loginContainer}>
+                    <TouchableOpacity
+                        onPress={() => this.props.navigation.navigate('Login')}
+                        style={styles.loginStyle}>
+                        <Text style={styles.textt11}>Login </Text>
+                    </TouchableOpacity>
 
-                <TouchableOpacity 
-                style={styles.loginStyle}
-                //onPress={()=>this.props.navigation.navigate("SignUP")}
-                 onPress={()=>alert(JSON.stringify(this.props.navigation.navigate("SignUp")))}
-                >
-                <Text style={styles.textt11}>Sign Up </Text>
-                </TouchableOpacity>
+                    <TouchableOpacity
+                        style={styles.loginStyle}
+                        //onPress={()=>this.props.navigation.navigate("SignUP")}
+                        onPress={() => alert(JSON.stringify(this.props.navigation.navigate("SignUp")))}
+                    >
+                        <Text style={styles.textt11}>Sign Up </Text>
+                    </TouchableOpacity>
                 </View>
 
             </ImageBackground>
@@ -83,31 +105,31 @@ const styles = StyleSheet.create({
         borderRadius: 1000,
         backgroundColor: 'red'
     },
-    loginContainer:{
-        flexDirection:"row",
-        marginTop:heightPercentageToDP(calculateHeight(15)),
-        marginLeft:widthPercentageToDP(calculateWidth(10)),
-        justifyContent:"space-around"
-      
-    },
-    loginStyle:{
-        width: widthPercentageToDP(calculateWidth(156)),
-        height: heightPercentageToDP(calculateHeight(54)),
-        borderWidth:3,
-        borderColor:colors.whiteColor,
-        borderRadius:widthPercentageToDP(calculateWidth(78)),
-        justifyContent:"center",
-        alignItems:"center"
-      
+    loginContainer: {
+        flexDirection: "row",
+        marginTop: heightPercentageToDP(calculateHeight(15)),
+        marginLeft: widthPercentageToDP(calculateWidth(10)),
+        justifyContent: "space-around"
 
     },
-    textt11:{
+    loginStyle: {
+        width: widthPercentageToDP(calculateWidth(156)),
+        height: heightPercentageToDP(calculateHeight(54)),
+        borderWidth: 3,
+        borderColor: colors.whiteColor,
+        borderRadius: widthPercentageToDP(calculateWidth(78)),
+        justifyContent: "center",
+        alignItems: "center"
+
+
+    },
+    textt11: {
         fontFamily: "Ubuntu-Medium",
-  fontSize: 16,
-  fontWeight: "bold",
-  fontStyle: "normal",
-  letterSpacing: 0.19,
-  color: colors.whiteColor
+        fontSize: 16,
+        fontWeight: "bold",
+        fontStyle: "normal",
+        letterSpacing: 0.19,
+        color: colors.whiteColor
     }
-   
+
 });

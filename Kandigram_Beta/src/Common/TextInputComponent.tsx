@@ -13,17 +13,21 @@ class TextInputComponent extends React.Component{
        value:""
     };
   };
-  
-  
+
     render(){
   return (
     <View style={styles.container}>
       <TextInput
        ref={"commonInputRef"}
+       value={this.props.val}
        placeholder={this.props.commonPlaceholder}
+       placeholderTextColor={"white"}
        returnKeyType={this.props.commonReturnKeyType}
        onSubmitEditing={this.props.commonOnSubmitEditing}
-       style={styles.textInput}
+       onChangeText={this.props.commonOnChangeText}
+       style={[styles.textInput,this.props.extraStyle]}
+       secureTextEntry={this.props.commonSecureTextEntry}
+       
       />
    
     
@@ -39,7 +43,7 @@ const styles = StyleSheet.create({
   textInput:{
   width: widthPercentageToDP(calculateWidth(350)),
   height: heightPercentageToDP(calculateHeight(56)),
-  marginTop:widthPercentageToDP(calculateWidth(20)),
+//  marginTop:widthPercentageToDP(calculateWidth(20)),
   borderRadius: 1000,
   paddingLeft: 20,
   fontSize:heightPercentageToDP(calculateHeight(16)),
