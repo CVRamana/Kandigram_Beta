@@ -14,7 +14,6 @@ interface LoginProps { }
 class ResetPassword extends React.Component {
     constructor(props) {
         super(props)
-
         this.state = {
             isSecure: false
         };
@@ -25,7 +24,7 @@ class ResetPassword extends React.Component {
             <ImageBackground style={styles.container}>
                 <HeaderComponent
                     // firstText={"Welocome Back,"}
-                    secondText={"Reset Password"}
+                    secondText={"Reset Password ?"}
                 />
                 <View style={styles.inputContainer}>
                     <TextInputComponent />

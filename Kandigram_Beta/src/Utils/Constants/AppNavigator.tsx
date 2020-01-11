@@ -1,11 +1,14 @@
-import { createAppContainer } from 'react-navigation';
-import { createStackNavigator } from 'react-navigation-stack';
+import { createAppContainer} from 'react-navigation';
+import { createStackNavigator, } from 'react-navigation-stack';
+import { createBottomTabNavigator } from 'react-navigation-tabs';
 import Splash from "../../Screens/Authentications/Splash";
 import SignUp from '../../Screens/Authentications/SignIn/SignUp';
 import WelcomeSplash from "../../Screens/Authentications/WelcomeSplash";
 import Profile from "../../Screens/Profile/Profile";
 import Login from "../../Screens/Authentications/Login/Login"
 import Home from "../../Screens/Home/Home";
+import ResetPassword from '../../Screens/Authentications/Login/ResetPassword';
+import ForgetPassword from '../../Screens/Authentications/Login/ForgetPassword';
 
 const SplashContainer = createStackNavigator({
 
@@ -14,49 +17,99 @@ const SplashContainer = createStackNavigator({
   },
 },
   {
-    headerMode: "none"
+    headerMode: "none",
+    navigationOptions: {
+      gesturesEnabled: false,
+      header: null
+  },
   },
 )
+//
 const WelcomeSplashContainer = createStackNavigator({
   WelcomeSplash: {
     screen: WelcomeSplash,
   },
 },
   {
-    headerMode: "none"
+    headerMode: "none",
+    navigationOptions: {
+      gesturesEnabled: false,
+      header: null
+  },
   },
 )
+//
 const SignUPContainer = createStackNavigator({
   SignUp: {
     screen: SignUp,
   }
 },
   {
-    headerMode: "none"
+    headerMode: "none",
+    navigationOptions: {
+      gesturesEnabled: false,
+      header: null
+  },
+
   },
 )
+
+//
 const LoginContainer=createStackNavigator({
   Login:{
     screen:Login
+  },
+  ResetPassword:{
+    screen:ResetPassword
+  },
+  ForgetPassword:{
+    screen:ForgetPassword
   }
 },{
-  headerMode:"none"
+  headerMode:"none", navigationOptions: {
+    gesturesEnabled: false,
+    header: null
+},
 })
+//
 const ProfileContainer=createStackNavigator({
   profile:{
     screen:Profile,
   },
 },
 {
-  headerMode:'none'
+  headerMode:'none', 
+  navigationOptions: {
+    gesturesEnabled: false,
+    header: null
+},
 }
 )
+//
 const HomeContainer=createStackNavigator({
 Home:{
   screen:Home,
 }
 },{
-  headerMode:"none"
+  headerMode:"none",
+  navigationOptions: {
+    gesturesEnabled: false,
+    header: null
+},
+})
+// craete tab navigator  
+const tabs=createBottomTabNavigator(
+  { 
+    Home:{screen:Home},
+   // secondTab: {screen: secondTab},
+  //  scan: {screen: Scan},
+  //  Notifications: {screen: NotificationStack},
+   // Settings: {screen: SettingsStack},
+
+},
+{
+  
+
 })
 
 const AppNavigator = createStackNavigator({

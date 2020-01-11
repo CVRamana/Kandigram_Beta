@@ -14,7 +14,7 @@ const CommonBackButton = (props: CommonBackButtonProps) => {
     <View style={styles.container}>
       <TouchableOpacity
       style={[styles.container,props.myStyle]}
-      onPress={()=>alert(JSON.stringify(props))}
+      onPress={()=>props.handleClick()}
       > 
           </TouchableOpacity>
     </View>

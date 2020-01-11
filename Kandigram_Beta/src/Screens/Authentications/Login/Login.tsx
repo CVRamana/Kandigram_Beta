@@ -8,6 +8,8 @@ import { widthPercentageToDP, heightPercentageToDP } from 'react-native-responsi
 import { calculateWidth, calculateHeight } from '../../../Common/ResponsiveScreen';
 import colors from '../../../Utils/Constants/colors';
 import CommonEye from '../../../Common/CommonEye';
+import {PersistAction} from "../../../ReduxPersist/PersistAction";
+import  {connect} from "react-redux";
 import firebase from 'react-native-firebase'
 
 interface LoginProps { }
@@ -18,7 +20,9 @@ class Login extends React.Component {
     
       this.state = {
          isSecure:false,
-         email: '', password: '', errorMessage: null 
+         email: '', 
+         password: '',
+         errorMessage: null 
       };
     };
 
@@ -30,8 +34,10 @@ class Login extends React.Component {
           .signInWithEmailAndPassword(email, password)
           .then(
               (res) => {
-                  //alert(JSON.stringify(res.Token))
-                console.log(res.user._user.uid)
+                  //On successfull login
+                let uid=res.user.uid
+                this.props.PersistAction(uid)
+                  console.log(res.user.uid)
                 debugger
                   this.props.navigation.navigate('Profile')
             }
@@ -73,7 +79,9 @@ class Login extends React.Component {
                     />
                     </View>
 
-                    <Text style={[styles.forgotText,{marginLeft: 200, marginBottom:48}]}>{index.strings.forgot} </Text>
+                    <Text 
+                    onPress={()=>this.props.navigation.navigate('ForgetPassword')}
+                    style={[styles.forgotText,{marginLeft: 200, marginBottom:48}]}>{index.strings.forgot} </Text>
                     <ButtonComponent
                     name={"Log In"}
                     onButtonPress={()=>this.handleLogin()}
@@ -101,7 +109,7 @@ class Login extends React.Component {
     }
 };
 
-export default Login;
+
 
 const styles = StyleSheet.create({
     container: {
@@ -140,3 +148,15 @@ const styles = StyleSheet.create({
         backgroundColor: "#1977f3"
     }
 });
+const mapStateToProps=(state:any)=>{
+    return{
+       
+    }
+}
+const mapDispatchToProps={
+    PersistAction:PersistAction
+
+}
+
+
+export default connect(mapStateToProps,mapDispatchToProps)(Login);

@@ -3,6 +3,7 @@ import { Component } from "react";
 import NetInfo from "@react-native-community/netinfo";
 import {connect} from 'react-redux'
 import {GlobalAction} from '../../GlobalRedux/GlobalAction'
+import { PersistAction } from "../../ReduxPersist/PersistAction";
 import image, {  } from "../../Utils/Constants/image";
 import { ImageBackground, View,TextInput, StyleSheet, Animated, Image, Easing } from 'react-native';
 
@@ -20,10 +21,11 @@ class Splash extends Component {
   componentDidMount() {
     this.spin()
    this.checkInternet()
+  
+
   }
   checkInternet=()=> {
     NetInfo.addEventListener(state => {
-     
       this.props.GlobalAction(state.isConnected);
    });
   }
@@ -37,7 +39,7 @@ class Splash extends Component {
         duration: 2000,
         easing: Easing.linear
       }
-    ).start(() => this.props.navigation.navigate('WelcomeSplash'))
+    ).start(()=>this.props.navigation.navigate("WelcomeSplash"))
   }
 
   render() {
@@ -74,11 +76,12 @@ const styles = StyleSheet.create({
 });
 const mapStateToProps=(state:any)=>{
   return{
-//define the states here
+  uid:state.PersistReducer.uid
   }
 }
 const mapDispatchToProps={
-  GlobalAction:GlobalAction
+  GlobalAction:GlobalAction,
+  PersistAction:PersistAction
 }
 
 export default connect(mapStateToProps,mapDispatchToProps)(Splash);

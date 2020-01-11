@@ -9,26 +9,95 @@ import { TextInput, TouchableOpacity } from 'react-native-gesture-handler';
 import CommonBackButton from '../../Common/CommonBackButton';
 import ButtonComponent from '../../Common/ButonComponent';
 //import { ScrollView } from 'react-native-gesture-handler';
+import AsyncStorage from '@react-native-community/async-storage'
+import { connect } from "react-redux"
 import firebase from 'react-native-firebase'
+import { db } from "../../Utils/FirebaseConfig";
+import ImagePicker from 'react-native-image-crop-picker';
 
 interface ProfileProps { }
 
 class Profile extends React.Component {
     constructor(props) {
-      super(props)
-    
-      this.state = {
-         about:"",currentUser:"",
-      };
+        super(props)
+
+        this.state = {
+            about: "", currentUser: "",
+            coverImgPath: '',
+            ProfileImageStatus: false,
+            profilePic: '',
+            picCon: false
+        };
     };
-    
+
     componentDidMount() {
         const { currentUser } = firebase.auth()
         this.setState({ currentUser })
+       // this.clearAsyncStorage()
+        alert(JSON.stringify(this.props.uid))
+        debugger
+    }
+// to clear the Database
+    clearAsyncStorage = async () => {
+        alert("called")
+        await AsyncStorage.clear();
+    }
+
+    //gallery
+    opengallery = () => {
+        ImagePicker.openPicker({ cropping: true })
+            .then(image => {
+                // console.warn(image.path);
+                this.setState({ coverImgPath: image.path }, () => {
+
+                    this.setState({ ProfileImageStatus: true })
+                    const ref = firebase.storage().ref("" + this.props.uid).child("coverImage.jpg")
+                    const uploadtask = ref.putFile(image.path)
+                    uploadtask.then((snap) => {
+                        ref.getDownloadURL().then((data) => {
+                            console.warn("image url=>", data)
+                            this.setState({ ProfileImageStatus: false })
+                            this.updateTheUserNode(this.props.uid, { "coverImage": data })
+                        })
+                    })
+                })
+            });
+    }
+
+    //profile pic
+    selectProfilePic = () => {
+        ImagePicker.openPicker({ cropping: true })
+            .then(image => {
+                console.warn("profile pic path", image.path);
+                this.setState({ profilePic: image.path }, () => {
+
+                    this.setState({ ProfileImageStatus: true })
+                    const ref = firebase.storage().ref("" + this.props.uid).child("profileImage.jpg")
+                    const uploadtask = ref.putFile(image.path)
+                    
+                    uploadtask.then((snap) => {
+                        ref.getDownloadURL().then((data) => {
+                            console.warn(" profile image url=>", data)
+                            this.setState({ ProfileImageStatus: false })
+                            this.updateTheUserNode(this.props.uid, { "ProfileImage": data })
+                        })
+                    })
+                })
+            });
+
+    }
+
+    //update the usernode
+    updateTheUserNode = (uid, obj) => {
+        console.warn("#obj" + obj)
+        db.ref('/Users').child(uid).update(obj, (result) => {
+            console.warn("incoming result:" + JSON.stringify(result),"null means OKK")
+
+        })
     }
 
     render() {
-     
+
         return (
             <ImageBackground style={styles.container}>
                 <HeaderComponent
@@ -47,22 +116,38 @@ class Profile extends React.Component {
                             // source={index.image.} 
                             style={styles.coverImage}
                         >
-                            <View style={styles.galleryContainer}>
-                                <Image
-                                    resizeMode="contain"
-                                    style={styles.gallery}
-                                    source={index.image.gallery}
-                                />
+                            <TouchableOpacity
+                                onPress={() => this.opengallery()}
+                                style={styles.galleryContainer}>
+                                {this.state.coverImgPath === "" ?
+                                    <Image
+                                        resizeMode="contain"
+                                        style={styles.gallery}
+                                        source={index.image.gallery}
+                                    /> :
+                                    <Image
+                                        resizeMode="contain"
+                                        style={styles.gallery}
+                                        source={{ uri: this.state.coverImgPath }}
+                                    />
+                                }
                                 <Text style={styles.coverText}>Add Cover Image
                         </Text>
-                            </View>
+                            </TouchableOpacity>
+                            {/* Profile picture */}
                             <ImageBackground
-                                source={index.image.profile}
+
+                                // source={ this.state.profilePic=== "" ? {index.image.profile} : null} 
+                                source={this.state.profilePic === "" ? index.image.profile : this.state.profilePic}
                                 style={styles.profileImg}
                             >
-                                <Image source={index.image.edit}
-                                    style={styles.edit}
-                                />
+                                <TouchableOpacity
+                                    onPress={() => this.selectProfilePic()}
+                                >
+                                    <Image source={index.image.edit}
+                                        style={styles.edit}
+                                    />
+                                </TouchableOpacity>
 
                             </ImageBackground >
 
@@ -72,7 +157,7 @@ class Profile extends React.Component {
                                     multiline={true}
                                     value={this.state.about}
                                     maxLength={400}
-                                    onChangeText={(val)=>this.setState({about:val})}
+                                    onChangeText={(val) => this.setState({ about: val })}
                                     placeholder="Describe Yourself"
                                     placeholderTextColor={colors.whiteColor}
                                     placeholderStyle={{
@@ -93,17 +178,19 @@ class Profile extends React.Component {
                                     fontStyle: "normal",
                                     letterSpacing: 0.17,
                                     color: colors.whiteColor
-                          }}>{this.state.about.length}/400 </Text>
+                                }}>{this.state.about.length}/400 </Text>
 
                             </View>
                             <TouchableOpacity style={styles.Social_Button}>
 
                             </TouchableOpacity>
 
-                            <TouchableOpacity style={[styles.Social_Button,{marginBottom: 48}]}>
+                            <TouchableOpacity style={[styles.Social_Button, { marginBottom: 48 }]}>
 
                             </TouchableOpacity>
-                            <ButtonComponent/>
+                            <ButtonComponent
+                            onButtonPress={()=>this.props.navigation.navigate('ForgetPassword')}
+                             />
 
                         </ImageBackground>
 
@@ -114,7 +201,7 @@ class Profile extends React.Component {
     };
 }
 
-export default Profile;
+
 
 const styles = StyleSheet.create({
 
@@ -164,7 +251,9 @@ const styles = StyleSheet.create({
         height: heightPercentageToDP(calculateHeight(100)),
         width: widthPercentageToDP(calculateWidth(100)),
         marginTop: heightPercentageToDP(calculateHeight(90)),
-        marginLeft: widthPercentageToDP(calculateWidth(118))
+        marginLeft: widthPercentageToDP(calculateWidth(118)),
+        backgroundColor: "red",
+        zIndex: 300
 
     },
     edit: {
@@ -215,7 +304,7 @@ const styles = StyleSheet.create({
         height: widthPercentageToDP(calculateWidth(80)),
         width: widthPercentageToDP(calculateWidth(340)),
         marginTop: 20,
-      //  marginBottom: 48,
+        //  marginBottom: 48,
         borderRadius: 10,
         backgroundColor: "rgba(18 ,40, 87, 0.75)",
         borderStyle: "solid",
@@ -223,3 +312,11 @@ const styles = StyleSheet.create({
         borderColor: "#213d79"
     }
 });
+const mapStateToProps = (state: any) => {
+    return {
+        uid: state.PersistReducer.uid
+    }
+
+}
+
+export default connect(mapStateToProps)(Profile);

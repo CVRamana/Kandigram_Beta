@@ -7,6 +7,7 @@ import { calculateHeight, calculateWidth } from '../../Common/ResponsiveScreen';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import ButtonComponent from '../../Common/ButonComponent';
 import firebase from 'react-native-firebase';
+import {connect } from "react-redux";
 
 interface WelocmeSplashProps { }
 
@@ -20,13 +21,22 @@ class WelocmeSplash extends React.Component {
     };
 
     componentDidMount() {
-        alert(this.state.isAuthenticated)
+       // alert(this.state.isAuthenticated)
         firebase.auth().signInAnonymously()
           .then(() => {
             this.setState({
               isAuthenticated: true,
             });
           });
+          console.warn(this.props.uid)
+          if(this.props.uid == ""){
+          //  alert(this.props.uid)
+           //  this.props.navigation.navigate('WelcomeSplash')
+          }else{
+          
+           this.props.navigation.navigate('Profile')
+        // alert(this.props.uid)
+          }
       }
     
     
@@ -72,8 +82,13 @@ class WelocmeSplash extends React.Component {
         );
     }
 };
+const mapStateToProps=(state)=>{
+return{
+    uid:state.PersistReducer.uid
+}
+}
 
-export default WelocmeSplash;
+export default connect(mapStateToProps)(WelocmeSplash);
 
 const styles = StyleSheet.create({
     container: {

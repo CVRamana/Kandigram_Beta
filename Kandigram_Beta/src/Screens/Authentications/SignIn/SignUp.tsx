@@ -7,10 +7,11 @@ import { SignUpAction } from './SignInAction'
 import { PersistAction } from '../../../ReduxPersist/PersistAction'
 import AsyncStorage from '@react-native-community/async-storage'
 import { connect } from "react-redux";
-import { LoginButton, AccessToken } from 'react-native-fbsdk';
+import { LoginManager, AccessToken, GraphRequest, GraphRequestManager } from 'react-native-fbsdk';
 import Loader from '../../../Common/loader';
 import index from "../../../Utils//Constants/index";
 import firebase from "react-native-firebase";
+import { db } from '../../../Utils/FirebaseConfig'
 
 import image from '../../../Utils/Constants/image';
 
@@ -52,20 +53,93 @@ class SignUp extends React.Component {
       .auth()
       .createUserWithEmailAndPassword(this.state.email, this.state.password)
       .then((res) => {
-        alert(JSON.stringify(res))
-        this.props.navigation.navigate('Profile')
+        let values = {
+          name: this.state.name,
+          email: this.state.email,
+          mobile: this.state.mobile,
+          username: this.state.username,
+          password: this.state.password
+
+        }
+        this.setNewUserToFireBase(values, res.user.uid)
+        // this.props.navigation.navigate('Profile')
       })
       .catch(error => this.setState({ errorMessage: error.message }, () => alert(error)))
   }
 
-
-
+  //save to firebase the info
+  setNewUserToFireBase = (res, uid) => {
+    alert(JSON.stringify(res))
+    console.warn("save =>", res)
+    var obj = res;
+    obj["uid"] = uid
+    console.warn("save object_1=>", obj)
+    db.ref('/Users').child(uid).set(res, (val) => {
+      console.warn("val", val, "if null means success")
+      if (val === null) {
+        this.props.navigation.navigate('Login')
+        console.warn("sucess")
+      }
+    })
+  }
   componentDidMount() {
     // this.clearAsyncStorage()
   }
-  clearAsyncStorage = async () => {
-    await AsyncStorage.clear();
+  // fb login
+  fblogin = () => {
+    LoginManager.logInWithPermissions(['email', 'public_profile']).then
+      (result => {
+        if (result.isCancelled) { console.log('Login cancelled'); return; }
+        else {
+          console.log('Login success with permissions: ' + result.grantedPermissions.toString());
+          this.setState({ isLoading: true })
+        } {
+          AccessToken.getCurrentAccessToken().then(data => {
+            let accessToken = data.accessToken;
+             console.log(data.accessToken.toString());
+             // login with the firebase Facebook
+             const credential = firebase.auth.FacebookAuthProvider.credential(data.accessToken);
+             firebase.auth().signInWithCredential(credential)
+             .then((res)=>{
+              console.warn("suucess asve in the firebase facebook: ",res)
+             })
+             .catch((err)=>{
+               console.log(err)
+             })
+             debugger
+             //console.warn(JSON.stringify(firebaseUserCredential.user.toJSON()))
+             console.log(data.accessToken.toString())
+            const responseInfoCallback = (error, result) => {
+              if (error) {
+                console.log(error);
+                alert('Unable to Login, Please try again!')
+                this.setState({ isLoading: false })
+              } else {
+                console.log('Success fetching data: ' + JSON.stringify(result));
+                console.warn('FB PIC', result.picture.data.url);
+                //   this.props.setProfileData(result.name, result.email, result.picture.data.url, 'fb')
+                alert('res ' + JSON.stringify(result))
+              //  console.log('redux res ', this.props.profileData);
+                // this.setState({ isLoading: false })
+               // this.props.navigation.navigate('CreateProfile', { "profile_pic": result.picture.data.url })
+              }
+            }
+            const infoRequest = new GraphRequest('/me',
+              { accessToken: accessToken, parameters: { fields: { string: 'email,name,first_name,middle_name,last_name,picture.type(large)', }, }, },
+              responseInfoCallback); new GraphRequestManager().addRequest(infoRequest).start();
+          });
+        }
+      }, function (error) { console.log('Login fail with error: ' + error); });
+
+
   }
+
+
+  clearAsyncStorage = async () => {
+   // await AsyncStorage.clear();
+  }
+
+
   onPress = () => {
     debugger
     this.props.SignUpAction()
@@ -90,6 +164,8 @@ class SignUp extends React.Component {
         <HeaderComponent
           firstText={index.strings.helloText}
           secondText={index.strings.signUpText}
+          //   page="WelcomeScreen"
+          handleClick={() => this.props.navigation.navigate("WelcomeScreen")}
         />
 
         {/* <Text> {DeviceInfo.getDeviceId}</Text>
@@ -204,7 +280,7 @@ class SignUp extends React.Component {
               <Text style={{ marginTop: heightPercentageToDP(calculateHeight(35)) }}>{index.strings.terms} </Text>
             </View>
             <View style={{ flexDirection: "row", alignItems: "center", justifyContent: "center", marginTop: 48 }}>
-              <LoginButton
+              {/* <LoginButton
                 onLoginFinished={
                   (error, result) => {
                     if (error) {
@@ -215,7 +291,6 @@ class SignUp extends React.Component {
                       AccessToken.getCurrentAccessToken().then(
                         (data) => {
                           const credential = firebase.auth.FacebookAuthProvider.credential(data.accessToken);
-                        
                           firebase.auth().signInWithCredential(credential)
                           .then((res)=>{
                            console.log(res)
@@ -231,11 +306,16 @@ class SignUp extends React.Component {
                     }
                   }
                 }
-                onLogoutFinished={() => console.warn("logout.")} />
-              {/* <Button
-              //   title="GoogleSignIn "
-              //   onPress={() => this.signIn()}
-              // /> */}
+                onLogoutFinished={() => console.warn("logout.")} /> */}
+              <TouchableOpacity
+                onPress={() => this.fblogin()}
+                style={styles.fbimg}
+              >
+                <Image
+                  style={styles.fbimg}
+                  source={index.image.fb}
+                />
+              </TouchableOpacity>
             </View>
             <View style={{ marginTop: heightPercentageToDP(calculateHeight(48)), marginBottom: 20, }}>
               <ButtonComponent
@@ -255,6 +335,7 @@ class SignUp extends React.Component {
 const mapStateToProps = (state: any) => {
   return {
     arr: state.SignInReducer.arr,
+    uid: state.PersistReducer.uid,
     offlineData: state.PersistReducer.offlineData,
   }
 }
@@ -285,7 +366,9 @@ const styles = StyleSheet.create({
     alignItems: "center",
     bottom: heightPercentageToDP(calculateHeight(268)),
     right: widthPercentageToDP(calculateWidth(40)),
-
+  },
+  fbimg: {
+    height: 50, width: 50
   }
 });
 

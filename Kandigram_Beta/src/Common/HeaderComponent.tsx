@@ -15,7 +15,8 @@ const HeaderComponent = (props: HeaderComponentProps) => {
     style={styles.container}>
       <CommonBackButton
       myStyle={{paddingTop:100, paddingLeft: 30}}
-      handleClick={()=>props.navigation.navigate('SignUp')}
+
+   //   handleClick={props.handleClick}
       />
       <Text style={styles.helloStyle}>{props.firstText}</Text>
       <Text style={styles.signUpstyle}> {props.secondText} </Text>
