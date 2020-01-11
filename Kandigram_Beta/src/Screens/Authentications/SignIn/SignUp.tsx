@@ -3,7 +3,7 @@ import { Text, View, StyleSheet, ImageBackground, ScrollView, TouchableOpacity, 
 import { widthPercentageToDP, heightPercentageToDP } from 'react-native-responsive-screen';
 import { calculateHeight, calculateWidth } from "../../../Common/ResponsiveScreen";
 import DeviceInfo from 'react-native-device-info'
-import { SignUpAction } from './SignInAction'
+import { SignUpAction,UpdateInputAction } from './SignInAction'
 import { PersistAction } from '../../../ReduxPersist/PersistAction'
 import AsyncStorage from '@react-native-community/async-storage'
 import { connect } from "react-redux";
@@ -42,10 +42,8 @@ class SignUp extends React.Component {
     };
   };
 
-  handleInput(val) {
-    this.setState({
-      txt: val
-    })
+  handleInput(key,val) {
+   this.props.UpdateInputAction(key,val)
   }
   // Sign UP Action 
   handleSignUp = () => {
@@ -83,7 +81,7 @@ class SignUp extends React.Component {
     })
   }
   componentDidMount() {
-    // this.clearAsyncStorage()
+     this.clearAsyncStorage()
   }
   // fb login
   fblogin = () => {
@@ -133,10 +131,39 @@ class SignUp extends React.Component {
 
 
   }
+// fb logout 
+fblogout=()=>{
+  let current_access_token = '';
+  AccessToken.getCurrentAccessToken()
+  .then((data) => {
+    alert(JSON.stringify(data))
+    current_access_token = data.accessToken.toString();
+  }).then(() => {
+    let logout = new GraphRequest(
+      "me/permissions/",
+      {
+          accessToken: current_access_token,
+          httpMethod: 'DELETE'
+      },
+      (error, result) => {
+          if (error) {
+              console.warn('Error fetching data: ' + error.toString());
+          } else {
+              LoginManager.logOut();
+              alert("loout")
+
+          }
+      });
+    new GraphRequestManager().addRequest(logout).start();
+  })
+  .catch(error => {
+    console.warn("error in logout: ",error)
+  }); 
+}
 
 
   clearAsyncStorage = async () => {
-   // await AsyncStorage.clear();
+   await AsyncStorage.clear();
   }
 
 
@@ -148,6 +175,11 @@ class SignUp extends React.Component {
     this.props.PersistAction()
   }
   render() {
+    console.warn("name: =>",this.props.name)
+    console.warn("email: =>",this.props.email)
+    console.warn("pwd: =>",this.props.password)
+    console.warn("usn: =>",this.props.username)
+    console.warn("mob: =>",this.props.mobile)
     return (
       <ImageBackground style={{ flex: 1, backgroundColor: 'rgb(19,31,52)' }}>
         {/* <ImageBackground
@@ -185,52 +217,52 @@ class SignUp extends React.Component {
           <ScrollView>
             <TextInputComponent
               ref="first"
-              val={this.state.name}
+           //   val={this.state.name}
               commonPlaceholder={"Name*"}
               commonReturnKeyType={"next"}
               commonOnSubmitEditing={() => this.refs.second.refs.commonInputRef.focus()}
-              commonOnChangeText={(val: any) => this.setState({ name: val })}
+              commonOnChangeText={(val: any) => this.handleInput('name',val)}
               commonSecureTextEntry={false}
               extraStyle={{ marginTop: 30, }}
             />
 
             <TextInputComponent
               ref="second"
-              val={this.state.mobile}
+            //  val={this.state.mobile}
               commonPlaceholder={"Mobile Number*"}
               commonReturnKeyType={"next"}
               commonOnSubmitEditing={() => this.refs.third.refs.commonInputRef.focus()}
-              commonOnChangeText={(val: any) => this.setState({ mobile: val })}
+              commonOnChangeText={(val: any) =>  this.handleInput('mobile',val)}
               commonSecureTextEntry={false}
               extraStyle={{ marginTop: 30, }}
             />
             <TextInputComponent
               ref="third"
-              val={this.state.email}
+            //  val={this.state.email}
               commonPlaceholder={"Email Address*"}
               commonReturnKeyType={"next"}
               commonOnSubmitEditing={() => this.refs.fourth.refs.commonInputRef.focus()}
-              commonOnChangeText={(val: any) => this.setState({ email: val })}
+              commonOnChangeText={(val: any) =>  this.handleInput('email',val)}
               commonSecureTextEntry={false}
               extraStyle={{ marginTop: 30, }}
             />
             <TextInputComponent
               ref="fourth"
-              val={this.state.username}
+             // val={this.state.username}
               commonPlaceholder={"UseraName*"}
               commonReturnKeyType={"next"}
               commonOnSubmitEditing={() => this.refs.fifth.refs.commonInputRef.focus()}
-              commonOnChangeText={(val: any) => this.setState({ username: val })}
+              commonOnChangeText={(val: any) =>  this.handleInput('username',val)}
               commonSecureTextEntry={false}
               extraStyle={{ marginTop: 30, }}
             />
             <TextInputComponent
               ref="fifth"
-              val={this.state.password}
+             // val={this.state.password}
               commonPlaceholder={"password*"}
               commonReturnKeyType={"next"}
               commonOnSubmitEditing={() => alert("Submit action")}
-              commonOnChangeText={(val: any) => this.setState({ password: val })}
+              commonOnChangeText={(val: any) =>  this.handleInput('password',val)}
               commonSecureTextEntry={this.state.isSecureText}
               extraStyle={{ marginTop: 30, }}
             />
@@ -307,6 +339,7 @@ class SignUp extends React.Component {
                   }
                 }
                 onLogoutFinished={() => console.warn("logout.")} /> */}
+                <View style={{flexDirection:"row"}}>
               <TouchableOpacity
                 onPress={() => this.fblogin()}
                 style={styles.fbimg}
@@ -316,11 +349,21 @@ class SignUp extends React.Component {
                   source={index.image.fb}
                 />
               </TouchableOpacity>
+              <TouchableOpacity
+                onPress={() => this.fblogout()}
+                style={styles.fbimg}
+              >
+                <Image
+                  style={styles.fbimg}
+                  source={index.image.fb}
+                />
+              </TouchableOpacity>
+              </View>
             </View>
             <View style={{ marginTop: heightPercentageToDP(calculateHeight(48)), marginBottom: 20, }}>
               <ButtonComponent
                 myStyle={{ width: widthPercentageToDP(calculateWidth(340)), backgroundColor: "red" }}
-                name={"Sign UP"}
+                name={this.props.name}
                 onButtonPress={() => this.handleSignUp()}
               />
             </View>
@@ -337,12 +380,18 @@ const mapStateToProps = (state: any) => {
     arr: state.SignInReducer.arr,
     uid: state.PersistReducer.uid,
     offlineData: state.PersistReducer.offlineData,
+    name:state.SignInReducer.name,
+    username:state.SignInReducer.username,
+    mobile:state.SignInReducer.mobile,
+  email:state.SignInReducer.email,
+  password:state.SignInReducer.password,
   }
 }
 
 const mapDispatchToProps = {
   SignUpAction: SignUpAction,
-  PersistAction: PersistAction
+  PersistAction: PersistAction,
+  UpdateInputAction:UpdateInputAction,
 }
 
 const styles = StyleSheet.create({

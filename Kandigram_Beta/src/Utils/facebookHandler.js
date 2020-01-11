@@ -349,3 +349,50 @@ export  class SignupScreen extends React.Component {
       mapStateToProps,
       mapDispatchToProps
     )(SignupScreen);
+
+
+    //dfgchjklsgzdfghj1234567890`1234567890-qwertyuiop[asdfghjkl;q  wertyuiop[asdfghjkl;Zxcvbnm,.qwertyuioqwertyu]]
+
+    LoginManager.logInWithPermissions(['email', 'public_profile']).then
+    (result => {
+      if (result.isCancelled) { console.log('Login cancelled'); return; }
+      else {
+        console.log('Login success with permissions: ' + result.grantedPermissions.toString());
+        this.setState({ isLoading: true })
+      } {
+        AccessToken.getCurrentAccessToken().then(data => {
+          let accessToken = data.accessToken;
+           console.log(data.accessToken.toString());
+           // login with the firebase Facebook
+           const credential = firebase.auth.FacebookAuthProvider.credential(data.accessToken);
+           firebase.auth().signInWithCredential(credential)
+           .then((res)=>{
+            console.warn("suucess asve in the firebase facebook: ",res)
+           })
+           .catch((err)=>{
+             console.log(err)
+           })
+           debugger
+           //console.warn(JSON.stringify(firebaseUserCredential.user.toJSON()))
+           console.log(data.accessToken.toString())
+          const responseInfoCallback = (error, result) => {
+            if (error) {
+              console.log(error);
+              alert('Unable to Login, Please try again!')
+              this.setState({ isLoading: false })
+            } else {
+              console.log('Success fetching data: ' + JSON.stringify(result));
+              console.warn('FB PIC', result.picture.data.url);
+              //   this.props.setProfileData(result.name, result.email, result.picture.data.url, 'fb')
+              alert('res ' + JSON.stringify(result))
+            //  console.log('redux res ', this.props.profileData);
+              // this.setState({ isLoading: false })
+             // this.props.navigation.navigate('CreateProfile', { "profile_pic": result.picture.data.url })
+            }
+          }
+          const infoRequest = new GraphRequest('/me',
+            { accessToken: accessToken, parameters: { fields: { string: 'email,name,first_name,middle_name,last_name,picture.type(large)', }, }, },
+            responseInfoCallback); new GraphRequestManager().addRequest(infoRequest).start();
+        });
+      }
+    }, function (error) { console.log('Login fail with error: ' + error); });
