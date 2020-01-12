@@ -15,8 +15,10 @@ export default{
    search:require('../../Common/Public/Images/Searchicon.png'),
    saved:require('../../Common/Public/Images/SavedKandis.png'),
    fb:require('../../Common/Public/Images/facebook.png'),
-   detailBG:require('../../Common/Public/Images/DetailBGPatetrn.png')
-
-
-
+   detailBG:require('../../Common/Public/Images/DetailBGPatetrn.png'),
+   like:require('../../Common/Public/Images/LikeIcon.png'),
+   likeStats:require('../../Common/Public/Images/LikesStatsIcon.png'),
+   camera:require('../../Common/Public/Images/CameraStatsIcon.png'),
+   comment:require('../../Common/Public/Images/CommentStatsIcon.png'),
+  // unlike:require('../../Common/Public/Images/UnLikeIcon.png'),
 }
