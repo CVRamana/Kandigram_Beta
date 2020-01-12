@@ -6,7 +6,6 @@ const initialState={
     email:"",
     username:"",
     password:"",
-
 };
 const SignInReducer=(state=initialState,action:any)=>{
     switch(action.type){

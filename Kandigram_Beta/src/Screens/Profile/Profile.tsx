@@ -14,6 +14,7 @@ import { connect } from "react-redux"
 import firebase from 'react-native-firebase'
 import { db } from "../../Utils/FirebaseConfig";
 import ImagePicker from 'react-native-image-crop-picker';
+import { PersistCoverImgAction,PersistProfileImgAction,PersistAction } from "../../ReduxPersist/PersistAction";
 
 interface ProfileProps { }
 
@@ -33,7 +34,7 @@ class Profile extends React.Component {
     componentDidMount() {
         const { currentUser } = firebase.auth()
         this.setState({ currentUser })
-        this.clearAsyncStorage()
+       // this.clearAsyncStorage()
         alert(JSON.stringify(this.props.uid))
         debugger
     }
@@ -113,37 +114,33 @@ class Profile extends React.Component {
                     <View style={{ height: 1050 }}>
                         {/* <ScrollView> */}
                         <ImageBackground
-                            // source={index.image.} 
+                             source={ this.state.coverImgPath === "" ? null : {uri:this.state.coverImgPath}  } 
                             style={styles.coverImage}
                         >
                             <TouchableOpacity
                                 onPress={() => this.opengallery()}
                                 style={styles.galleryContainer}>
                                 {this.state.coverImgPath === "" ?
+  
+                                <View style={{flexDirection: 'row',alignItems:"center"}}>
                                     <Image
                                         resizeMode="contain"
                                         style={styles.gallery}
                                         source={index.image.gallery}
-                                    /> :
-                                    <Image
-                                        resizeMode="contain"
-                                        style={styles.gallery}
-                                        source={{ uri: this.state.coverImgPath }}
-                                    />
+                                    />  
+                                     <Text style={styles.coverText}> Add Cover Image. </Text>
+                                     </View>
+                                    : null
+                                   
                                 }
-                                <Text style={styles.coverText}>Add Cover Image
-                        </Text>
+                              
                             </TouchableOpacity>
                             {/* Profile picture */}
                             <ImageBackground
-
-                                // source={ this.state.profilePic=== "" ? {index.image.profile} : null} 
-                                source={this.state.profilePic === "" ? index.image.profile : this.state.profilePic}
+                                source={this.state.profilePic === "" ? index.image.profile :{ uri:this.state.profilePic}}
                                 style={styles.profileImg}
                             >
-                                <TouchableOpacity
-                                    onPress={() => this.selectProfilePic()}
-                                >
+                                <TouchableOpacity onPress={() => this.selectProfilePic()} >
                                     <Image source={index.image.edit}
                                         style={styles.edit}
                                     />
@@ -217,7 +214,7 @@ const styles = StyleSheet.create({
         height: heightPercentageToDP(calculateHeight(210)),
         marginLeft: widthPercentageToDP(calculateWidth(16)),
         marginTop: heightPercentageToDP(calculateHeight(50)),
-        borderRadius: 10,
+        borderRadius: 30,
         backgroundColor: "rgba(18, 40, 87, 0.7)",
         borderStyle: "solid",
         borderWidth: 2,
@@ -252,15 +249,17 @@ const styles = StyleSheet.create({
         width: widthPercentageToDP(calculateWidth(100)),
         marginTop: heightPercentageToDP(calculateHeight(90)),
         marginLeft: widthPercentageToDP(calculateWidth(118)),
-        backgroundColor: "red",
-        zIndex: 300
+       // backgroundColor: "red",
+        zIndex: 300,
+        borderRadius:widthPercentageToDP(calculateWidth(50))
 
     },
     edit: {
         height: widthPercentageToDP(calculateWidth(40)),
         width: widthPercentageToDP(calculateWidth(40)),
         marginTop: heightPercentageToDP(calculateHeight(60)),
-        marginLeft: widthPercentageToDP(calculateWidth(60))
+        marginLeft: widthPercentageToDP(calculateWidth(60)),
+        zIndex:300
 
     }, addBio: {
         marginTop: 40, marginLeft: 16,
@@ -316,7 +315,12 @@ const mapStateToProps = (state: any) => {
     return {
         uid: state.PersistReducer.uid
     }
-
+}
+const mapDispatchToProps={
+    PersistAction:PersistAction,
+    PersistCoverImgAction:PersistCoverImgAction,
+    PersistProfileImgAction:PersistProfileImgAction,
+    
 }
 
-export default connect(mapStateToProps)(Profile);
+export default connect(mapStateToProps,mapDispatchToProps)(Profile);

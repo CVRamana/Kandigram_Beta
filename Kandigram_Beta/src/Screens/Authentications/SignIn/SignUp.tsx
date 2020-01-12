@@ -14,7 +14,6 @@ import firebase from "react-native-firebase";
 import { db } from '../../../Utils/FirebaseConfig'
 
 import image from '../../../Utils/Constants/image';
-
 import TextInputComponent from '../../../Common/TextInputComponent';
 import colors from '../../../Utils/Constants/colors';
 import ButtonComponent from '../../../Common/ButonComponent';
@@ -175,11 +174,7 @@ fblogout=()=>{
     this.props.PersistAction()
   }
   render() {
-    console.warn("name: =>",this.props.name)
-    console.warn("email: =>",this.props.email)
-    console.warn("pwd: =>",this.props.password)
-    console.warn("usn: =>",this.props.username)
-    console.warn("mob: =>",this.props.mobile)
+  
     return (
       <ImageBackground style={{ flex: 1, backgroundColor: 'rgb(19,31,52)' }}>
         {/* <ImageBackground

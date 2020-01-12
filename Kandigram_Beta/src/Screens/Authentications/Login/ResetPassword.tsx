@@ -36,7 +36,6 @@ class ResetPassword extends React.Component {
                                 width: widthPercentageToDP(calculateWidth(300)),
                                 borderRadius: 0,
                                 borderWidth: 0,
-
                                 borderColor: "transparent",
 
                             }}

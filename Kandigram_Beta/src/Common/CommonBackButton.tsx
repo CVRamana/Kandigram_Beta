@@ -5,7 +5,7 @@ import { widthPercentageToDP, heightPercentageToDP } from 'react-native-responsi
 import { calculateWidth, calculateHeight } from './ResponsiveScreen';
 
 interface CommonBackButtonProps {
-    myStyle: StyleProp<ViewStyle>;
+  
 }
 
 const CommonBackButton = (props: CommonBackButtonProps) => {

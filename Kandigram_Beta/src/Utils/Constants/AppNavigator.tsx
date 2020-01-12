@@ -5,6 +5,7 @@ import Splash from "../../Screens/Authentications/Splash";
 import SignUp from '../../Screens/Authentications/SignIn/SignUp';
 import WelcomeSplash from "../../Screens/Authentications/WelcomeSplash";
 import Profile from "../../Screens/Profile/Profile";
+import  Details from "../../Screens/Profile/Details";
 import Login from "../../Screens/Authentications/Login/Login"
 import Home from "../../Screens/Home/Home";
 import ResetPassword from '../../Screens/Authentications/Login/ResetPassword';
@@ -76,6 +77,9 @@ const ProfileContainer=createStackNavigator({
   profile:{
     screen:Profile,
   },
+  Details:{
+    screen:Details
+  }
 },
 {
   headerMode:'none', 

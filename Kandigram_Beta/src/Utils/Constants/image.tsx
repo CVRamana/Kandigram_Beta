@@ -15,6 +15,8 @@ export default{
    search:require('../../Common/Public/Images/Searchicon.png'),
    saved:require('../../Common/Public/Images/SavedKandis.png'),
    fb:require('../../Common/Public/Images/facebook.png'),
+   detailBG:require('../../Common/Public/Images/DetailBGPatetrn.png')
+
 
 
 }

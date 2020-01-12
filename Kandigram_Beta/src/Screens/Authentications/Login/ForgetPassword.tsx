@@ -56,6 +56,7 @@ class ForgetPassword extends React.Component {
                 <View style={styles.bttn}>
                     <ButtonComponent
                     name={"Send Code"}
+                    onButtonPress={()=>this.props.navigation.navigate('Details')}
                     />
 
                     </View>

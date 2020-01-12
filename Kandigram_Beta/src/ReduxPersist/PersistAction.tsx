@@ -1,14 +1,30 @@
 import actionTypes from "../Utils/Constants/actionTypes";
 
-export const PersistAction=(params:any,successCallback:Function,errorCallback:Function)=>{
-    return function(dispatch:Function,getState:Function){
+export const PersistAction = (params: any, successCallback: Function, errorCallback: Function) => {
+    return function (dispatch: Function, getState: Function) {
         debugger
-    
-      debugger
+
         dispatch({
-            type:actionTypes.offlineAction,
-            uid:params
+            type: actionTypes.offlineAction,
+            uid: params
         })
     }
 
+}
+export const PersistCoverImgAction = (param: any, successCallback: Function, errorCallback: Function) => {
+    return function (dispatch: Function, getState: Function) {
+        dispatch({
+            type: actionTypes.offlineCoverImg,
+            coverImg: param
+        })
+    }
+}
+
+export const PersistProfileImgAction = (param: any, successCallback: Function, errorCallback: Function) => {
+    return function (dispatch: Function, getState: Function) {
+        dispatch({
+            type: actionTypes.offlineProfileImg,
+            profileImg: param
+        })
+    }
 }
