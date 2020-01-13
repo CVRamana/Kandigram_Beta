@@ -109,6 +109,8 @@ class Home extends React.Component {
 </View>
 <ButtonComponent
 name={"Get Kandi Beads"}
+onButtonPress={()=>this.props.navigation.navigate('CreateKandi')}
+
 myStyle={{ 
   marginLeft:widthPercentageToDP(calculateWidth(20)),
   marginTop:heightPercentageToDP(calculateHeight(35))}}

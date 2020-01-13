@@ -20,5 +20,8 @@ export default{
    likeStats:require('../../Common/Public/Images/LikesStatsIcon.png'),
    camera:require('../../Common/Public/Images/CameraStatsIcon.png'),
    comment:require('../../Common/Public/Images/CommentStatsIcon.png'),
-  // unlike:require('../../Common/Public/Images/UnLikeIcon.png'),
+   creteKandi:require('../../Common/Public/Images/createKandiBG.png'),
+   public:require('../../Common/Public/Images/Public_Icon.png'),
+   private:require('../../Common/Public/Images/Private_Icon.png'),
+   back:require('../../Common/Public/Images/backArrow.png'),
 }

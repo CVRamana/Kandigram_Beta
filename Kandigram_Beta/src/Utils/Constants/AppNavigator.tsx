@@ -10,6 +10,7 @@ import Login from "../../Screens/Authentications/Login/Login"
 import Home from "../../Screens/Home/Home";
 import ResetPassword from '../../Screens/Authentications/Login/ResetPassword';
 import ForgetPassword from '../../Screens/Authentications/Login/ForgetPassword';
+import CreateKandi from '../../Screens/Home/CreateKandi';
 
 const SplashContainer = createStackNavigator({
 
@@ -93,7 +94,7 @@ const ProfileContainer=createStackNavigator({
 const HomeContainer=createStackNavigator({
 Home:{
   screen:Home,
-}
+},CreateKandi:{screen:CreateKandi},
 },{
   headerMode:"none",
   navigationOptions: {

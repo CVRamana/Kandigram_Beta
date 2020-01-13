@@ -1,10 +1,11 @@
 import * as React from 'react';
 import { Text, View, StyleSheet, ImageBackground, Image } from 'react-native';
 import { heightPercentageToDP, widthPercentageToDP } from 'react-native-responsive-screen';
-import { calculateHeight, calculateWidth } from '../../Common/ResponsiveScreen';
+import { calculateHeight, calculateWidth, vw,vh } from '../../Common/ResponsiveScreen';
 import colors from '../../Utils/Constants/colors';
 import index from "../../Utils/Constants/index";
 import { ScrollView } from 'react-native-gesture-handler';
+
 
 interface DetailsProps { }
 
@@ -12,7 +13,7 @@ class Details extends React.Component {
   render() {
     return (
       <ImageBackground style={styles.container}>
-      
+
         <ImageBackground
           source={index.image.detailBG}
           style={styles.header}>
@@ -109,51 +110,112 @@ class Details extends React.Component {
 
         </ImageBackground>
         <ScrollView>
-        <View style={styles.like}>
-          <Image 
-          style={styles.likeImg}
-          source={index.image.like}
-          />
-          <Image
-           style={styles.likeImg}
-           source={index.image.like}
+          <View style={styles.like}>
+            <Image
+              style={styles.likeImg}
+              source={index.image.like}
             />
-        </View>
-        <View style={{
-           height:heightPercentageToDP(calculateHeight(144)),
-           width:widthPercentageToDP(calculateWidth(348)),
-           marginTop:widthPercentageToDP(calculateWidth(20)),
-           marginLeft:widthPercentageToDP(calculateWidth(20))
-           }}>
-    <Text style={{
-      fontFamily: "Ubuntu-Medium",
-  fontSize: 20,
-  fontWeight: "500",
-  fontStyle: "normal",
-  lineHeight: 35,
-  letterSpacing: 0,
-  color: colors.whiteColor}}>Absolutely loved camping at this show! Met the most 
-      amazing people and we can’t wait to come back next year. 
+            <Image
+              style={styles.likeImg}
+              source={index.image.like}
+            />
+          </View>
+          <View style={{
+            height: heightPercentageToDP(calculateHeight(144)),
+            width: widthPercentageToDP(calculateWidth(348)),
+            marginTop: widthPercentageToDP(calculateWidth(20)),
+            marginLeft: widthPercentageToDP(calculateWidth(20))
+          }}>
+            <Text style={{
+              fontFamily: "Ubuntu-Medium",
+              fontSize: 20,
+              fontWeight: "500",
+              fontStyle: "normal",
+              lineHeight: 35,
+              letterSpacing: 0,
+              color: colors.whiteColor
+            }}>Absolutely loved camping at this show! Met the most
+                      amazing people and we can’t wait to come back next year.
       See you all at EDC in 2020!</Text>
           </View>
           <View style={styles.likeCont}>
             <Image
-            style={{height:24,width:24,borderRadius:12,backgroundColor:"red"}}
+              style={{ height: 24, width: 24, borderRadius: 12, backgroundColor: "red" }}
             />
-             <Image
-            style={{height:24,width:24,borderRadius:12,backgroundColor:"red"}}
+            <Image
+              style={{ height: 24, width: 24, borderRadius: 12, backgroundColor: "red" }}
             />
-             <Image
-            style={{height:24,width:24,borderRadius:12,backgroundColor:"red",marginRight:8 ,}}
+            <Image
+              style={{ height: 24, width: 24, borderRadius: 12, backgroundColor: "red", marginRight: 8, }}
             />
-            <Text style={{fontFamily: "Ubuntu",
-  fontSize: 14,
-  fontWeight: "bold",
-  fontStyle: "normal",
-  letterSpacing: 0.17,
-  color: "#e91e63"}}>Liked by @myfestival and 94 other </Text>
+            <Text style={{
+              fontFamily: "Ubuntu",
+              fontSize: 14,
+              fontWeight: "bold",
+              fontStyle: "normal",
+              letterSpacing: 0.17,
+              color: "#e91e63"
+            }}>Liked by @myfestival and 94 other </Text>
+          </View>
+          <View style={{
+            marginTop: heightPercentageToDP(calculateHeight(46)),
+            marginLeft: widthPercentageToDP(calculateWidth(156))
+          }}>
+            <Image
+              style={{
+                height: heightPercentageToDP(calculateHeight(64)),
+                width: widthPercentageToDP(calculateWidth(64)),
+                backgroundColor: "green",
+                borderRadius: widthPercentageToDP(calculateWidth(32))
+              }}
+            />
+          </View>
+          <View style={{
+            height: heightPercentageToDP(calculateHeight(34)),
+            width: widthPercentageToDP(calculateWidth(120)),
+            justifyContent: "center",
+            marginTop: heightPercentageToDP(calculateHeight(13)),
+            marginLeft: widthPercentageToDP(calculateWidth(128)),
+            //  backgroundColor: "rgb (24, 39, 59)",
+            borderColor: "rgb (233, 30, 99)",
+            borderRadius: 10,
+            shadowColor: "rgba(0, 0, 0, 0.25)",
+            borderWidth: 3,
+            shadowOffset: {
+              width: 0,
+              height: 4
+            },
+            shadowRadius: 4,
+            shadowOpacity: 1,
+            alignItems: "center"
+          }}>
+            <Text style={styles.commonText}> katietheraver </Text>
+          </View>
+          <View
+            style={{
+              height: heightPercentageToDP(calculateHeight(25)),
+              // justifyContent: "center",
+              marginTop: heightPercentageToDP(calculateHeight(35)),
+              alignItems: "center",
+              //backgroundColor: "red",
+              flexDirection: 'row',
+              paddingLeft: widthPercentageToDP(calculateWidth(18))
+            }}
+          >
+            <Text style={styles.commonText}>Comments </Text>
+            <Text style={[styles.commonText,{ 
+              marginLeft: widthPercentageToDP(calculateWidth(80)) }]}> View all 23 Comments</Text>
+          </View>
+          <View style={styles.commentContainer}>
+
+          </View>
+          <View style={{marginLeft:vw(17),marginTop:vh(40)}}>
+            <Text style={styles.commonText}>Made from this Kandi</Text>
             </View>
-</ScrollView>
+            <View style={styles.memoryContainer}>
+
+              </View>
+        </ScrollView>
       </ImageBackground>
     );
   };
@@ -162,32 +224,62 @@ class Details extends React.Component {
 export default Details;
 
 const styles = StyleSheet.create({
-  likeCont:{
-    height:heightPercentageToDP(calculateHeight(24)),
-    width:widthPercentageToDP(calculateWidth(330)),
-    marginTop: heightPercentageToDP(calculateHeight(14)),
+  memoryContainer:{
+    height:vh(360),
+    width:vw(345),
+    backgroundColor:"lightgrey",
+    marginBottom:60,
+    marginTop: heightPercentageToDP(calculateHeight(19)),
     marginLeft: widthPercentageToDP(calculateWidth(16)),
-    flexDirection:"row"
+    borderRadius: 10,
 
   },
-  likeImg:{
-    height:heightPercentageToDP(calculateHeight(48)),
-    width:widthPercentageToDP(calculateWidth(48)),
-    marginRight:widthPercentageToDP(calculateWidth(18))
+  commonText:{
+    
+      fontFamily: "Ubuntu-Medium",
+      fontSize: widthPercentageToDP(calculateWidth(14)),
+      fontWeight: "bold",
+      fontStyle: "normal",
+      letterSpacing: 0.7,
+      color: colors.whiteColor
+    },
+  commentContainer:{
+    marginTop: heightPercentageToDP(calculateHeight(19)),
+    marginLeft: widthPercentageToDP(calculateWidth(16)),
+    height: heightPercentageToDP(calculateHeight(430)),
+    width: widthPercentageToDP(calculateWidth(342)),
+    borderRadius: 10,
+   backgroundColor: "#18273b"
+
+  },
+  likeCont: {
+    height: heightPercentageToDP(calculateHeight(24)),
+    width: widthPercentageToDP(calculateWidth(330)),
+    marginTop: heightPercentageToDP(calculateHeight(14)),
+    marginLeft: widthPercentageToDP(calculateWidth(16)),
+    flexDirection: "row"
+
+  },
+  likeImg: {
+    height: heightPercentageToDP(calculateHeight(48)),
+    width: widthPercentageToDP(calculateWidth(48)),
+    marginRight: widthPercentageToDP(calculateWidth(18))
 
   },
   like: {
     marginTop: heightPercentageToDP(calculateHeight(400)),
     marginLeft: widthPercentageToDP(calculateWidth(241)),
-    flexDirection:  "row",
+    flexDirection: "row",
     // backgroundColor:"green"
 
   },
   container: {
-  // marginTop:50,
-    height: heightPercentageToDP(calculateHeight(1764)),
-   // height:1777,
+    // marginTop:50,
+    flex: 1,
+    // height: heightPercentageToDP(calculateHeight(1764)),
+    // height:1777,
     width: "100%",
+    paddingBottom: 10,
     backgroundColor: "grey"
   },
   header: {

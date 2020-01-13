@@ -34,7 +34,7 @@ class Profile extends React.Component {
     componentDidMount() {
         const { currentUser } = firebase.auth()
         this.setState({ currentUser })
-       // this.clearAsyncStorage()
+        this.clearAsyncStorage()
         alert(JSON.stringify(this.props.uid))
         debugger
     }
