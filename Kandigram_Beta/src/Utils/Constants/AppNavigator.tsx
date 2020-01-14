@@ -11,6 +11,8 @@ import Home from "../../Screens/Home/Home";
 import ResetPassword from '../../Screens/Authentications/Login/ResetPassword';
 import ForgetPassword from '../../Screens/Authentications/Login/ForgetPassword';
 import CreateKandi from '../../Screens/Home/CreateKandi';
+import ChatApp from "../../Screens/Home/ChatApp";
+import ChatRoom from "../../Screens/Home/ChatRoom";
 
 const SplashContainer = createStackNavigator({
 
@@ -95,6 +97,8 @@ const HomeContainer=createStackNavigator({
 Home:{
   screen:Home,
 },CreateKandi:{screen:CreateKandi},
+ChatApp:{screen:ChatApp},
+ChatRoom:{screen:ChatRoom}
 },{
   headerMode:"none",
   navigationOptions: {

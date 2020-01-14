@@ -24,4 +24,7 @@ export default{
    public:require('../../Common/Public/Images/Public_Icon.png'),
    private:require('../../Common/Public/Images/Private_Icon.png'),
    back:require('../../Common/Public/Images/backArrow.png'),
+   loc:require('../../Common/Public/Images/LocationIcon.png'),
+   eventBG:require('../../Common/Public/Images/BGEvent.png'),
+   calender:require('../../Common/Public/Images/CalendarIcon.png'),
 }

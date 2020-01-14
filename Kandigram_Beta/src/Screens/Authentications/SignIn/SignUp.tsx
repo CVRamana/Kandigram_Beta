@@ -46,17 +46,17 @@ class SignUp extends React.Component {
   }
   // Sign UP Action 
   handleSignUp = () => {
+    alert(this.props.password)
     firebase
       .auth()
-      .createUserWithEmailAndPassword(this.state.email, this.state.password)
+      .createUserWithEmailAndPassword(this.props.email, this.props.password)
       .then((res) => {
         let values = {
-          name: this.state.name,
-          email: this.state.email,
-          mobile: this.state.mobile,
-          username: this.state.username,
-          password: this.state.password
-
+          name: this.props.name,
+          email: this.props.email,
+          mobile: this.props.mobile,
+          username: this.props.username,
+          password: this.props.password,
         }
         this.setNewUserToFireBase(values, res.user.uid)
         // this.props.navigation.navigate('Profile')

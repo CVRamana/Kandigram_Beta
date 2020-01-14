@@ -39,7 +39,7 @@ class Login extends React.Component {
                 this.props.PersistAction(uid)
                   console.log(res.user.uid)
                 debugger
-                  this.props.navigation.navigate('Profile')
+                  this.props.navigation.navigate('Home')
             }
             )
           .catch(error => this.setState({ errorMessage: error.message },()=>alert(error.message)))

@@ -6,8 +6,9 @@ import { calculateWidth, calculateHeight } from '../../Common/ResponsiveScreen';
 import ButtonComponent from '../../Common/ButonComponent';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import colors from '../../Utils/Constants/colors';
+import {  connect} from "react-redux";
 
-interface HomeProps {}
+interface HomeProps{}
 
 class Home extends React.Component {
   constructor(props) {
@@ -19,6 +20,9 @@ class Home extends React.Component {
        
     };
   };
+  componentDidMount(){
+    alert(this.props.uid)
+  }
 
   animate () {
    // this.setState({left:!this.state.left})
@@ -51,19 +55,27 @@ class Home extends React.Component {
     <ImageBackground style={styles.container}>
 
       <ImageBackground
-     // resizeMode={"contain"}
+    //  resizeMode={"contain"}
      resizeMethod="resize"
     source={index.image.HomeBG}
     style={styles.homebg}
      >
        <View style={{flexDirection:"row",marginTop:54,}}>
         <Text style={styles.HomeText}>Home</Text>
+        
+        <TouchableOpacity>
         <Image
         source={index.image.search}
         style={{marginLeft: 220,}}/>
+        </TouchableOpacity>
+        {/* on saved Press */}
+        <TouchableOpacity
+        onPress={()=>this.props.navigation.navigate('ChatApp',{uid:this.props.uid})}
+        >
         <Image
          style={{marginLeft: 24,}}
          source={index.image.saved}/>
+             </TouchableOpacity>
 
          </View>
          <View style={styles.tab}>
@@ -120,8 +132,13 @@ myStyle={{
   );
 }
 }
+const mapStateToProps=(state:any)=>{
+  return{
+  uid:state.PersistReducer.uid
+  }
+}
 
-export default Home;
+export default connect(mapStateToProps) (Home);
 
 const styles = StyleSheet.create({
   container: {flex:1,

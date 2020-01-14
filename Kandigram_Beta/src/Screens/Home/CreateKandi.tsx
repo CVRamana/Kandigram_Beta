@@ -6,7 +6,7 @@ import { vw, vh } from '../../Common/ResponsiveScreen';
 import TextInputComponent from '../../Common/TextInputComponent';
 import ButtonComponent from '../../Common/ButonComponent';
 import colors from '../../Utils/Constants/colors';
-import {db} from "../../Utils/FirebaseConfig";
+import { db } from "../../Utils/FirebaseConfig";
 import firebase from 'react-native-firebase'
 
 
@@ -15,61 +15,61 @@ interface CreateKandiProps { }
 
 class CreateKandi extends React.Component {
     constructor(props) {
-      super(props)
-    
-      this.state = {
-         kandiImg:"",
-         kandiImgUrl:"",
-         kandiName:'',
-         event:'',
-         kandiDesc:'',
-         ispublic:""
+        super(props)
 
-      };
+        this.state = {
+            kandiImg: "",
+            kandiImgUrl: "",
+            kandiName: '',
+            event: '',
+            kandiDesc: '',
+            ispublic: false
+
+        };
     };
 
-    getKandiImg=()=>{
-      
+    getKandiImg = () => {
+
         ImagePicker.openPicker({
             cropping: true
-          }).then(image => {
+        }).then(image => {
             console.warn(image.path);
-            this.setState({kandiImg:image.path},()=>{
-                const ref=firebase.storage().ref("created_kandi_Images","creater_UID").child("kandi_img.png")
-                const uploadTask=ref.putFile(image.path)
-                uploadTask.then((snap)=>{
-                    ref.getDownloadURL().then((data)=>{
-                        console.warn("download url",data)
-                        this.setState({kandiImgUrl:data})
+            this.setState({ kandiImg: image.path }, () => {
+                const ref = firebase.storage().ref("created_kandi_Images", "creater_UID").child("kandi_img.png")
+                const uploadTask = ref.putFile(image.path)
+                uploadTask.then((snap) => {
+                    ref.getDownloadURL().then((data) => {
+                        console.warn("download url", data)
+                        this.setState({ kandiImgUrl: data })
 
                     })
 
                 })
             })
-          });
+        });
     }
 
-    handleKandi=()=>{
-        let values={
-            kandi_name:this.state.kandName,
-            kandiImage:this.state.kandiImg,
-            kandi_desc:this.state.kandiDesc,
-            events:this.state.event,
-            kandiImgUrl:this.state.kandiImgUrl
+    handleKandi = () => {
+        let values = {
+            kandi_name: this.state.kandName,
+            kandiImage: this.state.kandiImg,
+            kandi_desc: this.state.kandiDesc,
+            events: this.state.event,
+            kandiImgUrl: this.state.kandiImgUrl
         }
-       this.setDataToFirebase(values)
+        this.setDataToFirebase(values)
     }
-    setDataToFirebase=(res)=>{
+    setDataToFirebase = (res) => {
         alert("called")
-        db.ref('/created_Kandies').child("creater_uid").set(res,(val)=>{
+        db.ref('/created_Kandies').child("creater_uid").set(res, (val) => {
             if (val === null) {
-               // this.props.navigation.navigate('Login')
+                // this.props.navigation.navigate('Login')
                 console.warn("sucess")
-              }
+            }
 
         })
     }
-    
+
     render() {
         return (
             <ImageBackground style={styles.container}>
@@ -92,12 +92,12 @@ class CreateKandi extends React.Component {
                         </TouchableOpacity>
                         <Text style={styles.txt}>Create a Kandi</Text>
                     </View>
-                    </ImageBackground>
-                    <ScrollView style={{paddingTop:100,flex: 1,}}>
-                        {/* Choose Image */}
-                        {this.state.kandiImg ==="" ?  <View style={styles.kandiImg} >
+                </ImageBackground>
+                <ScrollView style={{ paddingTop: 100, flex: 1, }}>
+                    {/* Choose Image */}
+                    {this.state.kandiImg === "" ? <View style={styles.kandiImg} >
                         <TouchableOpacity
-                        onPress={()=>this.getKandiImg()}
+                            onPress={() => this.getKandiImg()}
                         >
                             <Image
                                 source={index.image.gallery}
@@ -111,36 +111,34 @@ class CreateKandi extends React.Component {
                             color: "#515f7b"
                         }}> Add Kandi Image </Text>
                     </View> :
-                     <View  style={styles.kandiImg} >
-                        <Image
-                       // resizeMode="contain"
-                        style={{height:vh(210),width:vw(343),borderRadius:vh(10)}}
-                        source={{uri:this.state.kandiImg}}
-                        />
+                        <View style={styles.kandiImg} >
+                            <Image
+                                // resizeMode="contain"
+                                style={{ height: vh(210), width: vw(343), borderRadius: vh(10) }}
+                                source={{ uri: this.state.kandiImg }}
+                            />
                         </View>
-                         }
-                   
+                    }
+
                     <View style={{ marginTop: vh(40), marginLeft: vw(16), marginBottom: vh(32), }}>
                         <TextInputComponent
-                        commonOnChangeText={(val)=>this.setState({kandiName:val})}
-
+                            commonOnChangeText={(val) => this.setState({ kandiName: val })}
                             extraStyle={{ marginBottom: vh(32), }}
-
 
                         />
                         <TextInputComponent
-                         commonOnChangeText={(val)=>this.setState({event:val})}
-                         />
+                            commonOnChangeText={(val) => this.setState({ event: val })}
+                        />
                     </View>
 
                     <View style={styles.inputContainer}>
                         <TextInput
                             placeholder={"Add Description"}
-                    
+
                             multiline={true}
                             // value={this.state.about}
                             maxLength={400}
-                            onChangeText={(val) => this.setState({ kandiDesc : val })}
+                            onChangeText={(val) => this.setState({ kandiDesc: val })}
                             placeholderTextColor={colors.whiteColor}
                             placeholderStyle={{
                                 opacity: 1,
@@ -154,48 +152,54 @@ class CreateKandi extends React.Component {
                             style={styles.inpt}
                         />
                     </View>
-                    <View style={{marginTop:vh(40),marginLeft:vw(16),
-                       // backgroundColor:"red"
-                        }}>
-                        <Text style={[styles.txt,{color:"black"}]}>Privacy</Text>
-                        </View>
-                        <View style={{
-                            flexDirection: 'row',
-                            marginLeft:vw(16),
-                            marginTop:vw(20)
+                    <View style={{
+                        marginTop: vh(40), marginLeft: vw(16),
+                        // backgroundColor:"red"
+                    }}>
+                        <Text style={[styles.txt, { color: "black" }]}>Privacy</Text>
+                    </View>
+                    <View style={{
+                        flexDirection: 'row',
+                        marginLeft: vw(16),
+                        marginTop: vw(20)
 
                     }}>
-                           <View style={{height:vh(316),width:vw(176),justifyContent:"center",alignItems:"center"}}>
-                               <TouchableOpacity onPress={()=>this.setState({ispublic:!this.state.ispublic})}>
-                               <Image
-                               style={{height:vh(60),width:vw(60)}}
-                               source={index.image.public}
-                               resizeMode="contain"
-                               />
-                               </TouchableOpacity>
-                                </View> 
-                                <View style={{height:vh(316),
-                                justifyContent:"center",alignItems:"center",
-                                    width:vw(176)}}>
-                                        <TouchableOpacity>
+                        <View style={{ height: vh(316), width: vw(176), justifyContent: "center", alignItems: "center" }}>
+                            <TouchableOpacity onPress={() => this.setState({ ispublic: !this.state.ispublic })}>
                                 <Image
-                                resizeMode="contain"
-                                 style={{height:vh(60),width:vw(60)}}
-                                 source={index.image.private}
+                                    style={this.state.ispublic ? { height: vh(60), width: vw(60), } : { height: vh(60), width: vw(60),tintColor:'red' }}
+                                    source={index.image.public}
+                                    resizeMode="contain"
                                 />
-                                </TouchableOpacity>
-                                </View> 
-                               
-                            </View>
-                            <View style={{marginLeft:vw(16)}}>
-                            <ButtonComponent
-                                onButtonPress={()=>this.handleKandi()}
-                                name={"Create a Kandi"}
-                                myStyle={{borderColor: "black",marginBottom:vh(150)}}
+                            </TouchableOpacity>
+                        </View>
+                        <View style={{
+                            height: vh(316),
+                            justifyContent: "center", alignItems: "center",
+                            width: vw(176)
+                        }}>
+                            <TouchableOpacity
+                            onPress={() => this.setState({ ispublic: !(!this.state.ispublic)})}
+                            >
+                                <Image
+                                     style={this.state.ispublic ? { height: vh(60), width: vw(60),tintColor:'red' } : { height: vh(60), width: vw(60), }}
+                                    resizeMode="contain"
+                                    style={{ height: vh(60), width: vw(60) }}
+                                    source={index.image.private}
                                 />
-                                </View>
+                            </TouchableOpacity>
+                        </View>
 
-</ScrollView>
+                    </View>
+                    <View style={{ marginLeft: vw(16) }}>
+                        <ButtonComponent
+                            onButtonPress={() => this.handleKandi()}
+                            name={"Create a Kandi"}
+                            myStyle={{ borderColor: "black", marginBottom: vh(150) }}
+                        />
+                    </View>
+
+                </ScrollView>
             </ImageBackground>
         );
     }
@@ -204,9 +208,10 @@ class CreateKandi extends React.Component {
 export default CreateKandi;
 
 const styles = StyleSheet.create({
-    container: { flex: 1,
-        
-     },
+    container: {
+        flex: 1,
+
+    },
     bg: {
         position: "absolute",
         top: 0,
