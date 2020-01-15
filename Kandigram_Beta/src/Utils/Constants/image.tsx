@@ -26,5 +26,7 @@ export default{
    back:require('../../Common/Public/Images/backArrow.png'),
    loc:require('../../Common/Public/Images/LocationIcon.png'),
    eventBG:require('../../Common/Public/Images/BGEvent.png'),
-   calender:require('../../Common/Public/Images/CalendarIcon.png'),
+   offbg:require('../../Common/Public/Images/offlineBGPatetrn.png'),
+   refresh:require('../../Common/Public/Images/Refreshicon.png'),
+   bgOfflineHead:require('../../Common/Public/Images/BGOFFLINE.png'),
 }

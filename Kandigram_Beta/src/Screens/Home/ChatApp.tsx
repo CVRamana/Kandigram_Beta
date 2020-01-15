@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import { vh, vw } from "../../Common/ResponsiveScreen";
 import firebase from "react-native-firebase";
 import { db } from "../../Utils/FirebaseConfig";
-import { usePowerState } from 'react-native-device-info';
+
 
 
 interface ChatAppProps { }
@@ -25,7 +25,7 @@ class ChatApp extends React.Component {
     }
     getFirebaseData = (self: any) => {
         let tempp = [];
-        alert("hgd",props.navigation.state.params.uid)
+       // alert("hgd",props.navigation.state.params.uid)
         var key = [];
         let ref = firebase.database().ref();
         ref.child('Users').on("value", function (snapshot) {

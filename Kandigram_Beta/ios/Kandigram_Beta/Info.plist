@@ -16,10 +16,6 @@
 	<string>$(PRODUCT_NAME)</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
-	<key>NSPhotoLibraryUsageDescription</key>
-	<string>allow camera to take photo</string>
-	<key>NSCameraUsageDescription</key>
-	<string>allow camera</string>
 	<key>CFBundleShortVersionString</key>
 	<string>1.0</string>
 	<key>CFBundleSignature</key>
@@ -69,8 +65,12 @@
 			</dict>
 		</dict>
 	</dict>
+	<key>NSCameraUsageDescription</key>
+	<string>allow camera</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string></string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>allow camera to take photo</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Monofett.ttf</string>
@@ -83,6 +83,10 @@
 		<string>Ubuntu-MediumItalic.ttf</string>
 		<string>Ubuntu.ttf</string>
 		<string>UbuntuCondensed-Regular.ttf</string>
+	</array>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>remote-notification</string>
 	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>

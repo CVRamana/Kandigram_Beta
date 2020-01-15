@@ -54,9 +54,9 @@ class Details extends React.Component {
             </View>
           </View>
           <View style={{
-            width: 272,
-            height: 40.4,
-            borderRadius: 10,
+            width: vw(272),
+            height:vh(40),
+            borderRadius:vw(10) ,
             flexDirection: "row",
             shadowColor: "rgba(0, 0, 0, 0.25)",
             backgroundColor: "rgba(35, 35, 35, 0.3)",
@@ -103,7 +103,6 @@ class Details extends React.Component {
 
               />
               <Text style={{ marginLeft: 6 }}>12</Text>
-
 
             </View>
           </View>
@@ -228,7 +227,7 @@ const styles = StyleSheet.create({
     height:vh(360),
     width:vw(345),
     backgroundColor:"lightgrey",
-    marginBottom:60,
+    marginBottom:vh(60),
     marginTop: heightPercentageToDP(calculateHeight(19)),
     marginLeft: widthPercentageToDP(calculateWidth(16)),
     borderRadius: 10,
@@ -248,7 +247,7 @@ const styles = StyleSheet.create({
     marginLeft: widthPercentageToDP(calculateWidth(16)),
     height: heightPercentageToDP(calculateHeight(430)),
     width: widthPercentageToDP(calculateWidth(342)),
-    borderRadius: 10,
+    borderRadius: vw(10),
    backgroundColor: "#18273b"
 
   },
@@ -279,7 +278,7 @@ const styles = StyleSheet.create({
     // height: heightPercentageToDP(calculateHeight(1764)),
     // height:1777,
     width: "100%",
-    paddingBottom: 10,
+    paddingBottom: vh(10),
     backgroundColor: "grey"
   },
   header: {
@@ -292,7 +291,7 @@ const styles = StyleSheet.create({
   },
   summerCarniwal: {
     width: ' 100%',
-    height: 36,
+    height:vh (36),
     fontFamily: "Monofett",
     // marginLeft:widthPercentageToDP(calculateWidth(13)),
     marginTop: heightPercentageToDP(calculateHeight(50)),
@@ -302,7 +301,7 @@ const styles = StyleSheet.create({
 
   summerText: {
     fontFamily: "Monofett",
-    fontSize: 32,
+    fontSize: vw(32),
     fontWeight: "normal",
     fontStyle: "normal",
     letterSpacing: 0.38,
@@ -318,7 +317,7 @@ const styles = StyleSheet.create({
     height: heightPercentageToDP(calculateHeight(40)),
     width: widthPercentageToDP(calculateWidth(62)),
     //justifyContent:"center",
-    paddingLeft: 12,
+    paddingLeft:vw(12) ,
     flexDirection: "row",
     alignItems: "center",
     // backgroundColor:"grey"

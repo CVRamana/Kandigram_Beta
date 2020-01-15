@@ -1,8 +1,8 @@
 import * as React from 'react';
-import { Text, View, StyleSheet, ImageBackground,Animated,Easing, Image } from 'react-native';
+import { Text, View, StyleSheet, ImageBackground,Animated,Easing, Image,LayoutAnimation } from 'react-native';
 import index from "../../Utils/Constants/index";
 import { widthPercentageToDP, heightPercentageToDP } from 'react-native-responsive-screen';
-import { calculateWidth, calculateHeight } from '../../Common/ResponsiveScreen';
+import { calculateWidth, calculateHeight, vh, vw } from '../../Common/ResponsiveScreen';
 import ButtonComponent from '../../Common/ButonComponent';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import colors from '../../Utils/Constants/colors';
@@ -13,44 +13,17 @@ interface HomeProps{}
 class Home extends React.Component {
   constructor(props) {
     super(props)
-    this.animatedValue = new Animated.Value(0)
+   // this.animatedValue = new Animated.Value(0)
   
     this.state = {
-      left:true
+      isleft:true
        
     };
   };
   componentDidMount(){
-    alert(this.props.uid)
+  // alert(this.props.uid)
   }
-
-  animate () {
-   // this.setState({left:!this.state.left})
-    console.warn(this.state.left)
-    this.animatedValue.setValue(0)
-    Animated.timing(
-      this.animatedValue,
-      {
-        toValue: 1,
-        duration: 500,
-        easing: Easing.bounce
-      }
-    ).start()
-  }
-  
     render(){
-    
-      const marginAnimLeft = this.animatedValue.interpolate({
-        inputRange: [0, 1],
-        
-        outputRange: [0, 168]
-      }) 
-      const marginRight = this.animatedValue.interpolate({
-        inputRange: [0, 1],
-        
-        outputRange: [168, 0]
-      })
-    
   return (
     <ImageBackground style={styles.container}>
 
@@ -60,50 +33,78 @@ class Home extends React.Component {
     source={index.image.HomeBG}
     style={styles.homebg}
      >
-       <View style={{flexDirection:"row",marginTop:54,}}>
+       <View style={{flexDirection:"row",marginTop:vh(54),width:vw(375)}}>
         <Text style={styles.HomeText}>Home</Text>
         
-        <TouchableOpacity>
+        <TouchableOpacity
+        onPress={()=>this.props.navigation.navigate('Offlinekandies')}
+        >
         <Image
         source={index.image.search}
-        style={{marginLeft: 220,}}/>
+        style={{marginLeft: vw(190),}}/>
         </TouchableOpacity>
         {/* on saved Press */}
         <TouchableOpacity
         onPress={()=>this.props.navigation.navigate('ChatApp',{uid:this.props.uid})}
         >
         <Image
-         style={{marginLeft: 24,}}
+         style={{marginLeft: vw(24),}}
          source={index.image.saved}/>
              </TouchableOpacity>
-
+      
          </View>
+            {/* TOGGLE BUTOTON */}
          <View style={styles.tab}>
-
-
-           <Animated.View 
-            style={[styles.made,
-             { marginLeft:this.state.left ? marginAnimLeft : marginRight,
-             // height: 30,
-             // width: 40,
-             // backgroundColor: 'red'
-            }
-            ]}
-
+           <View 
+            style={[styles.tab,{marginTop:vh(0),
+              justifyContent:"space-around",
+              //alignItems:"center",
+              flexDirection:"row",
+              marginLeft:vw(0),backgroundColor:"transparent",borderWidth: vw(0)}]}
            >
-           <TouchableOpacity //
-           style={[styles.made,{justifyContent:"center",alignItems:"center",backgroundColor:"red"}]}
-           onPress={()=> this.setState({left:!this.state.left},()=>this.animate())
-          // 
-           }>
-        
-           {this.state.left ?
-           <Text>Made </Text> :  <Text>Discover </Text> }
-           </TouchableOpacity>
-
-           </Animated.View>
            
+             <View style={{justifyContent:"space-around",
+              alignItems:"center",
+             // backgroundColor:"lightgrey"
+              }}>
+             <Text style={styles.tabTxt}>Made</Text>
+             </View>
+          
+          
+      
+             <View style={{justifyContent:"space-around",
+          //   backgroundColor:"lightgrey",
+              alignItems:"center",}}>
+             <Text style={styles.tabTxt}>Discover</Text>
+             </View>
+        
+          
 
+           </View>
+           {/* buutonView */}
+           { this.state.isleft ?
+           <View style={{position:"absolute"}}>
+           <TouchableOpacity 
+           onPress={()=>{
+            LayoutAnimation.configureNext(LayoutAnimation.Presets.linear)
+             this.setState({isleft:!this.state.isleft})}}
+           activeOpacity={ 1}
+           style={styles.made}>
+             <Text style={styles.tabTxt}>Made </Text> 
+             </TouchableOpacity>
+             </View> 
+             :
+             <View style={{position:"absolute"}}>
+             <TouchableOpacity 
+             onPress={()=>{
+              LayoutAnimation.configureNext(LayoutAnimation.Presets.linear)
+               this.setState({isleft:!this.state.isleft})}}
+             activeOpacity={ 1}
+             style={[styles.made,{marginLeft:vw(153)}]}>
+               <Text style={styles.tabTxt}>Discover </Text> 
+               </TouchableOpacity>
+               </View>
+             }
            </View>
  </ImageBackground>
 
@@ -164,7 +165,7 @@ backgroundColor:"rgb(19 ,31 ,52)"},
     marginTop:heightPercentageToDP(calculateHeight(10))
   },txt:{
     fontFamily: "Ubuntu-Medium",
-    fontSize: 20,
+    fontSize: vw(20),
     textAlign:"center",
     fontWeight: "bold",
     fontStyle: "normal",
@@ -172,16 +173,16 @@ backgroundColor:"rgb(19 ,31 ,52)"},
     letterSpacing: 0.24,
     color: "#e2e2e2"
   },HomeText:{
-    fontFamily: "Ubuntu",
-  fontSize: 24,
+    fontFamily: "Ubuntu-Medium",
+  fontSize: vw(24),
   fontWeight: "bold",
   fontStyle: "normal",
   letterSpacing: 0.29,
   color: index.colors.whiteColor,
-  marginLeft: 16,
+  marginLeft: vw(16),
   },tab:{
     width:widthPercentageToDP(calculateWidth(343)),
-    marginLeft: 18,
+    marginLeft: vw(18),
     marginTop:heightPercentageToDP(calculateHeight(26)),
   height: heightPercentageToDP(calculateHeight(54)),
   borderRadius: 1000,
@@ -190,12 +191,24 @@ backgroundColor:"rgb(19 ,31 ,52)"},
   borderWidth:3
   },
   made:{
+   // activeOpacity:1,
     width: widthPercentageToDP(calculateWidth(184)),
   height:  heightPercentageToDP(calculateHeight(48)),
   borderRadius: 1000,
+
+  //shadowOpacity:1,
+ // position:"absolute",
   justifyContent:"center",
   alignItems:"center",
   backgroundColor:"grey"
 
+  },
+  tabTxt:{
+    fontFamily: "Ubuntu-Medium",
+    fontSize: vw(16),
+    fontWeight: "bold",
+    fontStyle: "normal",
+    letterSpacing: 0.19,
+    color: colors.whiteColor
   }
 });

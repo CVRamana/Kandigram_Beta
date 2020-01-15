@@ -34,13 +34,13 @@ class Profile extends React.Component {
     componentDidMount() {
         const { currentUser } = firebase.auth()
         this.setState({ currentUser })
-        this.clearAsyncStorage()
-        alert(JSON.stringify(this.props.uid))
+       this.clearAsyncStorage()
+      //  alert(JSON.stringify(this.props.uid))
         debugger
     }
 // to clear the Database
     clearAsyncStorage = async () => {
-        alert("called")
+     
         await AsyncStorage.clear();
     }
 
@@ -107,7 +107,6 @@ class Profile extends React.Component {
 
                     style={{
                         marginTop: 240,
-                        //backgroundColor:'red',
                         flex: 1
                     }}
                 >
@@ -136,17 +135,23 @@ class Profile extends React.Component {
                               
                             </TouchableOpacity>
                             {/* Profile picture */}
+                          <View>
                             <ImageBackground
                                 source={this.state.profilePic === "" ? index.image.profile :{ uri:this.state.profilePic}}
                                 style={styles.profileImg}
                             >
-                                <TouchableOpacity onPress={() => this.selectProfilePic()} >
+                            </ImageBackground >
+                            <View >
+                            <TouchableOpacity 
+                            style={styles.edit}
+
+                            onPress={() => this.selectProfilePic()} >
                                     <Image source={index.image.edit}
                                         style={styles.edit}
                                     />
                                 </TouchableOpacity>
-
-                            </ImageBackground >
+                                </View>
+                                </View>
 
                             <Text style={styles.addBio}>Add Bio </Text>
                             <View style={styles.describeStyle}>
@@ -255,10 +260,11 @@ const styles = StyleSheet.create({
 
     },
     edit: {
+        //position:"absolute",
         height: widthPercentageToDP(calculateWidth(40)),
         width: widthPercentageToDP(calculateWidth(40)),
-        marginTop: heightPercentageToDP(calculateHeight(60)),
-        marginLeft: widthPercentageToDP(calculateWidth(60)),
+      //  marginTop: heightPercentageToDP(calculateHeight(100)),
+        marginLeft: widthPercentageToDP(calculateWidth(100)),
         zIndex:300
 
     }, addBio: {

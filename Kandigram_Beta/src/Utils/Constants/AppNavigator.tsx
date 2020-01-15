@@ -13,7 +13,8 @@ import ForgetPassword from '../../Screens/Authentications/Login/ForgetPassword';
 import CreateKandi from '../../Screens/Home/CreateKandi';
 import ChatApp from "../../Screens/Home/ChatApp";
 import ChatRoom from "../../Screens/Home/ChatRoom";
-
+import LayoutAnimation from "../../Screens/Home/LayoutAnimation";
+import Offlinekandies from "../../Screens/Home/OfflineKandies";
 const SplashContainer = createStackNavigator({
 
   Splash: {
@@ -98,7 +99,9 @@ Home:{
   screen:Home,
 },CreateKandi:{screen:CreateKandi},
 ChatApp:{screen:ChatApp},
-ChatRoom:{screen:ChatRoom}
+ChatRoom:{screen:ChatRoom},
+LayoutAnimation:{screen:LayoutAnimation},
+Offlinekandies:{screen:Offlinekandies},
 },{
   headerMode:"none",
   navigationOptions: {

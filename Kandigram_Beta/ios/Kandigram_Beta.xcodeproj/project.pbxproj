@@ -58,6 +58,7 @@
 		00E356F21AD99517003FC87E /* Kandigram_BetaTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Kandigram_BetaTests.m; sourceTree = "<group>"; };
 		07855F4B16D9460E14FD6348 /* libPods-Kandigram_Beta-tvOSTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Kandigram_Beta-tvOSTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0AA0264612E5436AA032133C /* UbuntuCondensed-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "UbuntuCondensed-Regular.ttf"; path = "../assets/fonts/UbuntuCondensed-Regular.ttf"; sourceTree = "<group>"; };
+		0C6F5E5D23CEEC4200104252 /* Kandigram_Beta.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = Kandigram_Beta.entitlements; path = Kandigram_Beta/Kandigram_Beta.entitlements; sourceTree = "<group>"; };
 		0C9769B523BE24B40036B50D /* libRNGoogleSignin.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libRNGoogleSignin.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		0C9769B723BE24E40036B50D /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
 		0C9769B923BE24F50036B50D /* SafariServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SafariServices.framework; path = System/Library/Frameworks/SafariServices.framework; sourceTree = SDKROOT; };
@@ -154,6 +155,7 @@
 		13B07FAE1A68108700A75B9A /* Kandigram_Beta */ = {
 			isa = PBXGroup;
 			children = (
+				0C6F5E5D23CEEC4200104252 /* Kandigram_Beta.entitlements */,
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
@@ -345,6 +347,17 @@
 					00E356ED1AD99517003FC87E = {
 						CreatedOnToolsVersion = 6.2;
 						TestTargetID = 13B07F861A680F5B00A75B9A;
+					};
+					13B07F861A680F5B00A75B9A = {
+						DevelopmentTeam = KB9Q4R4YLX;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+							com.apple.Push = {
+								enabled = 1;
+							};
+						};
 					};
 					2D02E47A1E0B4A5D006451C7 = {
 						CreatedOnToolsVersion = 8.2.1;
@@ -793,9 +806,12 @@
 			baseConfigurationReference = 110772B55ED240F86CCE7544 /* Pods-Kandigram_Beta.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Kandigram_Beta/Kandigram_Beta.entitlements;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = NO;
+				DEVELOPMENT_TEAM = KB9Q4R4YLX;
 				INFOPLIST_FILE = Kandigram_Beta/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
@@ -813,8 +829,11 @@
 			baseConfigurationReference = 2AB680FF05CDB8608885B932 /* Pods-Kandigram_Beta.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Kandigram_Beta/Kandigram_Beta.entitlements;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = KB9Q4R4YLX;
 				INFOPLIST_FILE = Kandigram_Beta/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
