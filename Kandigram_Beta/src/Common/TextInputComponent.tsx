@@ -4,10 +4,21 @@ import colors from '../Utils/Constants/colors';
 import { widthPercentageToDP, heightPercentageToDP } from 'react-native-responsive-screen';
 import { calculateWidth, calculateHeight } from './ResponsiveScreen';
 
-interface TextInputProps {}
+interface TextInputProps {
+ 
+  val:string
+  commonPlaceholder:string
+  commonReturnKeyType:string
+  commonOnChangeText:Function
 
-class TextInputComponent extends React.Component{
-  constructor(props) {
+
+}
+interface State{
+value:string
+}
+
+class TextInputComponent extends React.Component<TextInputProps>{
+  constructor(props:TextInputProps) {
     super(props)
     this.state = {
        value:""

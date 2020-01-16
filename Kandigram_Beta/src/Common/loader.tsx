@@ -4,11 +4,12 @@ const Spinner = require('react-native-spinkit');
 import NetInfo from "@react-native-community/netinfo";
 
 interface LoaderProps {
+  isLoading:boolean
     
 }
 
-class Loader extends React.PureComponent {
-    constructor(props) {
+class Loader extends React.PureComponent<LoaderProps> {
+    constructor(props:LoaderProps) {
       super(props)
       this.state = { 
       };

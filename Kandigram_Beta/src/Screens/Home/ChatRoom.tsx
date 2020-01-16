@@ -73,6 +73,8 @@ class ChatRoom extends React.Component {
                         style={styles.txt}> {this.props.navigation.state.params.receiver_name}</Text>
                     <FlatList
                         data={this.state.userChat}
+                        ref = "flatList"
+                       onContentSizeChange={()=> this.refs.flatList.scrollToEnd()}
                         keyExtractor={item => item.index}
                         renderItem={({ item }) => {
                             return (

@@ -20,7 +20,9 @@ class OfflineKandies extends React.Component {
           source={index.image.bgOfflineHead}
         >
           <View style={styles.head}>
-            <TouchableOpacity>
+            <TouchableOpacity 
+            onPress={()=>this.props.navigation.goBack()}
+            >
               <Image
                 //  resizeMode={"contain"}
                 style={styles.back}
@@ -44,8 +46,8 @@ class OfflineKandies extends React.Component {
                 />
               </View>
               <View style={styles.txtData}>
-                <Text style={styles.txt}>Undiscoveredhjgwehfehjgweytuyewtuy Kandi </Text>
-                <Text style={[styles.txt, { fontSize: vw(17) }]}>Offline kandi</Text>
+                <Text style={styles.txt}>Undiscovered Kandi </Text>
+                <Text style={[styles.txt, { fontSize: vw(13) }]}>Offline kandi</Text>
               </View>
               {/* //icon container */}
               <View style={styles.iconRefresh}>
@@ -137,7 +139,7 @@ const styles = StyleSheet.create({
     height: vh(136),
     borderRadius: 9,
     backgroundColor: index.colors.textInputBGColor,
-    marginTop: vh(48),
+    marginTop: vh(78),
     marginLeft: vw(59),
     //  flexDirection:"row"
   },

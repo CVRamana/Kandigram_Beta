@@ -1,28 +1,53 @@
 import * as React from 'react';
-import { Text, View, StyleSheet,ImageBackground } from 'react-native';
+import { Text, View, StyleSheet,ImageBackground, TouchableOpacity,Image } from 'react-native';
 import index from "../Utils/Constants/index";
-import { calculateHeight,calculateWidth } from './ResponsiveScreen';
+import { calculateHeight,calculateWidth, vh, vw } from './ResponsiveScreen';
 import { heightPercentageToDP,widthPercentageToDP } from 'react-native-responsive-screen';
 import CommonBackButton from './CommonBackButton';
 import colors from '../Utils/Constants/colors';
 
-interface HeaderComponentProps {}
+interface HeaderComponentProps {
+ // navigation: any
+  firstText:string
+  secondText:string
+  lastName:string
+  //passingpropo
+}
  
-const HeaderComponent = (props: HeaderComponentProps) => {
+class HeaderComponent extends React.Component {
+  constructor(props) {
+    super(props)
+  
+    this.state = {
+       
+    };
+  };
+  
+  render(){
+ // props.passingPropo
   return (
     <ImageBackground 
     source={index.image.signup_bg}
     style={styles.container}>
-      <CommonBackButton
-      myStyle={{paddingTop:100, paddingLeft: 30}}
-
-   //   handleClick={props.handleClick}
-      />
-      <Text style={styles.helloStyle}>{props.firstText}</Text>
-      <Text style={styles.signUpstyle}> {props.secondText} </Text>
-        
+      <View style={{marginTop:50}}>
+  <TouchableOpacity
+  style={{marginTop:vh(20),
+  marginLeft: vw(16),}}
+  onPress={()=>this.props.navigation.navigate('WelcomeSplash')}
+  >
+    <Image
+    source={index.image.back}
+    style={{height:vh(20),width:vw(30),}}
+    />
+    </TouchableOpacity>
+      <Text style={styles.helloStyle}>{this.props.lastName}</Text>
+      <Text style={styles.helloStyle}>{this.props.firstText}</Text>
+      <Text style={styles.signUpstyle}> {this.props.secondText} </Text>
+      </View>
+      
     </ImageBackground>
   );
+  }
 };
 
 export default HeaderComponent;
@@ -31,6 +56,7 @@ const styles = StyleSheet.create({
     position:'absolute',
     backgroundColor:'transparent',
     zIndex:300,
+    top:0,
       height:heightPercentageToDP(calculateHeight(238)),
       width:widthPercentageToDP(calculateWidth(375)),
      

@@ -20,33 +20,62 @@ import ButtonComponent from '../../../Common/ButonComponent';
 import CommonEye from '../../../Common/CommonEye';
 import HeaderComponent from '../../../Common/HeaderComponent';
 
+interface Props{
+  UpdateInputAction:Function
+  email:string
+  password:string
+  name:string
+  mobile:string
+  username:string
+  navigation:any
+  PersistAction:Function
+  SignUpAction:Function
+  
+  
+  val:string
+  commonPlaceholder:string
+  commonReturnKeyType:string
+  commonOnChangeText:Function
 
-class SignUp extends React.Component {
-  constructor(props) {
+
+}
+interface State{
+isloading:boolean
+isSigninInProgress:boolean
+txt:string
+isSecure:boolean
+isChecked:boolean
+isSecureText:boolean
+errorMessage:string
+SignUpAction:Function
+
+}
+
+class SignUp extends React.Component<Props,State> {
+  constructor(props:Props) {
     super(props)
 
     this.state = {
       isSigninInProgress: true,
-      txt: "",
-      name: '',
-      email: '',
-      mobile: "",
-      password: "",
-      age: "",
-      username: "",
+      txt:"",
       isSecure: true,
       isSecureText: false,
       isChecked: false,
+      isloading:false,
+      errorMessage:""
+      
+
 
     };
   };
 
-  handleInput(key,val) {
+  handleInput(key:any,val:any) {
    this.props.UpdateInputAction(key,val)
   }
   // Sign UP Action 
   handleSignUp = () => {
-    alert(this.props.password)
+    this.setState({isloading:!this.state.isloading})
+  //  alert(this.props.password)
     firebase
       .auth()
       .createUserWithEmailAndPassword(this.props.email, this.props.password)
@@ -65,8 +94,8 @@ class SignUp extends React.Component {
   }
 
   //save to firebase the info
-  setNewUserToFireBase = (res, uid) => {
-    alert(JSON.stringify(res))
+  setNewUserToFireBase = (res:any, uid:string) => {
+    //alert(JSON.stringify(res))
     console.warn("save =>", res)
     var obj = res;
     obj["uid"] = uid
@@ -74,13 +103,14 @@ class SignUp extends React.Component {
     db.ref('/Users').child(uid).set(res, (val) => {
       console.warn("val", val, "if null means success")
       if (val === null) {
+        this.setState({isloading:!this.state.isloading})
         this.props.navigation.navigate('Login')
         console.warn("sucess")
       }
     })
   }
   componentDidMount() {
-     this.clearAsyncStorage()
+     //this.clearAsyncStorage()
   }
   // fb login
   fblogin = () => {
@@ -89,9 +119,9 @@ class SignUp extends React.Component {
         if (result.isCancelled) { console.log('Login cancelled'); return; }
         else {
           console.log('Login success with permissions: ' + result.grantedPermissions.toString());
-          this.setState({ isLoading: true })
+          this.setState({ isloading: true })
         } {
-          AccessToken.getCurrentAccessToken().then(data => {
+          AccessToken.getCurrentAccessToken().then(data=> {
             let accessToken = data.accessToken;
              console.log(data.accessToken.toString());
              // login with the firebase Facebook
@@ -106,11 +136,11 @@ class SignUp extends React.Component {
              debugger
              //console.warn(JSON.stringify(firebaseUserCredential.user.toJSON()))
              console.log(data.accessToken.toString())
-            const responseInfoCallback = (error, result) => {
+            const responseInfoCallback = (error:any, result:any) => {
               if (error) {
                 console.log(error);
                 alert('Unable to Login, Please try again!')
-                this.setState({ isLoading: false })
+                this.setState({ isloading: false })
               } else {
                 console.log('Success fetching data: ' + JSON.stringify(result));
                 console.warn('FB PIC', result.picture.data.url);
@@ -126,7 +156,7 @@ class SignUp extends React.Component {
               responseInfoCallback); new GraphRequestManager().addRequest(infoRequest).start();
           });
         }
-      }, function (error) { console.log('Login fail with error: ' + error); });
+      }, function (error:any) { console.log('Login fail with error: ' + error); });
 
 
   }
@@ -144,7 +174,7 @@ fblogout=()=>{
           accessToken: current_access_token,
           httpMethod: 'DELETE'
       },
-      (error, result) => {
+      (error:any, result:any) => {
           if (error) {
               console.warn('Error fetching data: ' + error.toString());
           } else {
@@ -155,14 +185,12 @@ fblogout=()=>{
       });
     new GraphRequestManager().addRequest(logout).start();
   })
-  .catch(error => {
+  .catch(error=> {
     console.warn("error in logout: ",error)
   }); 
 }
-
-
-  clearAsyncStorage = async () => {
-   await AsyncStorage.clear();
+  clearAsyncStorage =  () => {
+    AsyncStorage.clear();
   }
 
 
@@ -307,33 +335,7 @@ fblogout=()=>{
               <Text style={{ marginTop: heightPercentageToDP(calculateHeight(35)) }}>{index.strings.terms} </Text>
             </View>
             <View style={{ flexDirection: "row", alignItems: "center", justifyContent: "center", marginTop: 48 }}>
-              {/* <LoginButton
-                onLoginFinished={
-                  (error, result) => {
-                    if (error) {
-                      console.log("login has error: " + result.error);
-                    } else if (result.isCancelled) {
-                      console.log("login is cancelled.");
-                    } else {
-                      AccessToken.getCurrentAccessToken().then(
-                        (data) => {
-                          const credential = firebase.auth.FacebookAuthProvider.credential(data.accessToken);
-                          firebase.auth().signInWithCredential(credential)
-                          .then((res)=>{
-                           console.log(res)
-                          })
-                          .catch((err)=>{
-                            console.log(err)
-                          })
-                          debugger
-                          //console.warn(JSON.stringify(firebaseUserCredential.user.toJSON()))
-                          console.log(data.accessToken.toString())
-                        }
-                      )
-                    }
-                  }
-                }
-                onLogoutFinished={() => console.warn("logout.")} /> */}
+            
                 <View style={{flexDirection:"row"}}>
               <TouchableOpacity
                 onPress={() => this.fblogin()}
@@ -365,6 +367,7 @@ fblogout=()=>{
 
           </ScrollView>
         </View>
+        <Loader isLoading={this.state.isloading}/>
       </ImageBackground>
     );
   }

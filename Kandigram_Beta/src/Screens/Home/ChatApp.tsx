@@ -1,21 +1,29 @@
 import * as React from 'react';
-import { Text, View, StyleSheet, FlatList, TouchableOpacity } from 'react-native';
+import { Text, View, StyleSheet, FlatList, TouchableOpacity ,Image} from 'react-native';
 import { connect } from "react-redux";
 import { vh, vw } from "../../Common/ResponsiveScreen";
 import firebase from "react-native-firebase";
-import { db } from "../../Utils/FirebaseConfig";
+import  Loader  from "../../Common/loader";
+import index from "../../Utils/Constants/index";
 
 
+interface ChatAppProps {
+    navigation:any
+ }
+ interface State{
+users:any
+keys:any
+isloading:boolean
+ }
 
-interface ChatAppProps { }
-
-class ChatApp extends React.Component {
-    constructor(props) {
+class ChatApp extends React.Component<ChatAppProps,State> {
+    constructor(props:ChatAppProps) {
         super(props)
 
         this.state = {
             users: [],
-            keys: []
+            keys: [],
+            isloading:false
         };
     };
 
@@ -24,6 +32,7 @@ class ChatApp extends React.Component {
         
     }
     getFirebaseData = (self: any) => {
+    self.setState({isloading:!self.state.isloading})
         let tempp = [];
        // alert("hgd",props.navigation.state.params.uid)
         var key = [];
@@ -31,6 +40,7 @@ class ChatApp extends React.Component {
         ref.child('Users').on("value", function (snapshot) {
             key = snapshot._childKeys
             console.warn(key)
+            self.setState({isloading:!self.state.isloading})
             key.filter(function (val, index, array) {
                 tempp.push(snapshot.val()[val])
                 console.warn(snapshot.val()[val])
@@ -44,10 +54,7 @@ class ChatApp extends React.Component {
         self.setState({ users: tempp })
         let refine=self.state.users
         refine.filter(item => item.uid != this.props.navigation.state.uid)
-        alert(JSON.stringify("refinde   ",refine, this.props.uid))
-
-
-        // self.setState({users:refine})
+       // alert(JSON.stringify("refinde   ",refine, this.props.uid))
 
     }
 
@@ -55,12 +62,22 @@ class ChatApp extends React.Component {
     render() {
         return (
             <View style={styles.container}>
+             <View>
+                 <View>
+                     <TouchableOpacity>
+                         <Image
+                         style={{height:vh(21),width:vw(22)}}
+                         source={index.image.back}
+                         />
+                     </TouchableOpacity>
                 <Text> Welcome  to chat Application </Text>
-                <View style={styles.flat}>
+
+                </View>
+
                     <FlatList
                         data={this.state.users}
                         keyExtractor={item => item.index}
-                        renderItem={({ item }) => {
+                        renderItem={({ item}) => {
                             return (
                                 <View style={{
                                     height: vh(100), width: vw(350),
@@ -74,13 +91,11 @@ class ChatApp extends React.Component {
                                         <Text> {item.uid}</Text>
                                     </TouchableOpacity>
                                 </View>
-
-
                             )
                         }}
                     />
                 </View>
-
+<Loader isLoading={this.state.isloading}/>
             </View>
         );
     }

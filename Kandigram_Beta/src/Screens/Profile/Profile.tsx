@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Text, View, StyleSheet, ImageBackground, Image, ScrollView } from 'react-native';
+import { Text, View, StyleSheet, ImageBackground, Image, ScrollView ,Alert} from 'react-native';
 import HeaderComponent from '../../Common/HeaderComponent';
 import { widthPercentageToDP, heightPercentageToDP } from 'react-native-responsive-screen';
 import { calculateWidth, calculateHeight } from '../../Common/ResponsiveScreen';
@@ -14,16 +14,19 @@ import { connect } from "react-redux"
 import firebase from 'react-native-firebase'
 import { db } from "../../Utils/FirebaseConfig";
 import ImagePicker from 'react-native-image-crop-picker';
-import { PersistCoverImgAction,PersistProfileImgAction,PersistAction } from "../../ReduxPersist/PersistAction";
+import { PersistCoverImgAction, PersistProfileImgAction, PersistAction } from "../../ReduxPersist/PersistAction";
 
-interface ProfileProps { }
+interface ProfileProps {
+    navigation: any
+ }
 
-class Profile extends React.Component {
-    constructor(props) {
+class Profile extends React.Component<ProfileProps> {
+    constructor(props: ProfileProps) {
         super(props)
 
         this.state = {
-            about: "", currentUser: "",
+            about: "", 
+            currentUser: "",
             coverImgPath: '',
             ProfileImageStatus: false,
             profilePic: '',
@@ -34,19 +37,18 @@ class Profile extends React.Component {
     componentDidMount() {
         const { currentUser } = firebase.auth()
         this.setState({ currentUser })
-       this.clearAsyncStorage()
-      //  alert(JSON.stringify(this.props.uid))
+        this.clearAsyncStorage()
+        //  alert(JSON.stringify(this.props.uid))
         debugger
     }
-// to clear the Database
-    clearAsyncStorage = async () => {
-     
-        await AsyncStorage.clear();
+    // to clear the Database
+    clearAsyncStorage =  () => {
+       AsyncStorage.clear();
     }
 
     //gallery
     opengallery = () => {
-        ImagePicker.openPicker({ cropping: true })
+        ImagePicker.openPicker({ cropping : true })
             .then(image => {
                 // console.warn(image.path);
                 this.setState({ coverImgPath: image.path }, () => {
@@ -75,7 +77,7 @@ class Profile extends React.Component {
                     this.setState({ ProfileImageStatus: true })
                     const ref = firebase.storage().ref("" + this.props.uid).child("profileImage.jpg")
                     const uploadtask = ref.putFile(image.path)
-                    
+
                     uploadtask.then((snap) => {
                         ref.getDownloadURL().then((data) => {
                             console.warn(" profile image url=>", data)
@@ -92,16 +94,20 @@ class Profile extends React.Component {
     updateTheUserNode = (uid, obj) => {
         console.warn("#obj" + obj)
         db.ref('/Users').child(uid).update(obj, (result) => {
-            console.warn("incoming result:" + JSON.stringify(result),"null means OKK")
+            console.warn("incoming result:" + JSON.stringify(result), "null means OKK")
 
         })
     }
 
     render() {
-
+console.warn('')
         return (
-            <ImageBackground style={styles.container}>
+            <ImageBackground source={{}} style={styles.container}>
                 <HeaderComponent
+             //   lastName={"JINDAL"}
+                firstText={"Welcome,"}
+                secondText={"Create your profile"}
+                navigation={this.props.navigation}
                 />
                 <ScrollView
 
@@ -113,45 +119,45 @@ class Profile extends React.Component {
                     <View style={{ height: 1050 }}>
                         {/* <ScrollView> */}
                         <ImageBackground
-                             source={ this.state.coverImgPath === "" ? null : {uri:this.state.coverImgPath}  } 
+                            source={this.state.coverImgPath === "" ? null : { uri: this.state.coverImgPath }}
                             style={styles.coverImage}
                         >
                             <TouchableOpacity
                                 onPress={() => this.opengallery()}
                                 style={styles.galleryContainer}>
                                 {this.state.coverImgPath === "" ?
-  
-                                <View style={{flexDirection: 'row',alignItems:"center"}}>
-                                    <Image
-                                        resizeMode="contain"
-                                        style={styles.gallery}
-                                        source={index.image.gallery}
-                                    />  
-                                     <Text style={styles.coverText}> Add Cover Image. </Text>
-                                     </View>
+
+                                    <View style={{ flexDirection: 'row', alignItems: "center" }}>
+                                        <Image
+                                            resizeMode="contain"
+                                            style={styles.gallery}
+                                            source={index.image.gallery}
+                                        />
+                                        <Text style={styles.coverText}> Add Cover Image. </Text>
+                                    </View>
                                     : null
-                                   
+
                                 }
-                              
+
                             </TouchableOpacity>
                             {/* Profile picture */}
-                          <View>
-                            <ImageBackground
-                                source={this.state.profilePic === "" ? index.image.profile :{ uri:this.state.profilePic}}
-                                style={styles.profileImg}
-                            >
-                            </ImageBackground >
-                            <View >
-                            <TouchableOpacity 
-                            style={styles.edit}
-
-                            onPress={() => this.selectProfilePic()} >
-                                    <Image source={index.image.edit}
+                            <View>
+                                <ImageBackground
+                                    source={this.state.profilePic === "" ? index.image.profile : { uri: this.state.profilePic }}
+                                    style={styles.profileImg}
+                                >
+                                </ImageBackground >
+                                <View >
+                                    <TouchableOpacity
                                         style={styles.edit}
-                                    />
-                                </TouchableOpacity>
+
+                                        onPress={() => this.selectProfilePic()} >
+                                        <Image source={index.image.edit}
+                                            style={styles.edit}
+                                        />
+                                    </TouchableOpacity>
                                 </View>
-                                </View>
+                            </View>
 
                             <Text style={styles.addBio}>Add Bio </Text>
                             <View style={styles.describeStyle}>
@@ -191,8 +197,8 @@ class Profile extends React.Component {
 
                             </TouchableOpacity>
                             <ButtonComponent
-                            onButtonPress={()=>this.props.navigation.navigate('ForgetPassword')}
-                             />
+                                onButtonPress={() => this.props.navigation.navigate('ForgetPassword')}
+                            />
 
                         </ImageBackground>
 
@@ -254,18 +260,18 @@ const styles = StyleSheet.create({
         width: widthPercentageToDP(calculateWidth(100)),
         marginTop: heightPercentageToDP(calculateHeight(90)),
         marginLeft: widthPercentageToDP(calculateWidth(118)),
-       // backgroundColor: "red",
+        // backgroundColor: "red",
         zIndex: 300,
-        borderRadius:widthPercentageToDP(calculateWidth(50))
+        borderRadius: widthPercentageToDP(calculateWidth(50))
 
     },
     edit: {
         //position:"absolute",
         height: widthPercentageToDP(calculateWidth(40)),
         width: widthPercentageToDP(calculateWidth(40)),
-      //  marginTop: heightPercentageToDP(calculateHeight(100)),
+        //  marginTop: heightPercentageToDP(calculateHeight(100)),
         marginLeft: widthPercentageToDP(calculateWidth(100)),
-        zIndex:300
+        zIndex: 300
 
     }, addBio: {
         marginTop: 40, marginLeft: 16,
@@ -322,11 +328,11 @@ const mapStateToProps = (state: any) => {
         uid: state.PersistReducer.uid
     }
 }
-const mapDispatchToProps={
-    PersistAction:PersistAction,
-    PersistCoverImgAction:PersistCoverImgAction,
-    PersistProfileImgAction:PersistProfileImgAction,
-    
+const mapDispatchToProps = {
+    PersistAction: PersistAction,
+    PersistCoverImgAction: PersistCoverImgAction,
+    PersistProfileImgAction: PersistProfileImgAction,
+
 }
 
-export default connect(mapStateToProps,mapDispatchToProps)(Profile);
+export default connect(mapStateToProps, mapDispatchToProps)(Profile);

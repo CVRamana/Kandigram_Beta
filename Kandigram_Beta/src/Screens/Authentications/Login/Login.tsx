@@ -12,6 +12,9 @@ import {PersistAction} from "../../../ReduxPersist/PersistAction";
 import  {connect} from "react-redux";
 import firebase from 'react-native-firebase'
 
+import { ScrollView } from 'react-native-gesture-handler';
+import Loader from '../../../Common/loader';
+
 interface LoginProps { }
 
 class Login extends React.Component {
@@ -22,13 +25,15 @@ class Login extends React.Component {
          isSecure:false,
          email: '', 
          password: '',
-         errorMessage: null 
+         errorMessage: null ,
+         isloading:false,
       };
     };
 
     //handle Login
     handleLogin = () => {
         const { email, password } = this.state
+        this.setState({isloading:true})
         firebase
           .auth()
           .signInWithEmailAndPassword(email, password)
@@ -40,18 +45,21 @@ class Login extends React.Component {
                   console.log(res.user.uid)
                 debugger
                   this.props.navigation.navigate('Home')
+                  this.setState({isloading:false})
             }
             )
-          .catch(error => this.setState({ errorMessage: error.message },()=>alert(error.message)))
+          .catch(error => this.setState({ errorMessage: error.message,isloading:false },()=>alert(error.message)))
       }
     
     render() {
+       // {this.state.isloading ? <Loader/> : }
         return (
             <ImageBackground style={styles.container}>
                 <HeaderComponent
                     firstText={"Welocome Back,"}
                     secondText={"Log in"}
                 />
+                <ScrollView>
                 <View style={styles.inputContainer}>
                     <TextInputComponent
                     val={this.state.email} 
@@ -101,11 +109,18 @@ class Login extends React.Component {
                          style={styles.fbimg}
                         />
                         </View>
+                        
 
                 </View>
+                </ScrollView>
+                <Loader isLoading={this.state.isloading}/>
 
-            </ImageBackground>
+            </ImageBackground> 
+
+
+       
         );
+               
     }
 };
 

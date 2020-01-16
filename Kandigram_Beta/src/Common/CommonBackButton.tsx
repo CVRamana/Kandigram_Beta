@@ -5,16 +5,22 @@ import { widthPercentageToDP, heightPercentageToDP } from 'react-native-responsi
 import { calculateWidth, calculateHeight } from './ResponsiveScreen';
 
 interface CommonBackButtonProps {
-  
+  navigation: any
+  myStyle:any
+  firstText?:string
+  name:string
+  passingpropo:any
 }
 
 const CommonBackButton = (props: CommonBackButtonProps) => {
+  console.warn(props.firstText);
+  
   return (
     //  console.warn()
     <View style={styles.container}>
       <TouchableOpacity
       style={[styles.container,props.myStyle]}
-      onPress={()=>props.handleClick()}
+      onPress={()=>props.navigation.navigate('WelcomeSplash')}
       > 
           </TouchableOpacity>
     </View>
@@ -28,7 +34,7 @@ const styles = StyleSheet.create({
       width:widthPercentageToDP(calculateWidth(11)),
       height:heightPercentageToDP(calculateHeight(18)),
       backgroundColor:"blue",
-      marginTop: 100,
+      marginTop: 70,
       marginLeft: 16,
      
     

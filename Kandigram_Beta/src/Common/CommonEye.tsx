@@ -4,7 +4,11 @@ import index from "../Utils/Constants/index";
 import { heightPercentageToDP, widthPercentageToDP } from 'react-native-responsive-screen';
 import { calculateHeight, calculateWidth } from './ResponsiveScreen';
 
-interface CommonEyeProps {}
+interface CommonEyeProps {
+  handlePress:Function
+  extraStyle:Function
+  isSecureProp:boolean
+}
 
 const CommonEye = (props: CommonEyeProps) => {
   return (
