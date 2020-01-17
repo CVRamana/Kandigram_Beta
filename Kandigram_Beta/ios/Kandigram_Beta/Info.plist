@@ -20,6 +20,12 @@
 	<string>1.0</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
+	<key>LSApplicationCategoryType</key>
+	<string></string>
+	<key>UIAppFonts</key>
+	<array>
+		<string>Ubuntu-Medium.ttf</string>
+	</array>
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>
@@ -71,19 +77,6 @@
 	<string></string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>allow camera to take photo</string>
-	<key>UIAppFonts</key>
-	<array>
-		<string>Monofett.ttf</string>
-		<string>Ubuntu Condensed.ttf</string>
-		<string>Ubuntu-Bold.ttf</string>
-		<string>Ubuntu-BoldItalic.ttf</string>
-		<string>Ubuntu-Light.ttf</string>
-		<string>Ubuntu-LightItalic.ttf</string>
-		<string>Ubuntu-Medium.ttf</string>
-		<string>Ubuntu-MediumItalic.ttf</string>
-		<string>Ubuntu.ttf</string>
-		<string>UbuntuCondensed-Regular.ttf</string>
-	</array>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>remote-notification</string>

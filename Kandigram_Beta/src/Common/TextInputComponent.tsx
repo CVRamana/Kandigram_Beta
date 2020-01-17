@@ -6,7 +6,7 @@ import { calculateWidth, calculateHeight } from './ResponsiveScreen';
 
 interface TextInputProps {
  
-  val:string
+  val:any
   commonPlaceholder:string
   commonReturnKeyType:string
   commonOnChangeText:Function
@@ -32,12 +32,13 @@ class TextInputComponent extends React.Component<TextInputProps>{
        ref={"commonInputRef"}
        value={this.props.val}
        placeholder={this.props.commonPlaceholder}
-       placeholderTextColor={"white"}
+       placeholderTextColor={"rgba(255,255,255,.3)"}
        returnKeyType={this.props.commonReturnKeyType}
        onSubmitEditing={this.props.commonOnSubmitEditing}
        onChangeText={this.props.commonOnChangeText}
        style={[styles.textInput,this.props.extraStyle]}
        secureTextEntry={this.props.commonSecureTextEntry}
+       onBlur={this.props.commonOnBlur}
        
       />
    

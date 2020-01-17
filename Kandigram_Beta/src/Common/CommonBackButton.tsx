@@ -16,7 +16,7 @@ const CommonBackButton = (props: CommonBackButtonProps) => {
   console.warn(props.firstText);
   
   return (
-    //  console.warn()
+    
     <View style={styles.container}>
       <TouchableOpacity
       style={[styles.container,props.myStyle]}

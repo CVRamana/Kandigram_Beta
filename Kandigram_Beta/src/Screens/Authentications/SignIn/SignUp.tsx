@@ -1,9 +1,9 @@
 import * as React from 'react';
 import { Text, View, StyleSheet, ImageBackground, ScrollView, TouchableOpacity, Button, Image } from 'react-native';
 import { widthPercentageToDP, heightPercentageToDP } from 'react-native-responsive-screen';
-import { calculateHeight, calculateWidth } from "../../../Common/ResponsiveScreen";
+import { calculateHeight, calculateWidth, vh, vw } from "../../../Common/ResponsiveScreen";
 import DeviceInfo from 'react-native-device-info'
-import { SignUpAction,UpdateInputAction } from './SignInAction'
+import { SignUpAction, UpdateInputAction } from './SignInAction'
 import { PersistAction } from '../../../ReduxPersist/PersistAction'
 import AsyncStorage from '@react-native-community/async-storage'
 import { connect } from "react-redux";
@@ -12,7 +12,6 @@ import Loader from '../../../Common/loader';
 import index from "../../../Utils//Constants/index";
 import firebase from "react-native-firebase";
 import { db } from '../../../Utils/FirebaseConfig'
-
 import image from '../../../Utils/Constants/image';
 import TextInputComponent from '../../../Common/TextInputComponent';
 import colors from '../../../Utils/Constants/colors';
@@ -20,62 +19,64 @@ import ButtonComponent from '../../../Common/ButonComponent';
 import CommonEye from '../../../Common/CommonEye';
 import HeaderComponent from '../../../Common/HeaderComponent';
 
-interface Props{
-  UpdateInputAction:Function
-  email:string
-  password:string
-  name:string
-  mobile:string
-  username:string
-  navigation:any
-  PersistAction:Function
-  SignUpAction:Function
-  
-  
-  val:string
-  commonPlaceholder:string
-  commonReturnKeyType:string
-  commonOnChangeText:Function
+interface Props {
+  UpdateInputAction: Function
+  email: string
+  password: string
+  name: string
+  mobile: string
+  username: string
+  navigation: any
+  PersistAction: Function
+  SignUpAction: Function
+
+
+  val: string
+  commonPlaceholder: string
+  commonReturnKeyType: string
+  commonOnChangeText: Function
 
 
 }
-interface State{
-isloading:boolean
-isSigninInProgress:boolean
-txt:string
-isSecure:boolean
-isChecked:boolean
-isSecureText:boolean
-errorMessage:string
-SignUpAction:Function
+interface State {
+  isloading: boolean
+  isSigninInProgress: boolean
+  txt: string
+  isSecure: boolean
+  isChecked: boolean
+  isSecureText: boolean
+  errorMessage: string
+  bColor:string
+  tColor:string
+
 
 }
 
-class SignUp extends React.Component<Props,State> {
-  constructor(props:Props) {
+class SignUp extends React.Component<Props, State> {
+  constructor(props: Props) {
     super(props)
 
     this.state = {
       isSigninInProgress: true,
-      txt:"",
+      txt: "",
       isSecure: true,
       isSecureText: false,
       isChecked: false,
-      isloading:false,
-      errorMessage:""
-      
-
-
+      isloading: false,
+      errorMessage: "",
+      bColor:index.colors.textInputBorderColor,
+      tColor:index.colors.whiteColor
     };
   };
 
-  handleInput(key:any,val:any) {
-   this.props.UpdateInputAction(key,val)
+  handleInput(key: any, val: any) {
+    this.props.UpdateInputAction(key, val)
+   // this.setState({})
   }
   // Sign UP Action 
   handleSignUp = () => {
-    this.setState({isloading:!this.state.isloading})
-  //  alert(this.props.password)
+    this.setState({ isloading: !this.state.isloading })
+    //  alert(this.props.password)
     firebase
       .auth()
       .createUserWithEmailAndPassword(this.props.email, this.props.password)
@@ -90,11 +91,11 @@ class SignUp extends React.Component<Props,State> {
         this.setNewUserToFireBase(values, res.user.uid)
         // this.props.navigation.navigate('Profile')
       })
-      .catch(error => this.setState({ errorMessage: error.message }, () => alert(error)))
+      .catch(error => this.setState({ errorMessage: error.message, isloading: false }, () => alert(error)))
   }
 
   //save to firebase the info
-  setNewUserToFireBase = (res:any, uid:string) => {
+  setNewUserToFireBase = (res: any, uid: string) => {
     //alert(JSON.stringify(res))
     console.warn("save =>", res)
     var obj = res;
@@ -103,14 +104,14 @@ class SignUp extends React.Component<Props,State> {
     db.ref('/Users').child(uid).set(res, (val) => {
       console.warn("val", val, "if null means success")
       if (val === null) {
-        this.setState({isloading:!this.state.isloading})
+        this.setState({ isloading: !this.state.isloading })
         this.props.navigation.navigate('Login')
         console.warn("sucess")
       }
     })
   }
   componentDidMount() {
-     //this.clearAsyncStorage()
+    //this.clearAsyncStorage()
   }
   // fb login
   fblogin = () => {
@@ -121,22 +122,22 @@ class SignUp extends React.Component<Props,State> {
           console.log('Login success with permissions: ' + result.grantedPermissions.toString());
           this.setState({ isloading: true })
         } {
-          AccessToken.getCurrentAccessToken().then(data=> {
+          AccessToken.getCurrentAccessToken().then(data => {
             let accessToken = data.accessToken;
-             console.log(data.accessToken.toString());
-             // login with the firebase Facebook
-             const credential = firebase.auth.FacebookAuthProvider.credential(data.accessToken);
-             firebase.auth().signInWithCredential(credential)
-             .then((res)=>{
-              console.warn("suucess asve in the firebase facebook: ",res)
-             })
-             .catch((err)=>{
-               console.log(err)
-             })
-             debugger
-             //console.warn(JSON.stringify(firebaseUserCredential.user.toJSON()))
-             console.log(data.accessToken.toString())
-            const responseInfoCallback = (error:any, result:any) => {
+            console.log(data.accessToken.toString());
+            // login with the firebase Facebook
+            const credential = firebase.auth.FacebookAuthProvider.credential(data.accessToken);
+            firebase.auth().signInWithCredential(credential)
+              .then((res) => {
+                console.warn("suucess asve in the firebase facebook: ", res)
+              })
+              .catch((err) => {
+                console.log(err)
+              })
+            debugger
+            //console.warn(JSON.stringify(firebaseUserCredential.user.toJSON()))
+            console.log(data.accessToken.toString())
+            const responseInfoCallback = (error: any, result: any) => {
               if (error) {
                 console.log(error);
                 alert('Unable to Login, Please try again!')
@@ -146,9 +147,9 @@ class SignUp extends React.Component<Props,State> {
                 console.warn('FB PIC', result.picture.data.url);
                 //   this.props.setProfileData(result.name, result.email, result.picture.data.url, 'fb')
                 alert('res ' + JSON.stringify(result))
-              //  console.log('redux res ', this.props.profileData);
+                //  console.log('redux res ', this.props.profileData);
                 // this.setState({ isLoading: false })
-               // this.props.navigation.navigate('CreateProfile', { "profile_pic": result.picture.data.url })
+                // this.props.navigation.navigate('CreateProfile', { "profile_pic": result.picture.data.url })
               }
             }
             const infoRequest = new GraphRequest('/me',
@@ -156,44 +157,71 @@ class SignUp extends React.Component<Props,State> {
               responseInfoCallback); new GraphRequestManager().addRequest(infoRequest).start();
           });
         }
-      }, function (error:any) { console.log('Login fail with error: ' + error); });
+      }, function (error: any) { console.log('Login fail with error: ' + error); });
 
 
   }
-// fb logout 
-fblogout=()=>{
-  let current_access_token = '';
-  AccessToken.getCurrentAccessToken()
-  .then((data) => {
-    alert(JSON.stringify(data))
-    current_access_token = data.accessToken.toString();
-  }).then(() => {
-    let logout = new GraphRequest(
-      "me/permissions/",
-      {
-          accessToken: current_access_token,
-          httpMethod: 'DELETE'
-      },
-      (error:any, result:any) => {
-          if (error) {
+  // fb logout 
+  fblogout = () => {
+    let current_access_token = '';
+    AccessToken.getCurrentAccessToken()
+      .then((data) => {
+        alert(JSON.stringify(data))
+        current_access_token = data.accessToken.toString();
+      }).then(() => {
+        let logout = new GraphRequest(
+          "me/permissions/",
+          {
+            accessToken: current_access_token,
+            httpMethod: 'DELETE'
+          },
+          (error: any, result: any) => {
+            if (error) {
               console.warn('Error fetching data: ' + error.toString());
-          } else {
+            } else {
               LoginManager.logOut();
               alert("loout")
 
-          }
+            }
+          });
+        new GraphRequestManager().addRequest(logout).start();
+      })
+      .catch(error => {
+        console.warn("error in logout: ", error)
       });
-    new GraphRequestManager().addRequest(logout).start();
-  })
-  .catch(error=> {
-    console.warn("error in logout: ",error)
-  }); 
-}
-  clearAsyncStorage =  () => {
+  }
+  clearAsyncStorage = () => {
     AsyncStorage.clear();
   }
+//Email Validation 
+validateEmail=()=>{
+//  alert("called")
+ if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(this.props.email))
+  {
+    this.refs.fourth.refs.commonInputRef.focus()
+    this.setState({bColor:index.colors.textInputBorderColor,tColor:index.colors.whiteColor})
+    return (true)
+  }
+    this.setState({bColor:"red",tColor:"red"})
+    alert("You have entered an invalid email address!")
+    return (false)
+}
+//password validation
+validatePassword=()=>{
+  var passw=  /^[A-Za-z]\w{7,14}$/;
+if(this.props.password.match(passw)) 
+{ 
+  this.setState({bColor:index.colors.textInputBorderColor,tColor:index.colors.whiteColor})
+return true;
+}
+else
+{ 
+  this.setState({bColor:"red",tColor:"red"})
+// alert('Wrong...!')
+return false;
+}
 
-
+}
   onPress = () => {
     debugger
     this.props.SignUpAction()
@@ -202,9 +230,11 @@ fblogout=()=>{
     this.props.PersistAction()
   }
   render() {
-  
+
     return (
-      <ImageBackground style={{ flex: 1, backgroundColor: 'rgb(19,31,52)' }}>
+      <ImageBackground
+        source={{}}
+        style={{ flex: 1, backgroundColor: 'rgb(19,31,52)' }}>
         {/* <ImageBackground
           source={image.signup_bg}
           style={styles.container}>
@@ -240,80 +270,74 @@ fblogout=()=>{
           <ScrollView>
             <TextInputComponent
               ref="first"
-           //   val={this.state.name}
+              //   val={this.state.name}
               commonPlaceholder={"Name*"}
               commonReturnKeyType={"next"}
               commonOnSubmitEditing={() => this.refs.second.refs.commonInputRef.focus()}
-              commonOnChangeText={(val: any) => this.handleInput('name',val)}
+              commonOnChangeText={(val: any) => this.handleInput('name', val)}
               commonSecureTextEntry={false}
               extraStyle={{ marginTop: 30, }}
             />
 
             <TextInputComponent
               ref="second"
-            //  val={this.state.mobile}
+              //  val={this.state.mobile}
               commonPlaceholder={"Mobile Number*"}
               commonReturnKeyType={"next"}
               commonOnSubmitEditing={() => this.refs.third.refs.commonInputRef.focus()}
-              commonOnChangeText={(val: any) =>  this.handleInput('mobile',val)}
+              commonOnChangeText={(val: any) => this.handleInput('mobile', val)}
               commonSecureTextEntry={false}
-              extraStyle={{ marginTop: 30, }}
+              extraStyle={{ marginTop: 30,}}
             />
             <TextInputComponent
               ref="third"
-            //  val={this.state.email}
+              //  val={this.state.email}
               commonPlaceholder={"Email Address*"}
               commonReturnKeyType={"next"}
-              commonOnSubmitEditing={() => this.refs.fourth.refs.commonInputRef.focus()}
-              commonOnChangeText={(val: any) =>  this.handleInput('email',val)}
+              commonOnSubmitEditing={() => this.validateEmail()}
+              commonOnChangeText={(val: any) => this.handleInput('email', val)}
               commonSecureTextEntry={false}
-              extraStyle={{ marginTop: 30, }}
+              commonOnBlur={()=>this.validateEmail()}
+              extraStyle={{ marginTop: 30, borderColor:this.state.bColor,color:this.state.tColor }}
             />
             <TextInputComponent
               ref="fourth"
-             // val={this.state.username}
+              // val={this.state.username}
               commonPlaceholder={"UseraName*"}
               commonReturnKeyType={"next"}
               commonOnSubmitEditing={() => this.refs.fifth.refs.commonInputRef.focus()}
-              commonOnChangeText={(val: any) =>  this.handleInput('username',val)}
+              commonOnChangeText={(val: any) => this.handleInput('username', val)}
               commonSecureTextEntry={false}
               extraStyle={{ marginTop: 30, }}
             />
-            <TextInputComponent
-              ref="fifth"
-             // val={this.state.password}
-              commonPlaceholder={"password*"}
-              commonReturnKeyType={"next"}
-              commonOnSubmitEditing={() => alert("Submit action")}
-              commonOnChangeText={(val: any) =>  this.handleInput('password',val)}
-              commonSecureTextEntry={this.state.isSecureText}
-              extraStyle={{ marginTop: 30, }}
-            />
-
-            {/* 
-            <TouchableOpacity
-              onPress={() => this.setState({ isSecure: !this.state.isSecure,
-              isSecureText: !this.state.isSecureText })}
-              style={styles.secure11}>
-              {this.state.isSecure ?
-                <Image
-                  style={{ tintColor: "white", height: 30, width: 45 }}
-                  source={index.image.closeEye}
-                /> : <Image
-                  style={{ tintColor: "white", height: 30, width: 45 }}
-                  source={index.image.openEye}
-                />}
-            </TouchableOpacity> 
-            */}
-
-            <View style={styles.secure11}>
-              <CommonEye
-                isSecureProp={this.state.isSecure}
-                handlePress={() => this.setState({
-                  isSecure: !this.state.isSecure,
-                  isSecureText: !this.state.isSecureText
-                })}
+            <View style={[styles.pwd,{  borderColor:this.state.bColor,}]}
+            >
+              <TextInputComponent
+                ref="fifth"
+                // val={this.state.password}
+                commonPlaceholder={"password*"}
+                commonReturnKeyType={"next"}
+                commonOnSubmitEditing={() =>this.validatePassword() }
+                commonOnChangeText={(val: any) => this.handleInput('password', val)}
+                commonSecureTextEntry={this.state.isSecureText}
+                extraStyle={{ backgroundColor: "transparent",
+              
+                color:this.state.tColor,
+                 width: vw(280),
+                  borderWidth: 0,
+                  height: vh(50) }}
               />
+
+
+              <View style={styles.secure11}>
+                <CommonEye
+                  isSecureProp={this.state.isSecure}
+                  handlePress={() => this.setState({
+                    isSecure: !this.state.isSecure,
+                    isSecureText: !this.state.isSecureText
+                  })}
+                />
+              </View>
             </View>
 
             <View style={{ flexDirection: "row" }}>
@@ -332,42 +356,45 @@ fblogout=()=>{
 
               </TouchableOpacity>
 
-              <Text style={{ marginTop: heightPercentageToDP(calculateHeight(35)) }}>{index.strings.terms} </Text>
+              <Text style={styles.termText}>{index.strings.terms} </Text>
             </View>
-            <View style={{ flexDirection: "row", alignItems: "center", justifyContent: "center", marginTop: 48 }}>
-            
-                <View style={{flexDirection:"row"}}>
-              <TouchableOpacity
-                onPress={() => this.fblogin()}
-                style={styles.fbimg}
-              >
-                <Image
+
+
+            <View style={{ flexDirection: "row", alignItems: "center", justifyContent: "center", marginTop: vh(48) }}>
+
+              <View style={{ flexDirection: "row" ,justifyContent:"space-between",width:vw(148)}}>
+                <TouchableOpacity
+                  onPress={() => this.fblogin()}
                   style={styles.fbimg}
-                  source={index.image.fb}
-                />
-              </TouchableOpacity>
-              <TouchableOpacity
-                onPress={() => this.fblogout()}
-                style={styles.fbimg}
-              >
-                <Image
+                >
+                  <Image
+                    style={styles.fbimg}
+                    source={index.image.fb}
+                  />
+                </TouchableOpacity>
+
+                <TouchableOpacity
+                  onPress={() => this.fblogout()}
                   style={styles.fbimg}
-                  source={index.image.fb}
-                />
-              </TouchableOpacity>
+                >
+                  <Image
+                    style={styles.fbimg}
+                    source={index.image.fb}
+                  />
+                </TouchableOpacity>
               </View>
             </View>
-            <View style={{ marginTop: heightPercentageToDP(calculateHeight(48)), marginBottom: 20, }}>
+            <View style={{ marginTop: heightPercentageToDP(calculateHeight(48)), marginBottom: vh(50), }}>
               <ButtonComponent
                 myStyle={{ width: widthPercentageToDP(calculateWidth(340)), backgroundColor: "red" }}
-                name={this.props.name}
+                name={"Sign Up"}
                 onButtonPress={() => this.handleSignUp()}
               />
             </View>
 
           </ScrollView>
         </View>
-        <Loader isLoading={this.state.isloading}/>
+        <Loader isLoading={this.state.isloading} />
       </ImageBackground>
     );
   }
@@ -378,18 +405,18 @@ const mapStateToProps = (state: any) => {
     arr: state.SignInReducer.arr,
     uid: state.PersistReducer.uid,
     offlineData: state.PersistReducer.offlineData,
-    name:state.SignInReducer.name,
-    username:state.SignInReducer.username,
-    mobile:state.SignInReducer.mobile,
-  email:state.SignInReducer.email,
-  password:state.SignInReducer.password,
+    name: state.SignInReducer.name,
+    username: state.SignInReducer.username,
+    mobile: state.SignInReducer.mobile,
+    email: state.SignInReducer.email,
+    password: state.SignInReducer.password,
   }
 }
 
 const mapDispatchToProps = {
   SignUpAction: SignUpAction,
   PersistAction: PersistAction,
-  UpdateInputAction:UpdateInputAction,
+  UpdateInputAction: UpdateInputAction,
 }
 
 const styles = StyleSheet.create({
@@ -397,25 +424,50 @@ const styles = StyleSheet.create({
     flex: .3,
 
   },
+  termText:
+  {
+    marginTop: heightPercentageToDP(calculateHeight(35)),
+    marginLeft: vw(15),
+    fontFamily: "Ubuntu-Medium",
+    fontSize: vw(14),
+    fontWeight: "500",
+    fontStyle: "normal",
+    letterSpacing: 0.17,
+    color: colors.whiteColor
+  },
+  pwd: {
+    flexDirection: "row",
+    backgroundColor: colors.textInputBGColor,
+    borderColor: colors.textInputBorderColor,
+    borderStyle: "solid",
+    fontWeight: "bold",
+    fontStyle: "normal",
+    letterSpacing: 0.19,
+    color: colors.whiteColor,
+    borderWidth: 4,
+    marginTop: vh(30),
+    width: vw(343),
+    borderRadius: 1000,
+    height: vh(56),
+ 
+  },
   check: {
-    marginLeft: 24,
+    marginLeft: vw(24),
     marginTop: heightPercentageToDP(calculateHeight(30)),
     height: heightPercentageToDP(calculateHeight(28)),
     width: widthPercentageToDP(calculateWidth(28))
   },
 
   secure11: {
-    position: "absolute",
-    // backgroundColor:"red",
-    height: heightPercentageToDP(calculateHeight(30)),
+    height: heightPercentageToDP(calculateHeight(50)),
     width: widthPercentageToDP(calculateWidth(50)),
     justifyContent: "center",
     alignItems: "center",
-    bottom: heightPercentageToDP(calculateHeight(268)),
-    right: widthPercentageToDP(calculateWidth(40)),
+
   },
   fbimg: {
-    height: 50, width: 50
+    height: vh(50),
+     width: vw(50)
   }
 });
 

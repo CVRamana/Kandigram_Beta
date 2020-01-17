@@ -84,7 +84,7 @@ class ChatRoom extends React.Component {
                                     <Text style={styles.chatText}> {item.message}</Text>
                         </View> :
                         <View style={styles.yourchat}>
-                        <Text style={styles.chatText}> {item.message}</Text>
+                        <Text style={[styles.chatText,{color:"black"}]}> {item.message}</Text>
                   </View> 
                          }
                                 </View>
@@ -141,33 +141,37 @@ const styles = StyleSheet.create({
         fontSize: vw(29)
     },
     chat: {
-        backgroundColor: "transparent",
-        marginTop: 10,
-        marginLeft: 159,
-        marginRight:10,
-        maxWidth: vw(350),
-        // minHeight:vh(70),
-        borderRadius: vw(10000),
-        minWidth: vw(100),
-        // paddingTop: vh(100),
+        backgroundColor: "blue",
+        marginTop: vh(10),
+        marginLeft: vw(59),
+      
+        marginRight:vw(10),
+       // maxWidth: vw(350),
+        padding: vw(20),
+      // paddingRight: vw(20),
+ //flexDirection:"row-reverse",
+        alignSelf: 'flex-start',
+        borderRadius: vw(50),
+       // minWidth: vw(100),
+  
 
     },
     yourchat: {
-        backgroundColor: "transparent",
+        backgroundColor: "white",
         marginTop: 10,
         marginLeft: 10,
+       flexDirection:"row",
         marginRight:10,
-        maxWidth: vw(350),
-        // minHeight:vh(70),
-        borderRadius: vw(10000),
-        minWidth: vw(100),
-        // paddingTop: vh(100),
+        borderRadius:10,
+         // flexDirection:"row-reverse",
+        alignSelf: 'flex-start'
+     
 
     },
     chatText: {
         fontSize: vw(20),
         color: colors.whiteColor,
-        backgroundColor: "lightblue",
+       // backgroundColor: "lightblue",
 
     }
 });

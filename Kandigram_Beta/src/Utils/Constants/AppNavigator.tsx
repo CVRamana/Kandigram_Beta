@@ -1,4 +1,5 @@
 import { createAppContainer} from 'react-navigation';
+import React from "react";
 import { createStackNavigator, } from 'react-navigation-stack';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
 import Splash from "../../Screens/Authentications/Splash";
@@ -15,8 +16,11 @@ import ChatApp from "../../Screens/Home/ChatApp";
 import ChatRoom from "../../Screens/Home/ChatRoom";
 import LayoutAnimation from "../../Screens/Home/LayoutAnimation";
 import Offlinekandies from "../../Screens/Home/OfflineKandies";
-const SplashContainer = createStackNavigator({
+import {Image,StyleSheet} from "react-native";
+import { vh, vw } from '../../Common/ResponsiveScreen';
+import index from "../../Utils/Constants/index";
 
+const SplashContainer = createStackNavigator({
   Splash: {
     screen: Splash,
   },
@@ -95,9 +99,8 @@ const ProfileContainer=createStackNavigator({
 )
 //
 const HomeContainer=createStackNavigator({
-Home:{
-  screen:Home,
-},CreateKandi:{screen:CreateKandi},
+Home:{screen:Home,},
+CreateKandi:{screen:CreateKandi},
 ChatApp:{screen:ChatApp},
 ChatRoom:{screen:ChatRoom},
 LayoutAnimation:{screen:LayoutAnimation},
@@ -116,15 +119,63 @@ const tabs=createBottomTabNavigator(
    // secondTab: {screen: secondTab},
   //  scan: {screen: Scan},
   //  Notifications: {screen: NotificationStack},
-   // Settings: {screen: SettingsStack},
+    Profile: {screen: Profile},
 
 },
-{
-  
 
-})
+{
+
+  defaultNavigationOptions: ({navigation}) => ({
+      tabBarIcon: ({focused, tintColor}) => {
+          const {routeName} = navigation.state;
+          if (routeName === 'Home') {
+              return focused ? <Image resizeMode={'contain'} source={index.image.homeIconEn} style={styles.iconImg}/> : <Image resizeMode={'contain'} source={index.image.homeIconDis}
+                         style={styles.iconImg}/>
+          } else if (routeName === 'navigation') {
+              return focused ? <Image resizeMode={'contain'} source={index.image.DiscIconEn}
+                                      style={styles.iconImg}/> :
+                  <Image resizeMode={'contain'} source={index.image.DiscIconDis}
+                         style={styles.iconImg}/>
+          } else if (routeName === 'scan') {
+              return <Image resizeMode={'contain'} source={index.image.scancon}
+                            style={[styles.iconImg,{ marginBottom: vw(50)}]}/>
+          } else if (routeName === 'createProfile') {
+              return focused ? <Image resizeMode={'contain'} source={index.image.NotIcon}
+                                      style={{height: vh(25), width: vw(25)}}/> :
+                  <Image resizeMode={'contain'} source={index.image.NotIconDis}
+                         style={styles.iconImg}/>
+          } else if (routeName === 'Profile') {
+              return focused ? <Image resizeMode={'contain'} source={index.image.profileEn}
+                                      style={styles.iconImg}/> :
+                  <Image resizeMode={'contain'} source={index.image.profileDis}
+                         style={styles.iconImg}/>
+          }
+          return null;
+      }
+  }),
+  // tabBarComponent: props => <SafeAreaMaterialTopTabBar {...props} />,
+  tabBarOptions: {
+      style: {
+          height: vh(100),
+          backgroundColor: 'rgb(38,55,90)',
+          borderTopColor: 'transparent    '
+      },
+      activeTintColor: 'tomato',
+      inactiveTintColor: 'gray',
+      showIcon: true,
+      showLabel: false,
+      scrollEnabled: true
+  },
+  tabBarPosition: 'bottom',
+  animationEnabled: true,
+ swipeEnabled: true
+}
+)
 
 const AppNavigator = createStackNavigator({
+
+  tabs:{screen:tabs},
+
   Splash: {
     screen: SplashContainer,
   },
@@ -147,8 +198,15 @@ const AppNavigator = createStackNavigator({
 },
   {
     headerMode: "none",
-    initialRouteName: 'Splash',
+    initialRouteName: 'WelcomeSplash',
   }
 );
+const styles=StyleSheet.create({
+  iconImg:{
+    height: vh(25), 
+    width: vw(25)
+  }
+
+})
 
 export default createAppContainer(AppNavigator);

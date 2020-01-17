@@ -1,4 +1,5 @@
 import ActionTypes from "../../../Utils/Constants/actionTypes";
+import index from '../../../Utils/Constants/index'
 
 export const SignUpAction = (params: any, successCallback: Function, errorCallback: Function) => {
     return function (dispatch: Function, getState: Function) {
@@ -18,7 +19,6 @@ export const UpdateInputAction=(key:any,val:any,successCallback: Function, error
     return function(dispatch:Function,getState:Function){
         debugger
         dispatch({
-            
             type:ActionTypes.updateInput,
             payload:{[key]:val},
         })
