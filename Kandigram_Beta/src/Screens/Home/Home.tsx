@@ -37,7 +37,7 @@ class Home extends React.Component {
         <Text style={styles.HomeText}>Home</Text>
         
         <TouchableOpacity
-        onPress={()=>this.props.navigation.navigate('Offlinekandies')}
+        onPress={()=>this.props.navigation.navigate('Discover')}
         >
         <Image
         source={index.image.search}
@@ -87,6 +87,7 @@ class Home extends React.Component {
            <TouchableOpacity 
            onPress={()=>{
             LayoutAnimation.configureNext(LayoutAnimation.Presets.linear)
+            this.props.navigation.navigate('AddEvent')
              this.setState({isleft:!this.state.isleft})}}
            activeOpacity={ 1}
            style={styles.made}>

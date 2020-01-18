@@ -19,6 +19,8 @@ import Offlinekandies from "../../Screens/Home/OfflineKandies";
 import {Image,StyleSheet} from "react-native";
 import { vh, vw } from '../../Common/ResponsiveScreen';
 import index from "../../Utils/Constants/index";
+import AddEvent from '../../Screens/Home/AddEvent';
+import Discover from '../../Screens/Home/Discover';
 
 const SplashContainer = createStackNavigator({
   Splash: {
@@ -105,6 +107,8 @@ ChatApp:{screen:ChatApp},
 ChatRoom:{screen:ChatRoom},
 LayoutAnimation:{screen:LayoutAnimation},
 Offlinekandies:{screen:Offlinekandies},
+AddEvent:{screen:AddEvent},
+Discover:{screen:Discover}
 },{
   headerMode:"none",
   navigationOptions: {

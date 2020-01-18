@@ -110,7 +110,6 @@ console.warn('')
                 navigation={this.props.navigation}
                 />
                 <ScrollView
-
                     style={{
                         marginTop: 240,
                         flex: 1

@@ -1,6 +1,8 @@
 export default{
    splash_bg: require('../../Common/Public/Images/GradientBG.png'),
    welcome_bg: require('../../Common/Public/Images/1.2_WelcomeScreen2.png'),
+   welcome_bg1: require('../../Common/Public/Images/12WelcomeScreen1.png'),
+   welcome_bg3: require('../../Common/Public/Images/12WelcomeScreen3.png'),
    KandiSnap_Final_logo:require('../../Common/Public/Images/Kandisnap_Final_Logo.png'),
    signup_bg: require('../../Common/Public/Images/SignupBGPatetrn.png'),
    check: require('../../Common/Public/Images/CheckBox_Checked.png'),
@@ -23,7 +25,7 @@ export default{
    creteKandi:require('../../Common/Public/Images/createKandiBG.png'),
    public:require('../../Common/Public/Images/Public_Icon.png'),
    private:require('../../Common/Public/Images/Private_Icon.png'),
-   back:require('../../Common/Public/Images/backArrow.png'),
+   back:require('../../Common/Public/Images/BackIcon.png'),
    loc:require('../../Common/Public/Images/LocationIcon.png'),
    eventBG:require('../../Common/Public/Images/BGEvent.png'),
    offbg:require('../../Common/Public/Images/offlineBGPatetrn.png'),
@@ -38,4 +40,7 @@ export default{
    scancon:require('../../Common/Public/Images/scanIcon.png'),
    profileEn:require('../../Common/Public/Images/Profile_icon_Enable.png'),
    profileDis:require('../../Common/Public/Images/Profile_icon_disable.png'),
+   eventBg:require('../../Common/Public/Images/ProfileBG.png'),
+   calander:require('../../Common/Public/Images/CalendarIcon.png'),
+   
 }
