@@ -59,7 +59,8 @@ class WelocmeSplash extends React.Component {
                     <View style={{marginLeft: 24,marginTop: 80,}}>
                 <ButtonComponent
                     name={"Discover Kandi"}
-                    onButtonPress={() => this.props.navigation.navigate('Home')}
+                   // onButtonPress={() => this.props.navigation.navigate('Home')}
+                    onButtonPress={() => this.props.navigation.navigate('AppintroSlider')}
                 />
                 </View>
                 <View style={styles.loginContainer}>

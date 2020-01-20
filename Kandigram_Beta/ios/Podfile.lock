@@ -313,6 +313,8 @@ PODS:
     - React-cxxreact (= 0.61.5)
     - React-jsi (= 0.61.5)
   - React-jsinspector (0.61.5)
+  - react-native-camera-kit (8.0.4):
+    - React
   - react-native-fbsdk (1.1.1):
     - React
     - react-native-fbsdk/Core (= 1.1.1)
@@ -418,6 +420,7 @@ DEPENDENCIES:
   - React-jsi (from `../node_modules/react-native/ReactCommon/jsi`)
   - React-jsiexecutor (from `../node_modules/react-native/ReactCommon/jsiexecutor`)
   - React-jsinspector (from `../node_modules/react-native/ReactCommon/jsinspector`)
+  - react-native-camera-kit (from `../node_modules/react-native-camera-kit`)
   - react-native-fbsdk (from `../node_modules/react-native-fbsdk`)
   - "react-native-netinfo (from `../node_modules/@react-native-community/netinfo`)"
   - react-native-spinkit (from `../node_modules/react-native-spinkit`)
@@ -506,6 +509,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon/jsiexecutor"
   React-jsinspector:
     :path: "../node_modules/react-native/ReactCommon/jsinspector"
+  react-native-camera-kit:
+    :path: "../node_modules/react-native-camera-kit"
   react-native-fbsdk:
     :path: "../node_modules/react-native-fbsdk"
   react-native-netinfo:
@@ -594,6 +599,7 @@ SPEC CHECKSUMS:
   React-jsi: cb2cd74d7ccf4cffb071a46833613edc79cdf8f7
   React-jsiexecutor: d5525f9ed5f782fdbacb64b9b01a43a9323d2386
   React-jsinspector: fa0ecc501688c3c4c34f28834a76302233e29dc0
+  react-native-camera-kit: 498a6d111a904834e0824e9073cfadef7303235f
   react-native-fbsdk: b94a83971c496a35803f38b921aec6d637ba07b5
   react-native-netinfo: d3fb9723582eb9a111c128d37f896bae88c00f99
   react-native-spinkit: da294fd828216ad211fe36a5c14c1e09f09e62db

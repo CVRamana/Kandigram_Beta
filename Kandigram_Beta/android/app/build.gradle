@@ -133,6 +133,8 @@ android {
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
         versionName "1.0"
+
+        multiDexEnabled true
     }
     splits {
         abi {
@@ -183,14 +185,18 @@ dependencies {
     implementation "com.google.firebase:firebase-auth:19.2.0"
     implementation "com.google.firebase:firebase-database:19.2.0"
     implementation fileTree(dir: "libs", include: ["*.jar"])
-    implementation "com.facebook.react:react-native:+"  // From node_modules
+    implementation "com.facebook.react:react-native:0.61.5"  // From node_modules
    // implementation 'androidx.appcompat:appcompat:1.1.0-alpha02'
-    implementation 'androidx.appcompat:appcompat:1.0.2'
-    implementation 'androidx.annotation:annotation:1.0.2'
+    implementation 'androidx.appcompat:appcompat:1.1.0'
+
+    implementation 'com.android.support:multidex:1.0.3'
+
+    implementation 'androidx.annotation:annotation:1.1.0'
     implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0-alpha02'
     implementation project(path: ':react-native-firebase')
     implementation project(':react-native-gesture-handler')
 
+   // implementation project(":rncamerakit")
     // implementation(project(":react-native-google-signin"))
 
     if (enableHermes) {
@@ -209,7 +215,7 @@ task copyDownloadableDepsToLibs(type: Copy) {
     into 'libs'
 }
 
-//apply from: file("../../node_modules/@react-native-community/cli-platform-android/native_modules.gradle");
-//applyNativeModulesAppBuildGradle(project)
+apply from: file("../../node_modules/@react-native-community/cli-platform-android/native_modules.gradle");
+applyNativeModulesAppBuildGradle(project)
 
 apply plugin: 'com.google.gms.google-services'

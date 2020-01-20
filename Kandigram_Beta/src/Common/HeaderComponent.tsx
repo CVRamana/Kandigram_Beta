@@ -3,21 +3,20 @@ import { Text, View, StyleSheet,ImageBackground, TouchableOpacity,Image } from '
 import index from "../Utils/Constants/index";
 import { calculateHeight,calculateWidth, vh, vw } from './ResponsiveScreen';
 import { heightPercentageToDP,widthPercentageToDP } from 'react-native-responsive-screen';
-import CommonBackButton from './CommonBackButton';
+
 import colors from '../Utils/Constants/colors';
 
 interface HeaderComponentProps {
- // navigation: any
+  navigation: any
   firstText:string
   secondText:string
   lastName:string
   //passingpropo
 }
  
-class HeaderComponent extends React.Component {
-  constructor(props) {
+class HeaderComponent extends React.Component<HeaderComponentProps> {
+  constructor(props:HeaderComponentProps) {
     super(props)
-  
     this.state = {
        
     };
@@ -32,8 +31,8 @@ class HeaderComponent extends React.Component {
       <View style={{marginTop:50}}>
   <TouchableOpacity
   style={{marginTop:vh(20),
-  marginLeft: vw(16),}}
-  onPress={()=>this.props.navigation.navigate('WelcomeSplash')}
+     marginLeft: vw(16),}}
+     onPress={this.props.goBack}
   >
     <Image
     source={index.image.back}

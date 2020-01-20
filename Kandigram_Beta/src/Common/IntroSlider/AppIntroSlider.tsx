@@ -1,4 +1,4 @@
-  
+
 import React from 'react';
 import {
   StyleSheet,
@@ -13,11 +13,22 @@ import {
   I18nManager,
 } from 'react-native';
 import DefaultSlide from './DefaultSlide';
-import MyButton from  '../FunctionalComponent/Button'
 
-import { Images, Dimension, vh, vw, Colors, DesignWidth } from '../../Constants/'
+import ButtonComponent from "../ButonComponent";
+
+import index from "../../Utils/Constants/index";
+import image from '../../Utils/Constants/image';
+import { vh, vw, calculateHeight, calculateWidth } from '../ResponsiveScreen';
+//import { Colors } from 'react-native/Libraries/NewAppScreen';
+import Colors from "../../Utils/Constants/colors";
+import colors from '../../Utils/Constants/colors';
+import { heightPercentageToDP, widthPercentageToDP } from 'react-native-responsive-screen';
+
+
+
 
 const { width, height } = Dimensions.get('window');
+
 
 
 const slides = [
@@ -25,21 +36,21 @@ const slides = [
     key: 'somethun',
     title: 'Create your story',
     text: 'Description.\nSay something cool',
-    image: Images.welcome,
+    image: index.image.welcome_bg,
     backgroundColor: '#59b2ab',
   },
   {
     key: 'somethun-dos',
     title: 'follow your story',
     text: 'Other cool stuff',
-    image:  Images.welcome_second,
+    image: index.image.welcome_bg1,
     backgroundColor: '#febe29',
   },
   {
     key: 'somethun1',
     title: 'share your story',
     text: 'I\'m already out of descriptions\n\nLorem ipsum bla bla bla',
-    image: Images.welcome_third,
+    image: index.image.welcome_bg3,
     backgroundColor: '#22bcb5',
   }
 ];
@@ -51,7 +62,7 @@ const isAndroidRTL = I18nManager.isRTL && Platform.OS === 'android';
 
 export default class AppIntroSlider extends React.Component {
 
-  
+
   static defaultProps = {
     activeDotStyle: {
       backgroundColor: 'rgba(255, 255, 255, .9)',
@@ -73,7 +84,7 @@ export default class AppIntroSlider extends React.Component {
     width,
     height,
     activeIndex: 0,
-    message:'create your story'
+    message: 'create your story'
   };
 
   goToSlide = pageNum => {
@@ -111,8 +122,8 @@ export default class AppIntroSlider extends React.Component {
         {this.props.renderItem ? (
           this.props.renderItem(props)
         ) : (
-          <DefaultSlide bottomButton={this.props.bottomButton} {...props} />
-        )}
+            <DefaultSlide bottomButton={this.props.bottomButton} {...props} />
+          )}
       </View>
     );
   };
@@ -177,59 +188,77 @@ export default class AppIntroSlider extends React.Component {
     );
 
 
-    _renderView= () => {
-        
-      return(
-        <Image
-        style={{position:'absolute',top:vh(360),left:vw(20)}}
-       resizeMode='contain'
-       source={(Images.welcome_logo)} /> 
-      )
-   
-          
-    };
+  _renderView = () => {
 
-    text= () => {
-        
-      return(
-        <View style={{width:vw(DesignWidth),position:'absolute',top:vh(465)}}>
+    return (
+      <Image
+        style={{
+          position: 'absolute',
+          top: vh(360),
+          left: vw(20)
+        }}
+        resizeMode='contain'
+        source={(index.image.KandiSnap_Final_logo)} />
+    )
+
+
+  };
+
+  text = () => {
+
+    return (
+      <View style={{ width: '100%', position: 'absolute', top: vh(465) }}>
         <Text style={styles.textStyle} >KandiSnap</Text>
         <Text style={styles.textStyle2} >{this.state.message}</Text>
+      </View>
+    )
+
+
+  };
+
+  gotoLogin = () => {
+    console.warn("called")
+    this.props.navigation.navigate('login')
+  }
+  gotoSignup = () => {
+    console.warn("called")
+    this.props.navigation.navigate('SignUp')
+  }
+
+  _renderButton = () => {
+
+    return (
+      <View style={{ position: 'absolute', top: vh(580), width: '100%' }}>
+
+        <View style={{ marginLeft: vw(20),marginTop:vh(45) }}>
+          <ButtonComponent
+            name={"Discover a Kandi"}
+            onButtonPress={() => this.props.navigation.navigate('Scanner')}
+          />
+
         </View>
-      )
-   
-          
-    };
-
-    gotoLogin=()=>{
-      console.warn("called")
-      this.props.navigation.navigate('login')
-    }
-    gotoSignup=()=>{
-      console.warn("called")
-      this.props.navigation.navigate('SignUp')
-    }
-
-    _renderButton= () => {
-        
-      return(
-   <View style={{position:'absolute',top:vh(580),width:vw(DesignWidth)}}>
-        <TouchableOpacity >
-            <MyButton 
-            StartColor={Colors.firstColor}
-            EndColor={Colors.secondColor}
-            top={vh(49)}
-            text={"Discover a Kandi"}/>
+        <View style={styles.loginContainer}>
+          <TouchableOpacity
+            onPress={() => this.props.navigation.navigate('Login')}
+            style={styles.loginStyle}>
+            <Text style={styles.textt11}>Login </Text>
           </TouchableOpacity>
-          <View style={styles.LoginLayout}>
-            <Text onPress={this.gotoLogin} style={styles.loginButton}>Login</Text>
-            <Text  onPress={this.gotoSignup} style={styles.loginButton}>Signup</Text>
-          </View>
-   </View>
-      )
-   
-          
-    };
+
+          <TouchableOpacity
+            style={styles.loginStyle}
+            //onPress={()=>this.props.navigation.navigate("SignUP")}
+            onPress={() => alert(JSON.stringify(this.props.navigation.navigate("SignUp")))}
+          >
+            <Text style={styles.textt11}>Sign Up </Text>
+          </TouchableOpacity>
+        </View>
+
+
+      </View>
+    )
+
+
+  };
 
 
   _renderPagination = () => {
@@ -243,15 +272,15 @@ export default class AppIntroSlider extends React.Component {
     return (
       <View style={[styles.paginationContainer]}>
         <View style={styles.paginationDots}>
-          {slides.length> 1 &&
+          {slides.length > 1 &&
             slides.map((_, i) => (
-              <TouchableOpacity 
+              <TouchableOpacity
                 key={i}
                 style={[
                   styles.dot,
                   this._rtlSafeIndex(i) === this.state.activeIndex
-                    ? {borderColor:'red',borderWidth:1,backgroundColor:'rgb(156,39,176)'}
-                    : {borderColor:'red',borderWidth:1,borderColor:'rgb(156,39,176)'},
+                    ? { borderColor: 'red', borderWidth: 1, backgroundColor: 'rgb(156,39,176)' }
+                    : { borderColor: 'red', borderWidth: 1, borderColor: 'rgb(156,39,176)' },
                 ]}
                 onPress={() => this._onPaginationPress(i)}
               />
@@ -282,18 +311,15 @@ export default class AppIntroSlider extends React.Component {
   };
 
   onViewableItemsChanged = ({ viewableItems, changed }) => {
-   if((changed[0].index)===0)
-   {
-this.setState({message:"create your story"})
+    if ((changed[0].index) === 0) {
+      this.setState({ message: "create your story" })
 
-   }else if((changed[0].index)===1)
-   {
-    this.setState({message:"share your story"})
-   }
-   else if((changed[0].index)===2)
-   {
-    this.setState({message:"follow your story"})
-   }
+    } else if ((changed[0].index) === 1) {
+      this.setState({ message: "share your story" })
+    }
+    else if ((changed[0].index) === 2) {
+      this.setState({ message: "follow your story" })
+    }
   }
 
   _onLayout = () => {
@@ -332,10 +358,10 @@ this.setState({message:"create your story"})
     return (
       <View style={styles.flexOne}>
         <FlatList
-        onViewableItemsChanged={this.onViewableItemsChanged }
-        viewabilityConfig={{
-          itemVisiblePercentThreshold: 50
-        }}
+          onViewableItemsChanged={this.onViewableItemsChanged}
+          viewabilityConfig={{
+            itemVisiblePercentThreshold: 50
+          }}
           ref={ref => (this.flatList = ref)}
           data={slides}
           horizontal
@@ -361,31 +387,33 @@ this.setState({message:"create your story"})
 
 const styles = StyleSheet.create({
   flexOne: {
-   flex:1
+    flex: 1,
+
   },
   flatList: {
     flex: 1,
     flexDirection: isAndroidRTL ? 'row-reverse' : 'row',
   },
   paginationContainer: {
+   // height:100,
     position: 'absolute',
-
-    top:vh(545),
-    left:vw(20)
+    top: vh(545),
+    left: vw(20),
 
   },
   paginationDots: {
-    height: 16,
-    margin: 16,
+    height: vh(16),
+    margin: vw(16),
     flexDirection: isAndroidRTL ? 'row-reverse' : 'row',
     justifyContent: 'center',
     alignItems: 'center',
+   //  marginBottom:20
   },
   dot: {
-    width: 10,
-    height: 10,
+    width: vw(10),
+    height: vh(10),
     borderRadius: 5,
-    marginHorizontal: 4,
+    marginHorizontal: vw(4),
   },
   leftButtonContainer: {
     position: 'absolute',
@@ -404,43 +432,69 @@ const styles = StyleSheet.create({
   buttonText: {
     backgroundColor: 'transparent',
     color: 'white',
-    fontSize: 18,
-    padding: 12,
-  },textStyle: { 
-    marginLeft:vw(20),
- color:'rgb(255,255,255)',
+    fontSize: vw(18),
+    padding: vw(12),
+  },
+  textStyle: {
+    marginLeft: vw(20),
+    color: 'rgb(255,255,255)',
+    fontFamily: (Platform.OS) === 'ios' ? 'Ubuntu-Bold' : 'Ubuntu-B',
+    fontSize: vh(36),
 
-  fontFamily: (Platform.OS)==='ios'?'Ubuntu-Bold':'Ubuntu-B',
-  fontSize: vh(36), 
+  }, textStyle2: {
+    marginTop: vh(12.6),
+    color: 'rgb(255,255,255)',
+    marginLeft: vw(20),
+    fontFamily: (Platform.OS) === 'ios' ? 'Ubuntu-Medium' : 'Ubuntu',
+    fontSize: vh(18),
 
-}, textStyle2: { 
- marginTop:vh(12.6),
- color:'rgb(255,255,255)',
- marginLeft:vw(20),
-  fontFamily: (Platform.OS)==='ios'?'Ubuntu-Medium':'Ubuntu',
-  fontSize: vh(18),
+  }, LoginLayout: {
+    marginTop: vh(24),
+    height: vh(54),
+    width: 0,
+    alignSelf: 'stretch',
+    flexDirection: 'row',
 
-}, LoginLayout:{
-  marginTop:vh(24),
-  height:vh(54),
-  width:null,
-   alignSelf:'stretch',
-  flexDirection:'row',
-  
-  marginHorizontal:vh(20),
-  justifyContent:'space-between'
-  
-},
-loginButton:{
-  fontFamily: (Platform.OS)==='ios'?'Ubuntu-Bold':'Ubuntu-B',
-  color:'white',
-  fontSize:vh(18),
-  width:vw(156),
-  height:vh(54),
-  borderColor:'white',
-  borderWidth:1,
-  borderRadius:vw(27),
-  paddingVertical:vh(16),
-  paddingHorizontal:vw(50)
-}
+    marginHorizontal: vh(20),
+    justifyContent: 'space-between'
+
+  },
+  loginButton: {
+    fontFamily: (Platform.OS) === 'ios' ? 'Ubuntu-Bold' : 'Ubuntu-B',
+    color: 'white',
+    fontSize: vh(18),
+    width: vw(156),
+    height: vh(54),
+    borderColor: 'white',
+    borderWidth: 1,
+    borderRadius: vw(27),
+    paddingVertical: vh(16),
+    paddingHorizontal: vw(50)
+  },
+  textt11: {
+    fontFamily: "Ubuntu-Medium",
+    fontSize: 16,
+    fontWeight: "bold",
+    fontStyle: "normal",
+    letterSpacing: 0.19,
+    color: colors.whiteColor
+  },
+  loginContainer: {
+    flexDirection: "row",
+    marginTop: heightPercentageToDP(calculateHeight(15)),
+    marginLeft: widthPercentageToDP(calculateWidth(10)),
+    justifyContent: "space-around"
+
+  },
+  loginStyle: {
+    width: widthPercentageToDP(calculateWidth(156)),
+    height: heightPercentageToDP(calculateHeight(54)),
+    borderWidth: 3,
+    borderColor: Colors.whiteColor,
+    borderRadius: widthPercentageToDP(calculateWidth(78)),
+    justifyContent: "center",
+    alignItems: "center"
+
+
+  },
 });

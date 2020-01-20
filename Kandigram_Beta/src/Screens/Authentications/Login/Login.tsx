@@ -106,6 +106,7 @@ class Login extends React.Component<LoginProps,State> {
                 <HeaderComponent
                     firstText={"Welocome Back,"}
                     secondText={"Log in"}
+                    goBack={()=>this.props.navigation.navigate('AppintroSlider')}
                 />
                 <ScrollView>
                 <View style={styles.inputContainer}>

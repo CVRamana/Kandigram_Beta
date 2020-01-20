@@ -42,5 +42,8 @@ export default{
    profileDis:require('../../Common/Public/Images/Profile_icon_disable.png'),
    eventBg:require('../../Common/Public/Images/ProfileBG.png'),
    calander:require('../../Common/Public/Images/CalendarIcon.png'),
+   cancel:require('../../Common/Public/Images/Cancel_Button.png'),
+   scan:require('../../Common/Public/Images/Overlay.png'),
+   
    
 }

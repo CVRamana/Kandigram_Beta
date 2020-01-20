@@ -21,6 +21,8 @@ import { vh, vw } from '../../Common/ResponsiveScreen';
 import index from "../../Utils/Constants/index";
 import AddEvent from '../../Screens/Home/AddEvent';
 import Discover from '../../Screens/Home/Discover';
+import AppintroSlider from "../../Common/IntroSlider/AppIntroSlider";
+import Scanner from "../../Common/Scanner";
 
 const SplashContainer = createStackNavigator({
   Splash: {
@@ -37,9 +39,7 @@ const SplashContainer = createStackNavigator({
 )
 //
 const WelcomeSplashContainer = createStackNavigator({
-  WelcomeSplash: {
-    screen: WelcomeSplash,
-  },
+  AppintroSlider:{screen:AppintroSlider}
 },
   {
     headerMode: "none",
@@ -64,6 +64,16 @@ const SignUPContainer = createStackNavigator({
 
   },
 )
+const ScannerContainer=createStackNavigator({
+Scanner:{screen:Scanner}
+},
+{
+  headerMode: "none",
+  navigationOptions: {
+    gesturesEnabled: false,
+    header: null
+}
+})
 
 //
 const LoginContainer=createStackNavigator({
@@ -179,6 +189,7 @@ const tabs=createBottomTabNavigator(
 const AppNavigator = createStackNavigator({
 
   tabs:{screen:tabs},
+  Scanner:{screen:Scanner},
 
   Splash: {
     screen: SplashContainer,

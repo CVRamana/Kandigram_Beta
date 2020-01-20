@@ -39,7 +39,7 @@ class Splash extends Component {
         duration: 2000,
         easing: Easing.linear
       }
-    ).start(()=>this.props.navigation.navigate("WelcomeSplash"))
+    ).start(()=>this.props.navigation.navigate("AppintroSlider"))
   }
 
   render() {

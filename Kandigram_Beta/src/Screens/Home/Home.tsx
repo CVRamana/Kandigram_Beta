@@ -1,23 +1,30 @@
 import * as React from 'react';
-import { Text, View, StyleSheet, ImageBackground,Animated,Easing, Image,LayoutAnimation } from 'react-native';
+import { Text, View, StyleSheet,TouchableOpacity, ImageBackground,Animated,Easing, Image,LayoutAnimation,Platform, UIManager } from 'react-native';
 import index from "../../Utils/Constants/index";
 import { widthPercentageToDP, heightPercentageToDP } from 'react-native-responsive-screen';
 import { calculateWidth, calculateHeight, vh, vw } from '../../Common/ResponsiveScreen';
 import ButtonComponent from '../../Common/ButonComponent';
-import { TouchableOpacity } from 'react-native-gesture-handler';
+//import { TouchableOpacity } from 'react-native-gesture-handler';
 import colors from '../../Utils/Constants/colors';
 import {  connect} from "react-redux";
 
 interface HomeProps{}
 
+
+if (Platform.OS === 'android') {
+  if (UIManager.setLayoutAnimationEnabledExperimental) {
+    UIManager.setLayoutAnimationEnabledExperimental(true);
+  }
+}
 class Home extends React.Component {
   constructor(props) {
     super(props)
    // this.animatedValue = new Animated.Value(0)
   
     this.state = {
-      isleft:true
-       
+      isleft:true,
+      expanded:false  ,
+      position:'relative'
     };
   };
   componentDidMount(){
@@ -33,11 +40,17 @@ class Home extends React.Component {
     source={index.image.HomeBG}
     style={styles.homebg}
      >
-       <View style={{flexDirection:"row",marginTop:vh(54),width:vw(375)}}>
+       <View style={{flexDirection:"row",marginTop:vh(54),
+       //width:vw(375)
+       }}>
         <Text style={styles.HomeText}>Home</Text>
         
         <TouchableOpacity
-        onPress={()=>this.props.navigation.navigate('Discover')}
+       onPress={() => {
+        LayoutAnimation.configureNext(LayoutAnimation.Presets.linear);
+        this.setState({position:"absolute",expanded: !this.state.expanded })
+      }}
+       // onPress={()=>this.props.navigation.navigate('Discover')}
         >
         <Image
         source={index.image.search}
@@ -51,8 +64,26 @@ class Home extends React.Component {
          style={{marginLeft: vw(24),}}
          source={index.image.saved}/>
              </TouchableOpacity>
-      
+                    {/* for the input animated */}
+                    {this.state.expanded ? <View style={{height:50,width:300,backgroundColor:"grey",marginLeft:50,position:this.state.position}}>
+                      <TouchableOpacity
+                    onPress={()=>{
+                      LayoutAnimation.configureNext(LayoutAnimation.Presets.linear)
+                      //this.props.navigation.navigate('AddEvent')
+                       this.setState({position:"relative"})
+
+                    }}
+                      >
+                        <Image
+                        style={{height:vh(30),width:vw(30)}}
+                        source={index.image.cancel}
+                        />
+                        </TouchableOpacity>
+                    </View>: null }
+                    {/* <View style={{height:50,width:300,backgroundColor:"grey",marginLeft:50}}> */}
          </View>
+   
+      
             {/* TOGGLE BUTOTON */}
          <View style={styles.tab}>
            <View 
@@ -88,7 +119,8 @@ class Home extends React.Component {
            onPress={()=>{
             LayoutAnimation.configureNext(LayoutAnimation.Presets.linear)
             this.props.navigation.navigate('AddEvent')
-             this.setState({isleft:!this.state.isleft})}}
+             this.setState({isleft:!this.state.isleft})
+            }}
            activeOpacity={ 1}
            style={styles.made}>
              <Text style={styles.tabTxt}>Made </Text> 

@@ -7,12 +7,12 @@ import android.util.Log;
 
 import com.facebook.react.PackageList;
 
+//import com.wix.RNCameraKit.RNCameraKitPackage;
+
 
 import com.facebook.hermes.reactexecutor.HermesExecutorFactory;
 import com.facebook.react.bridge.JavaScriptExecutorFactory;
-import com.microsoft.appcenter.reactnative.crashes.AppCenterReactNativeCrashesPackage;
-import com.microsoft.appcenter.reactnative.analytics.AppCenterReactNativeAnalyticsPackage;
-import com.microsoft.appcenter.reactnative.appcenter.AppCenterReactNativePackage;
+
 
 
 import com.facebook.react.ReactApplication;
@@ -43,6 +43,8 @@ public class MainApplication extends Application implements ReactApplication {
           // packages.add(new MyReactNativePackage());
             packages.add(new RNFirebaseAuthPackage());
             packages.add(new RNFirebaseDatabasePackage());
+
+           // packages.add(new RNCameraKitPackage());
           return packages;
         }
 
