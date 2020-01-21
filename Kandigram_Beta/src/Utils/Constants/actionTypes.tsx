@@ -4,5 +4,7 @@ export default{
     isInternet:"isInternet",
     updateInput:"updateInput",
     offlineCoverImg:"coverImg",
-    offlineProfileImg:"profileImg"
+    offlineProfileImg:"profileImg",
+    offlineKandies:"OfflineKandies",
+    
 }

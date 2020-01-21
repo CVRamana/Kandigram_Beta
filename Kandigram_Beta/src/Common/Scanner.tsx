@@ -1,11 +1,14 @@
 import * as React from 'react';
-import { Text, View, StyleSheet, ImageBackground, PermissionsAndroid, Button, TouchableOpacity, Image } from 'react-native';
+import { Text, View, StyleSheet, ImageBackground, PermissionsAndroid,Platform, Button, TouchableOpacity, Image } from 'react-native';
 import { CameraKitCameraScreen } from "react-native-camera-kit";
 import index from "../Utils/Constants/index";
 import { vw, vh } from './ResponsiveScreen';
+import {connect} from "react-redux";
+import {PersistOfflinekandiAction} from '../ReduxPersist/PersistAction'
 
 interface ScannerProps {
-
+    PersistOfflinekandiAction:Function
+    navigation:any
 }
 interface State {
 
@@ -13,31 +16,46 @@ interface State {
 
 class Scanner extends React.Component<ScannerProps, State> {
     onReadCode = (event: any) => {
-        console.log(event.nativeEvent.codeStringValue)
+        //let param=event.nativeEvent.codeStringValue
+        this.props.PersistOfflinekandiAction("hello")
+      
     }
 
     componentDidMount() {
-        try {
-            const granted = PermissionsAndroid.request(
-                PermissionsAndroid.PERMISSIONS.CAMERA,
-                {
-                    title: 'Cool Photo App Camera Permission',
-                    message:
-                        'Cool Photo App needs access to your camera ' +
-                        'so you can take awesome pictures.',
-                    buttonNeutral: 'Ask Me Later',
-                    buttonNegative: 'Cancel',
-                    buttonPositive: 'OK',
-                },
-            );
-            if (granted === PermissionsAndroid.RESULTS.GRANTED) {
-                console.log('You can use the camera');
-            } else {
-                console.log('Camera permission denied');
-            }
-        } catch (err) {
-            console.warn(err);
+        if (this.hasLocationPermission()) {
+          //  this.onReadCode(e)
+          this.props.PersistOfflinekandiAction("hello")
+        } else {
+            alert("no permission")
+            
         }
+    }
+
+    hasLocationPermission = async () => {
+        if (Platform.OS === 'ios' ||
+            (Platform.OS === 'android' && Platform.Version < 23)) {
+            return true;
+        }
+
+        const hasPermission = await PermissionsAndroid.check(
+            PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION
+        );
+
+        if (hasPermission) return true;
+
+        const status = await PermissionsAndroid.request(
+            PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION
+        );
+
+        if (status === PermissionsAndroid.RESULTS.GRANTED) return true;
+
+        if (status === PermissionsAndroid.RESULTS.DENIED) {
+            ToastAndroid.show('Camera permission denied by user.', ToastAndroid.LONG);
+        } else if (status === PermissionsAndroid.RESULTS.NEVER_ASK_AGAIN) {
+            ToastAndroid.show('Camera permission revoked by user.', ToastAndroid.LONG);
+        }
+
+        return false;
     }
 
     render() {
@@ -49,7 +67,7 @@ class Scanner extends React.Component<ScannerProps, State> {
                 <View style={{
                     top: 50,
                     left: 20,
-                    
+
                     position: "absolute",
                     zIndex: 400,
                     backgroundColor: "transparent "
@@ -84,7 +102,15 @@ class Scanner extends React.Component<ScannerProps, State> {
     }
 };
 
-export default Scanner;
+const mapStateToProps=(State:any)=>{
+    return {
+
+    }
+}
+const mapDispatchToProps={
+    PersistOfflinekandiAction:PersistOfflinekandiAction
+}
+export default connect(mapStateToProps,mapDispatchToProps)(Scanner);
 
 const styles = StyleSheet.create({
     container: {}

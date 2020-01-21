@@ -1,5 +1,6 @@
 import actionTypes from "../Utils/Constants/actionTypes";
 
+
 export const PersistAction = (params: any, successCallback: Function, errorCallback: Function) => {
     return function (dispatch: Function, getState: Function) {
         debugger
@@ -26,5 +27,17 @@ export const PersistProfileImgAction = (param: any, successCallback: Function, e
             type: actionTypes.offlineProfileImg,
             profileImg: param
         })
+    }
+}
+export const PersistOfflinekandiAction=(param:any,successCallback:Function,errorCallback:Function)=>{
+    return function (dispatch:Function,getState:Function) {
+        let arr=getState().PersistReducer.OfflineKandies
+        alert("arjgjhr",arr)
+        dispatch({
+            type:actionTypes.offlineKandies,
+            dispatch: param,
+
+        })
+        
     }
 }

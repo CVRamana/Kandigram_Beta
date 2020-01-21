@@ -46,8 +46,10 @@ interface State {
   isChecked: boolean
   isSecureText: boolean
   errorMessage: string
-  bColor:string
-  tColor:string
+  beColor: string
+  teColor: string
+  b2Color: string
+  t2Color: string
 
 
 }
@@ -64,14 +66,16 @@ class SignUp extends React.Component<Props, State> {
       isChecked: false,
       isloading: false,
       errorMessage: "",
-      bColor:index.colors.textInputBorderColor,
-      tColor:index.colors.whiteColor
+      beColor: index.colors.textInputBorderColor,
+      teColor: index.colors.whiteColor,
+      b2Color: index.colors.textInputBorderColor,
+      t2Color: index.colors.whiteColor,
     };
   };
 
   handleInput(key: any, val: any) {
     this.props.UpdateInputAction(key, val)
-   // this.setState({})
+    // this.setState({})
   }
   // Sign UP Action 
   handleSignUp = () => {
@@ -129,7 +133,7 @@ class SignUp extends React.Component<Props, State> {
             const credential = firebase.auth.FacebookAuthProvider.credential(data.accessToken);
             firebase.auth().signInWithCredential(credential)
               .then((res) => {
-                console.warn("suucess asve in the firebase facebook: ", res)
+                console.warn("suucess save in the firebase facebook: ", res)
               })
               .catch((err) => {
                 console.log(err)
@@ -193,35 +197,33 @@ class SignUp extends React.Component<Props, State> {
   clearAsyncStorage = () => {
     AsyncStorage.clear();
   }
-//Email Validation 
-validateEmail=()=>{
-//  alert("called")
- if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(this.props.email))
-  {
-    this.refs.fourth.refs.commonInputRef.focus()
-    this.setState({bColor:index.colors.textInputBorderColor,tColor:index.colors.whiteColor})
-    return (true)
-  }
-    this.setState({bColor:"red",tColor:"red"})
-    alert("You have entered an invalid email address!")
-    return (false)
-}
-//password validation
-validatePassword=()=>{
-  var passw=  /^[A-Za-z]\w{7,14}$/;
-if(this.props.password.match(passw)) 
-{ 
-  this.setState({bColor:index.colors.textInputBorderColor,tColor:index.colors.whiteColor})
-return true;
-}
-else
-{ 
-  this.setState({bColor:"red",tColor:"red"})
-// alert('Wrong...!')
-return false;
-}
+  //Email Validation 
+  validateEmail = () => {
+    //  alert("called")
+    if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(this.props.email)) {
+      this.setState({ beColor: index.colors.textInputBorderColor, teColor: index.colors.whiteColor })
 
-}
+      this.refs.fourth.refs.commonInputRef.focus()
+      return (true)
+    }
+    this.setState({ beColor: "red", teColor: "red" })
+    //  alert("You have entered an invalid email address!")
+    return (false)
+  }
+  //password validation
+  validatePassword = () => {
+    var passw = /^[A-Za-z]\w{7,14}$/;
+    if (this.props.password.match(passw)) {
+      this.setState({ b2Color: index.colors.textInputBorderColor, t2Color: index.colors.whiteColor })
+      return true;
+    }
+    else {
+      this.setState({ b2Color: "red", t2Color: "red" })
+      // alert('Wrong...!')
+      return false;
+    }
+
+  }
   onPress = () => {
     debugger
     this.props.SignUpAction()
@@ -246,86 +248,100 @@ return false;
           <Text style={styles.signUpstyle}>{index.strings.signUpText} </Text>
 
         </ImageBackground> */}
-        <HeaderComponent
-          firstText={index.strings.helloText}
-          secondText={index.strings.signUpText}
-          //   page="WelcomeScreen"
-          handleClick={() => this.props.navigation.navigate("WelcomeScreen")}
-        />
-
+        <View style={{ position: "absolute", top: 0, zIndex: 300 }}>
+          <HeaderComponent
+            firstText={index.strings.helloText}
+            secondText={index.strings.signUpText}
+            //   page="WelcomeScreen"
+            handleClick={() => this.props.navigation.navigate("WelcomeScreen")}
+          />
+        </View>
         {/* <Text> {DeviceInfo.getDeviceId}</Text>
           <Button onPress={() => this.onPress()} title={"Redux"} />
           <Button onPress={() => this.onPersist()} title={"Redux Persist"} />
           */}
+        <ScrollView>
+          <View style={{
 
-        <View style={{
-          height: heightPercentageToDP(calculateHeight(1100)),
-          width: widthPercentageToDP(calculateWidth(375)),
-          paddingBottom: 400,
-          paddingLeft: 16,
-          marginTop: 50,
-          paddingTop: 200,
-          // backgroundColor:"pink"
-        }}>
-          <ScrollView>
-            <TextInputComponent
-              ref="first"
-              //   val={this.state.name}
-              commonPlaceholder={"Name*"}
-              commonReturnKeyType={"next"}
-              commonOnSubmitEditing={() => this.refs.second.refs.commonInputRef.focus()}
-              commonOnChangeText={(val: any) => this.handleInput('name', val)}
-              commonSecureTextEntry={false}
-              extraStyle={{ marginTop: 30, }}
-            />
+            width: widthPercentageToDP(calculateWidth(375)),
+            paddingBottom: vh(100),
+            paddingLeft: vw(16),
 
-            <TextInputComponent
-              ref="second"
-              //  val={this.state.mobile}
-              commonPlaceholder={"Mobile Number*"}
-              commonReturnKeyType={"next"}
-              commonOnSubmitEditing={() => this.refs.third.refs.commonInputRef.focus()}
-              commonOnChangeText={(val: any) => this.handleInput('mobile', val)}
-              commonSecureTextEntry={false}
-              extraStyle={{ marginTop: 30,}}
-            />
-            <TextInputComponent
-              ref="third"
-              //  val={this.state.email}
-              commonPlaceholder={"Email Address*"}
-              commonReturnKeyType={"next"}
-              commonOnSubmitEditing={() => this.validateEmail()}
-              commonOnChangeText={(val: any) => this.handleInput('email', val)}
-              commonSecureTextEntry={false}
-              commonOnBlur={()=>this.validateEmail()}
-              extraStyle={{ marginTop: 30, borderColor:this.state.bColor,color:this.state.tColor }}
-            />
-            <TextInputComponent
-              ref="fourth"
-              // val={this.state.username}
-              commonPlaceholder={"UseraName*"}
-              commonReturnKeyType={"next"}
-              commonOnSubmitEditing={() => this.refs.fifth.refs.commonInputRef.focus()}
-              commonOnChangeText={(val: any) => this.handleInput('username', val)}
-              commonSecureTextEntry={false}
-              extraStyle={{ marginTop: 30, }}
-            />
-            <View style={[styles.pwd,{  borderColor:this.state.bColor,}]}
-            >
+            paddingTop: vh(270),
+
+          }}>
+
+            <View style={styles.inputBox}>
+              <TextInputComponent
+                ref="first"
+                //   val={this.state.name}
+                commonPlaceholder={"Name*"}
+                commonReturnKeyType={"next"}
+                commonOnSubmitEditing={() => this.refs.second.refs.commonInputRef.focus()}
+                commonOnChangeText={(val: any) => this.handleInput('name', val)}
+                commonSecureTextEntry={false}
+                extraStyle={{ borderColor: "transparent", borderWidth: vw(0) }}
+              />
+            </View>
+            {/* mobileNumber */}
+            <View style={[styles.inputBox, { marginTop: vh(30) }]}>
+              <TextInputComponent
+                ref="second"
+                //  val={this.state.mobile}
+                commonPlaceholder={"Mobile Number*"}
+                commonReturnKeyType={"next"}
+                commonOnSubmitEditing={() => this.refs.third.refs.commonInputRef.focus()}
+                commonOnChangeText={(val: any) => this.handleInput('mobile', val)}
+                commonSecureTextEntry={false}
+                extraStyle={{ borderColor: "transparent", borderWidth: vw(0) }}
+              />
+            </View>
+            {/* Email */}
+            <View style={[styles.inputBox, { marginTop: vh(30), borderColor: this.state.beColor, }]}>
+              <TextInputComponent
+                ref="third"
+                //  val={this.state.email}
+                commonPlaceholder={"Email Address*"}
+                commonReturnKeyType={"next"}
+                commonOnSubmitEditing={() => this.validateEmail()}
+                commonOnChangeText={(val: any) => this.handleInput('email', val)}
+                commonSecureTextEntry={false}
+                //  commonOnBlur={()=>this.validateEmail()}
+                extraStyle={{ borderColor: "transparent", borderColor: this.state.beColor, color: this.state.teColor, borderWidth: vw(0) }}
+              />
+            </View>
+            {/* username */}
+            <View style={[styles.inputBox, { marginTop: vh(30), }]}>
+              <TextInputComponent
+                ref="fourth"
+                // val={this.state.username}
+                commonPlaceholder={"UseraName*"}
+                commonReturnKeyType={"next"}
+                commonOnSubmitEditing={() => this.refs.fifth.refs.commonInputRef.focus()}
+                commonOnChangeText={(val: any) => this.handleInput('username', val)}
+                commonSecureTextEntry={false}
+                extraStyle={{ borderColor: "transparent", color: this.state.teColor, borderWidth: vw(0) }}
+              />
+            </View>
+            {/* password */}
+            <View style={[styles.pwd, { borderColor: this.state.b2Color, }]} >
               <TextInputComponent
                 ref="fifth"
                 // val={this.state.password}
                 commonPlaceholder={"password*"}
                 commonReturnKeyType={"next"}
-                commonOnSubmitEditing={() =>this.validatePassword() }
+                commonOnSubmitEditing={() => this.validatePassword()}
                 commonOnChangeText={(val: any) => this.handleInput('password', val)}
                 commonSecureTextEntry={this.state.isSecureText}
-                extraStyle={{ backgroundColor: "transparent",
-              
-                color:this.state.tColor,
-                 width: vw(280),
+                extraStyle={{
+                  backgroundColor: "transparent",
+                  // borderColor: this.state.b2Color,
+                  color: this.state.t2Color,
+                  width: vw(280),
                   borderWidth: 0,
-                  height: vh(50) }}
+                  borderColor: "transparent",
+                  height: vh(50)
+                }}
               />
 
 
@@ -338,6 +354,7 @@ return false;
                   })}
                 />
               </View>
+
             </View>
 
             <View style={{ flexDirection: "row" }}>
@@ -362,7 +379,7 @@ return false;
 
             <View style={{ flexDirection: "row", alignItems: "center", justifyContent: "center", marginTop: vh(48) }}>
 
-              <View style={{ flexDirection: "row" ,justifyContent:"space-between",width:vw(148)}}>
+              <View style={{ flexDirection: "row", justifyContent: "space-between", width: vw(148) }}>
                 <TouchableOpacity
                   onPress={() => this.fblogin()}
                   style={styles.fbimg}
@@ -392,8 +409,9 @@ return false;
               />
             </View>
 
-          </ScrollView>
-        </View>
+
+          </View>
+        </ScrollView>
         <Loader isLoading={this.state.isloading} />
       </ImageBackground>
     );
@@ -444,12 +462,21 @@ const styles = StyleSheet.create({
     fontStyle: "normal",
     letterSpacing: 0.19,
     color: colors.whiteColor,
-    borderWidth: 4,
+    borderWidth: vw(2),
     marginTop: vh(30),
     width: vw(343),
     borderRadius: 1000,
-    height: vh(56),
- 
+    height: vh(50),
+
+  },
+  inputBox: {
+    // backgroundColor:"red",
+    backgroundColor: colors.textInputBGColor,
+    borderColor: colors.textInputBorderColor,
+    borderWidth: vw(2),
+    width: vw(343),
+    borderRadius: 1000,
+    height: vh(50),
   },
   check: {
     marginLeft: vw(24),
@@ -467,7 +494,7 @@ const styles = StyleSheet.create({
   },
   fbimg: {
     height: vh(50),
-     width: vw(50)
+    width: vw(50)
   }
 });
 

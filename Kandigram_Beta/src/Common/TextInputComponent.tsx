@@ -53,19 +53,20 @@ export default TextInputComponent;
 const styles = StyleSheet.create({
   container: {},
   textInput:{
-  width: widthPercentageToDP(calculateWidth(350)),
-  height: heightPercentageToDP(calculateHeight(56)),
+  width: widthPercentageToDP(calculateWidth(338)),
+  height: heightPercentageToDP(calculateHeight(50)),
 //  marginTop:widthPercentageToDP(calculateWidth(20)),
   borderRadius: 1000,
   paddingLeft: 20,
   fontSize:heightPercentageToDP(calculateHeight(16)),
-  backgroundColor:colors.textInputBGColor,
+  //backgroundColor:colors.textInputBGColor,
+  backgroundColor:"transparent",
   borderColor:colors.textInputBorderColor,
   borderStyle: "solid",
   fontWeight: "bold",
   fontStyle: "normal",
   letterSpacing: 0.19,
   color:colors.whiteColor,
-  borderWidth: 4,
+  borderWidth: 2,
   }
 });

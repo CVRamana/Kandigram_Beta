@@ -10,7 +10,6 @@ import { db } from "../../Utils/FirebaseConfig";
 import firebase from 'react-native-firebase'
 
 
-
 interface CreateKandiProps { }
 
 class CreateKandi extends React.Component {
@@ -259,7 +258,7 @@ const styles = StyleSheet.create({
         //backgroundColor: "transparent",
         opacity: 0.6,
         fontFamily: "Ubuntu-Medium",
-        fontSize: 16,
+        fontSize: vw(16),
         fontWeight: "500",
         fontStyle: "normal",
         letterSpacing: 0.19,

@@ -35,8 +35,10 @@ class HeaderComponent extends React.Component<HeaderComponentProps> {
      onPress={this.props.goBack}
   >
     <Image
+    resizeMethod={"resize"}
+    resizeMode={"contain"}
     source={index.image.back}
-    style={{height:vh(20),width:vw(30),}}
+    style={{height:vh(18),width:vw(13),}}
     />
     </TouchableOpacity>
       <Text style={styles.helloStyle}>{this.props.lastName}</Text>

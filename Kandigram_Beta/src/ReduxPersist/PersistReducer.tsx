@@ -3,6 +3,7 @@ const initialState = {
     uid: "",
     coverImg: '',
     ProfileImg: '',
+    OfflineKandies:["hi","ugjhg"]
 }
 const PersistReducer = (state = initialState, action: any) => {
     switch (action.type) {
@@ -12,6 +13,8 @@ const PersistReducer = (state = initialState, action: any) => {
             return (Object as any).assign({}, state, { coverImg: action.coverImg })
         case actionTypes.offlineProfileImg:
             return (Object as any).assign({}, state, { profileImg: action.profileImg })
+        case actionTypes.offlineKandies:
+            return (Object as any ).assign({},state,{OfflineKandies: action.OfflineKandies})
         default:
             return state
     }

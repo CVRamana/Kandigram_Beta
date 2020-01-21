@@ -13,7 +13,9 @@ import {
   I18nManager,
 } from 'react-native';
 import DefaultSlide from './DefaultSlide';
+import {connect  } from "react-redux";
 
+import NetInfo from "@react-native-community/netinfo";
 import ButtonComponent from "../ButonComponent";
 
 import index from "../../Utils/Constants/index";
@@ -23,14 +25,9 @@ import { vh, vw, calculateHeight, calculateWidth } from '../ResponsiveScreen';
 import Colors from "../../Utils/Constants/colors";
 import colors from '../../Utils/Constants/colors';
 import { heightPercentageToDP, widthPercentageToDP } from 'react-native-responsive-screen';
-
-
-
-
+import { GlobalInternetAction } from "../../GlobalRedux/GlobalAction";
 const { width, height } = Dimensions.get('window');
-
-
-
+//var isConnected1:boolean
 const slides = [
   {
     key: 'somethun',
@@ -60,8 +57,21 @@ const isIphoneX =
 
 const isAndroidRTL = I18nManager.isRTL && Platform.OS === 'android';
 
-export default class AppIntroSlider extends React.Component {
+ class AppIntroSlider extends React.Component {
 
+ componentDidMount(){
+  NetInfo.fetch().then(state => {
+    console.log("Connection type", state.type);
+    console.log("Is connected?", state.isConnected);
+    this.props.GlobalInternetAction(isConnected1)
+  });
+
+  NetInfo.addEventListener(state => {
+   let isConnected1=state.isConnected
+   //console.warn(state.isConnected);
+    this.props.GlobalInternetAction(isConnected1)
+  })
+ }
 
   static defaultProps = {
     activeDotStyle: {
@@ -498,3 +508,13 @@ const styles = StyleSheet.create({
 
   },
 });
+const mapStateToProps=(state:any)=>{
+  return{
+    isInternet:state.GlobalReducer.isInternet
+  }
+}
+const mapDispatchToProps={
+  GlobalInternetAction:GlobalInternetAction
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(AppIntroSlider)
