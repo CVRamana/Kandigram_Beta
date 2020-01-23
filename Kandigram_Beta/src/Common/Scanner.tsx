@@ -24,6 +24,7 @@ class Scanner extends React.Component<ScannerProps, State> {
     componentDidMount() {
         if (this.hasLocationPermission()) {
           //  this.onReadCode(e)
+          debugger
           this.props.PersistOfflinekandiAction("hello")
         } else {
             alert("no permission")
@@ -88,7 +89,6 @@ class Scanner extends React.Component<ScannerProps, State> {
                     scanBarcode={true}
                     laserColor={"blue"}
                     frameColor={"yellow"}
-
                     onReadQRCode={((event: any) => this.onReadCode(event))} //optional
                     hideControls={false}           //(default false) optional, hide buttons and additional controls on top and bottom of screen
                     showFrame={true}   //(default false) optional, show frame with transparent layer (qr code or barcode will be read on this area ONLY), start animation for scanner,that stoped when find any code. Frame always at center of the screen

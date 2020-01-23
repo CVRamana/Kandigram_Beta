@@ -117,7 +117,7 @@ class Login extends React.Component<LoginProps, State> {
                 <HeaderComponent
                     firstText={"Welocome Back,"}
                     secondText={"Log in"}
-                    goBack={() => this.props.navigation.navigate('AppintroSlider')}
+                    handleClick={() => this.props.navigation.navigate('AppintroSlider')}
                 />
                 <ScrollView>
                     <View style={styles.inputContainer}>
@@ -192,13 +192,13 @@ class Login extends React.Component<LoginProps, State> {
                 <Loader isLoading={this.state.isloading} />
                 {!this.props.isInternet ?
                     <View style={styles.snack}>
-                        <Snackbar
-                            name="No Internet!" />
+                       <Snackbar
+                           /> 
                     </View> :
                     <View style={styles.snack}>
-                        <Snackbar
-                            name="Internet Connected!"
-                        />
+                     <Snackbar
+                         
+                        /> 
                     </View>
                 }
             </ImageBackground>

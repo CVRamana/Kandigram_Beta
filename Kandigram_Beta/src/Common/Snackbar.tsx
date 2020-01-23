@@ -2,6 +2,8 @@ import * as React from 'react';
 import { Text, View, StyleSheet, Animated, Easing } from 'react-native';
 import { vh, vw } from './ResponsiveScreen';
 import colors from '../Utils/Constants/colors';
+import { connect } from "react-redux";
+import { GlobalAction } from "../../src/GlobalRedux/GlobalAction";
 
 interface SnackbarProps { }
 
@@ -13,8 +15,16 @@ class Snackbar extends React.Component<SnackbarProps>{
 
         };
     };
-    componentDidMount() {
-        this.animate()
+
+    shouldComponentUpdate(nextProps: Readonly<State>, nextState: Readonly<Props>, nextContext: any): boolean {
+        if (this.props.isInternet != nextProps.isInternet) {
+            this.animate()
+            return true
+        }
+        else {
+            this.animate()
+            return true
+        }
     }
     animate = () => {
         this.animatedValue.setValue(0)
@@ -22,7 +32,7 @@ class Snackbar extends React.Component<SnackbarProps>{
             this.animatedValue,
             {
                 toValue: 1,
-                duration:3000,
+                duration: 2000,
                 easing: Easing.linear
             }
         ).start()
@@ -37,29 +47,34 @@ class Snackbar extends React.Component<SnackbarProps>{
 
             <Animated.View style={styles.container, { bottom }}>
                 <View style={styles.txt}>
-        <Text style={{ color: colors.whiteColor }}>{this.props.name}</Text>
+                    <Text style={{ color: colors.whiteColor }}>{this.props.isInternet ? "Connected !" : " No Connection! "}</Text>
                 </View>
             </Animated.View>
 
         );
     }
 };
+const mapStateToProps = (state: any) => {
+    return {
+        isInternet: state.GlobalReducer.isInternet
+    }
+}
 
-export default Snackbar;
+export default connect(mapStateToProps, {})(Snackbar);
 
 const styles = StyleSheet.create({
     container: {
-       
+
         position: "absolute",
         right: 0,
         zIndex: 700,
 
-      
+
         width: 500,
     },
-    txt:{
+    txt: {
         height: vh(50),
-        width:500,
+        width: 500,
         backgroundColor: "red",
         justifyContent: "center",
         alignItems: "center",

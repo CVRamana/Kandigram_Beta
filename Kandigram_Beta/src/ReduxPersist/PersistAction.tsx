@@ -31,11 +31,12 @@ export const PersistProfileImgAction = (param: any, successCallback: Function, e
 }
 export const PersistOfflinekandiAction=(param:any,successCallback:Function,errorCallback:Function)=>{
     return function (dispatch:Function,getState:Function) {
-        let arr=getState().PersistReducer.OfflineKandies
-        alert("arjgjhr",arr)
+        let offlineKandi=getState().PersistReducer.OfflineKandies
+      
+        debugger
         dispatch({
             type:actionTypes.offlineKandies,
-            dispatch: param,
+            OfflineKandies: param,
 
         })
         

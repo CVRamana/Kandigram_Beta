@@ -18,6 +18,7 @@ import colors from '../../../Utils/Constants/colors';
 import ButtonComponent from '../../../Common/ButonComponent';
 import CommonEye from '../../../Common/CommonEye';
 import HeaderComponent from '../../../Common/HeaderComponent';
+import { validate } from '../../../Common/validate';
 
 interface Props {
   UpdateInputAction: Function
@@ -50,6 +51,12 @@ interface State {
   teColor: string
   b2Color: string
   t2Color: string
+  bnColor: string
+  tnColor: string
+  bmColor: string
+  tmColor: string
+  buColor: string
+  tuColor: string
 
 
 }
@@ -70,6 +77,12 @@ class SignUp extends React.Component<Props, State> {
       teColor: index.colors.whiteColor,
       b2Color: index.colors.textInputBorderColor,
       t2Color: index.colors.whiteColor,
+      bnColor: index.colors.textInputBorderColor,
+      tnColor: index.colors.whiteColor,
+      bmColor: index.colors.textInputBorderColor,
+      tmColor: index.colors.whiteColor,
+      buColor: index.colors.textInputBorderColor,
+      tuColor: index.colors.whiteColor,
     };
   };
 
@@ -169,7 +182,7 @@ class SignUp extends React.Component<Props, State> {
   fblogout = () => {
     let current_access_token = '';
     AccessToken.getCurrentAccessToken()
-      .then((data) => {
+      .then((data:any) => {
         alert(JSON.stringify(data))
         current_access_token = data.accessToken.toString();
       }).then(() => {
@@ -190,40 +203,78 @@ class SignUp extends React.Component<Props, State> {
           });
         new GraphRequestManager().addRequest(logout).start();
       })
-      .catch(error => {
+      .catch((error:any) => {
         console.warn("error in logout: ", error)
       });
   }
   clearAsyncStorage = () => {
     AsyncStorage.clear();
   }
-  //Email Validation 
-  validateEmail = () => {
-    //  alert("called")
-    if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(this.props.email)) {
-      this.setState({ beColor: index.colors.textInputBorderColor, teColor: index.colors.whiteColor })
 
-      this.refs.fourth.refs.commonInputRef.focus()
-      return (true)
-    }
-    this.setState({ beColor: "red", teColor: "red" })
-    //  alert("You have entered an invalid email address!")
-    return (false)
-  }
-  //password validation
-  validatePassword = () => {
-    var passw = /^[A-Za-z]\w{7,14}$/;
-    if (this.props.password.match(passw)) {
-      this.setState({ b2Color: index.colors.textInputBorderColor, t2Color: index.colors.whiteColor })
-      return true;
-    }
-    else {
-      this.setState({ b2Color: "red", t2Color: "red" })
-      // alert('Wrong...!')
-      return false;
+  // validate all
+  validation = (type: any) => {
+    switch (type) {
+      case "name":
+        let flag = validate({ type: "name", val: this.props.name })
+        if (flag) {
+          this.setState({ bnColor: index.colors.textInputBorderColor, tnColor: index.colors.whiteColor })
+          this.refs.second.refs.commonInputRef.focus()
+        }
+        else {
+          this.setState({ bnColor: "red", tnColor: "red" })
+        
+        }
+     
+        break
+      case "mobile":
+        let flag1 = validate({ type: "mobile", val: this.props.mobile })
+        if (flag1) {
+          this.setState({ bmColor: index.colors.textInputBorderColor, tmColor: index.colors.whiteColor })
+          this.refs.third.refs.commonInputRef.focus()
+        }
+        else {
+          this.setState({ bmColor: "red", tmColor: "red" })
+        }
+        break
+
+      case "email":
+        let flag2 = validate({ type: "email", val: this.props.email })
+        if (flag2) {
+          this.setState({ beColor: index.colors.textInputBorderColor, teColor: index.colors.whiteColor })
+          this.refs.fourth.refs.commonInputRef.focus()
+          alert(flag2)
+        } else {
+          this.setState({ beColor: "red", teColor: "red" })
+        }
+
+        break
+      case "username":
+        let flag3 = validate({ type: "username", val: this.props.username })
+        if (flag3) {
+          this.setState({ buColor: index.colors.textInputBorderColor, tuColor: index.colors.whiteColor })
+          this.refs.fifth.refs.commonInputRef.focus()
+          alert(flag3)
+        }
+        else {
+          this.setState({ buColor: "red", tuColor: "red" })
+          alert(flag3)
+        }
+
+        break;
+      case "password":
+        let flag4 = validate({ type: "password", val: this.props.password })
+        if (flag4) {
+          this.setState({ b2Color: index.colors.textInputBorderColor, t2Color: index.colors.whiteColor })
+        }
+        else {
+          this.setState({ b2Color: "red", t2Color: "red" })
+        }
+        break
     }
 
   }
+
+ 
   onPress = () => {
     debugger
     this.props.SignUpAction()
@@ -253,7 +304,7 @@ class SignUp extends React.Component<Props, State> {
             firstText={index.strings.helloText}
             secondText={index.strings.signUpText}
             //   page="WelcomeScreen"
-            handleClick={() => this.props.navigation.navigate("WelcomeScreen")}
+            handleClick={() => this.props.navigation.navigate("AppintroSlider")}
           />
         </View>
         {/* <Text> {DeviceInfo.getDeviceId}</Text>
@@ -271,29 +322,29 @@ class SignUp extends React.Component<Props, State> {
 
           }}>
 
-            <View style={styles.inputBox}>
+            <View style={[styles.inputBox,{borderColor: this.state.bnColor, }]}>
               <TextInputComponent
                 ref="first"
                 //   val={this.state.name}
                 commonPlaceholder={"Name*"}
                 commonReturnKeyType={"next"}
-                commonOnSubmitEditing={() => this.refs.second.refs.commonInputRef.focus()}
+                commonOnSubmitEditing={() =>this.validation("name")}
                 commonOnChangeText={(val: any) => this.handleInput('name', val)}
                 commonSecureTextEntry={false}
-                extraStyle={{ borderColor: "transparent", borderWidth: vw(0) }}
+                extraStyle={{ borderColor: "transparent", color: this.state.tnColor,borderWidth: vw(0) }}
               />
             </View>
             {/* mobileNumber */}
-            <View style={[styles.inputBox, { marginTop: vh(30) }]}>
+            <View style={[styles.inputBox, { marginTop: vh(30), borderColor: this.state.bmColor,}]}>
               <TextInputComponent
                 ref="second"
                 //  val={this.state.mobile}
                 commonPlaceholder={"Mobile Number*"}
                 commonReturnKeyType={"next"}
-                commonOnSubmitEditing={() => this.refs.third.refs.commonInputRef.focus()}
+                commonOnSubmitEditing={() => this.validation("mobile")}
                 commonOnChangeText={(val: any) => this.handleInput('mobile', val)}
                 commonSecureTextEntry={false}
-                extraStyle={{ borderColor: "transparent", borderWidth: vw(0) }}
+                extraStyle={{ borderColor: "transparent", borderWidth: vw(0),color:this.state.tmColor }}
               />
             </View>
             {/* Email */}
@@ -303,24 +354,24 @@ class SignUp extends React.Component<Props, State> {
                 //  val={this.state.email}
                 commonPlaceholder={"Email Address*"}
                 commonReturnKeyType={"next"}
-                commonOnSubmitEditing={() => this.validateEmail()}
+                commonOnSubmitEditing={() => this.validation("email")}
                 commonOnChangeText={(val: any) => this.handleInput('email', val)}
                 commonSecureTextEntry={false}
                 //  commonOnBlur={()=>this.validateEmail()}
-                extraStyle={{ borderColor: "transparent", borderColor: this.state.beColor, color: this.state.teColor, borderWidth: vw(0) }}
+                extraStyle={{ borderColor: "transparent", color: this.state.teColor, borderWidth: vw(0) }}
               />
             </View>
             {/* username */}
-            <View style={[styles.inputBox, { marginTop: vh(30), }]}>
+            <View style={[styles.inputBox, { marginTop: vh(30),borderColor: this.state.buColor, }]}>
               <TextInputComponent
                 ref="fourth"
                 // val={this.state.username}
                 commonPlaceholder={"UseraName*"}
                 commonReturnKeyType={"next"}
-                commonOnSubmitEditing={() => this.refs.fifth.refs.commonInputRef.focus()}
+                commonOnSubmitEditing={() => this.validation("username")}
                 commonOnChangeText={(val: any) => this.handleInput('username', val)}
                 commonSecureTextEntry={false}
-                extraStyle={{ borderColor: "transparent", color: this.state.teColor, borderWidth: vw(0) }}
+                extraStyle={{ borderColor: "transparent", color: this.state.tuColor, borderWidth: vw(0) }}
               />
             </View>
             {/* password */}
@@ -330,7 +381,7 @@ class SignUp extends React.Component<Props, State> {
                 // val={this.state.password}
                 commonPlaceholder={"password*"}
                 commonReturnKeyType={"next"}
-                commonOnSubmitEditing={() => this.validatePassword()}
+                commonOnSubmitEditing={() => this.validation("password")}
                 commonOnChangeText={(val: any) => this.handleInput('password', val)}
                 commonSecureTextEntry={this.state.isSecureText}
                 extraStyle={{

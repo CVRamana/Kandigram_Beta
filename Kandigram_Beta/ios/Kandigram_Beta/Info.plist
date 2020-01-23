@@ -26,6 +26,7 @@
 	<array>
 		<string>Ubuntu-Medium.ttf</string>
 		<string>Ubuntu-Bold.ttf</string>
+		<string>Monofett.ttf</string>
 	</array>
 	<key>CFBundleURLTypes</key>
 	<array>

@@ -1,18 +1,22 @@
 import * as React from 'react';
 import { Text, View, StyleSheet, ImageBackground, Image } from 'react-native';
 import { heightPercentageToDP, widthPercentageToDP } from 'react-native-responsive-screen';
-import { calculateHeight, calculateWidth, vw,vh } from '../../Common/ResponsiveScreen';
+import { calculateHeight, calculateWidth, vw, vh } from '../../Common/ResponsiveScreen';
 import colors from '../../Utils/Constants/colors';
 import index from "../../Utils/Constants/index";
 import { ScrollView } from 'react-native-gesture-handler';
 
-
 interface DetailsProps { }
+interface State {
 
-class Details extends React.Component {
+}
+
+class Details extends React.Component<DetailsProps, State> {
   render() {
     return (
-      <ImageBackground style={styles.container}>
+      <ImageBackground
+        source={{}}
+        style={styles.container}>
 
         <ImageBackground
           source={index.image.detailBG}
@@ -43,10 +47,10 @@ class Details extends React.Component {
 
             </View>
             <View style={{
-              width: 78,
-              height: 22,
-              marginLeft: 63,
-              borderRadius: 5,
+              width: vw(78),
+              height:vh(22) ,
+              marginLeft:vw(63),
+              borderRadius: vw(5),
               justifyContent: "center",
               alignItems: "center",
               backgroundColor: "rgba(35, 35, 35, 0.3)"
@@ -55,8 +59,8 @@ class Details extends React.Component {
           </View>
           <View style={{
             width: vw(272),
-            height:vh(40),
-            borderRadius:vw(10) ,
+            height: vh(40),
+            borderRadius: vw(10),
             flexDirection: "row",
             shadowColor: "rgba(0, 0, 0, 0.25)",
             backgroundColor: "rgba(35, 35, 35, 0.3)",
@@ -74,7 +78,7 @@ class Details extends React.Component {
                 style={{}}
                 source={index.image.camera}
               />
-              <Text style={{ marginLeft: 6 }}>12</Text>
+              <Text style={{ marginLeft: vw(6) }}>12</Text>
 
 
             </View>
@@ -84,7 +88,7 @@ class Details extends React.Component {
                 source={index.image.likeStats}
 
               />
-              <Text style={{ marginLeft: 6 }}>12</Text>
+              <Text style={{ marginLeft: vw(6) }}>12</Text>
 
             </View>
             <View style={styles.iconContainer}>
@@ -93,7 +97,7 @@ class Details extends React.Component {
                 source={index.image.comment}
 
               />
-              <Text style={{ marginLeft: 6 }}>12</Text>
+              <Text style={{ marginLeft: vw(6) }}>12</Text>
 
             </View>
             <View style={styles.iconContainer}>
@@ -102,7 +106,7 @@ class Details extends React.Component {
                 source={index.image.camera}
 
               />
-              <Text style={{ marginLeft: 6 }}>12</Text>
+              <Text style={{ marginLeft: vw(6) }}>12</Text>
 
             </View>
           </View>
@@ -134,17 +138,20 @@ class Details extends React.Component {
               letterSpacing: 0,
               color: colors.whiteColor
             }}>Absolutely loved camping at this show! Met the most
-                      amazing people and we can’t wait to come back next year.
+                        amazing people and we can’t wait to come back next year.
       See you all at EDC in 2020!</Text>
           </View>
           <View style={styles.likeCont}>
             <Image
+              source={{}}
               style={{ height: 24, width: 24, borderRadius: 12, backgroundColor: "red" }}
             />
             <Image
+              source={{}}
               style={{ height: 24, width: 24, borderRadius: 12, backgroundColor: "red" }}
             />
             <Image
+              source={{}}
               style={{ height: 24, width: 24, borderRadius: 12, backgroundColor: "red", marginRight: 8, }}
             />
             <Text style={{
@@ -161,6 +168,7 @@ class Details extends React.Component {
             marginLeft: widthPercentageToDP(calculateWidth(156))
           }}>
             <Image
+              source={{}}
               style={{
                 height: heightPercentageToDP(calculateHeight(64)),
                 width: widthPercentageToDP(calculateWidth(64)),
@@ -177,9 +185,9 @@ class Details extends React.Component {
             marginLeft: widthPercentageToDP(calculateWidth(128)),
             //  backgroundColor: "rgb (24, 39, 59)",
             borderColor: "rgb (233, 30, 99)",
-            borderRadius: 10,
+            borderRadius:vw(10) ,
             shadowColor: "rgba(0, 0, 0, 0.25)",
-            borderWidth: 3,
+            borderWidth: vw(3),
             shadowOffset: {
               width: 0,
               height: 4
@@ -202,18 +210,19 @@ class Details extends React.Component {
             }}
           >
             <Text style={styles.commonText}>Comments </Text>
-            <Text style={[styles.commonText,{ 
-              marginLeft: widthPercentageToDP(calculateWidth(80)) }]}> View all 23 Comments</Text>
+            <Text style={[styles.commonText, {
+              marginLeft: widthPercentageToDP(calculateWidth(80))
+            }]}> View all 23 Comments</Text>
           </View>
           <View style={styles.commentContainer}>
 
           </View>
-          <View style={{marginLeft:vw(17),marginTop:vh(40)}}>
+          <View style={{ marginLeft: vw(17), marginTop: vh(40) }}>
             <Text style={styles.commonText}>Made from this Kandi</Text>
-            </View>
-            <View style={styles.memoryContainer}>
+          </View>
+          <View style={styles.memoryContainer}>
 
-              </View>
+          </View>
         </ScrollView>
       </ImageBackground>
     );
@@ -223,32 +232,32 @@ class Details extends React.Component {
 export default Details;
 
 const styles = StyleSheet.create({
-  memoryContainer:{
-    height:vh(360),
-    width:vw(345),
-    backgroundColor:"lightgrey",
-    marginBottom:vh(60),
+  memoryContainer: {
+    height: vh(360),
+    width: vw(345),
+    backgroundColor: "lightgrey",
+    marginBottom: vh(60),
     marginTop: heightPercentageToDP(calculateHeight(19)),
     marginLeft: widthPercentageToDP(calculateWidth(16)),
     borderRadius: 10,
 
   },
-  commonText:{
-    
-      fontFamily: "Ubuntu-Medium",
-      fontSize: widthPercentageToDP(calculateWidth(14)),
-      fontWeight: "bold",
-      fontStyle: "normal",
-      letterSpacing: 0.7,
-      color: colors.whiteColor
-    },
-  commentContainer:{
+  commonText: {
+
+    fontFamily: "Ubuntu-Medium",
+    fontSize: widthPercentageToDP(calculateWidth(14)),
+    fontWeight: "bold",
+    fontStyle: "normal",
+    letterSpacing: 0.7,
+    color: colors.whiteColor
+  },
+  commentContainer: {
     marginTop: heightPercentageToDP(calculateHeight(19)),
     marginLeft: widthPercentageToDP(calculateWidth(16)),
     height: heightPercentageToDP(calculateHeight(430)),
     width: widthPercentageToDP(calculateWidth(342)),
     borderRadius: vw(10),
-   backgroundColor: "#18273b"
+    backgroundColor: "#18273b"
 
   },
   likeCont: {
@@ -291,7 +300,7 @@ const styles = StyleSheet.create({
   },
   summerCarniwal: {
     width: ' 100%',
-    height:vh (36),
+    height: vh(36),
     fontFamily: "Monofett",
     // marginLeft:widthPercentageToDP(calculateWidth(13)),
     marginTop: heightPercentageToDP(calculateHeight(50)),
@@ -317,7 +326,7 @@ const styles = StyleSheet.create({
     height: heightPercentageToDP(calculateHeight(40)),
     width: widthPercentageToDP(calculateWidth(62)),
     //justifyContent:"center",
-    paddingLeft:vw(12) ,
+    paddingLeft: vw(12),
     flexDirection: "row",
     alignItems: "center",
     // backgroundColor:"grey"

@@ -11,5 +11,6 @@ export default{
     lipstick:'rgb(233,30,99)',
     secondtextInputColor:"rgba(18, 40, 87, 0.75)",
     secondBorderColor:"#213d79",
-    //darkSlateBlue75:"rgba (18, 40, 87, 0.75)"
+    darkSlateBlue75:"rgba (18, 40, 87, 0.75)",
+    buttonBG:"rgb(233, 30, 99)"
 }

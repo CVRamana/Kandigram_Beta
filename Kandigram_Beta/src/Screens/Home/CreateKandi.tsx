@@ -8,12 +8,24 @@ import ButtonComponent from '../../Common/ButonComponent';
 import colors from '../../Utils/Constants/colors';
 import { db } from "../../Utils/FirebaseConfig";
 import firebase from 'react-native-firebase'
+import {connect} from "react-redux";
 
 
-interface CreateKandiProps { }
+interface CreateKandiProps {
+uid:string
+}
 
-class CreateKandi extends React.Component {
-    constructor(props) {
+interface State {
+    kandiImg: string
+    kandiImgUrl: string
+    kandiName: string
+    event: string
+    kandiDesc: string
+    ispublic: boolean
+}
+
+class CreateKandi extends React.Component<CreateKandiProps,State> {
+    constructor(props: CreateKandiProps) {
         super(props)
 
         this.state = {
@@ -34,8 +46,9 @@ class CreateKandi extends React.Component {
         }).then(image => {
             console.warn(image.path);
             this.setState({ kandiImg: image.path }, () => {
-                const ref = firebase.storage().ref("created_kandi_Images", "creater_UID").child("kandi_img.png")
+                const ref = firebase.storage().ref("created_kandi_Images", this.props.uid).child("kandi_img.png")
                 const uploadTask = ref.putFile(image.path)
+
                 uploadTask.then((snap) => {
                     ref.getDownloadURL().then((data) => {
                         console.warn("download url", data)
@@ -50,25 +63,27 @@ class CreateKandi extends React.Component {
 
     handleKandi = () => {
         let values = {
-            kandi_name: this.state.kandName,
             kandiImage: this.state.kandiImg,
             kandi_desc: this.state.kandiDesc,
             events: this.state.event,
-            kandiImgUrl: this.state.kandiImgUrl
+            kandiImgUrl: this.state.kandiImgUrl,
+            ispublic:this.state.ispublic
         }
         this.setDataToFirebase(values)
     }
-    setDataToFirebase = (res) => {
-        alert("called")
-        db.ref('/created_Kandies').child("creater_uid").set(res, (val) => {
+    setDataToFirebase = (res:any) => {
+     //   alert("called")
+        db.ref('/Users').child(this.props.uid).child("Created_Kandies").child("raman"+(Math.round(Math.random()*100000000))).set(res, (val) => {
             if (val === null) {
                 // this.props.navigation.navigate('Login')
-                console.warn("sucess")
+                console.warn("sucess fully uploaded")
             }
 
         })
     }
-
+componentDidMount(){
+   // alert(this.props.uid)
+}
     render() {
         return (
             <ImageBackground style={styles.container}>
@@ -122,11 +137,17 @@ class CreateKandi extends React.Component {
                     <View style={{ marginTop: vh(40), marginLeft: vw(16), marginBottom: vh(32), }}>
                         <TextInputComponent
                             commonOnChangeText={(val) => this.setState({ kandiName: val })}
-                            extraStyle={{ marginBottom: vh(32), }}
+                            commonPlaceholder={"Kandi Name"}
+                            extraStyle={{ marginBottom: vh(32), backgroundColor: colors.textInputBGColor }}
 
                         />
                         <TextInputComponent
                             commonOnChangeText={(val) => this.setState({ event: val })}
+                            commonPlaceholder={"About kandi"}
+                            extraStyle={{
+                                //marginBottom: vh(32)
+                                backgroundColor: colors.textInputBGColor
+                            }}
                         />
                     </View>
 
@@ -166,7 +187,7 @@ class CreateKandi extends React.Component {
                         <View style={{ height: vh(316), width: vw(176), justifyContent: "center", alignItems: "center" }}>
                             <TouchableOpacity onPress={() => this.setState({ ispublic: !this.state.ispublic })}>
                                 <Image
-                                    style={this.state.ispublic ? { height: vh(60), width: vw(60), } : { height: vh(60), width: vw(60),tintColor:'red' }}
+                                    style={this.state.ispublic ? { height: vh(60), width: vw(60), } : { height: vh(60), width: vw(60), tintColor: 'red' }}
                                     source={index.image.public}
                                     resizeMode="contain"
                                 />
@@ -178,10 +199,10 @@ class CreateKandi extends React.Component {
                             width: vw(176)
                         }}>
                             <TouchableOpacity
-                            onPress={() => this.setState({ ispublic: !(!this.state.ispublic)})}
+                                onPress={() => this.setState({ ispublic: !(!this.state.ispublic) })}
                             >
                                 <Image
-                                     style={this.state.ispublic ? { height: vh(60), width: vw(60),tintColor:'red' } : { height: vh(60), width: vw(60), }}
+                                    style={this.state.ispublic ? { height: vh(60), width: vw(60), tintColor: 'red' } : { height: vh(60), width: vw(60), }}
                                     resizeMode="contain"
                                     style={{ height: vh(60), width: vw(60) }}
                                     source={index.image.private}
@@ -204,7 +225,16 @@ class CreateKandi extends React.Component {
     }
 };
 
-export default CreateKandi;
+const mapStateToProps=(state:any)=>{
+    return{
+uid:state.PersistReducer.uid
+    }
+}
+const mapDispatchToProps={
+
+
+}
+export default connect(mapStateToProps,mapDispatchToProps)(CreateKandi);
 
 const styles = StyleSheet.create({
     container: {
@@ -250,7 +280,7 @@ const styles = StyleSheet.create({
         backgroundColor: "#26375a"
     },
     inpt: {
-        backgroundColor: "transparent",
+        backgroundColor: colors.textInputBGColor,
         width: vw(343),
         height: vh(172),
         paddingLeft: vw(16),

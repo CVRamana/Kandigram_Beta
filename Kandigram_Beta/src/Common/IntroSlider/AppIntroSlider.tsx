@@ -10,10 +10,11 @@ import {
   TouchableOpacity,
   Platform,
   StatusBar,
+  UIManager,
   I18nManager,
 } from 'react-native';
 import DefaultSlide from './DefaultSlide';
-import {connect  } from "react-redux";
+import { connect } from "react-redux";
 
 import NetInfo from "@react-native-community/netinfo";
 import ButtonComponent from "../ButonComponent";
@@ -26,6 +27,7 @@ import Colors from "../../Utils/Constants/colors";
 import colors from '../../Utils/Constants/colors';
 import { heightPercentageToDP, widthPercentageToDP } from 'react-native-responsive-screen';
 import { GlobalInternetAction } from "../../GlobalRedux/GlobalAction";
+import Loader from '../loader';
 const { width, height } = Dimensions.get('window');
 //var isConnected1:boolean
 const slides = [
@@ -57,21 +59,41 @@ const isIphoneX =
 
 const isAndroidRTL = I18nManager.isRTL && Platform.OS === 'android';
 
- class AppIntroSlider extends React.Component {
+class AppIntroSlider extends React.Component {
+  constructor(props) {
+    super(props)
 
- componentDidMount(){
-  NetInfo.fetch().then(state => {
-    console.log("Connection type", state.type);
-    console.log("Is connected?", state.isConnected);
-    this.props.GlobalInternetAction(isConnected1)
-  });
+    this.state = {
+      isloading: false
+    };
+  };
 
-  NetInfo.addEventListener(state => {
-   let isConnected1=state.isConnected
-   //console.warn(state.isConnected);
-    this.props.GlobalInternetAction(isConnected1)
-  })
- }
+
+  componentDidMount() {
+    NetInfo.addEventListener(state => {
+      let isConnected1 = state.isConnected
+      this.props.GlobalInternetAction(isConnected1)
+    })
+    setTimeout(() => {
+      this.authenticate()
+    }, 2000);
+    
+  }
+  authenticate=()=>{
+    console.warn("uid from the persist",this.props.uid);
+    
+    if(this.props.uid != "")
+  { 
+    this.setState({isloading:true})
+  setTimeout(() => {
+    this.setState({isloading:false})
+    this.props.navigation.navigate('Profile')
+  }, 2000);
+
+  }else{
+   
+  }
+  }
 
   static defaultProps = {
     activeDotStyle: {
@@ -240,7 +262,7 @@ const isAndroidRTL = I18nManager.isRTL && Platform.OS === 'android';
     return (
       <View style={{ position: 'absolute', top: vh(580), width: '100%' }}>
 
-        <View style={{ marginLeft: vw(20),marginTop:vh(45) }}>
+        <View style={{ marginLeft: vw(20), marginTop: vh(45) }}>
           <ButtonComponent
             name={"Discover a Kandi"}
             onButtonPress={() => this.props.navigation.navigate('Scanner')}
@@ -389,7 +411,7 @@ const isAndroidRTL = I18nManager.isRTL && Platform.OS === 'android';
         {this._renderView()}
         {this._renderButton()}
         {this.text()}
-
+        <Loader isLoading={this.state.isloading} />
       </View>
     );
   }
@@ -405,7 +427,7 @@ const styles = StyleSheet.create({
     flexDirection: isAndroidRTL ? 'row-reverse' : 'row',
   },
   paginationContainer: {
-   // height:100,
+    // height:100,
     position: 'absolute',
     top: vh(545),
     left: vw(20),
@@ -417,7 +439,7 @@ const styles = StyleSheet.create({
     flexDirection: isAndroidRTL ? 'row-reverse' : 'row',
     justifyContent: 'center',
     alignItems: 'center',
-   //  marginBottom:20
+    //  marginBottom:20
   },
   dot: {
     width: vw(10),
@@ -508,13 +530,14 @@ const styles = StyleSheet.create({
 
   },
 });
-const mapStateToProps=(state:any)=>{
-  return{
-    isInternet:state.GlobalReducer.isInternet
+const mapStateToProps = (state: any) => {
+  return {
+    isInternet: state.GlobalReducer.isInternet,
+    uid: state.PersistReducer.uid
   }
 }
-const mapDispatchToProps={
-  GlobalInternetAction:GlobalInternetAction
+const mapDispatchToProps = {
+  GlobalInternetAction: GlobalInternetAction
 }
 
-export default connect(mapStateToProps,mapDispatchToProps)(AppIntroSlider)
+export default connect(mapStateToProps, mapDispatchToProps)(AppIntroSlider)
