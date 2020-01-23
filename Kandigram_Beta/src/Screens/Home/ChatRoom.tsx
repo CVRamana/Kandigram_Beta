@@ -5,12 +5,20 @@ import firebase, { database } from 'react-native-firebase';
 import { vw, vh } from '../../Common/ResponsiveScreen';
 import colors from '../../Utils/Constants/colors';
 import { connect } from "react-redux";
+import { ChatDataAction } from "../Home/ChatAction";
 
 
-interface ChatRoomProps { }
+interface ChatRoomProps { 
+    ChatDataAction:Function
+    uid:string
+    chatData:any
+}
+interface State{
 
-class ChatRoom extends React.Component {
-    constructor(props) {
+}
+
+class ChatRoom extends React.Component<ChatRoomProps,State> {
+    constructor(props:ChatRoomProps) {
         super(props)
 
         this.state = {
@@ -36,17 +44,16 @@ class ChatRoom extends React.Component {
                 temp.push(snap.val()[val])
                 //   console.warn("message > ",snap.val()[val].messgae)
             })
-            // this.props.addFirebaseChat(temp)
+             this.props.ChatDataAction(temp)
+           //  alert(this.props.chatData)
             this.setState({
                 userChat: temp
-            }, () => {
-                console.warn("flat list data=>", this.state.userChat)
             })
         })
     }
     //create the ChatRoom
     createChatRoom = () => {
-        //  let room = this.props.loginUid < this.text.ReceiverKey ? this.props.loginUid + "-" + this.text.ReceiverKey : this.text.ReceiverKey + "-" + this.props.loginUid
+
         let room = this.props.uid < this.props.navigation.state.params.receiver ? this.props.uid + "-" + this.props.navigation.state.params.receiver : this.props.navigation.state.params.receiver + "-" + this.props.uid
         let data = {
             sender: this.props.uid,
@@ -58,13 +65,13 @@ class ChatRoom extends React.Component {
 
             if (val === null) {
                 this.setState({ message: "" })
-                // alert("saved successfully")
+
             }
         })
     }
 
     render() {
-       // const { navigation } = this.props;
+        // const { navigation } = this.props;
         return (
             <View style={styles.container}>
                 <View >
@@ -72,24 +79,25 @@ class ChatRoom extends React.Component {
                     <Text
                         style={styles.txt}> {this.props.navigation.state.params.receiver_name}</Text>
                     <FlatList
-                        data={this.state.userChat}
-                        ref = "flatList"
-                       onContentSizeChange={()=> this.refs.flatList.scrollToEnd()}
+                    //    data={this.state.userChat}
+                    data={this.props.chatData}
+                        ref="flatList"
+                        onContentSizeChange={() => this.refs.flatList.scrollToEnd()}
                         keyExtractor={item => item.index}
                         renderItem={({ item }) => {
                             return (
                                 <View>
-                                    {this.props.uid===item.sender ?
-                                <View style={styles.chat}>
-                                    <Text style={styles.chatText}> {item.message}</Text>
-                        </View> :
-                        <View style={styles.yourchat}>
-                        <Text style={[styles.chatText,{color:"black"}]}> {item.message}</Text>
-                  </View> 
-                         }
+                                    {this.props.uid === item.sender ?
+                                        <View style={styles.chat}>
+                                            <Text style={styles.chatText}> {item.message}</Text>
+                                        </View> :
+                                        <View style={styles.yourchat}>
+                                            <Text style={[styles.chatText, { color: "black" }]}> {item.message}</Text>
+                                        </View>
+                                    }
                                 </View>
-                                
-                                
+
+
                             )
                         }}
 
@@ -115,11 +123,15 @@ class ChatRoom extends React.Component {
 };
 const mapStateToProps = (state: any) => {
     return {
-        uid: state.PersistReducer.uid
+        uid: state.PersistReducer.uid,
+        chatData:state.ChatReducer.chatData
     }
 }
+const mapDispatchToProps = {
+    ChatDataAction: ChatDataAction
+}
 
-export default connect(mapStateToProps)(ChatRoom);
+export default connect(mapStateToProps, mapDispatchToProps)(ChatRoom);
 
 const styles = StyleSheet.create({
     container: {
@@ -144,34 +156,34 @@ const styles = StyleSheet.create({
         backgroundColor: "blue",
         marginTop: vh(10),
         marginLeft: vw(59),
-      
-        marginRight:vw(10),
-       // maxWidth: vw(350),
+
+        marginRight: vw(10),
+        // maxWidth: vw(350),
         padding: vw(20),
-      // paddingRight: vw(20),
- //flexDirection:"row-reverse",
+        // paddingRight: vw(20),
+        //flexDirection:"row-reverse",
         alignSelf: 'flex-start',
         borderRadius: vw(50),
-       // minWidth: vw(100),
-  
+        // minWidth: vw(100),
+
 
     },
     yourchat: {
         backgroundColor: "white",
         marginTop: 10,
         marginLeft: 10,
-       flexDirection:"row",
-        marginRight:10,
-        borderRadius:10,
-         // flexDirection:"row-reverse",
+        flexDirection: "row",
+        marginRight: 10,
+        borderRadius: 10,
+        // flexDirection:"row-reverse",
         alignSelf: 'flex-start'
-     
+
 
     },
     chatText: {
         fontSize: vw(20),
         color: colors.whiteColor,
-       // backgroundColor: "lightblue",
+        // backgroundColor: "lightblue",
 
     }
 });

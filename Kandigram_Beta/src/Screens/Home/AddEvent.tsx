@@ -50,6 +50,7 @@ class AddEvent extends React.Component<AddEventProps,State> {
 
                     <TextInputComponent
                         commonPlaceholder={"Event Name*"}
+                        extraStyle={{backgroundColor:index.colors.textInputBGColor}}
                     />
                 </View>
 
@@ -123,7 +124,7 @@ const styles = StyleSheet.create({
     inputContainer1:{ marginLeft: vw(16), marginTop: vh(30)},
     inputContainer:{
         width: widthPercentageToDP(calculateWidth(350)),
-        height: heightPercentageToDP(calculateHeight(56)),
+        height: heightPercentageToDP(calculateHeight(50)),
       //  marginTop:widthPercentageToDP(calculateWidth(20)),
         borderRadius: 1000,
         //paddingLeft: 20,
@@ -131,7 +132,7 @@ const styles = StyleSheet.create({
         backgroundColor:colors.textInputBGColor,
         borderColor:colors.textInputBorderColor,
         borderStyle: "solid",
-        borderWidth:vw(4),
+        borderWidth:vw(2),
         flexDirection:"row",
         marginLeft: vw(16),
         marginTop: vh(30),

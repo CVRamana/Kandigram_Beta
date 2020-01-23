@@ -6,5 +6,7 @@ export default{
     offlineCoverImg:"coverImg",
     offlineProfileImg:"profileImg",
     offlineKandies:"OfflineKandies",
+    chatAction:"chatAction",
+    chatDataAction:"ChatData",
     
 }
