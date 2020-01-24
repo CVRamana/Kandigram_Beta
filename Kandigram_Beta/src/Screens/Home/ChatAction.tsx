@@ -10,7 +10,7 @@ export const ChatAction=(param:any,successcallback:Function,errorCallback:Functi
 //chat
 export const ChatDataAction=(param:any,successcallback:Function,errorCallback:Function)=>{
     return function (dispstch:Function,getSate:Function) {
-        debugger
+       // debugger
         dispstch({
             type:actionTypes.chatDataAction,
             chatData:param

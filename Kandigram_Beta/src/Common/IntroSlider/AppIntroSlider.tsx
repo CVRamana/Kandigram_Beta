@@ -9,27 +9,21 @@ import {
   Image,
   TouchableOpacity,
   Platform,
-  StatusBar,
-  UIManager,
   I18nManager,
 } from 'react-native';
 import DefaultSlide from './DefaultSlide';
 import { connect } from "react-redux";
-
 import NetInfo from "@react-native-community/netinfo";
 import ButtonComponent from "../ButonComponent";
-
 import index from "../../Utils/Constants/index";
-import image from '../../Utils/Constants/image';
 import { vh, vw, calculateHeight, calculateWidth } from '../ResponsiveScreen';
-//import { Colors } from 'react-native/Libraries/NewAppScreen';
 import Colors from "../../Utils/Constants/colors";
 import colors from '../../Utils/Constants/colors';
 import { heightPercentageToDP, widthPercentageToDP } from 'react-native-responsive-screen';
 import { GlobalInternetAction } from "../../GlobalRedux/GlobalAction";
 import Loader from '../loader';
 const { width, height } = Dimensions.get('window');
-//var isConnected1:boolean
+
 const slides = [
   {
     key: 'somethun',
@@ -77,22 +71,23 @@ class AppIntroSlider extends React.Component {
     setTimeout(() => {
       this.authenticate()
     }, 2000);
-    
-  }
-  authenticate=()=>{
-    console.warn("uid from the persist",this.props.uid);
-    
-    if(this.props.uid != "")
-  { 
-    this.setState({isloading:true})
-  setTimeout(() => {
-    this.setState({isloading:false})
-    this.props.navigation.navigate('Profile')
-  }, 2000);
 
-  }else{
-   
   }
+  authenticate = () => {
+  
+    console.warn("uid from the persist", this.props.uid);
+
+    if (this.props.uid != "") {
+      this.setState({ isloading: true })
+      setTimeout(() => {
+        this.setState({ isloading: false })
+        this.props.navigation.navigate('Profile')
+      }, 2000);
+
+    } else {
+      console.warn("uid", this.props.uid);
+
+    }
   }
 
   static defaultProps = {
@@ -249,11 +244,11 @@ class AppIntroSlider extends React.Component {
   };
 
   gotoLogin = () => {
-    console.warn("called")
+    //console.warn("called")
     this.props.navigation.navigate('login')
   }
   gotoSignup = () => {
-    console.warn("called")
+    //console.warn("called")
     this.props.navigation.navigate('SignUp')
   }
 

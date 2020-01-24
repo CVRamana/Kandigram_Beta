@@ -10,7 +10,7 @@ const ChatReducer = (state = InitialState, action: any) => {
             return (Object as any).assign({}, state, { contacts: action.contacts })
             break
         case actionTypes.chatDataAction:
-            debugger
+           // debugger
             return (Object as any).assign({}, state, { chatData: action.chatData })
             break
         default:

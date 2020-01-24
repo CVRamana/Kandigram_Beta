@@ -38,9 +38,9 @@ class ChatRoom extends React.Component<ChatRoomProps,State> {
     getAllDataFromFireabse = () => {
         let room = this.props.uid < this.props.navigation.state.params.receiver ? this.props.uid + "-" + this.props.navigation.state.params.receiver : this.props.navigation.state.params.receiver + "-" + this.props.uid
         firebase.database().ref().child("ChatRoom").child(room).on('value', (snap) => {
-            var temp = []
+            var temp:any = []
             var key = snap._childKeys
-            key.filter(function (val, index, array) {
+            key.filter(function (val:any, index:any, array) {
                 temp.push(snap.val()[val])
                 //   console.warn("message > ",snap.val()[val].messgae)
             })
@@ -57,7 +57,7 @@ class ChatRoom extends React.Component<ChatRoomProps,State> {
         let room = this.props.uid < this.props.navigation.state.params.receiver ? this.props.uid + "-" + this.props.navigation.state.params.receiver : this.props.navigation.state.params.receiver + "-" + this.props.uid
         let data = {
             sender: this.props.uid,
-            time: firebase.database.ServerValue.TIMESTAMP,
+            time: new Date(firebase.database.ServerValue.TIMESTAMP),
             message: this.state.message,
         }
         var dbRef = firebase.database().ref("ChatRoom/").child(room);

@@ -24,7 +24,7 @@ class Scanner extends React.Component<ScannerProps, State> {
     componentDidMount() {
         if (this.hasLocationPermission()) {
           //  this.onReadCode(e)
-          debugger
+          //debugger
           this.props.PersistOfflinekandiAction("hello")
         } else {
             alert("no permission")

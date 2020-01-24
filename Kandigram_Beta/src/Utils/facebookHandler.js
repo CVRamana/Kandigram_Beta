@@ -372,7 +372,7 @@ export  class SignupScreen extends React.Component {
            .catch((err)=>{
              console.log(err)
            })
-           debugger
+          // debugger
            //console.warn(JSON.stringify(firebaseUserCredential.user.toJSON()))
            console.log(data.accessToken.toString())
           const responseInfoCallback = (error, result) => {

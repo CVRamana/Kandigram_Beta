@@ -3,10 +3,10 @@ import index from '../../../Utils/Constants/index'
 
 export const SignUpAction = (params: any, successCallback: Function, errorCallback: Function) => {
     return function (dispatch: Function, getState: Function) {
-        debugger
+      //  debugger
         let data = getState().SignInReducer.arr
         data.push("Raman Verma")
-        debugger
+       // debugger
         dispatch({
             type: ActionTypes.dummy,
             arr: Array.from(data)
@@ -17,7 +17,7 @@ export const SignUpAction = (params: any, successCallback: Function, errorCallba
 }
 export const UpdateInputAction=(key:any,val:any,successCallback: Function, errorCallback: Function)=>{
     return function(dispatch:Function,getState:Function){
-        debugger
+   //     debugger
         dispatch({
             type:ActionTypes.updateInput,
             payload:{[key]:val},

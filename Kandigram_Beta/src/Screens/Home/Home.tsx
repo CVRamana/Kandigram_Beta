@@ -43,7 +43,7 @@ class Home extends React.Component<HomeProps,State> {
       source={{}} style={styles.container}>
 
         <ImageBackground
-          //  resizeMode={"contain"}
+           resizeMode={"stretch"}
           resizeMethod="resize"
           source={index.image.HomeBG}
           style={styles.homebg}

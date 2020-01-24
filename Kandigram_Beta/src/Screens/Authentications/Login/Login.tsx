@@ -99,7 +99,7 @@ class Login extends React.Component<LoginProps, State> {
                     let uid = res.user.uid
                     this.props.PersistAction(uid)
                     console.log(res.user.uid)
-                    debugger
+                 //   debugger
                     this.props.navigation.navigate('Home')
                     this.setState({ isloading: false })
                 }

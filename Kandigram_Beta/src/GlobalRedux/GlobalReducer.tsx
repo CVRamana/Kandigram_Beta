@@ -7,7 +7,7 @@ const initialState={
 const GlobalReducer=(state=initialState,action:any )=>{
 switch(action.type){
     case actionTypes.isInternet:
-        debugger
+     //   debugger
         return (Object as any).assign({},state,{isInternet:action.isInternet})
     default:
        return state

@@ -8,5 +8,7 @@ export default{
     offlineKandies:"OfflineKandies",
     chatAction:"chatAction",
     chatDataAction:"ChatData",
+    HomeAction:"HomeAction",
+    Delete_PersistAction:"Delete_Persist_Reducer"
     
 }

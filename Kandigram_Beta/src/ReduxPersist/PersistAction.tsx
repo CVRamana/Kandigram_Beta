@@ -1,9 +1,10 @@
 import actionTypes from "../Utils/Constants/actionTypes";
+import { func } from "prop-types";
 
 
 export const PersistAction = (params: any, successCallback: Function, errorCallback: Function) => {
     return function (dispatch: Function, getState: Function) {
-        debugger
+       // debugger
 
         dispatch({
             type: actionTypes.offlineAction,
@@ -21,6 +22,7 @@ export const PersistCoverImgAction = (param: any, successCallback: Function, err
     }
 }
 
+
 export const PersistProfileImgAction = (param: any, successCallback: Function, errorCallback: Function) => {
     return function (dispatch: Function, getState: Function) {
         dispatch({
@@ -33,7 +35,7 @@ export const PersistOfflinekandiAction=(param:any,successCallback:Function,error
     return function (dispatch:Function,getState:Function) {
         let offlineKandi=getState().PersistReducer.OfflineKandies
       
-        debugger
+       // debugger
         dispatch({
             type:actionTypes.offlineKandies,
             OfflineKandies: param,
@@ -41,4 +43,17 @@ export const PersistOfflinekandiAction=(param:any,successCallback:Function,error
         })
         
     }
+}
+
+export const PersistDelete=(param:any,successCallback:Function,errorCallback:Function)=>{
+    return function (dispatch:Function,getState:Function) {
+        dispatch({
+            type:actionTypes.Delete_PersistAction,
+            uid:"",
+            coverImg:'',
+            profileImg:"",
+        })
+        
+    }
+
 }

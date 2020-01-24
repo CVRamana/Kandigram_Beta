@@ -3,7 +3,7 @@ const initialState = {
     uid: "",
     coverImg: '',
     profileImg: '',
-    OfflineKandies:["hi","ugjhg"]
+    OfflineKandies:[]
 }
 const PersistReducer = (state = initialState, action: any) => {
     
@@ -20,8 +20,16 @@ const PersistReducer = (state = initialState, action: any) => {
             break
 
         case actionTypes.offlineKandies:
-            debugger
+           // debugger
             return (Object as any ).assign({},state,{OfflineKandies: action.OfflineKandies})
+        
+            case actionTypes.Delete_PersistAction:
+                // debugger
+                 return (Object as any ).assign({},state,{
+                     uid: action.uid,
+                     coverImg:action.coverImg,
+                     profileImg:action.profileImg
+                })
 
         default:
             return state

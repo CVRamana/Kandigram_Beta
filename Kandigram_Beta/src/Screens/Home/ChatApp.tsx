@@ -62,7 +62,7 @@ class ChatApp extends React.Component<ChatAppProps, State> {
 
             },(error:any)=>{})
             self11.setState({ isloading: !self11.state.isloading })
-            debugger
+          //  debugger
         }, function (error) {
             console.log("Error: " + error.code);
         });

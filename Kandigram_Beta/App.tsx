@@ -2,9 +2,10 @@ import React, { Component } from 'react';
 
 import { View, Text } from 'react-native';
 
-import AppNavigator from "./src/Utils/Constants/AppNavigator";
+//import AppNavigator from "./src/Utils/Constants/AppNavigator";
 import store from './src/Store/ConfigureStore'
 import {Provider} from 'react-redux'
+import RootNavigator from './src/Utils/Constants/SwitchNavigator';
 
 class App extends Component {
   constructor(props) {
@@ -15,7 +16,7 @@ class App extends Component {
   render() {
     return (
       <Provider store={store}>
-            <AppNavigator/>
+            <RootNavigator/>
             </Provider>
     );
   }

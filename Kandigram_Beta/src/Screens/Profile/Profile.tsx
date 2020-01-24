@@ -251,7 +251,9 @@ class Profile extends React.Component<ProfileProps, State> {
 
                         </View>
                        
-                        <TouchableOpacity style={styles.Social_Button}>
+                        <TouchableOpacity
+                        onPress={()=>this.props.navigation.navigate("Settings")}
+                         style={styles.Social_Button}>
 
                         </TouchableOpacity>
 

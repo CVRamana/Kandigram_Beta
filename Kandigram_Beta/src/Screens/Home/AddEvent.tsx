@@ -8,21 +8,47 @@ import colors from '../../Utils/Constants/colors';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 
 import {Calendar, } from 'react-native-calendars';
+import firebase from 'react-native-firebase';
+import {connect } from "react-redux";
 
-interface AddEventProps { }
+interface AddEventProps { 
+uid:string
+
+}
 interface State{
+    event_name:string
     date:string
     showCalander:boolean
+    event_Location:string
 }
 
 class AddEvent extends React.Component<AddEventProps,State> {
     constructor(props:AddEventProps) {
       super(props)
       this.state = {
+          event_name:'',
          date:'',
+         event_Location:'',
          showCalander:false,
       };
     };
+
+    addEvent=()=>{
+        let val={
+            event_name:this.state.event_name,
+            date:this.state.date,
+            event_Location:this.state.event_Location
+        }
+        var ref=firebase.database().ref('/Users').child(this.props.uid).child("Created_Events").child("Event"+(Math.round(Math.random()*100000000)))
+        ref.set(val,(res)=>{
+            if (res === null) {
+                // this.props.navigation.navigate('Login')
+                console.warn("sucess fully uploaded")
+            }
+        })
+
+    }
+
     render() {
         return (
             <ImageBackground source={index.image.eventBg}
@@ -37,19 +63,14 @@ class AddEvent extends React.Component<AddEventProps,State> {
                             source={index.image.back}
                         />
                         </TouchableOpacity>
-                        <Text style={{
-                            marginLeft: vw(16), fontSize: vw(18),
-                            fontWeight: "bold",
-                            fontStyle: "normal",
-                            letterSpacing: 0.22,
-                            color: index.colors.whiteColor
-                        }}>Add Event</Text>
+                        <Text style={styles.txt}>Add Event</Text>
                     </View>
                 </ImageBackground>
                 <View style={ styles.inputContainer1}>
 
                     <TextInputComponent
                         commonPlaceholder={"Event Name*"}
+                        commonOnChangeText={(val:any)=>this.setState({event_name:val})}
                         extraStyle={{backgroundColor:index.colors.textInputBGColor}}
                     />
                 </View>
@@ -57,6 +78,7 @@ class AddEvent extends React.Component<AddEventProps,State> {
                 <View style={ styles.inputContainer}>
                 <TextInputComponent
                         commonPlaceholder={"Select Event Date"}
+                       // commonOnChangeText={(val:any)=>this.setState({:val})}
                         val={this.state.date}
                        // commonOnBlur={()=>this.setState({})}
                         extraStyle={{width:vw(290),height:vh(50),borderWidth:0,backgroundColor:"transparent"}}
@@ -73,9 +95,9 @@ class AddEvent extends React.Component<AddEventProps,State> {
                 <View style={ styles.inputContainer}>
                 <TextInputComponent
                         commonPlaceholder={"Event Location"}
-                      
+                        commonOnChangeText={(val:any)=>this.setState({event_Location:val})}
                         extraStyle={{width:vw(290),height:vh(50),borderWidth:0,backgroundColor:"transparent"}}
-                        commonOnSubmitEditing={()=>alert("event generated")}
+                        commonOnSubmitEditing={()=>this.addEvent()}
                     />
                      <TouchableOpacity
                      activeOpacity={1}
@@ -87,8 +109,9 @@ class AddEvent extends React.Component<AddEventProps,State> {
                      />
                      </TouchableOpacity>
                 </View>
+
                 {this.state.showCalander?
-                <View   style={{marginTop:vh(20)}}>
+                <View   style={styles.calander}>
                 <Calendar
               
                 onDayPress={(day) =>this.setState({date: day.dateString})}/>
@@ -99,8 +122,17 @@ class AddEvent extends React.Component<AddEventProps,State> {
         );
     }
 };
+const mapStateToProps = (state: any) => {
+    return {
+        uid: state.PersistReducer.uid,
+        chatData:state.ChatReducer.chatData
+    }
+}
+const mapDispatchToProps = {
+   // ChatDataAction: ChatDataAction
+}
 
-export default AddEvent;
+export default connect(mapStateToProps,mapDispatchToProps)(AddEvent);
 
 const styles = StyleSheet.create({
     container: { flex: 1, },
@@ -116,6 +148,15 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         marginTop: vh(60),
         marginLeft: vw(16)
+    },
+    txt:{
+        
+            marginLeft: vw(16), fontSize: vw(18),
+            fontWeight: "bold",
+            fontStyle: "normal",
+            letterSpacing: 0.22,
+            color: index.colors.whiteColor
+        
     },
     backImg: {
         height: vh(18),
@@ -145,6 +186,15 @@ const styles = StyleSheet.create({
             justifyContent:"center",
             alignItems:"center"
         },
+        calander:{bottom:50,position:"absolute",width:"100%",zIndex:500,shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 10,
+        },
+        shadowOpacity: 0.53,
+        shadowRadius: 13.97,
+        
+        elevation: 21,}
         
 });
 

@@ -41,16 +41,13 @@ const styles = StyleSheet.create({
   container: {
   height:vh(50),
   width:vw(50),
-  
-  
- 
 },
   
  secure: {
-    height: heightPercentageToDP(calculateHeight(60)),
+    height: heightPercentageToDP(calculateHeight(50)),
     width: widthPercentageToDP(calculateWidth(50)),
     justifyContent:"center",
-  alignItems:"center"
+    alignItems:"center"
   
   
 

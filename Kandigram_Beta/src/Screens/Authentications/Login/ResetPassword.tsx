@@ -5,14 +5,17 @@ import TextInputComponent from '../../../Common/TextInputComponent';
 import index from "../../../Utils/Constants/index";
 import ButtonComponent from '../../../Common/ButonComponent';
 import { widthPercentageToDP, heightPercentageToDP } from 'react-native-responsive-screen';
-import { calculateWidth, calculateHeight } from '../../../Common/ResponsiveScreen';
+import { calculateWidth, calculateHeight, vw ,vh} from '../../../Common/ResponsiveScreen';
 import colors from '../../../Utils/Constants/colors';
 import CommonEye from '../../../Common/CommonEye';
 
 interface LoginProps { }
+interface State{
 
-class ResetPassword extends React.Component {
-    constructor(props) {
+}
+
+class ResetPassword extends React.Component<LoginProps,State> {
+    constructor(props:LoginProps) {
         super(props)
         this.state = {
             isSecure: false
@@ -21,13 +24,17 @@ class ResetPassword extends React.Component {
 
     render() {
         return (
-            <ImageBackground style={styles.container}>
+            <ImageBackground 
+            source={{}}
+            style={styles.container}>
                 <HeaderComponent
                     // firstText={"Welocome Back,"}
                     secondText={"Reset Password ?"}
                 />
                 <View style={styles.inputContainer}>
-                    <TextInputComponent />
+                    <TextInputComponent
+                    extraStyle={{backgroundColor:index.colors.textInputBGColor}}
+                     />
                     <View style={styles.inputt}>
                         <TextInputComponent
                             commonSecureTextEntry={this.state.isSecure}
@@ -40,11 +47,15 @@ class ResetPassword extends React.Component {
 
                             }}
                         />
+                        <View style={{marginTop:-2}}>
                         <CommonEye
                             handlePress={() => this.setState({ isSecure: !this.state.isSecure })}
                             isSecureProp={this.state.isSecure}
-                            extraStyle={{ marginLeft: 320, marginTop: 10 }}
+                            extraStyle={{ marginLeft:vw(320),
+                                // marginTop: vh(0)
+                                 }}
                         />
+                        </View>
                     </View>
                 </View>
 
@@ -62,19 +73,20 @@ const styles = StyleSheet.create({
 
     },
     inputContainer: {
-        marginTop: 300,
+        marginTop: vh(300),
         // justifyContent:"center"
         alignItems: "center"
     },
     inputt: {
         width: widthPercentageToDP(calculateWidth(350)),
-        height: heightPercentageToDP(calculateHeight(56)),
-        backgroundColor: colors.textInputBGColor, marginTop: 30, backgroundColor: colors.textInputBGColor,
+        height: heightPercentageToDP(calculateHeight(50)),
+        backgroundColor: colors.textInputBGColor, marginTop: vh(30), backgroundColor: colors.textInputBGColor,
         borderColor: colors.textInputBorderColor,
         borderStyle: "solid",
-        borderWidth: 4,
+        borderWidth: vw(2),
         borderRadius: 1000,
         flexDirection: "row"
+        
     },
     forgotText: {
         opacity: 0.6,
@@ -87,8 +99,8 @@ const styles = StyleSheet.create({
         color: index.colors.whiteColor
     },
     fbimg: {
-        width: 60,
-        height: 60,
+        width: vw(60),
+        height: vh(60),
         borderRadius: widthPercentageToDP(calculateWidth(30)),
         backgroundColor: "#1977f3"
     }

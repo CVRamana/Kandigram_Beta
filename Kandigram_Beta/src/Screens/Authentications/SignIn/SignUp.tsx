@@ -151,7 +151,7 @@ class SignUp extends React.Component<Props, State> {
               .catch((err) => {
                 console.log(err)
               })
-            debugger
+           // debugger
             //console.warn(JSON.stringify(firebaseUserCredential.user.toJSON()))
             console.log(data.accessToken.toString())
             const responseInfoCallback = (error: any, result: any) => {
@@ -276,7 +276,7 @@ class SignUp extends React.Component<Props, State> {
 
  
   onPress = () => {
-    debugger
+   // debugger
     this.props.SignUpAction()
   }
   onPersist = () => {

@@ -43,7 +43,13 @@ export default{
    eventBg:require('../../Common/Public/Images/ProfileBG.png'),
    calander:require('../../Common/Public/Images/CalendarIcon.png'),
    cancel:require('../../Common/Public/Images/Cancel_Button.png'),
-   scan:require('../../Common/Public/Images/Overlay.png'),
+   scan:require('../../Common/Public/Images/scanIcon.png'),
+   backArrow:require('../../Common/Public/Images/Back_2.png'),
+   terms:require('../../Common/Public/Images/TermsandConditions.png'),
+   contact:require('../../Common/Public/Images/ContactUsIcon.png'),
+   faq:require('../../Common/Public/Images/FaqIcon.png'),
+   lock:require('../../Common/Public/Images/LockIcon.png'),
+   logout:require('../../Common/Public/Images/LogOutIcon.png'),
    
    
 }
