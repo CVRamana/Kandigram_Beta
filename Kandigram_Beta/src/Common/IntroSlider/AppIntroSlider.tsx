@@ -70,12 +70,12 @@ class AppIntroSlider extends React.Component {
     })
     setTimeout(() => {
       this.authenticate()
-    }, 2000);
+    }, 1000);
 
   }
   authenticate = () => {
   
-    console.warn("uid from the persist", this.props.uid);
+   // console.warn("uid from the persist", this.props.uid,this.props.OfflineKandies);
 
     if (this.props.uid != "") {
       this.setState({ isloading: true })
@@ -85,7 +85,7 @@ class AppIntroSlider extends React.Component {
       }, 2000);
 
     } else {
-      console.warn("uid", this.props.uid);
+    //  console.warn("uid", this.props.uid);
 
     }
   }
@@ -528,7 +528,8 @@ const styles = StyleSheet.create({
 const mapStateToProps = (state: any) => {
   return {
     isInternet: state.GlobalReducer.isInternet,
-    uid: state.PersistReducer.uid
+    uid: state.PersistReducer.uid,
+    OfflineKandies:state.PersistReducer.OfflineKandies
   }
 }
 const mapDispatchToProps = {

@@ -1,18 +1,40 @@
 import * as React from 'react';
-import { Text, View, StyleSheet, ImageBackground, Image } from 'react-native';
+import { Text, View, StyleSheet, ImageBackground,TouchableOpacity, ScrollView, Image } from 'react-native';
 import index from "../../Utils/Constants/index";
 import { vh, vw } from '../../Common/ResponsiveScreen';
+import { connect } from "react-redux";
+import { PersistOfflinekandiAction } from '../../ReduxPersist/PersistAction';
 
-import { TouchableOpacity, ScrollView } from 'react-native-gesture-handler';
 
-interface OfflineKandiesProps { }
+interface OfflineKandiesProps {
+navigation:any
+OfflineKandies:any
+}
 
-class OfflineKandies extends React.Component {
+interface State {
+
+}
+
+class OfflineKandies extends React.Component<OfflineKandiesProps, State> {
+  constructor(props:OfflineKandiesProps) {
+    super(props)
+  
+    this.state = {
+       
+    };
+  };
+  componentDidMount(){
+   this.props.PersistOfflinekandiAction("raman")
+    //alert(JSON.stringify(this.props.OfflineKandies))
+
+  }
+
   render() {
     return (
 
       <ImageBackground
-        //  resizeMode={""}
+        resizeMethod={"resize"}
+        resizeMode={"stretch"}
         source={index.image.offbg}
         style={styles.container}>
 
@@ -20,8 +42,8 @@ class OfflineKandies extends React.Component {
           source={index.image.bgOfflineHead}
         >
           <View style={styles.head}>
-            <TouchableOpacity 
-            onPress={()=>this.props.navigation.goBack()}
+            <TouchableOpacity
+              onPress={() => this.props.navigation.goBack()}
             >
               <Image
                 //  resizeMode={"contain"}
@@ -42,6 +64,7 @@ class OfflineKandies extends React.Component {
             <View style={{ flexDirection: "row" }}>
               <View>
                 <Image
+                source={{}}
                   style={styles.profileImg}
                 />
               </View>
@@ -62,7 +85,7 @@ class OfflineKandies extends React.Component {
                   style={{}}
                   source={index.image.camera}
                 />
-                <Text style={{ marginLeft: 6 }}>12</Text>
+                <Text style={{ marginLeft: vw(6) }}>12</Text>
 
 
               </View>
@@ -72,7 +95,7 @@ class OfflineKandies extends React.Component {
                   source={index.image.likeStats}
 
                 />
-                <Text style={{ marginLeft: 6 }}>12</Text>
+                <Text style={{ marginLeft: vw(6) }}>12</Text>
 
               </View>
               <View style={styles.iconContainer}>
@@ -81,7 +104,7 @@ class OfflineKandies extends React.Component {
                   source={index.image.comment}
 
                 />
-                <Text style={{ marginLeft: 6 }}>12</Text>
+                <Text style={{ marginLeft: vw(6) }}>12</Text>
 
               </View>
               <View style={styles.iconContainer}>
@@ -90,7 +113,7 @@ class OfflineKandies extends React.Component {
                   source={index.image.camera}
 
                 />
-                <Text style={{ marginLeft: 6 }}>12</Text>
+                <Text style={{ marginLeft: vw(6) }}>12</Text>
 
               </View>
             </View>
@@ -104,7 +127,17 @@ class OfflineKandies extends React.Component {
   }
 };
 
-export default OfflineKandies;
+const mapStateToProps=(state:any)=>{
+  return{
+    OfflineKandies:state.PersistReducer.OfflineKandies
+  }
+
+}
+const mapDispatchToProps={
+  PersistOfflinekandiAction:PersistOfflinekandiAction
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(OfflineKandies);
 
 const styles = StyleSheet.create({
   container: {
@@ -150,8 +183,8 @@ const styles = StyleSheet.create({
     // justifyContent:"center",
     alignItems: "center"
   }, back: {
-    width: vw(27),
-    height: vh(28),
+    width: vw(11),
+    height: vh(18),
     marginLeft: vw(20)
   }, txt: {
     marginLeft: vw(20),
@@ -169,7 +202,7 @@ const styles = StyleSheet.create({
   profileImg: {
     height: vh(80),
     width: vw(80),
-    borderRadius:vw(20),
+    borderRadius: vw(20),
     backgroundColor: "red",
     marginTop: vh(29),
     marginLeft: vw(-40)

@@ -55,7 +55,7 @@ class Profile extends React.Component<ProfileProps, State> {
     componentDidMount() {
         const { currentUser } = firebase.auth()
         this.setState({ currentUser })
-        alert(JSON.stringify(this.props.uid))
+      //  alert(JSON.stringify(this.props.uid))
         const self = this;
         var ref = firebase.database().ref("/Users").child(this.props.uid);
         ref.on("value", function (snapshot) {
@@ -180,7 +180,8 @@ class Profile extends React.Component<ProfileProps, State> {
                                         marginLeft:vw(80)
                                     }}>
                                         <Image
-                                            resizeMode="contain"
+                                            resizeMode="stretch"
+                                            resizeMethod={"resize"}
                                             style={styles.gallery}
                                             source={index.image.gallery}
                                         />
@@ -323,13 +324,14 @@ const styles = StyleSheet.create({
         color: colors.whiteColor
     },
     profileImg: {
-        height: heightPercentageToDP(calculateHeight(100)),
-        width: widthPercentageToDP(calculateWidth(100)),
+        height: vh(120),
+        width: vh(120),
         marginTop: heightPercentageToDP(calculateHeight(90)),
         marginLeft: widthPercentageToDP(calculateWidth(118)),
         // backgroundColor: "red",
         zIndex: 300,
-        borderRadius: widthPercentageToDP(calculateWidth(50))
+        borderRadius:vh(60)
+        // widthPercentageToDP(calculateWidth(50))
 
     },
     edit: {

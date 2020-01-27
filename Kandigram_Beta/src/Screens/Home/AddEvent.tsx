@@ -113,7 +113,7 @@ class AddEvent extends React.Component<AddEventProps,State> {
                 {this.state.showCalander?
                 <View   style={styles.calander}>
                 <Calendar
-              
+              minDate={new Date()}
                 onDayPress={(day) =>this.setState({date: day.dateString})}/>
                 </View>:null}
 

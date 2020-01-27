@@ -15,6 +15,8 @@ export const PersistAction = (params: any, successCallback: Function, errorCallb
 }
 export const PersistCoverImgAction = (param: any, successCallback: Function, errorCallback: Function) => {
     return function (dispatch: Function, getState: Function) {
+     
+        
         dispatch({
             type: actionTypes.offlineCoverImg,
             coverImg: param
@@ -33,13 +35,16 @@ export const PersistProfileImgAction = (param: any, successCallback: Function, e
 }
 export const PersistOfflinekandiAction=(param:any,successCallback:Function,errorCallback:Function)=>{
     return function (dispatch:Function,getState:Function) {
-        let offlineKandi=getState().PersistReducer.OfflineKandies
-      
-       // debugger
+  
+     let offlineKandies=getState().PersistReducer.OfflineKandies
+        console.warn("from the action : ",offlineKandies );
+     //  let data = offlineKandies.splice(0,0,param)
+      let data=[...offlineKandies,param]
+       console.warn("datra : ",data)
+
         dispatch({
             type:actionTypes.offlineKandies,
-            OfflineKandies: param,
-
+            OfflineKandies: data,
         })
         
     }
@@ -52,6 +57,7 @@ export const PersistDelete=(param:any,successCallback:Function,errorCallback:Fun
             uid:"",
             coverImg:'',
             profileImg:"",
+            OfflineKandies:[]
         })
         
     }

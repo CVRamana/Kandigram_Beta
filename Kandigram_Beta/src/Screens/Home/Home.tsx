@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Text, View, StyleSheet, TouchableOpacity, ImageBackground, Animated, Easing, Image, LayoutAnimation, Platform, UIManager } from 'react-native';
+import { Text, View, StyleSheet, TouchableOpacity, ImageBackground, Animated, Easing, Image, LayoutAnimation, Platform, UIManager} from 'react-native';
 import index from "../../Utils/Constants/index";
 import { widthPercentageToDP, heightPercentageToDP } from 'react-native-responsive-screen';
 import { calculateWidth, calculateHeight, vh, vw } from '../../Common/ResponsiveScreen';
@@ -17,12 +17,12 @@ interface State{
       marginLeft:number
 }
 
-
 if (Platform.OS === 'android') {
   if (UIManager.setLayoutAnimationEnabledExperimental) {
     UIManager.setLayoutAnimationEnabledExperimental(true);
   }
 }
+
 class Home extends React.Component<HomeProps,State> {
   constructor(props:HomeProps) {
     super(props)
@@ -67,7 +67,8 @@ class Home extends React.Component<HomeProps,State> {
             </TouchableOpacity>
             {/* on saved Press */}
             <TouchableOpacity
-              onPress={() => this.props.navigation.navigate('ChatApp', { uid: this.props.uid })}
+            onPress={() => this.props.navigation.navigate('Offlinekandies')}
+            //  onPress={() => this.props.navigation.navigate('ChatApp', { uid: this.props.uid })}
             >
               <Image
                 style={{ marginLeft: vw(24), }}
@@ -123,10 +124,12 @@ class Home extends React.Component<HomeProps,State> {
                 //   backgroundColor:"lightgrey",
                 alignItems: "center",
               }}>
+                <TouchableOpacity
+                onPress={()=>this.props.navigation.navigate("Discover")}
+                >
                 <Text style={styles.tabTxt}>Discover</Text>
+                </TouchableOpacity>
               </View>
-
-
 
             </View>
             {/* buutonView */}
@@ -135,7 +138,7 @@ class Home extends React.Component<HomeProps,State> {
                 <TouchableOpacity
                   onPress={() => {
                     LayoutAnimation.configureNext(LayoutAnimation.Presets.linear)
-                    this.props.navigation.navigate('AddEvent')
+                   // this.props.navigation.navigate('AddEvent')
                     this.setState({ isleft: !this.state.isleft })
                   }}
                   activeOpacity={1}

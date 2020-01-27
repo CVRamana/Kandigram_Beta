@@ -1,21 +1,26 @@
 import { createAppContainer } from 'react-navigation';
 import React from "react";
 import { createStackNavigator, } from 'react-navigation-stack';
-import { createBottomTabNavigator } from 'react-navigation-tabs';
+import { createBottomTabNavigator,createMaterialTopTabNavigator } from 'react-navigation-tabs';
 import { Image, StyleSheet } from "react-native";
 import { vh, vw } from '../../Common/ResponsiveScreen';
 import Scanner from '../../Common/Scanner';
 import Profile from '../../Screens/Profile/Profile';
 import Details from '../../Screens/Profile/Details';
 import Home from '../../Screens/Home/Home';
-import CreateKandi from '../../Screens/Home/CreateKandi';
+import CreateKandi from '../../Screens/Home/CreateKandi/CreateKandi';
 import ChatApp from '../../Screens/Home/ChatApp';
 import ChatRoom from '../../Screens/Home/ChatRoom';
 import AddEvent from '../../Screens/Home/AddEvent';
-import Discover from '../../Screens/Home/Discover';
+import Discover from '../../Screens/Home/Discover/Discover';
 import Settings from "../../Screens/Settings/Settings";
 import index from "../../Utils/Constants/index";
 import ResetPassword from '../../Screens/Authentications/Login/ResetPassword';
+import Offlinekandies from "../../Screens/Home/OfflineKandies";
+import Notifications from '../../Screens/Notifications/Notifications';
+import Events_People from '../../Screens/Home/Discover/Events_People';
+import Events from '../../Screens/Home/Discover/Events';
+import People from '../../Screens/Home/Discover/People';
 
 
 const SettingsContainer = createStackNavigator({
@@ -80,7 +85,7 @@ const ProfileContainer = createStackNavigator({
 )
 //FOR HIDING THE TABBAR OPTIONS WITH PROFILE_CONTAINER
 ProfileContainer.navigationOptions = ({ navigation }) => {
-    let tabBarVisible = false;
+    let tabBarVisible = true;
     if (navigation.state.index > 0) {
         tabBarVisible = false;
     }
@@ -96,9 +101,11 @@ const HomeContainer = createStackNavigator({
     ChatApp: { screen: ChatApp },
     ChatRoom: { screen: ChatRoom },
     //  LayoutAnimation: { screen: LayoutAnimation },
-    //  Offlinekandies: { screen: Offlinekandies },
+    Offlinekandies: { screen: Offlinekandies },
     AddEvent: { screen: AddEvent },
-    Discover: { screen: Discover }
+    Discover: { screen: Discover},
+    Events_People:{screen:Events_People}
+
 }, {
     headerMode: "none",
     navigationOptions: {
@@ -117,13 +124,39 @@ HomeContainer.navigationOptions = ({ navigation }) => {
     };
 }
 
+// const DiscoverContainer=createStackNavigator({
+//     Discover: { screen: Discover },
+// })
+
+const NotificationsContainer = createStackNavigator({
+    Notifications: { screen: Notifications }
+
+}, {
+headerMode:"none",
+navigationOptions: {
+    gesturesEnabled: false,
+    header: null
+},
+})
+//top tab bar
+const TabsEventnPeople = createMaterialTopTabNavigator(
+    {
+        Events: { screen: Events },
+        People: { screen: People },
+        Events_People:{screen:Events_People}
+    },
+    {
+        initialRouteName: 'Events'
+    }
+);
+
+
+// main bottom tab bar
 const TabNavigator = createBottomTabNavigator({
     Home: { screen: HomeContainer },
     Settings: { screen: SettingsContainer },
     Scanner: { screen: ScannerContainer },
-    // secondTab: {screen: secondTab},
-    //  scan: {screen: Scan},
-    //  Notifications: {screen: NotificationStack},
+    Notifications: { screen: NotificationsContainer },
     Profile: { screen: ProfileContainer },
 
 },
@@ -141,11 +174,11 @@ const TabNavigator = createBottomTabNavigator({
                         <Image resizeMode={'contain'} source={index.image.DiscIconDis}
                             style={styles.iconImg} />
                 } else if (routeName === 'Scanner') {
-                    return focused ? <Image resizeMode={'contain'} source={index.image.scan}
-                        style={[styles.iconImg,]} /> : <Image resizeMode={'contain'} source={index.image.DiscIconDis}
-                            style={styles.iconImg} />
+                    return focused ? <Image resizeMode={'contain'} source={index.image.scancon}
+                        style={[styles.iconImg,{height:vh(60),width:vw(60),marginBottom:vh(39),position:"absolute",}]} /> : <Image resizeMode={'contain'} source={index.image.scancon}
+                            style={[styles.iconImg,{height:vh(60),width:vw(60),marginBottom:vh(39),position:"absolute"}]} />
 
-                } else if (routeName === 'createProfile') {
+                } else if (routeName === 'Notifications') {
                     return focused ? <Image resizeMode={'contain'} source={index.image.NotIcon}
                         style={{ height: vh(25), width: vw(25) }} /> :
                         <Image resizeMode={'contain'} source={index.image.NotIconDis}
@@ -183,7 +216,6 @@ const styles = StyleSheet.create({
         height: vh(25),
         width: vw(25)
     }
-
 })
 
 export default createAppContainer(TabNavigator);

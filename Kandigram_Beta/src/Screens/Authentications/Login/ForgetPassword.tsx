@@ -5,17 +5,21 @@ import TextInputComponent from '../../../Common/TextInputComponent';
 import index from "../../../Utils/Constants/index";
 import ButtonComponent from '../../../Common/ButonComponent';
 import { widthPercentageToDP, heightPercentageToDP } from 'react-native-responsive-screen';
-import { calculateWidth, calculateHeight } from '../../../Common/ResponsiveScreen';
+import { calculateWidth, calculateHeight,vw,vh } from '../../../Common/ResponsiveScreen';
 import colors from '../../../Utils/Constants/colors';
 import CommonEye from '../../../Common/CommonEye';
 
 
-interface ForgetProps { }
+interface ForgetProps { 
+    navigation:any
+}
+interface State{
 
-class ForgetPassword extends React.Component {
-    constructor(props) {
+}
+
+class ForgetPassword extends React.Component<ForgetProps,State> {
+    constructor(props:ForgetProps) {
         super(props)
-
         this.state = {
             isSecure: false
         };
@@ -27,25 +31,26 @@ class ForgetPassword extends React.Component {
                 <HeaderComponent
                      firstText={"Forget"}
                     secondText={"Password ?"}
+                    handleClick={()=>this.props.navigation.navigate('Login')}
                 />
                 <View style={styles.inputContainer}>
                     <Text style={styles.forgotText}> {index.strings.resetting}
                         </Text>
                 </View>
                 <View style={styles.textInput}>
-                    <View style={{height:55,width:71,justifyContent:"center",alignItems:"center"}}>
+                    <View style={{height:vh(55),width:71,justifyContent:"center",alignItems:"center"}}>
                         <Text style={styles.forgotText}> +1 </Text>
                         </View>
-                        <View style={{height:45,width:3,backgroundColor:"#213d79",marginTop:6}}>
+                        <View style={{height:vh(45),width:3,backgroundColor:"#213d79",marginTop:6}}>
                             </View>
                         <TextInput style={[styles.textInput,{
                             marginTop: 0,
                             marginLeft:0,
                             width:widthPercentageToDP(calculateWidth(260)),
-                            paddingLeft:32,
-                            paddingRight:10,
+                            paddingLeft:vw(32),
+                            paddingRight:vw(10),
                             borderWidth:0,fontFamily: "Ubuntu-Medium",
-                            fontSize: 20,
+                            fontSize:vw(20),
                             fontWeight: "500",
                             fontStyle: "normal",
                             letterSpacing: 5.12,
@@ -103,7 +108,7 @@ const styles = StyleSheet.create({
   fontSize: widthPercentageToDP(calculateWidth(16)) ,
   fontWeight: "normal",
   fontStyle: "normal",
-  lineHeight: 26,
+  lineHeight:26,
   letterSpacing: 0.19,
   //color: colors.white
         color: index.colors.whiteColor

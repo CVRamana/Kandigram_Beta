@@ -39,6 +39,7 @@ class TextInputComponent extends React.Component<TextInputProps>{
        style={[styles.textInput,this.props.extraStyle]}
        secureTextEntry={this.props.commonSecureTextEntry}
        onBlur={this.props.commonOnBlur}
+       onFocus={this.props.commonOnFocus}
        
       />
    

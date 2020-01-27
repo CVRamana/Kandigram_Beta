@@ -30,6 +30,7 @@ class ResetPassword extends React.Component<LoginProps,State> {
                 <HeaderComponent
                     // firstText={"Welocome Back,"}
                     secondText={"Reset Password ?"}
+                    handleClick={()=>this.props.navigation.navigate('Settings')}
                 />
                 <View style={styles.inputContainer}>
                     <TextInputComponent

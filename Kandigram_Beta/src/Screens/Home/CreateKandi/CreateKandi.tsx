@@ -1,18 +1,18 @@
 import * as React from 'react';
-import { Text, View, StyleSheet, ImageBackground, Image, TouchableOpacity, TextInput, ScrollView, } from 'react-native';
+import { Text, View, StyleSheet, ImageBackground, LayoutAnimation, Image, UIManager, Platform, TouchableOpacity, TextInput, ScrollView, } from 'react-native';
 import ImagePicker from 'react-native-image-crop-picker';
-import index from "../../Utils/Constants/index";
-import { vw, vh } from '../../Common/ResponsiveScreen';
-import TextInputComponent from '../../Common/TextInputComponent';
-import ButtonComponent from '../../Common/ButonComponent';
-import colors from '../../Utils/Constants/colors';
-import { db } from "../../Utils/FirebaseConfig";
+import index from "../../../Utils/Constants/index";
+import { vw, vh } from '../../../Common/ResponsiveScreen';
+import TextInputComponent from '../../../Common/TextInputComponent';
+import ButtonComponent from '../../../Common/ButonComponent';
+import colors from '../../../Utils/Constants/colors';
+import { db } from "../../../Utils/FirebaseConfig";
 import firebase from 'react-native-firebase'
-import {connect} from "react-redux";
+import { connect } from "react-redux";
 
 
 interface CreateKandiProps {
-uid:string
+    uid: string
 }
 
 interface State {
@@ -22,9 +22,17 @@ interface State {
     event: string
     kandiDesc: string
     ispublic: boolean
+    contHeight: number
+    isOn: boolean
+}
+if (
+    Platform.OS === 'android' &&
+    UIManager.setLayoutAnimationEnabledExperimental
+) {
+    UIManager.setLayoutAnimationEnabledExperimental(true);
 }
 
-class CreateKandi extends React.Component<CreateKandiProps,State> {
+class CreateKandi extends React.Component<CreateKandiProps, State> {
     constructor(props: CreateKandiProps) {
         super(props)
 
@@ -34,7 +42,9 @@ class CreateKandi extends React.Component<CreateKandiProps,State> {
             kandiName: '',
             event: '',
             kandiDesc: '',
-            ispublic: false
+            ispublic: false,
+            contHeight: vh(50),
+            isOn: false
 
         };
     };
@@ -53,7 +63,6 @@ class CreateKandi extends React.Component<CreateKandiProps,State> {
                     ref.getDownloadURL().then((data) => {
                         console.warn("download url", data)
                         this.setState({ kandiImgUrl: data })
-
                     })
 
                 })
@@ -67,13 +76,13 @@ class CreateKandi extends React.Component<CreateKandiProps,State> {
             kandi_desc: this.state.kandiDesc,
             events: this.state.event,
             kandiImgUrl: this.state.kandiImgUrl,
-            ispublic:this.state.ispublic
+            ispublic: this.state.ispublic
         }
         this.setDataToFirebase(values)
     }
-    setDataToFirebase = (res:any) => {
-     //   alert("called")
-        db.ref('/Users').child(this.props.uid).child("Created_Kandies").child("raman"+(Math.round(Math.random()*100000000))).set(res, (val) => {
+    setDataToFirebase = (res: any) => {
+        //   alert("called")
+        db.ref('/Users').child(this.props.uid).child("Created_Kandies").child("raman" + (Math.round(Math.random() * 100000000))).set(res, (val) => {
             if (val === null) {
                 // this.props.navigation.navigate('Login')
                 console.warn("sucess fully uploaded")
@@ -81,13 +90,15 @@ class CreateKandi extends React.Component<CreateKandiProps,State> {
 
         })
     }
-componentDidMount(){
-   // alert(this.props.uid)
-}
+    componentDidMount() {
+        // alert(this.props.uid)
+    }
     render() {
         return (
             <ImageBackground style={styles.container}>
                 <ImageBackground
+                    resizeMethod={"resize"}
+                    resizeMode={"stretch"}
                     source={index.image.creteKandi}
                     style={styles.bg}>
                     <View style={{ flexDirection: "row", marginTop: vh(56), marginLeft: vw(16) }}>
@@ -107,7 +118,7 @@ componentDidMount(){
                         <Text style={styles.txt}>Create a Kandi</Text>
                     </View>
                 </ImageBackground>
-                <ScrollView style={{ paddingTop: 100, flex: 1, }}>
+                <ScrollView style={{ paddingTop: vh(100), flex: 1, }}>
                     {/* Choose Image */}
                     {this.state.kandiImg === "" ? <View style={styles.kandiImg} >
                         <TouchableOpacity
@@ -117,13 +128,7 @@ componentDidMount(){
                                 source={index.image.gallery}
                                 style={{}} />
                         </TouchableOpacity>
-                        <Text style={{
-                            fontSize: 18,
-                            fontWeight: "600",
-                            fontStyle: "normal",
-                            letterSpacing: 0.22,
-                            color: "#515f7b"
-                        }}> Add Kandi Image </Text>
+                        <Text style={styles.AddkandiTxt}> Add Kandi Image </Text>
                     </View> :
                         <View style={styles.kandiImg} >
                             <Image
@@ -141,25 +146,78 @@ componentDidMount(){
                             extraStyle={{ marginBottom: vh(32), backgroundColor: colors.textInputBGColor }}
 
                         />
-                        <TextInputComponent
-                            commonOnChangeText={(val) => this.setState({ event: val })}
-                            commonPlaceholder={"About kandi"}
-                            extraStyle={{
-                                //marginBottom: vh(32)
-                                backgroundColor: colors.textInputBGColor
-                            }}
-                        />
+                        {/* //Animated TextInput */}
+                        <View style={{
+                            backgroundColor: colors.textInputBGColor,
+                            borderRadius: 22,
+                            height: this.state.contHeight,
+                            width: vw(338)
+                        }}>
+                            <TextInputComponent
+                                commonOnChangeText={(val: any) => this.setState({ event: val })}
+                                commonPlaceholder={"Add Event"}
+
+                                // commonOnBlur={() => {
+                                //     LayoutAnimation.configureNext(LayoutAnimation.Presets.linear);
+                                //     this.setState({ isOn: false, contHeight: vh(50) })
+                                // }
+                                // }
+
+                                commonOnFocus={() => {
+                                    LayoutAnimation.configureNext(LayoutAnimation.Presets.linear);
+                                    this.setState({ contHeight: vh(340), isOn: true })
+                                }
+                                    //()=>this.props.navigation.navigate('AddEvent')
+                                }
+                                extraStyle={{
+                                    //marginBottom: vh(32)shadowColor: "#000",
+                                    shadowOffset: {
+                                        width: 0,
+                                        height: 10,
+                                    },
+                                    shadowOpacity: 0.51,
+                                    shadowRadius: 13.16,
+
+                                    elevation: 10,
+
+                                }}
+                            />
+                            {/* toggle View */}
+                            {this.state.isOn ?
+                                <View>
+                                    <View style={{ marginTop: vh(20), marginLeft: vw(32) }}>
+                                        <Text
+                                            style={styles.lipstic}
+                                            onPress={() => this.props.navigation.navigate('AddEvent')}
+                                        >+ Add this Event</Text>
+                                    </View>
+                                    {/* plane line */}
+                                    <View style={{
+                                        marginTop: vh(13),
+                                        marginLeft: vw(15),
+                                        height: vh(4),
+                                        width: vw(311),
+                                        backgroundColor: "#26375a"
+                                    }}>
+                                    </View>
+                                    {/* flatList */}
+                                    <View>
+                                    </View>
+                                </View> : null
+                            }
+
+                        </View>
                     </View>
 
                     <View style={styles.inputContainer}>
                         <TextInput
                             placeholder={"Add Description"}
-
                             multiline={true}
                             // value={this.state.about}
                             maxLength={400}
                             onChangeText={(val) => this.setState({ kandiDesc: val })}
                             placeholderTextColor={colors.whiteColor}
+
                             placeholderStyle={{
                                 opacity: 1,
                                 fontSize: 19,
@@ -225,20 +283,21 @@ componentDidMount(){
     }
 };
 
-const mapStateToProps=(state:any)=>{
-    return{
-uid:state.PersistReducer.uid
+const mapStateToProps = (state: any) => {
+    return {
+        uid: state.PersistReducer.uid
     }
 }
-const mapDispatchToProps={
+const mapDispatchToProps = {
 
 
 }
-export default connect(mapStateToProps,mapDispatchToProps)(CreateKandi);
+export default connect(mapStateToProps, mapDispatchToProps)(CreateKandi);
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+        backgroundColor: '#434154'
 
     },
     bg: {
@@ -247,6 +306,13 @@ const styles = StyleSheet.create({
         zIndex: 300,
         width: vw(374.6),
         height: vh(101)
+    },
+    lipstic: {
+        fontSize: 18,
+        fontWeight: "600",
+        fontStyle: "normal",
+        letterSpacing: 0.22,
+        color: index.colors.lipstick
     },
     kandiImg: {
         width: vw(343),
@@ -263,9 +329,16 @@ const styles = StyleSheet.create({
         borderColor: "#515f7b"
 
     },
+    AddkandiTxt: {
+        fontSize: vw(18),
+        fontWeight: "600",
+        fontStyle: "normal",
+        letterSpacing: 0.22,
+        color: "#515f7b"
+    },
     txt: {
         fontFamily: "Ubuntu-Medium",
-        fontSize: 18,
+        fontSize: vw(18),
         fontWeight: "bold",
         fontStyle: "normal",
         letterSpacing: 0.22,

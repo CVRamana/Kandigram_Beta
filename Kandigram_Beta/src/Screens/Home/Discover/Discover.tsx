@@ -1,28 +1,36 @@
 import * as React from 'react';
 import { Text, View, StyleSheet, ImageBackground, TextInput, Image } from 'react-native';
-import index from "../../Utils/Constants/index";
-import { vw, vh } from '../../Common/ResponsiveScreen';
+import index from "../../../Utils/Constants/index";
+import { vw, vh } from '../../../Common/ResponsiveScreen';
 
-interface DiscoverProps { }
+interface DiscoverProps { 
+    navigation:any
+}
 
-class Discover extends React.Component {
+class Discover extends React.Component<DiscoverProps> {
+    constructor(props: DiscoverProps) {
+        super(props)
+
+        this.state = {
+
+        };
+    };
+
     render() {
         return (
             <ImageBackground
                 source={index.image.eventBg}
                 style={styles.container}>
                 <ImageBackground
-
+                    resizeMode={"stretch"}
+                    resizeMethod={'resize'}
                     source={index.image.HomeBG}
                     style={styles.discBG}
                 >
                     <View style={styles.header}>
                         <Text style={styles.txt}> Discover</Text>
                         <View style={styles.inputt}>
-                            <View style={{
-                                marginLeft: vw(10),
-                                height: vh(48), width: vw(50), backgroundColor: "transparent", justifyContent: "center", alignItems: "center"
-                            }}>
+                            <View style={styles.searchCont}>
                                 <Image
                                     resizeMode={'contain'}
                                     resizeMethod={'resize'}
@@ -32,14 +40,18 @@ class Discover extends React.Component {
                             </View>
                             <TextInput
                                 style={styles.tinput}
+                                onFocus={
+                                   // ()=>alert("callede")
+                                   ()=>this.props.navigation.navigate('Events_People')
+                                }
                             />
                         </View>
                     </View>
                 </ImageBackground>
-                <View style={{marginTop:vh(40)}}>
-                     <Text 
-                     style={styles.txt}
-                     > Trending Events</Text>
+                <View style={{ marginTop: vh(40) }}>
+                    <Text
+                        style={styles.txt}
+                    > Trending Events</Text>
                 </View>
             </ImageBackground>
         );
@@ -90,5 +102,12 @@ const styles = StyleSheet.create({
         fontStyle: "normal",
         letterSpacing: 0.29,
         color: index.colors.whiteColor
+    },
+    searchCont: {
+        marginLeft: vw(10),
+        height: vh(48), width: vw(50),
+        backgroundColor: "transparent",
+        justifyContent: "center",
+        alignItems: "center"
     }
 });

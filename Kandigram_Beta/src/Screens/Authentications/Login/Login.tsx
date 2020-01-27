@@ -159,15 +159,15 @@ class Login extends React.Component<LoginProps, State> {
 
                         <Text
                             onPress={() => this.props.navigation.navigate('ForgetPassword')}
-                            style={[styles.forgotText, { marginLeft: 200, marginBottom: 48 }]}>{index.strings.forgot} </Text>
+                            style={[styles.forgotText, { marginLeft: vw(200), marginBottom:vh(48) }]}>{index.strings.forgot} </Text>
                         <ButtonComponent
                             name={"Log In"}
                             onButtonPress={() => this.handleLogin()}
                         />
-                        <Text style={[styles.forgotText, { marginBottom: 48 }]}>or </Text>
+                        <Text style={[styles.forgotText, { marginBottom:vh(48)  }]}>or </Text>
                         <View style={{
                             flexDirection: "row",
-                            width: 200,
+                            width: vw(200),
                             justifyContent: "space-around"
 
 
@@ -249,17 +249,17 @@ const styles = StyleSheet.create({
     },
     forgotText: {
         opacity: 0.6,
-        marginTop: 24,
+        marginTop: vh(24),
         fontFamily: "Ubuntu-Medium",
-        fontSize: 17,
+        fontSize: vw(17),
         fontWeight: "500",
         fontStyle: "normal",
         letterSpacing: 0.17,
         color: index.colors.whiteColor
     },
     fbimg: {
-        width: 60,
-        height: 60,
+        width: vw(60),
+        height: vh(60),
         borderRadius: widthPercentageToDP(calculateWidth(30)),
         backgroundColor: "#1977f3"
     }

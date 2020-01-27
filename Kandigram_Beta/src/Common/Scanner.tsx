@@ -66,15 +66,16 @@ class Scanner extends React.Component<ScannerProps, State> {
                 style={{ flex: 1, }}
             >
                 <View style={{
-                    top: 50,
-                    left: 20,
+                    top: vh(50),
+                    left: vw(20),
 
                     position: "absolute",
                     zIndex: 400,
                     backgroundColor: "transparent "
                 }}>
                     <TouchableOpacity
-                        onPress={() => this.props.navigation.navigate('AppintroSlider')}
+                        onPress={() => this.props.navigation.navigate('Home')}
+                     //  onPress={()=>this.props.navigation.()}
                     >
                         <Image
                             style={{ width: vw(11), height: vh(18) }}

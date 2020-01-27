@@ -11,7 +11,7 @@ import Login from "../../Screens/Authentications/Login/Login"
 import Home from "../../Screens/Home/Home";
 import ResetPassword from '../../Screens/Authentications/Login/ResetPassword';
 import ForgetPassword from '../../Screens/Authentications/Login/ForgetPassword';
-import CreateKandi from '../../Screens/Home/CreateKandi';
+import CreateKandi from '../../Screens/Home/CreateKandi/CreateKandi';
 import ChatApp from "../../Screens/Home/ChatApp";
 import ChatRoom from "../../Screens/Home/ChatRoom";
 import LayoutAnimation from "../../Screens/Home/LayoutAnimation";
@@ -20,7 +20,7 @@ import { Image, StyleSheet } from "react-native";
 import { vh, vw } from '../../Common/ResponsiveScreen';
 import index from "../../Utils/Constants/index";
 import AddEvent from '../../Screens/Home/AddEvent';
-import Discover from '../../Screens/Home/Discover';
+import Discover from '../../Screens/Home/Discover/Discover';
 import AppintroSlider from "../../Common/IntroSlider/AppIntroSlider";
 import Scanner from "../../Common/Scanner";
 import Settings from "../../Screens/Settings/Settings";

@@ -5,7 +5,8 @@ import TabNavigator from "./TabNavigator";
 const RootNavigator = createAppContainer(
     createSwitchNavigator({
         AuthFlow: AuthNavigator,
-        TabNavigator: TabNavigator
+        TabNavigator: TabNavigator,
+        
     },
         { 
             initialRouteName: "AuthFlow"
