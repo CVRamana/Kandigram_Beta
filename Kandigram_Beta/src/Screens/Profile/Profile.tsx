@@ -208,7 +208,7 @@ class Profile extends React.Component<ProfileProps, State> {
                                 style={styles.profileImg}
                             >
                             </Image >
-                            <View style={{ marginTop: -45, marginLeft: -20, zIndex: 3000 }}>
+                            <View style={{ marginTop: vh(-45), marginLeft:vw(-20) , zIndex: 3000 }}>
                                 <TouchableOpacity
                                     style={styles.edit}
                                     activeOpacity={1}
@@ -258,7 +258,7 @@ class Profile extends React.Component<ProfileProps, State> {
 
                         </TouchableOpacity>
 
-                        <TouchableOpacity style={[styles.Social_Button, { marginBottom: 48 }]}>
+                        <TouchableOpacity style={[styles.Social_Button, { marginBottom: vh(48) }]}>
 
                         </TouchableOpacity>
                         <ButtonComponent

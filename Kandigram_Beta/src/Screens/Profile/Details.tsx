@@ -25,54 +25,16 @@ class Details extends React.Component<DetailsProps, State> {
             <Text style={styles.summerText}> Summer Carniwal 2020 </Text>
           </View>
           <View style={{ flexDirection: "row", marginTop: heightPercentageToDP(calculateHeight(10)), }}>
-            <View style={{
-              height: heightPercentageToDP(calculateHeight(21)),
-              width: widthPercentageToDP(calculateWidth(180)),
-              backgroundColor: "rgba(35, 35, 35, 0.3)",
-              marginLeft: widthPercentageToDP(calculateWidth(40)),
-              // marginTop: heightPercentageToDP(calculateHeight(10)),
-              alignItems: "center",
-              justifyContent: "center"
-            }}
+            <View style={styles.txt1}
             >
-              <Text style={{
-                opacity: 0.95,
-                fontFamily: "Ubuntu-Bold",
-                fontSize: heightPercentageToDP(calculateHeight(12)),
-                fontWeight: "normal",
-                fontStyle: "normal",
-                letterSpacing: -0.24,
-                color: colors.whiteColor
-              }}> Beyond Wonderland 20926gf</Text>
+              <Text style={styles.txt2}> Beyond Wonderland 20926gf</Text>
 
             </View>
-            <View style={{
-              width: vw(78),
-              height:vh(22) ,
-              marginLeft:vw(63),
-              borderRadius: vw(5),
-              justifyContent: "center",
-              alignItems: "center",
-              backgroundColor: "rgba(35, 35, 35, 0.3)"
-            }}><Text>5/06/2019</Text>
+            <View style={styles.v2}>
+              <Text>5/06/2019</Text>
             </View>
           </View>
-          <View style={{
-            width: vw(272),
-            height: vh(40),
-            borderRadius: vw(10),
-            flexDirection: "row",
-            shadowColor: "rgba(0, 0, 0, 0.25)",
-            backgroundColor: "rgba(35, 35, 35, 0.3)",
-            marginLeft: widthPercentageToDP(calculateWidth(56)),
-            marginTop: heightPercentageToDP(calculateHeight(14)),
-            shadowOffset: {
-              width: 0,
-              height: 4
-            },
-            shadowRadius: 4,
-            shadowOpacity: 1
-          }}>
+          <View style={styles.v3}>
             <View style={styles.iconContainer}>
               <Image
                 style={{}}
@@ -115,10 +77,14 @@ class Details extends React.Component<DetailsProps, State> {
         <ScrollView>
           <View style={styles.like}>
             <Image
+            resizeMethod={"resize"}
+            resizeMode={"contain"}
               style={styles.likeImg}
               source={index.image.like}
             />
             <Image
+             resizeMethod={"resize"}
+             resizeMode={"contain"}
               style={styles.likeImg}
               source={index.image.like}
             />
@@ -131,7 +97,7 @@ class Details extends React.Component<DetailsProps, State> {
           }}>
             <Text style={{
               fontFamily: "Ubuntu-Medium",
-              fontSize: 20,
+              fontSize: vw(20),
               fontWeight: "500",
               fontStyle: "normal",
               lineHeight: 35,
@@ -144,19 +110,19 @@ class Details extends React.Component<DetailsProps, State> {
           <View style={styles.likeCont}>
             <Image
               source={{}}
-              style={{ height: 24, width: 24, borderRadius: 12, backgroundColor: "red" }}
+              style={{ height: vh(24), width: vh(24), borderRadius: vh(12), backgroundColor: "red" }}
             />
             <Image
               source={{}}
-              style={{ height: 24, width: 24, borderRadius: 12, backgroundColor: "red" }}
+              style={{ height: vh(24), width: vh(24), borderRadius: vh(12), backgroundColor: "red" }}
             />
             <Image
               source={{}}
-              style={{ height: 24, width: 24, borderRadius: 12, backgroundColor: "red", marginRight: 8, }}
+              style={{ height: vh(24), width: vh(24), borderRadius: vh(12), backgroundColor: "red", marginRight: vw(8), }}
             />
             <Text style={{
               fontFamily: "Ubuntu",
-              fontSize: 14,
+              fontSize: vw(14),
               fontWeight: "bold",
               fontStyle: "normal",
               letterSpacing: 0.17,
@@ -170,44 +136,18 @@ class Details extends React.Component<DetailsProps, State> {
             <Image
               source={{}}
               style={{
-                height: heightPercentageToDP(calculateHeight(64)),
-                width: widthPercentageToDP(calculateWidth(64)),
+                height: vh(64),
+                width: vh(64),
                 backgroundColor: "green",
-                borderRadius: widthPercentageToDP(calculateWidth(32))
+                borderRadius:vh(32)
               }}
             />
           </View>
-          <View style={{
-            height: heightPercentageToDP(calculateHeight(34)),
-            width: widthPercentageToDP(calculateWidth(120)),
-            justifyContent: "center",
-            marginTop: heightPercentageToDP(calculateHeight(13)),
-            marginLeft: widthPercentageToDP(calculateWidth(128)),
-            //  backgroundColor: "rgb (24, 39, 59)",
-            borderColor: "rgb (233, 30, 99)",
-            borderRadius:vw(10) ,
-            shadowColor: "rgba(0, 0, 0, 0.25)",
-            borderWidth: vw(3),
-            shadowOffset: {
-              width: 0,
-              height: 4
-            },
-            shadowRadius: 4,
-            shadowOpacity: 1,
-            alignItems: "center"
-          }}>
+          <View style={styles.v4}>
             <Text style={styles.commonText}> katietheraver </Text>
           </View>
           <View
-            style={{
-              height: heightPercentageToDP(calculateHeight(25)),
-              // justifyContent: "center",
-              marginTop: heightPercentageToDP(calculateHeight(35)),
-              alignItems: "center",
-              //backgroundColor: "red",
-              flexDirection: 'row',
-              paddingLeft: widthPercentageToDP(calculateWidth(18))
-            }}
+            style={styles.v5}
           >
             <Text style={styles.commonText}>Comments </Text>
             <Text style={[styles.commonText, {
@@ -241,6 +181,67 @@ const styles = StyleSheet.create({
     marginLeft: widthPercentageToDP(calculateWidth(16)),
     borderRadius: 10,
 
+  },
+  v2:{
+    width: vw(78),
+    height:vh(22) ,
+    marginLeft:vw(63),
+    borderRadius: vw(5),
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "rgba(35, 35, 35, 0.3)"
+  },
+  v3:{
+    width: vw(272),
+    height: vh(40),
+    borderRadius: vw(10),
+    flexDirection: "row",
+    shadowColor: "rgba(0, 0, 0, 0.25)",
+    backgroundColor: "rgba(35, 35, 35, 0.3)",
+    marginLeft: widthPercentageToDP(calculateWidth(56)),
+    marginTop: heightPercentageToDP(calculateHeight(14)),
+    shadowOffset: {
+      width: 0,
+      height: 4
+    },
+    shadowRadius: 4,
+    shadowOpacity: 1
+  },
+  v4:{
+    height: heightPercentageToDP(calculateHeight(34)),
+    width: widthPercentageToDP(calculateWidth(120)),
+    justifyContent: "center",
+    marginTop: heightPercentageToDP(calculateHeight(13)),
+    marginLeft: widthPercentageToDP(calculateWidth(128)),
+  
+    borderColor: "rgb(233, 30, 99)",
+    borderRadius:vw(10) ,
+    shadowColor: "rgba(0, 0, 0, 0.25)",
+    borderWidth: vw(3),
+    shadowOffset: {
+      width: 0,
+      height: 4
+    },
+    shadowRadius: 4,
+    shadowOpacity: 1,
+    alignItems: "center"
+  },
+  v5:{
+    height: heightPercentageToDP(calculateHeight(25)),
+    marginTop: heightPercentageToDP(calculateHeight(35)),
+    alignItems: "center",
+    flexDirection: 'row',
+    paddingLeft: widthPercentageToDP(calculateWidth(18))
+  },
+  
+  txt2:{
+    opacity: 0.95,
+    fontFamily: "Ubuntu-Bold",
+    fontSize: heightPercentageToDP(calculateHeight(12)),
+    fontWeight: "normal",
+    fontStyle: "normal",
+    letterSpacing: -0.24,
+    color: colors.whiteColor
   },
   commonText: {
 
@@ -305,6 +306,18 @@ const styles = StyleSheet.create({
     // marginLeft:widthPercentageToDP(calculateWidth(13)),
     marginTop: heightPercentageToDP(calculateHeight(50)),
     alignItems: "center"
+
+  },
+  txt1:{
+    
+      height: heightPercentageToDP(calculateHeight(21)),
+      width: widthPercentageToDP(calculateWidth(180)),
+      backgroundColor: "rgba(35, 35, 35, 0.3)",
+      marginLeft: widthPercentageToDP(calculateWidth(40)),
+      // marginTop: heightPercentageToDP(calculateHeight(10)),
+      alignItems: "center",
+      justifyContent: "center"
+    
 
   },
 

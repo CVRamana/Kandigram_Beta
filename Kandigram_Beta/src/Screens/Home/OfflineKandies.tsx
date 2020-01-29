@@ -5,7 +5,6 @@ import { vh, vw } from '../../Common/ResponsiveScreen';
 import { connect } from "react-redux";
 import { PersistOfflinekandiAction } from '../../ReduxPersist/PersistAction';
 
-
 interface OfflineKandiesProps {
 navigation:any
 OfflineKandies:any
@@ -18,15 +17,12 @@ interface State {
 class OfflineKandies extends React.Component<OfflineKandiesProps, State> {
   constructor(props:OfflineKandiesProps) {
     super(props)
-  
-    this.state = {
-       
+    this.state = {  
     };
   };
   componentDidMount(){
-   this.props.PersistOfflinekandiAction("raman")
-    //alert(JSON.stringify(this.props.OfflineKandies))
-
+   //this.props.PersistOfflinekandiAction("raman")
+    
   }
 
   render() {
@@ -52,10 +48,14 @@ class OfflineKandies extends React.Component<OfflineKandiesProps, State> {
               />
             </TouchableOpacity>
             <Text style={styles.txt}>Offline Kandies</Text>
+            <TouchableOpacity
+            onPress={()=>this.props.navigation.navigate('Details')}
+            >
             <Image
               style={styles.refresh}
               source={index.image.refresh}
             />
+            </TouchableOpacity>
           </View>
 
         </ImageBackground>
@@ -151,7 +151,6 @@ const styles = StyleSheet.create({
     position: "absolute",
     top: 0,
     zIndex: 300,
-
   },
 
   txtData: {
@@ -165,7 +164,6 @@ const styles = StyleSheet.create({
     fontStyle: "normal",
     letterSpacing: 0.22,
     color: index.colors.whiteColor
-
   },
   data: {
     width: vw(303),
@@ -182,11 +180,13 @@ const styles = StyleSheet.create({
     marginTop: vh(56),
     // justifyContent:"center",
     alignItems: "center"
-  }, back: {
+  },
+   back: {
     width: vw(11),
     height: vh(18),
     marginLeft: vw(20)
-  }, txt: {
+  },
+   txt: {
     marginLeft: vw(20),
     fontFamily: "Ubuntu-Medium",
     fontSize: vw(18),
@@ -222,7 +222,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     shadowColor: "rgba(0, 0, 0, 0.25)",
     backgroundColor: "rgba(35, 35, 35, 0.3)",
-    //backgroundColor:"red",
+
     marginLeft: vw(56),
     marginTop: vh(-14),
     shadowOffset: {
