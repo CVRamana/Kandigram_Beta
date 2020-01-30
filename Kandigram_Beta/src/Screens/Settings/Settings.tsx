@@ -57,13 +57,7 @@ class Settings extends React.Component<SettingsProps, State> {
 
                     </View>
                 </ImageBackground>
-                {/* <View style={{
-                    //height:vh(400),
-                    paddingTop: vh(10),
-                    marginLeft: vw(16),
-                    // marginBottom: 100,
-                    // paddingBottom: vh(100)
-                }}> */}
+             
                     <FlatList
                         scrollEnabled={true}
                         data={this.state.settingData}

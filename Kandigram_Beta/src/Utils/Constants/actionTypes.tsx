@@ -9,6 +9,7 @@ export default{
     chatAction:"chatAction",
     chatDataAction:"ChatData",
     HomeAction:"HomeAction",
-    Delete_PersistAction:"Delete_Persist_Reducer"
+    Delete_PersistAction:"Delete_Persist_Reducer",
+    Offline_Uploaded:"offline kandi uploaded on the firebase"
     
 }

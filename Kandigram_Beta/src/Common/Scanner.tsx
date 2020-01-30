@@ -1,34 +1,64 @@
 import * as React from 'react';
-import { Text, View, StyleSheet, ImageBackground, PermissionsAndroid,Platform, Button, TouchableOpacity, Image } from 'react-native';
+import { Text, View, StyleSheet, ImageBackground, PermissionsAndroid, Platform, Button, TouchableOpacity, Image } from 'react-native';
 import { CameraKitCameraScreen } from "react-native-camera-kit";
 import index from "../Utils/Constants/index";
 import { vw, vh } from './ResponsiveScreen';
-import {connect} from "react-redux";
-import {PersistOfflinekandiAction} from '../ReduxPersist/PersistAction'
+import { connect } from "react-redux";
+import { PersistOfflinekandiAction } from '../ReduxPersist/PersistAction'
+import Loader from './loader';
+import firebase from "react-native-firebase";
 
 interface ScannerProps {
-    PersistOfflinekandiAction:Function
-    navigation:any
+    PersistOfflinekandiAction: Function
+    navigation: any
+    isInternet:Boolean
+    uid:string
 }
 interface State {
 
 }
+var isOne = false
 
 class Scanner extends React.Component<ScannerProps, State> {
+
+    constructor(props:ScannerProps) {
+        super(props)
+
+        this.state = {
+            isLoading: false
+        };
+    };
+
     onReadCode = (event: any) => {
-        //let param=event.nativeEvent.codeStringValue
-        this.props.PersistOfflinekandiAction("hello")
-      
+        var ref=firebase.database().ref('/Users').child(this.props.uid).child('Scanned_Kandies')
+        let param = event.nativeEvent.codeStringValue
+        { this.props.isInternet ?
+
+        this.props.PersistOfflinekandiAction(param, () => {
+            this.setState({ isLoading: true })
+            setTimeout(() => {
+                this.setState({ isLoading: false })
+                this.props.navigation.navigate('Offlinekandies')
+            }, 1000);
+        })  :
+
+        ref.push(param,(res:any)=>{
+            if(res===null){
+                console.warn("sucessfully uploaded")  
+            }
+        })
+
+    }
+
     }
 
     componentDidMount() {
         if (this.hasLocationPermission()) {
-          //  this.onReadCode(e)
-          //debugger
-          this.props.PersistOfflinekandiAction("hello")
+
+            //this.props.PersistOfflinekandiAction("hello")
         } else {
             alert("no permission")
-            
+
         }
     }
 
@@ -62,7 +92,7 @@ class Scanner extends React.Component<ScannerProps, State> {
     render() {
         return (
             <ImageBackground
-                source={index.image.scan}
+               // source={index.image.scan}
                 style={{ flex: 1, }}
             >
                 <View style={{
@@ -75,7 +105,7 @@ class Scanner extends React.Component<ScannerProps, State> {
                 }}>
                     <TouchableOpacity
                         onPress={() => this.props.navigation.navigate('Home')}
-                     //  onPress={()=>this.props.navigation.()}
+                    
                     >
                         <Image
                             style={{ width: vw(11), height: vh(18) }}
@@ -85,33 +115,41 @@ class Scanner extends React.Component<ScannerProps, State> {
                 </View>
 
                 <CameraKitCameraScreen
-                    //  actions={{ rightButtonText: 'Done', leftButtonText: 'Cancel' }}
-                    onBottomButtonPressed={(event: any) => this.onBottomButtonPressed(event)}
-                    scanBarcode={true}
-                    laserColor={"blue"}
-                    frameColor={"yellow"}
-                    onReadQRCode={((event: any) => this.onReadCode(event))} //optional
-                    hideControls={false}           //(default false) optional, hide buttons and additional controls on top and bottom of screen
-                    showFrame={true}   //(default false) optional, show frame with transparent layer (qr code or barcode will be read on this area ONLY), start animation for scanner,that stoped when find any code. Frame always at center of the screen
-                    offsetForScannerFrame={10}   //(default 30) optional, offset from left and right side of the screen
-                    heightForScannerFrame={200}  //(default 200) optional, change height of the scanner frame
-                    colorForScannerFrame={'red'} //(default white) optional, change colot of the scanner frame
+                    scanBarcode={this.state.isScan}
+                    style={{ height: '100%', width: '100%' }}
+                    onReadCode={(event: any) => {
+                        if (!isOne) {
+                            isOne = true;
+                            this.onReadCode(event);
+                            setTimeout(() => {
+                                isOne = false;
+                            }, 2000)
+                        }
+                    }}
+                    cameraOptions={{
+                        flashMode: 'auto'
+                    }}
                 />
+                <Loader
+                    isLoading={this.state.isLoading}
+                />
+
             </ImageBackground>
 
         );
     }
 };
 
-const mapStateToProps=(State:any)=>{
+const mapStateToProps = (State: any) => {
     return {
-
+     isInternet:State.GlobalReducer.isInternet,
+     uid:State.PersistReducer.uid
     }
 }
-const mapDispatchToProps={
-    PersistOfflinekandiAction:PersistOfflinekandiAction
+const mapDispatchToProps = {
+    PersistOfflinekandiAction: PersistOfflinekandiAction
 }
-export default connect(mapStateToProps,mapDispatchToProps)(Scanner);
+export default connect(mapStateToProps, mapDispatchToProps)(Scanner);
 
 const styles = StyleSheet.create({
     container: {}

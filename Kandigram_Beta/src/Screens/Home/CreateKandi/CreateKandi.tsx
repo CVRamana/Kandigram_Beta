@@ -22,6 +22,7 @@ interface State {
     event: string
     kandiDesc: string
     ispublic: boolean
+    isprivate:boolean
     contHeight: number
     isOn: boolean
 }
@@ -42,13 +43,20 @@ class CreateKandi extends React.Component<CreateKandiProps, State> {
             kandiName: '',
             event: '',
             kandiDesc: '',
-            ispublic: false,
+            ispublic: true,
+            isprivate:false,
             contHeight: vh(50),
             isOn: false
 
         };
     };
 
+    radioButton=()=>{
+        this.setState({
+            ispublic:!this.state.ispublic,
+            isprivate:!this.state.isprivate
+        })
+    }
     getKandiImg = () => {
 
         ImagePicker.openPicker({
@@ -107,7 +115,7 @@ class CreateKandi extends React.Component<CreateKandiProps, State> {
                         >
                             <Image
                                 style={{
-                                    width: vw(21),
+                                    width: vw(11),
                                     height: vh(18),
                                 }}
                                 source={index.image.back}
@@ -156,12 +164,6 @@ class CreateKandi extends React.Component<CreateKandiProps, State> {
                             <TextInputComponent
                                 commonOnChangeText={(val: any) => this.setState({ event: val })}
                                 commonPlaceholder={"Add Event"}
-
-                                // commonOnBlur={() => {
-                                //     LayoutAnimation.configureNext(LayoutAnimation.Presets.linear);
-                                //     this.setState({ isOn: false, contHeight: vh(50) })
-                                // }
-                                // }
 
                                 commonOnFocus={() => {
                                     LayoutAnimation.configureNext(LayoutAnimation.Presets.linear);
@@ -243,11 +245,12 @@ class CreateKandi extends React.Component<CreateKandiProps, State> {
 
                     }}>
                         <View style={{ height: vh(316), width: vw(176), justifyContent: "center", alignItems: "center" }}>
-                            <TouchableOpacity onPress={() => this.setState({ ispublic: !this.state.ispublic })}>
+                            <TouchableOpacity onPress={() => this.radioButton()}>
                                 <Image
-                                    style={this.state.ispublic ? { height: vh(60), width: vw(60), } : { height: vh(60), width: vw(60), tintColor: 'red' }}
+                                    style={this.state.ispublic ? { height: vh(60), width: vw(60), tintColor: index.colors.lipstick } : { height: vh(60), width: vw(60), }}
                                     source={index.image.public}
                                     resizeMode="contain"
+                                    resizeMethod="resize"
                                 />
                             </TouchableOpacity>
                         </View>
@@ -257,12 +260,13 @@ class CreateKandi extends React.Component<CreateKandiProps, State> {
                             width: vw(176)
                         }}>
                             <TouchableOpacity
-                                onPress={() => this.setState({ ispublic: !(!this.state.ispublic) })}
+                                onPress={() => this.radioButton()}
                             >
                                 <Image
-                                    style={this.state.ispublic ? { height: vh(60), width: vw(60), tintColor: 'red' } : { height: vh(60), width: vw(60), }}
+                                    style={this.state.isprivate ? { height: vh(60), width: vw(60), tintColor: index.colors.lipstick } : { height: vh(60), width: vw(60), }}
                                     resizeMode="contain"
-                                    style={{ height: vh(60), width: vw(60) }}
+                                    resizeMethod="resize"
+                                
                                     source={index.image.private}
                                 />
                             </TouchableOpacity>
@@ -358,7 +362,7 @@ const styles = StyleSheet.create({
         height: vh(172),
         paddingLeft: vw(16),
         paddingRight: vw(16),
-        //backgroundColor: "transparent",
+       
         opacity: 0.6,
         fontFamily: "Ubuntu-Medium",
         fontSize: vw(16),

@@ -9,7 +9,8 @@
     "test": "jest",
     "yarn pod": "cd ios && pod install && cd ..",
     "lint": "eslint .",
-    "postinstall": "npx jetify"
+    "postinstall": "npx jetify",
+    "tcp":""
   },
   "dependencies": {
     "@react-native-community/async-storage": "^1.7.1",

@@ -3,10 +3,10 @@ const initialState = {
     uid: "",
     coverImg: '',
     profileImg: '',
-    OfflineKandies:[]
+    OfflineKandies: []
 }
 const PersistReducer = (state = initialState, action: any) => {
-    
+
     switch (action.type) {
 
         case actionTypes.offlineAction:
@@ -21,18 +21,21 @@ const PersistReducer = (state = initialState, action: any) => {
 
         case actionTypes.offlineKandies:
             debugger
-            return (Object as any ).assign({},state,{OfflineKandies: action.OfflineKandies})
-        
-            case actionTypes.Delete_PersistAction:
-                // debugger
-                 return (Object as any ).assign({},state,{
-                     uid: action.uid,
-                     coverImg:action.coverImg,
-                     profileImg:action.profileImg,
-                     OfflineKandies:action.OfflineKandies
-                    
+            return (Object as any).assign({}, state, { OfflineKandies: action.OfflineKandies })
 
-                })
+        case actionTypes.Offline_Uploaded:
+            return (Object as any).assign({},state,{ OfflineKandies: action.OfflineKandies })
+
+        case actionTypes.Delete_PersistAction:
+            // debugger
+            return (Object as any).assign({}, state, {
+                uid: action.uid,
+                coverImg: action.coverImg,
+                profileImg: action.profileImg,
+                OfflineKandies: action.OfflineKandies
+
+
+            })
 
         default:
             return state

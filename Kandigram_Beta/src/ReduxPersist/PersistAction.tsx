@@ -41,11 +41,11 @@ export const PersistOfflinekandiAction=(param:any,successCallback:Function,error
      //  let data = offlineKandies.splice(0,0,param)
       let data=[...offlineKandies,param]
        console.warn("datra : ",data)
-
         dispatch({
             type:actionTypes.offlineKandies,
             OfflineKandies: data,
         })
+        successCallback()
         
     }
 }
@@ -58,8 +58,16 @@ export const PersistDelete=(param:any,successCallback:Function,errorCallback:Fun
             coverImg:'',
             profileImg:"",
             OfflineKandies:[]
-        })
-        
+        })     
     }
-
 }
+
+export const PersistedKandiClear=(param:any,successCallback:Function,errorCallback:Function)=>{
+    return function (dispatch:Function,getState:Function) {
+        dispatch({
+            type:actionTypes.Offline_Uploaded,
+            OfflineKandies:[]
+        })     
+    }
+}
+

@@ -175,12 +175,12 @@ const TabNavigator = createBottomTabNavigator({
                             style={styles.iconImg} />
                 } else if (routeName === 'Scanner') {
                     return focused ? <Image resizeMode={'contain'} source={index.image.scancon}
-                        style={[styles.iconImg,{height:vh(60),width:vw(60),marginBottom:vh(39),position:"absolute",}]} /> : <Image resizeMode={'contain'} source={index.image.scancon}
-                            style={[styles.iconImg,{height:vh(60),width:vw(60),marginBottom:vh(39),position:"absolute"}]} />
+                        style={[styles.iconImg,{height:vh(60),width:vw(60),marginTop:vh(-30),}]} /> : <Image resizeMode={'contain'} source={index.image.scancon}
+                            style={[styles.iconImg,{height:vh(60),width:vw(60),marginTop:vh(-30),}]} />
 
                 } else if (routeName === 'Notifications') {
                     return focused ? <Image resizeMode={'contain'} source={index.image.NotIcon}
-                        style={{ height: vh(25), width: vw(25) }} /> :
+                        style={styles.iconImg} /> :
                         <Image resizeMode={'contain'} source={index.image.NotIconDis}
                             style={styles.iconImg} />
                 } else if (routeName === 'Profile') {
@@ -196,7 +196,7 @@ const TabNavigator = createBottomTabNavigator({
         tabBarOptions: {
             style: {
                 // marginBottom: vh(20),
-                height: vh(84),
+                height: vh(50),
                 backgroundColor: 'rgb(38,55,90)',
                 borderTopColor: 'transparent    '
             },
@@ -214,7 +214,8 @@ const TabNavigator = createBottomTabNavigator({
 const styles = StyleSheet.create({
     iconImg: {
         height: vh(25),
-        width: vw(25)
+        width: vw(25),
+       // marginTop:vh(10)
     }
 })
 

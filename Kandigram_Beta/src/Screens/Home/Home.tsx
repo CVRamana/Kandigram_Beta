@@ -13,7 +13,7 @@ interface HomeProps {
 interface State {
   isleft: boolean
   expanded: boolean
-  left1: number,
+
   animatedMargin: any
 
 }
@@ -27,39 +27,29 @@ if (Platform.OS === 'android') {
 class Home extends React.Component<HomeProps, State> {
   constructor(props: HomeProps) {
     super(props)
-    //  this.animatedValue = new Animated.Value(0)
+
     this.state = {
       isleft: true,
       expanded: false,
-      left1: 50,
       animatedMargin: new Animated.Value(vw(50))
-     
+
     };
   };
   componentDidMount() {
-    // alert(this.props.uid)
+   
   }
   animate = (val: number) => {
-    // this.animatedValue.setValue(0)
     Animated.timing(
       this.state.animatedMargin,
       {
         toValue: val,
-        duration: 700,
+        duration: 600,
         easing: Easing.linear,
       }
     ).start()
-    
   }
 
   render() {
-
-    // const marginLeft = this.animatedValue.interpolate({
-    //   inputRange: [0, 1],
-    //   outputRange:[vw(50),vw(-328)]
-    // }) 
-
-
     return (
       <ImageBackground
         source={{}} style={styles.container}>
@@ -78,7 +68,7 @@ class Home extends React.Component<HomeProps, State> {
             {/* //Search Button Pressed */}
             <TouchableOpacity
               onPress={
-                () => this.animate(-vw(328))}
+                () => this.animate(-vw(335))}
             >
               <Image
                 source={index.image.search}
@@ -134,9 +124,11 @@ class Home extends React.Component<HomeProps, State> {
               style={[styles.tab, {
                 marginTop: vh(0),
                 justifyContent: "space-around",
-                //alignItems:"center",
+               
                 flexDirection: "row",
-                marginLeft: vw(0), backgroundColor: "transparent", borderWidth: vw(0)
+                marginLeft: vw(0), 
+                backgroundColor: "transparent",
+                 borderWidth: vw(0)
               }]}
             >
 
@@ -168,7 +160,7 @@ class Home extends React.Component<HomeProps, State> {
               <View style={{ position: "absolute" }}>
                 <TouchableOpacity
                   onPress={() => {
-                    LayoutAnimation.configureNext(LayoutAnimation.Presets.linear)
+                    LayoutAnimation.configureNext(LayoutAnimation.Presets.spring)
                     // this.props.navigation.navigate('AddEvent')
                     this.setState({ isleft: !this.state.isleft })
                   }}
@@ -181,7 +173,7 @@ class Home extends React.Component<HomeProps, State> {
               <View style={{ position: "absolute" }}>
                 <TouchableOpacity
                   onPress={() => {
-                    LayoutAnimation.configureNext(LayoutAnimation.Presets.linear)
+                    LayoutAnimation.configureNext(LayoutAnimation.Presets.spring)
                     this.setState({ isleft: !this.state.isleft })
                   }}
                   activeOpacity={1}

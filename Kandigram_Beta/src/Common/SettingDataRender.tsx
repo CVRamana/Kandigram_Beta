@@ -66,6 +66,7 @@ const styles = StyleSheet.create({
   },
   container: {
     width: vw(343),
+    opacity:0.75,
     height: vh(80),
     marginTop: vh(20),
     marginLeft: vw(16),

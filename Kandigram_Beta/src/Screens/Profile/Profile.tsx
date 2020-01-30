@@ -54,7 +54,7 @@ class Profile extends React.Component<ProfileProps, State> {
 
     componentDidMount() {
         const { currentUser } = firebase.auth()
-        this.setState({ currentUser })
+       // this.setState({ currentUser })
       //  alert(JSON.stringify(this.props.uid))
         const self = this;
         var ref = firebase.database().ref("/Users").child(this.props.uid);
@@ -148,7 +148,6 @@ class Profile extends React.Component<ProfileProps, State> {
         return (
             <ImageBackground source={{}} style={styles.container}>
                 <HeaderComponent
-                    //   lastName={"JINDAL"}
                     firstText={"Welcome,"}
                     secondText={"Create Your Profile"}
                     handleClick={() => this.props.navigation.navigate('CreateKandi')}
@@ -191,24 +190,13 @@ class Profile extends React.Component<ProfileProps, State> {
                             </TouchableOpacity>
                         </View>
                         {/* Profile picture */}
-                        <View style={{
-                            marginTop:vh(-160),
-                            marginLeft:vw(20),
-                            shadowColor: "#000",
-                            shadowOffset: {
-                                width: 0,
-                                height: 9,
-                            },
-                            shadowOpacity: 0.48,
-                            shadowRadius: 11.95,
-                            elevation: 18,
-                        }}>
+                        <View style={styles.profileCont}>
                             <Image
                                 source={this.props.profileImg === "" ? index.image.profile : { uri: this.props.profileImg }}
                                 style={styles.profileImg}
                             >
                             </Image >
-                            <View style={{ marginTop: vh(-45), marginLeft:vw(-20) , zIndex: 3000 }}>
+                            <View style={{ marginTop: vh(-25), marginLeft:vw(-20) , zIndex: 300 }}>
                                 <TouchableOpacity
                                     style={styles.edit}
                                     activeOpacity={1}
@@ -240,15 +228,7 @@ class Profile extends React.Component<ProfileProps, State> {
                                     zindex: 100
                                 }}
                                 style={styles.TextStyle} />
-                            <Text style={{
-                                marginLeft: vw(290), opacity: 0.6,
-                                fontFamily: "Ubuntu-Medium",
-                                fontSize: vw(14),
-                                fontWeight: "normal",
-                                fontStyle: "normal",
-                                letterSpacing: 0.17,
-                                color: colors.whiteColor
-                            }}>{this.state.about.length}/400 </Text>
+                            <Text style={styles.count_cont}>{this.state.about.length}/400 </Text>
 
                         </View>
                        
@@ -299,6 +279,18 @@ const styles = StyleSheet.create({
         borderWidth: 2,
         borderColor: "#515f7b"
     },
+    profileCont:{
+        marginTop:vh(-160),
+        marginLeft:vw(20),
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 9,
+        },
+        shadowOpacity: 0.48,
+        shadowRadius: 11.95,
+        elevation: 18,
+    },
     gallery: {
 
         height: 40,
@@ -313,6 +305,15 @@ const styles = StyleSheet.create({
         // justifyContent:"center",
         alignItems: "center"
         //backgroundColor:"red"
+    },
+    count_cont:{
+        marginLeft: vw(290), opacity: 0.6,
+        fontFamily: "Ubuntu-Medium",
+        fontSize: vw(14),
+        fontWeight: "normal",
+        fontStyle: "normal",
+        letterSpacing: 0.17,
+        color: colors.whiteColor
     },
     coverText: {
         opacity: 0.4,

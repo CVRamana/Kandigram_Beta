@@ -46,6 +46,7 @@ class AddEvent extends React.Component<AddEventProps,State> {
                 console.warn("sucess fully uploaded")
             }
         })
+       
 
     }
 

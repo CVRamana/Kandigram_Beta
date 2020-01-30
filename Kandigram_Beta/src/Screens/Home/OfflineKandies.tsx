@@ -1,28 +1,101 @@
 import * as React from 'react';
-import { Text, View, StyleSheet, ImageBackground,TouchableOpacity, ScrollView, Image } from 'react-native';
+import { Text, View, StyleSheet, ImageBackground,TouchableOpacity, ScrollView, Image, FlatList } from 'react-native';
 import index from "../../Utils/Constants/index";
 import { vh, vw } from '../../Common/ResponsiveScreen';
 import { connect } from "react-redux";
-import { PersistOfflinekandiAction } from '../../ReduxPersist/PersistAction';
+import firebase from "react-native-firebase";
+import { PersistOfflinekandiAction,PersistedKandiClear } from '../../ReduxPersist/PersistAction';
 
 interface OfflineKandiesProps {
 navigation:any
 OfflineKandies:any
+PersistedKandiClear:Function
 }
 
 interface State {
 
 }
-
+var x=0
 class OfflineKandies extends React.Component<OfflineKandiesProps, State> {
   constructor(props:OfflineKandiesProps) {
     super(props)
     this.state = {  
     };
   };
-  componentDidMount(){
-   //this.props.PersistOfflinekandiAction("raman")
-    
+  //uploading online the scanned offline kandies
+  uploadOnline=()=>{
+    let val:any=this.props.OfflineKandies
+    val.map((i:any)=>{
+    var ref=firebase.database().ref('/Users').child(this.props.uid).child('Scanned_Kandies')
+    ref.push(i,(res)=>{
+        if(res===null){
+            console.warn("sucessfully uploaded")  
+            this.props.PersistedKandiClear()
+        }
+    })
+  })
+  }
+  render_Item=(item)=>{
+    return(
+      <View style={styles.data}>
+      <View style={{ flexDirection: "row" }}>
+        <View>
+          <Image
+          source={{}}
+            style={styles.profileImg}
+          />
+        </View>
+        <View style={styles.txtData}>
+          <Text style={styles.txt}>Undiscovered Kandi </Text>
+    <Text style={[styles.txt, { fontSize: vw(13) }]}>{item}</Text>
+        </View>
+        {/* //icon container */}
+        <View style={styles.iconRefresh}>
+          <Image
+            source={index.image.refresh}
+          />
+        </View>
+      </View>
+      <View style={styles.icons}>
+        <View style={styles.iconContainer}>
+          <Image
+            style={{}}
+            source={index.image.camera}
+          />
+          <Text style={{ marginLeft: vw(6) }}>12</Text>
+
+
+        </View>
+        <View style={styles.iconContainer}>
+          <Image
+            style={{}}
+            source={index.image.likeStats}
+
+          />
+          <Text style={{ marginLeft: vw(6) }}>12</Text>
+
+        </View>
+        <View style={styles.iconContainer}>
+          <Image
+            style={{}}
+            source={index.image.comment}
+
+          />
+          <Text style={{ marginLeft: vw(6) }}>12</Text>
+
+        </View>
+        <View style={styles.iconContainer}>
+          <Image
+            style={{}}
+            source={index.image.camera}
+
+          />
+          <Text style={{ marginLeft: vw(6) }}>12</Text>
+
+        </View>
+      </View>
+    </View>
+    )
   }
 
   render() {
@@ -49,7 +122,8 @@ class OfflineKandies extends React.Component<OfflineKandiesProps, State> {
             </TouchableOpacity>
             <Text style={styles.txt}>Offline Kandies</Text>
             <TouchableOpacity
-            onPress={()=>this.props.navigation.navigate('Details')}
+            onPress={()=>this.uploadOnline()}
+
             >
             <Image
               style={styles.refresh}
@@ -59,67 +133,10 @@ class OfflineKandies extends React.Component<OfflineKandiesProps, State> {
           </View>
 
         </ImageBackground>
-        <ScrollView>
-          <View style={styles.data}>
-            <View style={{ flexDirection: "row" }}>
-              <View>
-                <Image
-                source={{}}
-                  style={styles.profileImg}
-                />
-              </View>
-              <View style={styles.txtData}>
-                <Text style={styles.txt}>Undiscovered Kandi </Text>
-                <Text style={[styles.txt, { fontSize: vw(13) }]}>Offline kandi</Text>
-              </View>
-              {/* //icon container */}
-              <View style={styles.iconRefresh}>
-                <Image
-                  source={index.image.refresh}
-                />
-              </View>
-            </View>
-            <View style={styles.icons}>
-              <View style={styles.iconContainer}>
-                <Image
-                  style={{}}
-                  source={index.image.camera}
-                />
-                <Text style={{ marginLeft: vw(6) }}>12</Text>
-
-
-              </View>
-              <View style={styles.iconContainer}>
-                <Image
-                  style={{}}
-                  source={index.image.likeStats}
-
-                />
-                <Text style={{ marginLeft: vw(6) }}>12</Text>
-
-              </View>
-              <View style={styles.iconContainer}>
-                <Image
-                  style={{}}
-                  source={index.image.comment}
-
-                />
-                <Text style={{ marginLeft: vw(6) }}>12</Text>
-
-              </View>
-              <View style={styles.iconContainer}>
-                <Image
-                  style={{}}
-                  source={index.image.camera}
-
-                />
-                <Text style={{ marginLeft: vw(6) }}>12</Text>
-
-              </View>
-            </View>
-          </View>
-
-        </ScrollView>
+        <FlatList
+        data={this.props.OfflineKandies}
+        renderItem={({item})=>this.render_Item(item)}
+        />
 
       </ImageBackground>
 
@@ -129,12 +146,14 @@ class OfflineKandies extends React.Component<OfflineKandiesProps, State> {
 
 const mapStateToProps=(state:any)=>{
   return{
+    uid:state.PersistReducer.uid,
     OfflineKandies:state.PersistReducer.OfflineKandies
   }
 
 }
 const mapDispatchToProps={
-  PersistOfflinekandiAction:PersistOfflinekandiAction
+  PersistOfflinekandiAction:PersistOfflinekandiAction,
+  PersistedKandiClear:PersistedKandiClear
 }
 
 export default connect(mapStateToProps,mapDispatchToProps)(OfflineKandies);
