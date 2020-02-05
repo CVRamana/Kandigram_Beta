@@ -10,6 +10,7 @@ export default{
     chatDataAction:"ChatData",
     HomeAction:"HomeAction",
     Delete_PersistAction:"Delete_Persist_Reducer",
-    Offline_Uploaded:"offline kandi uploaded on the firebase"
+    Offline_Uploaded:"offline kandi uploaded on the firebase",
+    getfcmToken:"getTheFCMToken",
     
 }

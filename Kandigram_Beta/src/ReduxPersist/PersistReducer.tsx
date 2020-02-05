@@ -3,7 +3,8 @@ const initialState = {
     uid: "",
     coverImg: '',
     profileImg: '',
-    OfflineKandies: []
+    OfflineKandies: [],
+    fcmToken:'',
 }
 const PersistReducer = (state = initialState, action: any) => {
 
@@ -36,6 +37,8 @@ const PersistReducer = (state = initialState, action: any) => {
 
 
             })
+        case actionTypes.getfcmToken:
+            return (Object as any).assign({},state,{fcmToken:action.fcmToken})
 
         default:
             return state

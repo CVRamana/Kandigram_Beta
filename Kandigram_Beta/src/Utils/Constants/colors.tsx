@@ -1,4 +1,5 @@
-export default{
+export default
+{
     backgroundColor: '#131f34',
     textInputBorderColor: "#213d79",
     textInputBGColor:"rgba(18, 40, 87, 0.75)",
@@ -12,5 +13,12 @@ export default{
     secondtextInputColor:"rgba(18, 40, 87, 0.75)",
     secondBorderColor:"#213d79",
     darkSlateBlue75:"#122857",
-    buttonBG:"rgb(233, 30, 99)"
+    buttonBG:"rgb(233, 30, 99)",
+    inactiveTintColor:'#6a6b6b',
+    color1:'rgb( 75 ,168 ,244)',
+    color2:'rgb(46 ,196, 182)',
+    color3:'rgb(244, 130, 127)',
+    color4:'rgb(201, 137 ,211 )',
+    color5:'rgb(75 ,168 ,244)'
+  
 }

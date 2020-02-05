@@ -46,8 +46,6 @@ class AddEvent extends React.Component<AddEventProps,State> {
                 console.warn("sucess fully uploaded")
             }
         })
-       
-
     }
 
     render() {
@@ -68,7 +66,6 @@ class AddEvent extends React.Component<AddEventProps,State> {
                     </View>
                 </ImageBackground>
                 <View style={ styles.inputContainer1}>
-
                     <TextInputComponent
                         commonPlaceholder={"Event Name*"}
                         commonOnChangeText={(val:any)=>this.setState({event_name:val})}
@@ -88,6 +85,8 @@ class AddEvent extends React.Component<AddEventProps,State> {
                     onPress={()=>this.setState({showCalander:!this.state.showCalander})}
                      style={styles.dateCont}>
                         <Image source={index.image.calander}
+                        resizeMethod={"resize"}
+                        resizeMode={"contain"}
                         style={styles.img}
                         />
                     </TouchableOpacity>
@@ -104,7 +103,8 @@ class AddEvent extends React.Component<AddEventProps,State> {
                      activeOpacity={1}
                       style={styles.dateCont}>
                      <Image
-                     
+                      resizeMethod={"resize"}
+                      resizeMode={"contain"}
                    //  style={styles.img}
                      source={index.image.loc}
                      />
@@ -147,6 +147,7 @@ const styles = StyleSheet.create({
     },
     headText: {
         flexDirection: "row",
+        alignItems:"center",
         marginTop: vh(60),
         marginLeft: vw(16)
     },
@@ -161,7 +162,7 @@ const styles = StyleSheet.create({
     },
     backImg: {
         height: vh(18),
-        width: vw(21)
+        width: vw(11)
     },
     inputContainer1:{ marginLeft: vw(16), marginTop: vh(30)},
     inputContainer:{
@@ -169,7 +170,7 @@ const styles = StyleSheet.create({
         height: heightPercentageToDP(calculateHeight(50)),
       //  marginTop:widthPercentageToDP(calculateWidth(20)),
         borderRadius: 1000,
-        //paddingLeft: 20,
+       
         fontSize:heightPercentageToDP(calculateHeight(16)),
         backgroundColor:colors.textInputBGColor,
         borderColor:colors.textInputBorderColor,

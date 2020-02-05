@@ -14,14 +14,15 @@ import firebase from 'react-native-firebase'
 import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler';
 import Loader from '../../../Common/loader';
 import Snackbar from '../../../Common/Snackbar';
+import { db } from "../../../Utils/FirebaseConfig";
 
 
 interface LoginProps {
     PersistAction: Function
     navigation: any
     isInternet: boolean
-
-
+    fcmToken:String
+    uid:String
 }
 interface State {
     isSecure: boolean
@@ -81,7 +82,6 @@ class Login extends React.Component<LoginProps, State> {
         }
         else {
             this.setState({ b2Color: "red", t2Color: "red" })
-            // alert('Wrong...!')
             return false;
         }
     }
@@ -100,11 +100,22 @@ class Login extends React.Component<LoginProps, State> {
                     this.props.PersistAction(uid)
                     console.log(res.user.uid)
                  //   debugger
+                    this.updateUserNode(this.props.uid)
                     this.props.navigation.navigate('Home')
                     this.setState({ isloading: false })
                 }
             )
             .catch(error => this.setState({ errorMessage: error.message, isloading: false }, () => alert(error.message)))
+    }
+
+   // updating the usernode for fcmToken
+
+    updateUserNode=(uid:string)=>{
+        let val={fcmToken:this.props.fcmToken}
+        db.ref('/Users').child(uid).update(val, (result) => {
+            console.warn("incoming result:" + JSON.stringify(result), "null means OKK")
+        })
+
     }
 
     render() {
@@ -169,11 +180,8 @@ class Login extends React.Component<LoginProps, State> {
                             flexDirection: "row",
                             width: vw(200),
                             justifyContent: "space-around"
-
-
                         }}>
                             <TouchableOpacity
-
                             >
                                 <Image
                                     source={{}}
@@ -202,9 +210,6 @@ class Login extends React.Component<LoginProps, State> {
                     </View>
                 }
             </ImageBackground>
-
-
-
         );
 
     }
@@ -266,7 +271,9 @@ const styles = StyleSheet.create({
 });
 const mapStateToProps = (state: any) => {
     return {
-        isInternet: state.GlobalReducer.isInternet
+        isInternet: state.GlobalReducer.isInternet,
+        fcmToken:state.PersistReducer.fcmToken,
+        uid:state.PersistReducer.uid
     }
 }
 const mapDispatchToProps = {

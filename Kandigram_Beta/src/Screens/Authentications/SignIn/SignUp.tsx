@@ -35,6 +35,7 @@ interface Props {
   val: string
   commonPlaceholder: string
   commonReturnKeyType: string
+  fcmToken:String
   commonOnChangeText: Function
 
 
@@ -104,6 +105,7 @@ class SignUp extends React.Component<Props, State> {
           mobile: this.props.mobile,
           username: this.props.username,
           password: this.props.password,
+          fcmToken: this.props.fcmToken
         }
         this.setNewUserToFireBase(values, res.user.uid)
         // this.props.navigation.navigate('Profile')
@@ -479,6 +481,7 @@ const mapStateToProps = (state: any) => {
     mobile: state.SignInReducer.mobile,
     email: state.SignInReducer.email,
     password: state.SignInReducer.password,
+    fcmToken:state.PersistReducer.fcmToken,
   }
 }
 

@@ -4,7 +4,7 @@ import index from "../../Utils/Constants/index";
 import { vh, vw } from '../../Common/ResponsiveScreen';
 import SettingDataRender from "../../Common/SettingDataRender";
 import AsyncStorage from "@react-native-community/async-storage";
-import { connect } from "react-redux";
+import {connect} from "react-redux";
 import  {PersistDelete} from "../../ReduxPersist/PersistAction";
 
 interface SettingsProps {
@@ -67,8 +67,8 @@ class Settings extends React.Component<SettingsProps, State> {
                                     txt={item.name}
                                     img={item.img}
                                     name={item.navigateTo}
+                                    
                                     //  onClick={()=>this.onPress(item.navigateTo)}
-
                                     onClick={index === 5 ? () => { 
                                     AsyncStorage.clear();
                                     this.props.PersistDelete()
@@ -85,14 +85,13 @@ class Settings extends React.Component<SettingsProps, State> {
         );
     }
 };
+
 const mapDispatchToProps={
 PersistDelete:PersistDelete
 }
 const mapStateToProps=(state:any)=>{
     return{
-
     }
-
 }
 
 export default connect(mapStateToProps,mapDispatchToProps)(Settings);
@@ -102,7 +101,7 @@ const styles = StyleSheet.create({
         flex: 1,
         // marginTop:100,
          paddingTop: vh(90),
-        backgroundColor: "pink"
+        backgroundColor: index.colors.darkSlateBlue75
     }, bg: {
         position: "absolute",
         width: vw(375),

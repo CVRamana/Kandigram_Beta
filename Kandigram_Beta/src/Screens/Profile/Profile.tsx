@@ -48,14 +48,15 @@ class Profile extends React.Component<ProfileProps, State> {
             profilePic: '',
             picCon: false,
             profileUrl: "",
-            coverUrl: ""
+            coverUrl: "",
+
         };
     };
 
     componentDidMount() {
         const { currentUser } = firebase.auth()
-       // this.setState({ currentUser })
-      //  alert(JSON.stringify(this.props.uid))
+        // this.setState({ currentUser })
+        //  alert(JSON.stringify(this.props.uid))
         const self = this;
         var ref = firebase.database().ref("/Users").child(this.props.uid);
         ref.on("value", function (snapshot) {
@@ -63,7 +64,7 @@ class Profile extends React.Component<ProfileProps, State> {
             snapshot._value.ProfileImage;
             self.props.PersistProfileImgAction(snapshot._value.ProfileImage)
             self.props.PersistCoverImgAction(snapshot._value.coverImage)
-          
+
             debugger
         }, function (error) {
             console.log("Error: " + error.code);
@@ -72,9 +73,7 @@ class Profile extends React.Component<ProfileProps, State> {
 
     }
     // to clear the Database
-    clearAsyncStorage = () => {
-        AsyncStorage.clear();
-    }
+
 
     //gallery
     opengallery = () => {
@@ -121,7 +120,7 @@ class Profile extends React.Component<ProfileProps, State> {
                             })
                             this.updateTheUserNode(this.props.uid, {
                                 "ProfileImage": data,
-                              
+
                             })
                         })
                     })
@@ -138,7 +137,7 @@ class Profile extends React.Component<ProfileProps, State> {
     updateTheUserNode = (uid: string, obj: Object) => {
         console.warn("#obj" + obj)
         db.ref('/Users').child(uid).update(obj, (result) => {
-            console.warn("incoming result:" + JSON.stringify(result), "null means OKK")
+            console.warn("incoming result:" + "null means OKK")
         })
     }
 
@@ -163,30 +162,32 @@ class Profile extends React.Component<ProfileProps, State> {
                                 onPress={() => this.opengallery()}
                             // style={styles.galleryContainer}
                             >
-                                <Image
-                                resizeMethod={"resize"}
-                                resizeMode={"stretch"}
-                                    source={this.props.coverImg === "" ? null : { uri: this.props.coverImg }}
-                                    style={styles.coverImage}
-                                >
-                                </Image>
 
-                                {this.props.coverImg === "" ?
-                                    <View style={{
-                                        flexDirection: 'row',
-                                        alignItems: "center",
-                                        marginTop:vh(-100),
-                                        marginLeft:vw(80)
-                                    }}>
-                                        <Image
-                                            resizeMode="stretch"
+
+                                {
+                                    this.props.coverImg === "" ?
+                                        <View style={{
+                                            flexDirection: 'row',
+                                            alignItems: "center",
+                                            marginTop: vh(-100),
+                                            marginLeft: vw(80)
+                                        }}>
+                                            <Image
+                                                resizeMode="stretch"
+                                                resizeMethod={"resize"}
+                                                style={styles.gallery}
+                                                source={index.image.gallery}
+                                            />
+                                            <Text style={styles.coverText}> Add Cover Image. </Text>
+                                        </View>
+                                        : <Image
                                             resizeMethod={"resize"}
-                                            style={styles.gallery}
-                                            source={index.image.gallery}
-                                        />
-                                        <Text style={styles.coverText}> Add Cover Image. </Text>
-                                    </View>
-                                    : null } 
+                                            resizeMode={"cover"}
+                                            source={this.props.coverImg === "" ? null : { uri: this.props.coverImg }}
+                                            style={styles.coverImage}
+                                        >
+                                        </Image>
+                                }
                             </TouchableOpacity>
                         </View>
                         {/* Profile picture */}
@@ -196,7 +197,7 @@ class Profile extends React.Component<ProfileProps, State> {
                                 style={styles.profileImg}
                             >
                             </Image >
-                            <View style={{ marginTop: vh(-25), marginLeft:vw(-20) , zIndex: 300 }}>
+                            <View style={{ marginTop: vh(-25), marginLeft: vw(-20), zIndex: 300 }}>
                                 <TouchableOpacity
                                     style={styles.edit}
                                     activeOpacity={1}
@@ -209,47 +210,49 @@ class Profile extends React.Component<ProfileProps, State> {
                         </View>
 
                         <Text style={styles.addBio}>Add Bio </Text>
-                        <View style={{marginLeft:vw(18)}}>
-                        <View style={styles.describeStyle}>
-                            <TextInput
-                                multiline={true}
-                                value={this.state.about}
-                                maxLength={400}
-                                onChangeText={(val) => this.setState({ about: val })}
-                                placeholder="Describe Yourself"
-                                placeholderTextColor={colors.whiteColor}
-                                placeholderStyle={{
-                                    opacity: 1,
-                                    fontSize: 19,
-                                    fontWeight: "500",
-                                    fontStyle: "normal",
-                                    letterSpacing: 0.19,
-                                    color: colors.whiteColor,
-                                    zindex: 100
-                                }}
-                                style={styles.TextStyle} />
-                            <Text style={styles.count_cont}>{this.state.about.length}/400 </Text>
+                        <View style={{ marginLeft: vw(18) }}>
+                            <View style={styles.describeStyle}>
+                                <TextInput
+                                    multiline={true}
+                                    value={this.state.about}
+                                    maxLength={400}
+                                    onChangeText={(val) => this.setState({ about: val })}
+                                    placeholder="Describe Yourself"
+                                    placeholderTextColor={colors.whiteColor}
+                                    placeholderStyle={{
+                                        opacity: 1,
+                                        fontSize: 19,
+                                        fontWeight: "500",
+                                        fontStyle: "normal",
+                                        letterSpacing: 0.19,
+                                        color: colors.whiteColor,
+                                        zindex: 100
+                                    }}
+                                    style={styles.TextStyle} />
+                                <Text style={styles.count_cont}>{this.state.about.length}/400 </Text>
 
+                            </View>
+
+                            <TouchableOpacity
+                                onPress={() => this.props.navigation.navigate("Settings")}
+                                style={styles.Social_Button}>
+
+                            </TouchableOpacity>
+
+                            <TouchableOpacity
+                             style={[styles.Social_Button, { marginBottom: vh(48) }]}
+                             onPress={()=>alert(this.props.navigation.navigate('ProfileGallery'))}
+                          
+                             >
+
+                            </TouchableOpacity>
+                            <ButtonComponent
+                                name="Create Profile"
+                                onButtonPress={() => this.onProfileSubmit()
+
+                                }
+                            />
                         </View>
-                       
-                        <TouchableOpacity
-                        onPress={()=>this.props.navigation.navigate("Settings")}
-                         style={styles.Social_Button}>
-
-                        </TouchableOpacity>
-
-                        <TouchableOpacity style={[styles.Social_Button, { marginBottom: vh(48) }]}>
-
-                        </TouchableOpacity>
-                        <ButtonComponent
-                            name="Create Profile"
-                            onButtonPress={() => this.onProfileSubmit()
-
-                            }
-                        />
-
-
-</View>
                     </View>
                 </ScrollView>
             </ImageBackground>
@@ -273,15 +276,15 @@ const styles = StyleSheet.create({
         height: heightPercentageToDP(calculateHeight(210)),
         marginLeft: widthPercentageToDP(calculateWidth(16)),
         marginTop: heightPercentageToDP(calculateHeight(50)),
-        borderRadius: 30,
+        borderRadius: vw(30),
         backgroundColor: "rgba(18, 40, 87, 0.7)",
         borderStyle: "solid",
         borderWidth: 2,
         borderColor: "#515f7b"
     },
-    profileCont:{
-        marginTop:vh(-160),
-        marginLeft:vw(20),
+    profileCont: {
+        marginTop: vh(-160),
+        marginLeft: vw(20),
         shadowColor: "#000",
         shadowOffset: {
             width: 0,
@@ -293,20 +296,18 @@ const styles = StyleSheet.create({
     },
     gallery: {
 
-        height: 40,
-        width: 40,
-        marginRight: 17,
-        // backgroundColor:"red"
+        height: vh(40),
+        width: vw(40),
+        marginRight: vw(17),
     },
     galleryContainer: {
-        marginTop: 48,
-        marginLeft: 71,
+        marginTop: vh(48),
+        marginLeft: vw(71),
         flexDirection: "row",
-        // justifyContent:"center",
         alignItems: "center"
-        //backgroundColor:"red"
+
     },
-    count_cont:{
+    count_cont: {
         marginLeft: vw(290), opacity: 0.6,
         fontFamily: "Ubuntu-Medium",
         fontSize: vw(14),
@@ -318,7 +319,7 @@ const styles = StyleSheet.create({
     coverText: {
         opacity: 0.4,
         fontFamily: "Ubuntu",
-        fontSize: 18,
+        fontSize: vw(18),
         fontWeight: "500",
         fontStyle: "normal",
         letterSpacing: 0.22,
@@ -331,7 +332,7 @@ const styles = StyleSheet.create({
         marginLeft: widthPercentageToDP(calculateWidth(118)),
         // backgroundColor: "red",
         zIndex: 300,
-        borderRadius:vh(60)
+        borderRadius: vh(60)
         // widthPercentageToDP(calculateWidth(50))
 
     },

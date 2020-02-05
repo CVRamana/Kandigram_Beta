@@ -11,6 +11,7 @@ import firebase from 'react-native-firebase'
 import { connect } from "react-redux";
 
 
+
 interface CreateKandiProps {
     uid: string
 }
@@ -109,7 +110,7 @@ class CreateKandi extends React.Component<CreateKandiProps, State> {
                     resizeMode={"stretch"}
                     source={index.image.creteKandi}
                     style={styles.bg}>
-                    <View style={{ flexDirection: "row", marginTop: vh(56), marginLeft: vw(16) }}>
+                    <View style={{ flexDirection: "row", marginTop: vh(56),alignItems:"center", marginLeft: vw(16) }}>
                         <TouchableOpacity
                             onPress={() => this.props.navigation.navigate('Home')}
                         >
@@ -126,7 +127,9 @@ class CreateKandi extends React.Component<CreateKandiProps, State> {
                         <Text style={styles.txt}>Create a Kandi</Text>
                     </View>
                 </ImageBackground>
-                <ScrollView style={{ paddingTop: vh(100), flex: 1, }}>
+                <ScrollView 
+                ref='_scrollView'
+                style={{ paddingTop: vh(100), flex: 1, }}>
                     {/* Choose Image */}
                     {this.state.kandiImg === "" ? <View style={styles.kandiImg} >
                         <TouchableOpacity
@@ -166,8 +169,11 @@ class CreateKandi extends React.Component<CreateKandiProps, State> {
                                 commonPlaceholder={"Add Event"}
 
                                 commonOnFocus={() => {
+                                    this.refs._scrollView.scrollTo({x:0,y:0,animated:true});
+                                   
                                     LayoutAnimation.configureNext(LayoutAnimation.Presets.linear);
                                     this.setState({ contHeight: vh(340), isOn: true })
+                                   
                                 }
                                     //()=>this.props.navigation.navigate('AddEvent')
                                 }

@@ -50,6 +50,7 @@ export default{
    faq:require('../../Common/Public/Images/FaqIcon.png'),
    lock:require('../../Common/Public/Images/LockIcon.png'),
    logout:require('../../Common/Public/Images/LogOutIcon.png'),
-   
+   below:require('../../Common/Public/Images/Back.png'),
+   setting:require('../../Common/Public/Images/Settingsicon.png')
    
 }

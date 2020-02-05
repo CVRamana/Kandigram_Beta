@@ -9,7 +9,6 @@ import { createAppContainer } from 'react-navigation';
 
 interface Events_PeopleProps { }
 
-
 const TopTab = createAppContainer(createMaterialTopTabNavigator(
     {
         Events: { screen: Events },
@@ -18,7 +17,7 @@ const TopTab = createAppContainer(createMaterialTopTabNavigator(
    {
     tabBarOptions: {
         activeTintColor:index.colors.whiteColor,
-        inactiveTintColor:'#6a6b6b',
+        inactiveTintColor:index.colors.inactiveTintColor,
         upperCaseLabel:false,
         indicatorStyle:{backgroundColor:index.colors.whiteColor},
         labelStyle: {
@@ -91,10 +90,6 @@ class Events_People extends React.Component<Events_PeopleProps> {
         );
     }
 };
-
-
-
-
 export default Events_People;
 
 const styles = StyleSheet.create({

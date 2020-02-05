@@ -1,10 +1,10 @@
 import * as React from 'react';
-import { Text, View, StyleSheet, ImageBackground, TextInput, Image } from 'react-native';
+import { Text, View, StyleSheet, ImageBackground, TextInput, Image, FlatList } from 'react-native';
 import index from "../../../Utils/Constants/index";
 import { vw, vh } from '../../../Common/ResponsiveScreen';
 
-interface DiscoverProps { 
-    navigation:any
+interface DiscoverProps {
+    navigation: any
 }
 
 class Discover extends React.Component<DiscoverProps> {
@@ -41,18 +41,48 @@ class Discover extends React.Component<DiscoverProps> {
                             <TextInput
                                 style={styles.tinput}
                                 onFocus={
-                                   // ()=>alert("callede")
-                                   ()=>this.props.navigation.navigate('Events_People')
+                                   
+                                    () => this.props.navigation.navigate('Events_People')
                                 }
                             />
                         </View>
                     </View>
                 </ImageBackground>
-                <View style={{ marginTop: vh(40) }}>
+                <View style={{ marginTop: vh(190), marginLeft: vw(16) }}>
                     <Text
                         style={styles.txt}
                     > Trending Events</Text>
                 </View>
+
+
+                <View>
+                    <FlatList
+                        data={[{}, {}, {}, {}]}
+                        horizontal={true}
+                        renderItem={({ item }) => {
+                            return (
+                                <View style={styles.render}>
+
+                                </View>
+                            )
+                        }}
+                    />
+                </View >
+
+                <View style={styles.coll}>
+                    <FlatList style={{ margin: 5 }}
+                        data={[{},{},{},{},{},{},{},{},{},{},{},{},{},{}]}
+                        numColumns={3}
+                        keyExtractor={(item, index) => item.id}
+                        renderItem={(item) => {
+                            return(
+                                <View style={styles.card}>
+                                    </View>
+                            )
+                        }}
+                    />
+                </View>
+
             </ImageBackground>
         );
     }
@@ -61,9 +91,35 @@ class Discover extends React.Component<DiscoverProps> {
 export default Discover;
 
 const styles = StyleSheet.create({
+    coll: {
+        marginTop: vh(42),
+       // backgroundColor: "red",
+       flex: 1,
+        alignItems:"baseline"
+
+    },
+    card:{
+        width: vw(101),
+        height: vh(101),
+        marginLeft: vw(16),
+      borderRadius:vw(10),
+        marginBottom: vh(12),
+        backgroundColor:"grey"
+    },
     container: {
         flex: 1,
         paddingTop: 50,
+    },
+    render: {
+        width: vw(102),
+        height: vh(40),
+        marginTop: vh(21),
+        marginLeft: vw(16),
+        borderRadius: vw(8),
+        backgroundColor: index.colors.darkSlateBlue75,
+        borderStyle: "solid",
+        borderWidth: vw(2),
+        borderColor: "#213d79"
     },
     discBG: {
         position: "absolute",
@@ -97,7 +153,7 @@ const styles = StyleSheet.create({
     },
     txt: {
         fontFamily: "Ubuntu-Bold",
-        fontSize: vw(24),
+        fontSize: vw(18),
         fontWeight: "bold",
         fontStyle: "normal",
         letterSpacing: 0.29,

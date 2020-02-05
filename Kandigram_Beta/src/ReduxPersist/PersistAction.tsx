@@ -1,5 +1,5 @@
 import actionTypes from "../Utils/Constants/actionTypes";
-import { func } from "prop-types";
+
 
 
 export const PersistAction = (params: any, successCallback: Function, errorCallback: Function) => {
@@ -11,12 +11,9 @@ export const PersistAction = (params: any, successCallback: Function, errorCallb
             uid: params
         })
     }
-
 }
 export const PersistCoverImgAction = (param: any, successCallback: Function, errorCallback: Function) => {
-    return function (dispatch: Function, getState: Function) {
-     
-        
+    return function (dispatch: Function, getState: Function) {   
         dispatch({
             type: actionTypes.offlineCoverImg,
             coverImg: param
@@ -71,3 +68,13 @@ export const PersistedKandiClear=(param:any,successCallback:Function,errorCallba
     }
 }
 
+export const PersistFCMAction=(param:any,successCallback:Function,errorCallback:Function)=>{
+    return function (dispatch:Function,getState:Function) {
+        debugger
+        dispatch({
+            type:actionTypes.getfcmToken,
+            fcmToken:param
+        })
+    }
+
+}

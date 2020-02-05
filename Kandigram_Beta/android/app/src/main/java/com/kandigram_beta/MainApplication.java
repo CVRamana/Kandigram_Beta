@@ -8,8 +8,6 @@ import android.util.Log;
 import com.facebook.react.PackageList;
 
 //import com.wix.RNCameraKit.RNCameraKitPackage;
-
-
 import com.facebook.hermes.reactexecutor.HermesExecutorFactory;
 import com.facebook.react.bridge.JavaScriptExecutorFactory;
 
@@ -24,6 +22,8 @@ import java.util.List;
 
 import io.invertase.firebase.auth.RNFirebaseAuthPackage;
 import io.invertase.firebase.database.RNFirebaseDatabasePackage;
+import io.invertase.firebase.notifications.RNFirebaseNotificationsPackage;
+import io.invertase.firebase.messaging.RNFirebaseMessagingPackage;
 
 public class MainApplication extends Application implements ReactApplication {
 
@@ -43,7 +43,8 @@ public class MainApplication extends Application implements ReactApplication {
           // packages.add(new MyReactNativePackage());
             packages.add(new RNFirebaseAuthPackage());
             packages.add(new RNFirebaseDatabasePackage());
-
+           packages.add(new RNFirebaseMessagingPackage());
+            packages.add(new RNFirebaseNotificationsPackage());
            // packages.add(new RNCameraKitPackage());
           return packages;
         }

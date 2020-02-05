@@ -6,6 +6,7 @@ import {
   View,
   Dimensions,
   Text,
+  Alert,
   Image,
   TouchableOpacity,
   Platform,
@@ -21,7 +22,10 @@ import Colors from "../../Utils/Constants/colors";
 import colors from '../../Utils/Constants/colors';
 import { heightPercentageToDP, widthPercentageToDP } from 'react-native-responsive-screen';
 import { GlobalInternetAction } from "../../GlobalRedux/GlobalAction";
+
 import Loader from '../loader';
+import firebase,{RemoteMessage} from 'react-native-firebase'
+import { PersistFCMAction } from '../../ReduxPersist/PersistAction';
 const { width, height } = Dimensions.get('window');
 
 const slides = [
@@ -56,27 +60,111 @@ const isAndroidRTL = I18nManager.isRTL && Platform.OS === 'android';
 class AppIntroSlider extends React.Component {
   constructor(props) {
     super(props)
-
     this.state = {
       isloading: false
     };
   };
 
 
-  componentDidMount() {
+  async componentDidMount() {
     NetInfo.addEventListener(state => {
       let isConnected1 = state.isConnected
       this.props.GlobalInternetAction(isConnected1)
     })
     setTimeout(() => {
+      this.checkPermission()
+      this.createNotificationListeners(); //add this line
       this.authenticate()
     }, 1000);
 
   }
-  authenticate = () => {
-  
-   // console.warn("uid from the persist", this.props.uid,this.props.OfflineKandies);
+//
+componentWillUnmount() {
+  this.messageListener();
+}
 
+  //get the FCM Token
+  async checkPermission() {
+    const enabled = await firebase.messaging().hasPermission();
+    if (enabled) {
+      this.getToken();
+    } else {
+      this.requestPermission();
+
+    }
+  }
+  async getToken() {
+    const fcmToken:String = await firebase.messaging().getToken();
+  
+    if (fcmToken) {
+      if (fcmToken) {
+        this.props.PersistFCMAction(fcmToken)
+      }
+    }
+  }
+
+  requestPermission() {
+    try {
+      firebase.messaging().requestPermission();
+      this.getToken();
+    } catch (error) {
+      // User has rejected permissions
+      console.warn('permission rejected');
+    }
+  }
+
+  //firebase Push Notifications
+  async createNotificationListeners() {
+    /*
+    * Triggered when a particular notification has been received in foreground
+    * */
+    this.notificationListener = firebase.notifications().onNotification((notification) => {
+      const { title, body } = notification;
+      console.warn("call here",title,body)
+      console.log('onNotification:',);
+
+
+    });
+
+    const channel = new firebase.notifications.Android.Channel('fcm_FirebaseNotifiction_default_channel', 'Demo app name', firebase.notifications.Android.Importance.High)
+      .setDescription('Demo app description')
+      .setSound('sampleaudio.wav');
+    firebase.notifications().android.createChannel(channel);
+
+    /*
+    * If your app is in background, you can listen for when a notification is clicked / tapped / opened as follows:
+    * */
+    this.notificationOpenedListener = firebase.notifications().onNotificationOpened((notificationOpen) => {
+      const { title, body } = notificationOpen.notification;
+      console.log('onNotificationOpened:');
+      Alert.alert(title, body)
+    });
+
+    /*
+    * If your app is closed, you can check if it was opened by a notification being clicked / tapped / opened as follows:
+    * */
+    const notificationOpen = await firebase.notifications().getInitialNotification();
+    if (notificationOpen) {
+      const { title, body } = notificationOpen.notification;
+      console.log('getInitialNotification:');
+      Alert.alert(title, body)
+    }
+    /*
+    * Triggered for data only payload in foreground
+    * */
+    this.messageListener = firebase.messaging().onMessage((message) => {
+      console.warn("call for data only payload in foreground")
+      //process data message
+      console.log("JSON.stringify:", JSON.stringify(message));
+    });
+  }
+
+
+
+
+
+  authenticate = () => {
+    // console.warn("uid from the persist", this.props.uid,this.props.OfflineKandies);
     if (this.props.uid != "") {
       this.setState({ isloading: true })
       setTimeout(() => {
@@ -85,7 +173,7 @@ class AppIntroSlider extends React.Component {
       }, 2000);
 
     } else {
-    //  console.warn("uid", this.props.uid);
+      //  console.warn("uid", this.props.uid);
 
     }
   }
@@ -227,8 +315,6 @@ class AppIntroSlider extends React.Component {
         resizeMode='contain'
         source={(index.image.KandiSnap_Final_logo)} />
     )
-
-
   };
 
   text = () => {
@@ -405,7 +491,7 @@ class AppIntroSlider extends React.Component {
         {this._renderPagination()}
         {this._renderView()}
         {this._renderButton()}
-        {this.text()}
+
         <Loader isLoading={this.state.isloading} />
       </View>
     );
@@ -529,11 +615,13 @@ const mapStateToProps = (state: any) => {
   return {
     isInternet: state.GlobalReducer.isInternet,
     uid: state.PersistReducer.uid,
-    OfflineKandies:state.PersistReducer.OfflineKandies
+    OfflineKandies: state.PersistReducer.OfflineKandies,
+    fcmToken: state.PersistReducer.fcmToken
   }
 }
 const mapDispatchToProps = {
-  GlobalInternetAction: GlobalInternetAction
+  GlobalInternetAction: GlobalInternetAction,
+  PersistFCMAction:PersistFCMAction
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(AppIntroSlider)

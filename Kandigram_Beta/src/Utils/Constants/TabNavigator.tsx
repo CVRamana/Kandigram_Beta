@@ -21,11 +21,14 @@ import Notifications from '../../Screens/Notifications/Notifications';
 import Events_People from '../../Screens/Home/Discover/Events_People';
 import Events from '../../Screens/Home/Discover/Events';
 import People from '../../Screens/Home/Discover/People';
+import Faq from '../../Screens/Settings/Faq';
+import ProfileGallery from "../../Screens/Profile/ProfileGallery";
 
 
 const SettingsContainer = createStackNavigator({
     Settings: { screen: Settings },
     ResetPassword: { screen: ResetPassword },
+    Faq:{screen:Faq}
 }, {
     headerMode: "none",
     navigationOptions: {
@@ -59,9 +62,7 @@ const ScannerContainer = createStackNavigator({
 //FOR HIDING THE TABBAR OPTIONS WITH SCANNER CONTAINER
 ScannerContainer.navigationOptions = ({ navigation }) => {
     let tabBarVisible = false;
-    // if (navigation.state.index > 0) {
-    //     tabBarVisible = false;
-    // }
+   
     return {
         tabBarVisible,
     };
@@ -73,6 +74,9 @@ const ProfileContainer = createStackNavigator({
     },
     Details: {
         screen: Details
+    },
+    ProfileGallery:{
+        screen:ProfileGallery
     }
 },
     {
