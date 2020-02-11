@@ -13,9 +13,7 @@ interface HomeProps {
 interface State {
   isleft: boolean
   expanded: boolean
-
   animatedMargin: any
-
 }
 
 if (Platform.OS === 'android') {

@@ -16,6 +16,7 @@ import firebase from 'react-native-firebase'
 import { db } from "../../Utils/FirebaseConfig";
 import ImagePicker from 'react-native-image-crop-picker';
 import { PersistCoverImgAction, PersistProfileImgAction, PersistAction } from "../../ReduxPersist/PersistAction";
+import { number } from 'prop-types';
 
 interface ProfileProps {
     navigation: any
@@ -49,14 +50,14 @@ class Profile extends React.Component<ProfileProps, State> {
             picCon: false,
             profileUrl: "",
             coverUrl: "",
+            
 
         };
     };
 
     componentDidMount() {
         const { currentUser } = firebase.auth()
-        // this.setState({ currentUser })
-        //  alert(JSON.stringify(this.props.uid))
+       
         const self = this;
         var ref = firebase.database().ref("/Users").child(this.props.uid);
         ref.on("value", function (snapshot) {
@@ -147,56 +148,105 @@ class Profile extends React.Component<ProfileProps, State> {
         return (
             <ImageBackground source={{}} style={styles.container}>
                 <HeaderComponent
-                    firstText={"Welcome,"}
-                    secondText={"Create Your Profile"}
-                    handleClick={() => this.props.navigation.navigate('CreateKandi')}
+                    firstText={"Create"}
+                    secondText={"Your Profile"}
+                   // handleClick={() => this.props.navigation.navigate('CreateKandi')}
                 />
                 <ScrollView
                     style={{
                         flex: 1
                     }}
                 >
-                    <View style={{ paddingTop: vh(220) }}>
-                        <View>
-                            <TouchableOpacity
-                                onPress={() => this.opengallery()}
-                            // style={styles.galleryContainer}
-                            >
+                    <View style={{ paddingTop: vh(200) }}>
+                        <View style={{
+                            width: vw(343),
+                            height: vh(210),
+                            borderRadius: vw(10),
+                            flexDirection: 'row',
+                            backgroundColor:"rgba(18, 40 ,87 ,0.7)",
+                            marginTop: vh(40),
+                            marginLeft: vw(16),
 
+                        }}
+                        >
+                            {
 
-                                {
-                                    this.props.coverImg === "" ?
-                                        <View style={{
-                                            flexDirection: 'row',
-                                            alignItems: "center",
-                                            marginTop: vh(-100),
-                                            marginLeft: vw(80)
-                                        }}>
-                                            <Image
-                                                resizeMode="stretch"
-                                                resizeMethod={"resize"}
-                                                style={styles.gallery}
-                                                source={index.image.gallery}
-                                            />
-                                            <Text style={styles.coverText}> Add Cover Image. </Text>
-                                        </View>
-                                        : <Image
+                                this.props.coverImg === undefined ?
+                                    <View style={{
+                                        flexDirection: 'row',
+                                         alignItems: "center",
+                                        marginTop: vh(-55),
+                                        marginLeft: vw(70)
+                                    }}>
+                                        <Image
+                                            resizeMode="stretch"
                                             resizeMethod={"resize"}
-                                            resizeMode={"cover"}
-                                            source={this.props.coverImg === "" ? null : { uri: this.props.coverImg }}
-                                            style={styles.coverImage}
-                                        >
-                                        </Image>
-                                }
+                                            style={styles.gallery}
+                                            source={index.image.gallery}
+                                        />
+                                        <Text style={styles.coverText}> Add Cover Image. </Text>
+                                    </View> 
+                                    :
+                                    <View  style={{
+                                        width: vw(343),
+                                        height: vh(210),
+                                       // backgroundColor: "green",
+                                        borderRadius: vw(10),
+                                        overflow: "hidden",
+                                       
+                                    }}>
+                                        <Image
+                                        source={{uri:this.props.coverImg}}
+                                        style={{flex: 1,height:null,width:null}}
+                                        />
+                                    </View>
+
+                            }
+                            <View
+                            style={{
+                                position:"absolute",
+                                top:vh(20),
+                                right:vh(20)
+                            }}
+                            >
+                            <TouchableOpacity
+                                style={{
+                                    height: vh(40),
+                                    alignSelf: 'flex-end',
+                                 
+                                    width: vh(40),
+                                    borderRadius: vh(20),
+                                    overflow: "hidden",
+                                    zIndex: 700
+                                }}
+                                onPress={()=>this.opengallery()}>
+                                <Image
+                                    source={index.image.edit}
+                                    style={{ flex: 1, height: null, width: null }}
+
+                                />
                             </TouchableOpacity>
+                            </View>
                         </View>
                         {/* Profile picture */}
                         <View style={styles.profileCont}>
-                            <Image
+                            {
+                                this.props.profileImg === undefined ?
+                                    <Image
+                                        source={index.image.profile}
+                                        style={styles.profileImg}
+                                    />
+                                    :
+                                    <Image
+                                        source={{ uri: this.props.profileImg }}
+                                        style={styles.profileImg}
+                                    />
+                            }
+                            {/* <Image
                                 source={this.props.profileImg === "" ? index.image.profile : { uri: this.props.profileImg }}
                                 style={styles.profileImg}
                             >
-                            </Image >
+                            </Image > */}
                             <View style={{ marginTop: vh(-25), marginLeft: vw(-20), zIndex: 300 }}>
                                 <TouchableOpacity
                                     style={styles.edit}
@@ -240,10 +290,10 @@ class Profile extends React.Component<ProfileProps, State> {
                             </TouchableOpacity>
 
                             <TouchableOpacity
-                             style={[styles.Social_Button, { marginBottom: vh(48) }]}
-                             onPress={()=>alert(this.props.navigation.navigate('ProfileGallery'))}
-                          
-                             >
+                                style={[styles.Social_Button, { marginBottom: vh(48) }]}
+                                onPress={() => alert(this.props.navigation.navigate('ProfileGallery'))}
+
+                            >
 
                             </TouchableOpacity>
                             <ButtonComponent
@@ -270,8 +320,8 @@ const styles = StyleSheet.create({
 
 
     },
-    coverImage:
-    {
+    cover_cont: {
+        overflow: "hidden",
         width: widthPercentageToDP(calculateWidth(343)),
         height: heightPercentageToDP(calculateHeight(210)),
         marginLeft: widthPercentageToDP(calculateWidth(16)),
@@ -281,6 +331,14 @@ const styles = StyleSheet.create({
         borderStyle: "solid",
         borderWidth: 2,
         borderColor: "#515f7b"
+    },
+    coverImage:
+    {
+        height: null,
+        width: null,
+        flex: 1,
+
+
     },
     profileCont: {
         marginTop: vh(-160),
@@ -295,7 +353,6 @@ const styles = StyleSheet.create({
         elevation: 18,
     },
     gallery: {
-
         height: vh(40),
         width: vw(40),
         marginRight: vw(17),
@@ -330,19 +387,19 @@ const styles = StyleSheet.create({
         width: vh(120),
         marginTop: heightPercentageToDP(calculateHeight(90)),
         marginLeft: widthPercentageToDP(calculateWidth(118)),
-        // backgroundColor: "red",
+        backgroundColor: "grey",
         zIndex: 300,
         borderRadius: vh(60)
         // widthPercentageToDP(calculateWidth(50))
 
     },
     edit: {
-        //position:"absolute",
+
         height: widthPercentageToDP(calculateWidth(40)),
         width: widthPercentageToDP(calculateWidth(40)),
         //  marginTop: heightPercentageToDP(calculateHeight(100)),
         marginLeft: widthPercentageToDP(calculateWidth(100)),
-        zIndex: 300
+        // zIndex: 300
 
     }, addBio: {
         marginTop: 40, marginLeft: 16,

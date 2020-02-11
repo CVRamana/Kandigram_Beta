@@ -10,7 +10,7 @@
     "yarn pod": "cd ios && pod install && cd ..",
     "lint": "eslint .",
     "postinstall": "npx jetify",
-    "tcp":""
+    "tcp": ""
   },
   "dependencies": {
     "@react-native-community/async-storage": "^1.7.1",
@@ -27,6 +27,7 @@
     "react-native-image-crop-picker": "^0.26.2",
     "react-native-keyboard-aware-scroll-view": "^0.9.1",
     "react-native-linear-gradient": "^2.5.6",
+    "react-native-modal": "^11.5.3",
     "react-native-reanimated": "^1.4.0",
     "react-native-responsive-screen": "^1.3.0",
     "react-native-screens": "^2.0.0-alpha.22",

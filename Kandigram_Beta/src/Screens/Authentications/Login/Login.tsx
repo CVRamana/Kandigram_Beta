@@ -176,11 +176,7 @@ class Login extends React.Component<LoginProps, State> {
                             onButtonPress={() => this.handleLogin()}
                         />
                         <Text style={[styles.forgotText, { marginBottom:vh(48)  }]}>or </Text>
-                        <View style={{
-                            flexDirection: "row",
-                            width: vw(200),
-                            justifyContent: "space-around"
-                        }}>
+                        <View style={styles.fb_cont}>
                             <TouchableOpacity
                             >
                                 <Image
@@ -261,6 +257,11 @@ const styles = StyleSheet.create({
         fontStyle: "normal",
         letterSpacing: 0.17,
         color: index.colors.whiteColor
+    },
+    fb_cont:{
+        flexDirection: "row",
+        width: vw(200),
+        justifyContent: "space-around"
     },
     fbimg: {
         width: vw(60),

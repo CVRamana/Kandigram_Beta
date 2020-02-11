@@ -82,7 +82,7 @@ const ProfileContainer = createStackNavigator({
     {
         headerMode: 'none',
         navigationOptions: {
-            gesturesEnabled: false,
+            gesturesEnabled: true,
             header: null
         },
     }
@@ -139,6 +139,7 @@ const NotificationsContainer = createStackNavigator({
 headerMode:"none",
 navigationOptions: {
     gesturesEnabled: false,
+    
     header: null
 },
 })

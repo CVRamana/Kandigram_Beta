@@ -30,7 +30,7 @@ class HeaderComponent extends React.Component<HeaderComponentProps> {
       resizeMode={"stretch"}
         source={index.image.signup_bg}
         style={styles.container}>
-        <View style={{ marginTop: 50 }}>
+        <View style={{ marginTop: vh(50) }}>
           <TouchableOpacity
             style={{
               marginTop: vh(5),
@@ -42,7 +42,9 @@ class HeaderComponent extends React.Component<HeaderComponentProps> {
               resizeMethod={"resize"}
               resizeMode={"contain"}
               source={index.image.back}
-              style={{ height: vh(18), width: vw(13), }}
+              style={
+                { height: vh(18), width: vw(13), }
+              }
             />
           </TouchableOpacity>
           <Text style={styles.helloStyle}>{this.props.lastName}</Text>
@@ -69,7 +71,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'transparent',
     zIndex: 300,
     top: 0,
-    height: heightPercentageToDP(calculateHeight(238)),
+    height: heightPercentageToDP(calculateHeight(208)),
     width: widthPercentageToDP(calculateWidth(375)),
   },
   helloStyle: {

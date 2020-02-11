@@ -128,7 +128,9 @@ class CreateKandi extends React.Component<CreateKandiProps, State> {
                     </View>
                 </ImageBackground>
                 <ScrollView 
+
                 ref='_scrollView'
+
                 style={{ paddingTop: vh(100), flex: 1, }}>
                     {/* Choose Image */}
                     {this.state.kandiImg === "" ? <View style={styles.kandiImg} >
@@ -150,12 +152,12 @@ class CreateKandi extends React.Component<CreateKandiProps, State> {
                         </View>
                     }
 
-                    <View style={{ marginTop: vh(40), marginLeft: vw(16), marginBottom: vh(32), }}>
+                    <View 
+                    style={{ marginTop: vh(40), marginLeft: vw(16), marginBottom: vh(32), }}>
                         <TextInputComponent
                             commonOnChangeText={(val) => this.setState({ kandiName: val })}
                             commonPlaceholder={"Kandi Name"}
                             extraStyle={{ marginBottom: vh(32), backgroundColor: colors.textInputBGColor }}
-
                         />
                         {/* //Animated TextInput */}
                         <View style={{
@@ -169,7 +171,7 @@ class CreateKandi extends React.Component<CreateKandiProps, State> {
                                 commonPlaceholder={"Add Event"}
 
                                 commonOnFocus={() => {
-                                    this.refs._scrollView.scrollTo({x:0,y:0,animated:true});
+                                    this.refs._scrollView.scrollTo({x:0,y:vh(370),animated:true});
                                    
                                     LayoutAnimation.configureNext(LayoutAnimation.Presets.linear);
                                     this.setState({ contHeight: vh(340), isOn: true })
@@ -228,7 +230,7 @@ class CreateKandi extends React.Component<CreateKandiProps, State> {
 
                             placeholderStyle={{
                                 opacity: 1,
-                                fontSize: 19,
+                                fontSize: vw(19),
                                 fontWeight: "500",
                                 fontStyle: "normal",
                                 letterSpacing: 0.19,

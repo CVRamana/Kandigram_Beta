@@ -1,100 +1,108 @@
 import * as React from 'react';
-import { Text, View, StyleSheet, ImageBackground,TouchableOpacity, ScrollView, Image, FlatList } from 'react-native';
+import { Text, View, StyleSheet, ImageBackground, TouchableOpacity, ScrollView, Image, FlatList } from 'react-native';
 import index from "../../Utils/Constants/index";
 import { vh, vw } from '../../Common/ResponsiveScreen';
 import { connect } from "react-redux";
+import Modal from "react-native-modal";
 import firebase from "react-native-firebase";
-import { PersistOfflinekandiAction,PersistedKandiClear } from '../../ReduxPersist/PersistAction';
+import { PersistOfflinekandiAction, PersistedKandiClear } from '../../ReduxPersist/PersistAction';
+import ButtonComponent from '../../Common/ButonComponent';
 
 interface OfflineKandiesProps {
-navigation:any
-OfflineKandies:any
-PersistedKandiClear:Function
+  navigation: any
+  OfflineKandies: any
+  PersistedKandiClear: Function
 }
 
 interface State {
-
+show:boolean
 }
-var x=0
+
 class OfflineKandies extends React.Component<OfflineKandiesProps, State> {
-  constructor(props:OfflineKandiesProps) {
+  constructor(props: OfflineKandiesProps) {
     super(props)
-    this.state = {  
+    this.state = {
+      show: false
     };
   };
-  //uploading online the scanned offline kandies
-  uploadOnline=()=>{
-    let val:any=this.props.OfflineKandies
-    val.map((i:any)=>{
-    var ref=firebase.database().ref('/Users').child(this.props.uid).child('Scanned_Kandies')
-    ref.push(i,(res)=>{
-        if(res===null){
-            console.warn("sucessfully uploaded")  
-            this.props.PersistedKandiClear()
-        }
-    })
-  })
+
+  componentDidMount() {
+    if (this.props.OfflineKandies === undefined || this.props.OfflineKandies === "") { this.setState({ show: true }) }
   }
-  render_Item=(item)=>{
-    return(
+
+  //uploading online the scanned offline kandies
+  uploadOnline = () => {
+    let val: any = this.props.OfflineKandies
+    val.map((i: any) => {
+      var ref = firebase.database().ref('/Users').child(this.props.uid).child('Scanned_Kandies')
+      ref.push(i, (res) => {
+        if (res === null) {
+          console.warn("sucessfully uploaded")
+          this.props.PersistedKandiClear()
+        }
+      })
+    })
+  }
+  render_Item = (item) => {
+    return (
       <View style={styles.data}>
-      <View style={{ flexDirection: "row" }}>
-        <View>
-          <Image
-          source={{}}
-            style={styles.profileImg}
-          />
+        <View style={{ flexDirection: "row" }}>
+          <View>
+            <Image
+              source={{}}
+              style={styles.profileImg}
+            />
+          </View>
+          <View style={styles.txtData}>
+            <Text style={styles.txt}>Undiscovered Kandi </Text>
+            <Text style={[styles.txt, { fontSize: vw(13) }]}>{item}</Text>
+          </View>
+          {/* //icon container */}
+          <View style={styles.iconRefresh}>
+            <Image
+              source={index.image.refresh}
+            />
+          </View>
         </View>
-        <View style={styles.txtData}>
-          <Text style={styles.txt}>Undiscovered Kandi </Text>
-    <Text style={[styles.txt, { fontSize: vw(13) }]}>{item}</Text>
-        </View>
-        {/* //icon container */}
-        <View style={styles.iconRefresh}>
-          <Image
-            source={index.image.refresh}
-          />
+        <View style={styles.icons}>
+          <View style={styles.iconContainer}>
+            <Image
+              style={{}}
+              source={index.image.camera}
+            />
+            <Text style={{ marginLeft: vw(6) }}>12</Text>
+
+
+          </View>
+          <View style={styles.iconContainer}>
+            <Image
+              style={{}}
+              source={index.image.likeStats}
+
+            />
+            <Text style={{ marginLeft: vw(6) }}>12</Text>
+
+          </View>
+          <View style={styles.iconContainer}>
+            <Image
+              style={{}}
+              source={index.image.comment}
+
+            />
+            <Text style={{ marginLeft: vw(6) }}>12</Text>
+
+          </View>
+          <View style={styles.iconContainer}>
+            <Image
+              style={{}}
+              source={index.image.camera}
+
+            />
+            <Text style={{ marginLeft: vw(6) }}>12</Text>
+
+          </View>
         </View>
       </View>
-      <View style={styles.icons}>
-        <View style={styles.iconContainer}>
-          <Image
-            style={{}}
-            source={index.image.camera}
-          />
-          <Text style={{ marginLeft: vw(6) }}>12</Text>
-
-
-        </View>
-        <View style={styles.iconContainer}>
-          <Image
-            style={{}}
-            source={index.image.likeStats}
-
-          />
-          <Text style={{ marginLeft: vw(6) }}>12</Text>
-
-        </View>
-        <View style={styles.iconContainer}>
-          <Image
-            style={{}}
-            source={index.image.comment}
-
-          />
-          <Text style={{ marginLeft: vw(6) }}>12</Text>
-
-        </View>
-        <View style={styles.iconContainer}>
-          <Image
-            style={{}}
-            source={index.image.camera}
-
-          />
-          <Text style={{ marginLeft: vw(6) }}>12</Text>
-
-        </View>
-      </View>
-    </View>
     )
   }
 
@@ -122,21 +130,48 @@ class OfflineKandies extends React.Component<OfflineKandiesProps, State> {
             </TouchableOpacity>
             <Text style={styles.txt}>Offline Kandies</Text>
             <TouchableOpacity
-            onPress={()=>this.uploadOnline()}
+              onPress={() => this.uploadOnline()}
 
             >
-            <Image
-              style={styles.refresh}
-              source={index.image.refresh}
-            />
+              <Image
+                style={styles.refresh}
+                source={index.image.refresh}
+              />
             </TouchableOpacity>
           </View>
 
         </ImageBackground>
         <FlatList
-        data={this.props.OfflineKandies}
-        renderItem={({item})=>this.render_Item(item)}
+          data={this.props.OfflineKandies}
+          renderItem={({ item }) => this.render_Item(item)}
         />
+        <View>
+          {/* Modal */}
+          <Modal
+          
+           isVisible={this.state.show}
+           onBackdropPress={() => this.setState({ show: false })}
+          >
+            <View style={styles.modal_cont}>
+              <View>
+                <Text style={styles.modalText1}>No Service Needed!</Text>
+              </View>
+
+              <View style={styles.modalText2}>
+                <Text >No Service Needed!</Text>
+              </View>
+
+              <View style={styles.modalText3}>
+                <Text>Feel free to trade them away! </Text>
+              </View>
+              {/* //Button */}
+              <View>
+                <ButtonComponent/>
+                </View>
+          
+            </View>
+          </Modal>
+        </View>
 
       </ImageBackground>
 
@@ -144,19 +179,19 @@ class OfflineKandies extends React.Component<OfflineKandiesProps, State> {
   }
 };
 
-const mapStateToProps=(state:any)=>{
-  return{
-    uid:state.PersistReducer.uid,
-    OfflineKandies:state.PersistReducer.OfflineKandies
+const mapStateToProps = (state: any) => {
+  return {
+    uid: state.PersistReducer.uid,
+    OfflineKandies: state.PersistReducer.OfflineKandies
   }
 
 }
-const mapDispatchToProps={
-  PersistOfflinekandiAction:PersistOfflinekandiAction,
-  PersistedKandiClear:PersistedKandiClear
+const mapDispatchToProps = {
+  PersistOfflinekandiAction: PersistOfflinekandiAction,
+  PersistedKandiClear: PersistedKandiClear
 }
 
-export default connect(mapStateToProps,mapDispatchToProps)(OfflineKandies);
+export default connect(mapStateToProps, mapDispatchToProps)(OfflineKandies);
 
 const styles = StyleSheet.create({
   container: {
@@ -193,6 +228,43 @@ const styles = StyleSheet.create({
     marginLeft: vw(59),
     //  flexDirection:"row"
   },
+  modal_cont:{
+    width: vw(348),
+    height: vh(213),
+    borderRadius: vh(25),
+    backgroundColor: "rgba(18, 40, 87, 0.9)",
+    borderColor: index.colors.lipstick,
+    borderWidth: vw(2),
+    justifyContent:"center",
+    alignItems: "center",
+  },
+  modalText1:{
+    fontFamily: "Ubuntu-Bold",
+    fontSize: vw(21),
+    fontWeight: "bold",
+    fontStyle: "normal",
+    letterSpacing: 0.25,
+    color: index.colors.whiteColor
+  },
+  modalText2:{ 
+    width: vw(312),
+    height: vh(51),
+    fontFamily: "Ubuntu-Medium",
+    fontSize: vw(15),
+    fontWeight: "normal",
+    fontStyle: "normal",
+    letterSpacing: 0.18,
+    color: index.colors.whiteColor
+  },
+  modalText3:{
+    width: vw(206),
+    height: vh(17),
+    fontFamily: "Ubuntu",
+    fontSize: vw(15),
+    fontWeight: "normal",
+    fontStyle: "normal",
+    letterSpacing: 0.18,
+    color: index.colors.whiteColor},
 
   head: {
     flexDirection: "row",
@@ -200,12 +272,12 @@ const styles = StyleSheet.create({
     // justifyContent:"center",
     alignItems: "center"
   },
-   back: {
+  back: {
     width: vw(11),
     height: vh(18),
     marginLeft: vw(20)
   },
-   txt: {
+  txt: {
     marginLeft: vw(20),
     fontFamily: "Ubuntu-Medium",
     fontSize: vw(18),

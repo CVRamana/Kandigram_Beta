@@ -90,7 +90,12 @@ class ForgetPassword extends React.Component<ForgetProps, State> {
 export default ForgetPassword;
 
 const styles = StyleSheet.create({
-    v2: { height: vh(55), width: 71, justifyContent: "center", alignItems: "center" },
+    v2: {
+        height: vh(55),
+        width: vw(71),
+        justifyContent: "center",
+        alignItems: "center"
+    },
     container: {
         flex: 1,
         backgroundColor: 'rgb(19,31,52)'
